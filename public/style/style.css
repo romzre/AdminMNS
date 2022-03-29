@@ -1,0 +1,157 @@
+/* Police  */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins:wght@200;400&family=Redressed&display=swap');
+
+@font-face {
+    font-family: "Shary";
+    src: url("shary-demo.woff2") format("woff2");
+    box-sizing: border-box;
+    color :#000000
+}
+
+
+/* Déclaration des variables de couleur */
+
+:root {
+    --main-bg-color: #151B36;
+    --main-title-color :#EC6834;
+    --dark-blue :#0D1121;
+}
+
+body{
+    background-color: var(--main-bg-color);
+    color : #fff;
+    font-family: 'Montserrat';
+}
+
+/* Titre  */
+h1 {
+    color : var(--main-title-color);
+    margin:0;
+    font-family: "Shary";
+    font-size: 8em;
+    text-decoration: underline;
+    text-align: center;
+}
+
+h2 {
+    color : #fff;
+    font-family: "Shary";
+    font-size: 1.5em;
+    text-align: center;
+}
+
+/* Bouton */
+.btn-primary {
+    background-color :var(--main-title-color);
+    border : 2px solid var(--main-title-color);
+    color:#fff;
+    width: 200px;
+    border-radius: 100px;
+    font-family: "Shary";
+}
+
+.btn-primary:hover{
+    background-color: transparent;
+    border : 2px solid var(--main-title-color)
+}
+
+.btn-primary a {
+    color:#fff;
+    text-decoration: none;
+    font-weight: 500
+}
+
+/* Header */
+header{
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    background-color: var(--dark-blue);
+}
+
+.logo-MNS {
+    margin : 1em 1em;
+    height: 40px;
+}
+
+/* Page connexion */
+.container {
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:4rem
+}
+
+/* Login form */
+.login-form-container{
+    height: 450px;
+    width: 410px;
+    border: solid 2px var(--main-title-color);
+    border-radius: 50px;
+    overflow: hidden;
+
+}
+.login-form-top{
+    background-color: var(--main-title-color);
+    border:solid 2px var(--main-title-color);
+    height: 100px;
+    padding: 10px 5px;
+
+
+}
+.login.btn {
+    margin-top: 20px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 75%;
+    width: 98%;
+}
+.form-group {
+    margin : 10px auto;
+    width: 90%;
+    font-family: 'Gilroy';
+    position:relative
+
+}
+
+input::placeholder{
+    font-weight: 100;
+}
+.container-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.password_forgotten {
+    text-align: right;
+    margin: 20px 10px
+}
+.password_forgotten a {
+    color: #fff;
+}
+
+.icone-verif {
+    width: 20px;
+    position: absolute;
+    right: 20px;
+    top: 35px;
+    display: none;
+}
+.message-alerte {
+    margin: 0px 15px;
+    color: crimson;
+    display: none;
+}
+
+.check-form{
+    font-family: 'montserrat';
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
