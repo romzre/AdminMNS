@@ -4,12 +4,14 @@
     include_once "../templates/pages/index.tpl.php";
 } else {
     if ($_GET['page']=='login') { 
-        include_once '../templates/pages/login.tpl.php';
+        include_once 'pages/login.php';
         if(!empty($_POST)) include_once '../app/scripts/login-check.php'; 
     };
-};
-
-
+    if ($_GET['page']=='register') { 
+        include_once 'pages/register.php';
+     
+    };
+}; 
 
 
 require '../templates/partials/inc_bottom.php'; ?>
