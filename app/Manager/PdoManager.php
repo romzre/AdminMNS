@@ -5,7 +5,7 @@
     
     public static function getPdo()
     {
-        // On instance la méthode seulement si pdo n'est pas encore initialisé
+        // On instance la méthode seulement si pdo n'est pas encore initialisé. C'est ce qu'on appelle un "Singleton"
         if(self::$pdo == null)
         {
             try{
