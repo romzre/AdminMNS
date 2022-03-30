@@ -1,0 +1,25 @@
+/* Style Page register */
+fieldset{
+    margin: 30px auto;
+    width: 60%;
+    border: 1px solid var(--main-title-color);
+    border-radius: 25px;
+    padding: 15px 25px ;
+}
+
+.space{
+    width: 55%;
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
+
+.ContBtn{
+    display: flex;
+    width: 100%;
+    padding: 15px;
+    justify-content: flex-end;
+}
