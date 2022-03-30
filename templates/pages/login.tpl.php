@@ -1,9 +1,11 @@
+<?php require '../templates/partials/inc_top.php';?>
+
 <div class="container">
     <div class="login-form-container">
         <div class="login-form-top">
             <h2>Connectez vous a votre espace ADMIN MNS</h2>
         </div>
-        <form method='post' action='index.php?page=login'>
+        <form method='post' action='./?page=login'>
             <div class="form-group">
                 <label for="email">Adresse email</label>
                 <input type="email" name="email" class="form-control" id="email_input" placeholder="name@example.com">
@@ -17,12 +19,13 @@
                 <label for="password">Mot de passe</label>
                 <input type="password"  name="password" class="form-control" id="password_input" placeholder="tappez votre mot de passe">
                 <?php if(isset($_GET['password_error'])) require '../templates/partials/inc_password-error.php'?>
+                <?php if(isset($_GET['account_error'])) require '../templates/partials/inc_account-error.php'?>
             </div>    
                 <div class="container-btn">
                     <input type="submit" class="btn btn-primary" value="Se connecter" name="submit" />
                 </div>
 
-
+    <?php if($_POST) var_dump($_POST);?>
            
                 
             <div class="password_forgotten"><a href="">mot de passe oublié ?</a></div>
@@ -31,3 +34,5 @@
 </div>
 </div>
 <script src="scripts/login-check.js"></script>
+
+<?php require '../templates/partials/inc_bottom.php';?>
