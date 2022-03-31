@@ -24,10 +24,6 @@
                 <div class="container-btn">
                     <input type="submit" class="btn btn-primary" value="Se connecter" name="submit" />
                 </div>
-
-    <?php if($_POST) var_dump($_POST);?>
-           
-                
             <div class="password_forgotten"><a href="">mot de passe oublié ?</a></div>
         </form>    
     </div>

@@ -6,7 +6,15 @@ class UserManager {
 
     public function getAll()
     {
+        $pdo=PdoManager::getPdo();
         $sql= 'SELECT * FROM users';
+        $req = $pdo->prepare($sql);
+        $req->execute();
+        
+        $users = $req->fetchAll(PDO::FETCH_ASSOC);
+        var_dump($users);
+        
+        return $users;
     }
 
     public function get(string $email)
@@ -19,9 +27,9 @@ class UserManager {
             'email_user'=>$email
         ]);
         
-        $user = $req->fetchAll(PDO::FETCH_ASSOC);
+        $user = $req->fetch(PDO::FETCH_ASSOC);
         // var_dump($req);exit;
-        var_dump($user,$email);exit;
+        var_dump($user,$email,$pdo);exit;
         
         return $user;
     }

@@ -5,7 +5,7 @@
     
     public static function getPdo()
     {
-        // On instance la méthode seulement si pdo n'est pas encore initialisé
+        // On instancie la méthode seulement si pdo n'est pas encore initialisé
         if(self::$pdo == null)
         {
             try{

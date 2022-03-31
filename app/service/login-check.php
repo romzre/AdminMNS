@@ -22,8 +22,8 @@ if(!$password)
 //on vérifier l'existance de l'utilisateur
 
 $manager = new UserManager();
+$users=$manager->getAll();
 $user=$manager->get($email);
-var_dump($user);exit;
 
 if(!$user)
 {
