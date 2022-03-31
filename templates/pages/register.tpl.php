@@ -1,4 +1,7 @@
-<?php require '../app/Entity/Form.php' ?>
+<?php 
+require '../app/Entity/Form.php';
+require '../templates/partials/inc_top.php'; 
+?>
 
 <div>
 <form action="#" method="POST">
