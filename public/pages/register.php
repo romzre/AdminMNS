@@ -1,5 +1,5 @@
 <?php
-
+require '../app/Entity/Form.php';
 
 $form = new Form();
 $users = $form->getUsers();
