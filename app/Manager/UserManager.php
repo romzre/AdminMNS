@@ -3,7 +3,12 @@ require 'PdoManager.php';
 class UserManager {
 
     use PdoManager; 
-
+    
+    /**
+     * getAll
+     *
+     * @return void
+     */
     public function getAll()
     {
         $pdo=PdoManager::getPdo();
@@ -16,7 +21,13 @@ class UserManager {
         
         return $users;
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $email
+     * @return void
+     */
     public function get(string $email)
     {
         $pdo=PdoManager::getPdo();
