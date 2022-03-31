@@ -1,7 +1,7 @@
 <?php require '../app/Entity/Form.php' ?>
 
 <div>
-<form action="" method="">
+<form action="#" method="POST">
     <fieldset>
         <legend>Informations Personnelles</legend>
     <?php 
@@ -125,7 +125,7 @@
         </legend>
         <?php 
 
-        $form->createSelect(['FB','Google','Email'],'Comment avez-vous connu MNS ?','Internet');
+        $form->createSelect(['FB','Google','Email'],'Comment avez-vous connu MNS ?','KnowingMns');
         $form->createBalise('Par un ancien stagiaire','p');
         $form->createInputText('FirstNameOldStag','text','Prénom', 'space');
         $form->createInputText('NameOldStag','text','Nom', 'space');

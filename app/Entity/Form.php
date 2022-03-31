@@ -2,6 +2,7 @@
 
 class Form 
 {
+    use PdoManager;
   
     /**
      * createInputText permet de creer un bloc Div > Label + input. Le param Label est optionnel. Il prendra la valeur de name si rien n'est entrer.
