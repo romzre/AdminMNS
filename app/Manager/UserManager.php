@@ -3,20 +3,31 @@ require 'PdoManager.php';
 class UserManager {
 
     use PdoManager; 
-
+    
+    /**
+     * getAll
+     *
+     * @return void
+     */
     public function getAll()
     {
         $pdo=PdoManager::getPdo();
+        
         $sql= 'SELECT * FROM users';
         $req = $pdo->prepare($sql);
         $req->execute();
         
         $users = $req->fetchAll(PDO::FETCH_ASSOC);
-        var_dump($users);
         
         return $users;
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $email
+     * @return void
+     */
     public function get(string $email)
     {
         $pdo=PdoManager::getPdo();
@@ -29,7 +40,7 @@ class UserManager {
         
         $user = $req->fetch(PDO::FETCH_ASSOC);
         // var_dump($req);exit;
-        var_dump($user,$email,$pdo);exit;
+        // var_dump($user);exit;
         
         return $user;
     }

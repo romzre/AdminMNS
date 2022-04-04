@@ -1,6 +1,10 @@
-<?php require '../app/Entity/Form.php' ?>
+<?php 
+require '../app/Entity/Form.php';
+require '../templates/partials/inc_top.php'; 
+?>
 
 <div>
+    <h1>Formulaire d'inscription</h1>
 <form action="#" method="POST">
     <fieldset>
         <legend>Informations Personnelles</legend>
