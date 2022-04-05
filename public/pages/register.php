@@ -1,7 +1,7 @@
 <?php
 
 $message = "";
-if (isset($_POST['submit'])) 
+if (isset($_POST['submit-register'])) 
 {
     var_dump($_POST); exit;
 }

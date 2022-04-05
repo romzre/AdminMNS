@@ -3,26 +3,43 @@ require '../app/Entity/Form.php';
 require '../templates/partials/inc_top.php'; 
 ?>
 
-<div>
+<div class="contForm">
     <h1>Formulaire d'inscription</h1>
 <form action="#" method="POST">
     <fieldset>
         <legend>Informations Personnelles</legend>
     <?php 
         $form = new Form();
-        $form->createInputText('FirstName','text','Prénom', 'space');
-        $form->createInputText('Name','text',null, 'space');
-        $form->createInputText('Adress','text',null, 'space');
-        $form->createInputText('CodeP','text', 'Code Postal', 'space');
-        $form->createInputText('City','text',null, 'space');
-        $form->createInputText('Phone','text',null, 'space');
-        $form->createInputText('Email','text',null, 'space');
-        $form->createInputText('Nationality','text',null, 'space');
+        $form->createInputText('FirstName_user','text','Prénom', 'space');
+        $form->createInputText('familyName_user','text','Nom', 'space');
+        $form->createInputText('birthdate','date','Date de naissance', 'space');
+        $form->createInputText('Nationality','text','Nationalité', 'space');
+    ?>
+    
+    </fieldset>
+    <fieldset>
+        <legend>Adresse</legend>
+    <?php
+        $form->createInputText('streetNumber','text','Numéro de voie', 'space');
+        $form->createInputText('laneType','text','Type de voie', 'space');
+        $form->createInputText('street','text','Nom de rue', 'space');
+        $form->createInputText('addressComplement','text','Complément d adresse', 'space');
+        $form->createInputText('postalCode','text', 'Code Postal', 'space');
+        $form->createInputText('city','text','Ville', 'space');
+        
     ?>
     </fieldset>
     <fieldset>
+        <legend>Communication</legend>
+    <?php
+        $form->createInputText('tel','text','Numéro de téléphone', 'space');
+        $form->createInputText('email_user','text','Adresse email', 'space');
+        $form->createInputText('password_user','text','Mot de passe', 'space');
+    ?>
+    </fieldset>
+    <!-- <fieldset>
         <legend>Votre situation Actuelle</legend>
-        <?php
+        < ?php
         $form->createInputText('Diploma','text','Diplôme obtenu ou en cours d\'obtention', 'space');
         $form->createInputText('Trainning','text','Type de formation', 'space');
 
@@ -44,7 +61,7 @@ require '../templates/partials/inc_top.php';
         ?>
 
 
-    </fieldset>
+    </fieldset> -->
     <fieldset>
         <legend>
             Formation Souhaitée
@@ -52,13 +69,13 @@ require '../templates/partials/inc_top.php';
         <?php 
         $form->createSelect(['Tech','DEV','RH'],'Quelle formation vous intéresse','trainnings');
         ?>
-
+        <?php $form->createSubmit('ContBtn','btn-primary','submit-register'); ?>
     </fieldset>
-    <fieldset>
+    <!-- <fieldset>
         <legend>
             Motivation
         </legend>
-        <?php 
+        < ?php 
        $form->createBalise('Pourquoi avoir choisi MNS ?','p');
        $form->createTextArea('MotChoiceSchoolText',30,3);
 
@@ -88,7 +105,7 @@ require '../templates/partials/inc_top.php';
         <legend>
             Langues Etrangères
         </legend>
-        <?php 
+        < ?php 
         $form->createBalise('Pouvez-vous nous préciser votre niveau oral et écrit en anglais ?','p');
         $form->createTextArea('LevEngText',30,3);
 
@@ -104,7 +121,7 @@ require '../templates/partials/inc_top.php';
         <legend>
           Votre Mobilité
         </legend>
-        <?php 
+        < ?php 
 
         $form->createBalise('Possédez-vous le permis B ?','p');
         $form->createInputRadio('DrivBool','Oui','DrivBoolY');
@@ -127,7 +144,7 @@ require '../templates/partials/inc_top.php';
         <legend>
         COMMENT AVEZ-VOUS CONNU MNS ?
         </legend>
-        <?php 
+        < ?php 
 
         $form->createSelect(['FB','Google','Email'],'Comment avez-vous connu MNS ?','KnowingMns');
         $form->createBalise('Par un ancien stagiaire','p');
@@ -135,9 +152,9 @@ require '../templates/partials/inc_top.php';
         $form->createInputText('NameOldStag','text','Nom', 'space');
         $form->createInputText('TrainningOldStag','text','Prénom', 'space');
 
-        $form->createSubmit('ContBtn','btn-primary','submit');
+        
          ?>
-    </fieldset>
+    </fieldset> -->
 </form>
 </div>
 
