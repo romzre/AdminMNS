@@ -13,7 +13,7 @@ class Form
      * @param  mixed $class
      * @return void
      */
-    public function createInputText(string $name, string $typeInput, $label = NULL, string $class = null)
+    public function createInputText(string $name, string $typeInput, $label = NULL, string $class = NULL)
     {
         $desc = $label === NULL ? $name : $label ;
         ?>
@@ -95,6 +95,7 @@ class Form
             
                 <?php endforeach ; ?>
             </select>
+           
         </div>
         
 
@@ -118,6 +119,14 @@ class Form
         <?php
     }
 
+    public function CheckForUX(string $message)
+    {
+        ?>
+        <div class='check-form'>
+            <span class="active"><?= $message ?></span>
+        </div>
+    <?php
+            }
 
 }
 

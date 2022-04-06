@@ -5,14 +5,28 @@ require '../templates/partials/inc_top.php';
 
 <div class="contForm">
     <h1>Formulaire d'inscription</h1>
-<form action="#" method="POST">
+<form action="index.php?page=register" method="POST">
     <fieldset>
         <legend>Informations Personnelles</legend>
     <?php 
         $form = new Form();
         $form->createInputText('FirstName_user','text','Prénom', 'space');
+        if(!empty($messageFN))
+        {
+            $form->createBalise($messageFN,'p');
+        }
+
         $form->createInputText('familyName_user','text','Nom', 'space');
+        if(!empty($messageFaN))
+        {
+            $form->createBalise($messageFaN,'p');
+        }
+
         $form->createInputText('birthdate','date','Date de naissance', 'space');
+        if(!empty($_POST['birthdate']))
+        {
+            $form->createBalise($messageDb,'p');
+        }
         $form->createInputText('Nationality','text','Nationalité', 'space');
     ?>
     
@@ -34,7 +48,20 @@ require '../templates/partials/inc_top.php';
     <?php
         $form->createInputText('tel','text','Numéro de téléphone', 'space');
         $form->createInputText('email_user','text','Adresse email', 'space');
+        if(!empty($messageEmail))
+        {
+            $form->createBalise($messageEmail,'p');
+        }
         $form->createInputText('password_user','text','Mot de passe', 'space');
+        if(!empty( $messagePass))
+        {
+            $form->createBalise( $messagePass,'p');
+        }
+        $form->createInputText('confirm_password','text','Retapez votre mot de passe', 'space');
+        if(!empty($messageConfPass))
+        {
+            $form->createBalise($messageConfPass,'p');
+        }
     ?>
     </fieldset>
     <!-- <fieldset>
@@ -157,7 +184,7 @@ require '../templates/partials/inc_top.php';
     </fieldset> -->
 </form>
 </div>
-
+<script src="scripts/register-check.js"></script>
 
 
 

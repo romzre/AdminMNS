@@ -50,6 +50,13 @@ fieldset{
         }
 }
 
+.check{
+    display: inline;
+}
+.error{
+    display: inline;
+}
+
 @media screen and (max-width: 250px) {
 
     form >  fieldset {
