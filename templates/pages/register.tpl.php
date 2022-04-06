@@ -1,7 +1,9 @@
 <?php 
 require '../app/Entity/Form.php';
 require '../templates/partials/inc_top.php'; 
-?>
+?> 
+<head><link rel="stylesheet" href="style/register.css"></head>
+<body>
 
 <div class="contForm">
     <h1>Formulaire d'inscription</h1>
@@ -10,23 +12,12 @@ require '../templates/partials/inc_top.php';
         <legend>Informations Personnelles</legend>
     <?php 
         $form = new Form();
-        $form->createInputText('FirstName_user','text','Prénom', 'space');
-        if(!empty($messageFN))
-        {
-            $form->createBalise($messageFN,'p');
-        }
+        $form->createInputText('FirstName_user','text','Prénom', 'space',(isset($FirstName_user)) ? $FirstName_user : NULL);
 
-        $form->createInputText('familyName_user','text','Nom', 'space');
-        if(!empty($messageFaN))
-        {
-            $form->createBalise($messageFaN,'p');
-        }
+        $form->createInputText('familyName_user','text','Nom', 'space',(isset($familyName_user)) ? $familyName_user : NULL);
 
         $form->createInputText('birthdate','date','Date de naissance', 'space');
-        if(!empty($_POST['birthdate']))
-        {
-            $form->createBalise($messageDb,'p');
-        }
+        
         $form->createInputText('Nationality','text','Nationalité', 'space');
     ?>
     
@@ -48,20 +39,9 @@ require '../templates/partials/inc_top.php';
     <?php
         $form->createInputText('tel','text','Numéro de téléphone', 'space');
         $form->createInputText('email_user','text','Adresse email', 'space');
-        if(!empty($messageEmail))
-        {
-            $form->createBalise($messageEmail,'p');
-        }
-        $form->createInputText('password_user','text','Mot de passe', 'space');
-        if(!empty( $messagePass))
-        {
-            $form->createBalise( $messagePass,'p');
-        }
-        $form->createInputText('confirm_password','text','Retapez votre mot de passe', 'space');
-        if(!empty($messageConfPass))
-        {
-            $form->createBalise($messageConfPass,'p');
-        }
+        $form->createInputText('password_user','password','Mot de passe', 'space'); 
+        $form->createInputText('confirm_password','password','Retapez votre mot de passe', 'space');
+        
     ?>
     </fieldset>
     <!-- <fieldset>

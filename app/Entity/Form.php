@@ -13,16 +13,22 @@ class Form
      * @param  mixed $class
      * @return void
      */
-    public function createInputText(string $name, string $typeInput, $label = NULL, string $class = NULL)
+    public function createInputText(string $name, string $typeInput, $label = NULL, string $class = NULL,string $value = NULL)
     {
         $desc = $label === NULL ? $name : $label ;
+
         ?>
         
         <div class="<?= $class ?>">
         <label for="<?= $name ?>"><?= $desc ?></label>
-        <input type="<?= $typeInput ?>" name="<?= $name ?>" id="<?= $name ?>">
+        <input type="<?= $typeInput ?>" name="<?= $name ?>" id="<?= $name?>" value="<?= $value ?>">
         </div>
+
     <?php
+        if(isset($_POST['submit-register']))
+        {
+            $this->CheckForUX($value);
+        }
     } 
     
     /**
@@ -119,13 +125,14 @@ class Form
         <?php
     }
 
-    public function CheckForUX(string $message)
+    public function CheckForUX($input)
     {
-        ?>
+        if(empty($input)) : ?>
         <div class='check-form'>
-            <span class="active"><?= $message ?></span>
+            <span class="active">Ce champ est obligatoire</span>
         </div>
-    <?php
+
+    <?php endif; 
             }
 
 }
