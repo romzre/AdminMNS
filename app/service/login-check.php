@@ -23,7 +23,7 @@ if(!$password)
 //on vérifier l'existence de l'utilisateur
 
 $manager = new UserManager();
-$user = $manager->get($email);
+$user = $manager->getByEmail($email);
 if(!$user)
 {
     header('Location: ./?page=login&error_account');
@@ -32,6 +32,7 @@ if(!$user)
 
 //on vérifie le mot de passe
 if($user['password_user']!==$password)
+// if(!password_verify($password, $user['password_user']) // à intégrer lorsqu'on aura hacher les mdp
 {
     header('Location: ./?page=login&error_account');
     exit;
@@ -54,5 +55,5 @@ if ($admin)
 }
 else{
     $_SESSION['is_admin'] = 0;
-    header('Location: ./?page=dashboard');
+    header('Location: ./?page=dashboard-trainee');
 }

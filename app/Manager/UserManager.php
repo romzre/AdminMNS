@@ -1,5 +1,6 @@
 <?php 
-require 'PdoManager.php';
+require_once 'PdoManager.php';
+require '../app/Entity/User.php';
 
 class UserManager {
 
@@ -29,7 +30,7 @@ class UserManager {
      * @param  mixed $email
      * @return void
      */
-    public function get(string $email)
+    public function getByEmail(string $email)
     {
         $pdo=PdoManager::getPdo();
         $sql= 'SELECT * FROM users WHERE email_user=:email_user';
@@ -43,5 +44,21 @@ class UserManager {
         
         return $user;
     }
+
+    public function getByUserId(string $id_user)
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= 'SELECT * FROM users WHERE id_user=:id_user';
+
+        $req = $pdo->prepare($sql);
+        $req->execute([
+            'id_user'=>$id_user
+        ]);
+        
+        $user = $req->fetch(PDO::FETCH_ASSOC);
+        $obj = new User($user);
+        return $obj;
+    }
+
 
 }

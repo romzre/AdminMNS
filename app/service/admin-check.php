@@ -11,6 +11,6 @@ if(!isset($_SESSION['id_user']))
 // Vérification que l'utilisateur est bien un administrateur
 if($_SESSION['is_admin']!==1)
 {
-    header('Location: /?page=dashboard');
+    header('Location: /?page=dashboard-trainee');
     exit;
 }

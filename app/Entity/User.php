@@ -5,9 +5,9 @@ class User {
     protected string $familyName;
     protected string $firstName;
     protected int $id;
-    protected int $password;
+    protected string $password;
 
-    public function __construct($userInfos)
+    public function __construct(array $userInfos)
     {
         $this->setId($userInfos['id_user']);
         $this->setFamilyName($userInfos['familyName_user']);
