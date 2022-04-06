@@ -1,5 +1,6 @@
 <?php 
 require '../app/Manager/UserManager.php';
+require '../app/Manager/AdminManager.php';
 
 //on vérifie le champ du mail
 $email = !empty($_POST['email']) ? $_POST['email']:null;
@@ -19,15 +20,10 @@ if(!$password)
     }
 
 
-//on vérifier l'existance de l'utilisateur
+//on vérifier l'existence de l'utilisateur
 
 $manager = new UserManager();
-$users = $manager->getAll();
-var_dump($users);
-$user=$manager->get($email);
-
-var_dump($user); exit;
-
+$user = $manager->get($email);
 if(!$user)
 {
     header('Location: ./?page=login&error_account');
@@ -35,20 +31,28 @@ if(!$user)
 }
 
 //on vérifie le mot de passe
-if($user['password']!==$password)
+if($user['password_user']!==$password)
 {
     header('Location: ./?page=login&error_account');
     exit;
 
 }
-//on ouvre une session et on stock le user_id
+//on ouvre une session et on stock l'id_user
 session_start();
-$_SESSION['user_id'] = $user['id'];
-$_SESSION['is_admin'] = $user['is_admin'];
+$id_user = $user['id_user'];
+$_SESSION['id_user'] = $id_user;
 
-// if ($user['is_admin']==1)
-// {
-//     header('Location: ./admin/index.php');
-// }
-// else{
+//on vérifie si l'utilisateur est un admin
+$adminManager = new AdminManager();
+$admin=$adminManager->get($id_user);
+
+
+if ($admin)
+{
+    $_SESSION['is_admin'] = 1;
+    header('Location: /?page=admin');
+}
+else{
+    $_SESSION['is_admin'] = 0;
     header('Location: ./?page=dashboard');
+}
