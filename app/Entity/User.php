@@ -1,11 +1,11 @@
 <?php
 
 class User {
-    private string $email;
-    private string $familyName;
-    private string $firstName;
-    private int $id;
-    private int $password;
+    protected string $email;
+    protected string $familyName;
+    protected string $firstName;
+    protected int $id;
+    protected int $password;
 
     public function __construct($userInfos)
     {

@@ -1,9 +1,7 @@
-<?php 
-require 'PdoManager.php';
+<?php
 
-class UserManager {
+class AdminManager {
 
-    use PdoManager; 
     
     /**
      * getAll
@@ -14,13 +12,13 @@ class UserManager {
     {
         $pdo=PdoManager::getPdo();
         
-        $sql= 'SELECT * FROM users';
+        $sql= 'SELECT * FROM admin';
         $req = $pdo->prepare($sql);
         $req->execute();
         
-        $users = $req->fetchAll(PDO::FETCH_ASSOC);
+        $admins = $req->fetchAll(PDO::FETCH_ASSOC);
         
-        return $users;
+        return $admins;
     }
     
     /**
@@ -29,19 +27,18 @@ class UserManager {
      * @param  mixed $email
      * @return void
      */
-    public function get(string $email)
+    public function get(string $id_user)
     {
         $pdo=PdoManager::getPdo();
-        $sql= 'SELECT * FROM users WHERE email_user=:email_user';
+        $sql= 'SELECT * FROM admin WHERE id_user=:id_user';
 
         $req = $pdo->prepare($sql);
         $req->execute([
-            'email_user'=>$email
+            'id_user'=>$id_user
         ]);
         
-        $user = $req->fetch(PDO::FETCH_ASSOC);
+        $admin = $req->fetch(PDO::FETCH_ASSOC);
         
-        return $user;
+        return $admin;
     }
-
 }

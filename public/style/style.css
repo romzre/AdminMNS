@@ -22,6 +22,7 @@ body{
     background-color: var(--main-bg-color);
     color : #fff;
     font-family: 'Montserrat';
+    margin :0
 }
 
 /* Titre  */
@@ -64,8 +65,6 @@ h2 {
 
 /* Header */
 header{
-    display: flex;
-    justify-content: space-between;
     height: 80px;
     background-color: var(--dark-blue);
 }
@@ -83,6 +82,80 @@ header{
     justify-content: center;
     align-items: center;
     gap:4rem
+}
+
+
+/*Navigation */
+
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    padding: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+ 
+nav ul {
+    list-style-type: none;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color : var(--main-title-color)
+}
+nav img
+{
+    height:40px;
+    width: auto;
+}
+
+.nav-img-notif
+{
+    height: 30px;
+}
+
+/* menu de base  */
+
+.navbar__menu__content{
+    display: flex;
+    justify-content: space-around;
+    gap : 20px
+
+}
+
+/* menu account */
+
+.navbar-account{
+    margin-right: 20px;
+}
+.navbar-account--toggle{
+    display: none;
+}
+
+/* on modifie son comporterment lorsqu'on clique dessus */
+.navbar-account--toggle.is-active{
+    display: block;
+    position:absolute;
+    display: flex;
+    justify-content: center;
+    right: 0;
+    background-color: var(--dark-blue);
+    border-radius: 10px;
+}
+.navbar-account__content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-inline-start: 0;
+    width: 110px;
 }
 
 /* Login form */
@@ -155,7 +228,7 @@ Les autres éléments s'afficheront grâce à php et ne seront pas impactés par
 
 }
 .message-alerte {
-    margin: 0px 15px;
+    width: 100%;
     color: crimson;
 
 }

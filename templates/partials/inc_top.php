@@ -10,6 +10,5 @@
   </head>
   <body>
   <header>
-    <img  class="logo-MNS" src="images/logo-mns.svg" alt="logo-MNS"></img>
-    <nav></nav>
+  <?php isset($_SESSION['id_user'])?($_SESSION['is_admin'] == 1 ?require '../templates/partials/inc_nav-admin.php' : require '../templates/partials/inc_nav.php'):null ;?>
 </header>

@@ -19,7 +19,7 @@
                 <label for="password">Mot de passe</label>
                 <input type="password"  name="password" class="form-control" id="password_input" placeholder="tappez votre mot de passe">
                 <?php if(isset($_GET['password_error'])) require '../templates/partials/inc_password-error.php'?>
-                <?php if(isset($_GET['account_error'])) require '../templates/partials/inc_account-error.php'?>
+                <?php if(isset($_GET['error_account'])) require '../templates/partials/inc_account-error.php'?>
             </div>    
                 <div class="container-btn">
                     <input type="submit" class="btn btn-primary" value="Se connecter" name="submit" />
