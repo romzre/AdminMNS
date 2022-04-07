@@ -22,19 +22,40 @@ if(count($array_dataPost) == 0)
        'email_user' => $_POST['email_user'],
        'password_user' => $password
     ];
-    unset($_POST['firstName_user']);
-    unset($_POST['familyName_user']);
-    unset($_POST['email_user']);
-    unset($_POST['password_user']);
-    unset($_POST['confirm_password']);
-    unset($_POST['trainnings']);
-    unset($_POST['submit-register']);
    
     require '../app/Manager/UserManager.php';
 
     $manager = new UserManager();
-
-    $req = $manager->insertRegister($_POST,$dataUser);
-    var_dump($req); exit;
+    $id  = $manager->insertUser($dataUser);
+    // $dataTrainee = [
+    //     'id_user' => intval($id),
+    //     'birthdate' => $_POST['birthdate'],
+    //     'tel' => $_POST['tel'],
+    //     'laneType' => $_POST['laneType'],
+    //     'street' => $_POST['street'],
+    //     'addressComplement' => $_POST['addressComplement'],
+    //     'postalCode' => $_POST['postalCode'],
+    //     'city' => $_POST['city'],
+    //     'streetNumber' => $_POST['streetNumber'],
+    //     'completeDossier' => 0,
+    //     'isRegister' => 0,
+    // ];
+    $dataTrainee = [
+        intval($id),
+        $_POST['birthdate'],
+        $_POST['tel'],
+        $_POST['laneType'],
+        $_POST['street'],
+        $_POST['addressComplement'],
+        $_POST['postalCode'],
+        $_POST['city'],
+        $_POST['streetNumber'],
+        0,
+        0,
+        0
+    ];
+    // var_dump($dataTrainee);exit;
+    $reqRegister = $manager->insertRegister($dataTrainee);
+   
 }
 

@@ -44,41 +44,18 @@ class UserManager {
         return $user;
     }
 
-    public function insertRegister(array $dataRegister,array $dataUser)
+    public function insertRegister(array $dataRegister)
     {
-      
-        $id  = self::insertUser($dataUser);
-       $dataRegister ['id_user'] = $id;
-       $dataRegister ['isRegister'] = '0';
-       $test = [
-           'id_user' => $id,
-           'isRegister' => '0'
-       ];
+
         // var_dump($dataRegister); exit;
         $pdo=PdoManager::getPdo();
-        $sql= "INSERT INTO `trainee`(
-            `id_user`,
-            `birthdate`,
-            )
-            VALUES (
-            :id_user,
-            :birtdate,
-            -- :tel,
-            -- :laneType,
-            -- :street,
-            -- :addressComplement,
-            -- :postalCode,
-            -- :city,
-            -- :streetNumber,
-            -- :isRegister
-            )";
+        // $sql= "INSERT INTO `trainee`(`id_user`, `birthdate`,  `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber`, `completeDossier`,`isRegister`) VALUES (:id_user,':birthdate',':tel',':laneType',':street',':addressComplement',':postalCode',':city',':streetNumber',:completeDossier,:isRegister)";
+        $sql= "INSERT INTO `trainee`(`id_user`, `birthdate`,  `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber`, `completeDossier`, isActive ,`isRegister`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        
         $req = $pdo->prepare($sql);
-        $stmt = $req->execute($test);
-
-        return $stmt;
+        return $req->execute($dataRegister);
 
     }
-
 
     /**
      * insertUser

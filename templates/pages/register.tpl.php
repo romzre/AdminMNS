@@ -4,7 +4,10 @@ require '../templates/partials/inc_top.php';
 ?> 
 <head><link rel="stylesheet" href="style/register.css"></head>
 <body>
-
+<?php if($message != NULL): ?>
+<p class="suc_err"><?= $message ?> </p>
+<p class="btn-primary Return"><a href="index.php">Retour</a><p>
+    <?php endif; ?>
 <div class="contForm">
     <h1>Formulaire d'inscription</h1>
 <form action="index.php?page=register" method="POST">
