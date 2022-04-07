@@ -58,7 +58,7 @@ class Form
      */
     public function createBalise(string $value, $balise)
     { ?>
-        <<?= $balise ?>><<?= $balise ?>><?= $value ?></<?= $balise ?>><<?= $balise ?>>
+      <?php return ?>  <<?= $balise ?>><<?= $balise ?>><?= $value ?></<?= $balise ?>><<?= $balise ?>>
 
     <?php
     }
