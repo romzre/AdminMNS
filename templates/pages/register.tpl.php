@@ -41,13 +41,18 @@ require '../templates/partials/inc_top.php';
     <?php
         $form->createInputText('tel','text','Numéro de téléphone', 'space',(isset($tel)) ? $tel : NULL);
         $form->createInputText('email_user','text','Adresse email', 'space',(isset($email_user)) ? $email_user : NULL);
+       if($email != NULL): ?>
+        <p><?= $email ?> </p>
+        <?php endif; 
         $form->createInputText('password_user','password','Mot de passe', 'space',(isset($password_user)) ? $password_user : NULL); 
         $form->createInputText('confirm_password','password','Retapez votre mot de passe', 'space',(isset($confirm_password)) ? $confirm_password : NULL);
-       
+        
         if($samePass == false)
         {
-            $form->createBalise("Vos mots de passe ne sont pas identiques",'p');
+            ?><p><?=$msg?></p><?php
         }
+        
+            
     ?>
     </fieldset>
     <fieldset>

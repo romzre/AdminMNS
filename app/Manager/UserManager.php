@@ -44,6 +44,19 @@ class UserManager {
         return $user;
     }
 
+    public function compareEmail($email)
+    {
+        $pdo=PdoManager::getPdo();
+      
+        $sql= 'SELECT email_user FROM users WHERE email_user = :email_user';
+        $req = $pdo->prepare($sql);
+        $req->execute(['email_user' => $email]);
+
+        $issetEmail = $req->fetch(PDO::FETCH_ASSOC);
+
+        return $issetEmail;
+    }
+
     public function insertRegister(array $dataRegister)
     {
 
