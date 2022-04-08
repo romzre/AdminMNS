@@ -7,10 +7,17 @@ if(!isset($_SESSION['id_user']))
 {
     header('Location: /');
     exit;
-}
-// Vérification que l'utilisateur est bien un administrateur
-if($_SESSION['is_admin']!==1)
+} 
+else 
+// Vérification que l'utilisateur est bien un administrateur 
 {
-    header('Location: /?page=dashboard-trainee');
-    exit;
+    require_once '../app/Manager/AdminManager.php';
+    $adminManager=new AdminManager();
+    $admin=$adminManager->get($_SESSION['id_user']);
+
+    if(!$admin){
+        header('Location: /');
+        exit;
+    }
+
 }

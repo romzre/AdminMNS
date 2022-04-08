@@ -4,7 +4,7 @@ require_once 'User.php';
 
 class Trainee extends User {
     
-    protected int $id;
+    protected int $id_user;
     protected string $familyName;
     protected string $firstName;
     protected string $email;
@@ -12,7 +12,7 @@ class Trainee extends User {
     private bool $completeDossier;
     private int $id_organism;
     private bool $isActive;
-    private bool $isRegister;
+    private bool $isRegistered;
     private string $addressComplement ;
     private string $badgeNum ;
     private string $birthdate ;
@@ -23,25 +23,9 @@ class Trainee extends User {
     private int $streetNumber;
     private string $tel;
 
-    public function __construct(array $data)
+    public function __construct()
     {
-     $this->setCompleteDossier($data['completeDossier']==1?true:false)
-            ->setIsActive($data['isActive']==1?true:false)
-            ->setIsRegister($data['isRegister']==1?true:false)
-            ->setBirthdate($data['birthdate'])
-            ->setTel($data['tel'])
-            ->setLaneType($data['laneType'])
-            ->setStreet($data['street'])
-            ->setPostalCode($data['postalCode'])
-            ->setCity($data['city'])
-            ->setStreetNumber($data['streetNumber'])
-            ->setBirthdate($data['birthdate']);
 
-        parent::setId($data['id_user']);
-        parent::setEmail($data['email_user']);
-        parent::setFamilyName($data['familyName_user']);
-        parent::setFirstName($data['firstName_user']);
-        parent::setPassword($data['password_user']);
     }
     
 
@@ -107,21 +91,21 @@ class Trainee extends User {
     }
 
     /**
-     * Get the value of isRegister
+     * Get the value of isRegistered
      */ 
-    public function getIsRegister()
+    public function getIsRegistered()
     {
-        return $this->isRegister;
+        return $this->isRegistered;
     }
 
     /**
-     * Set the value of isRegister
+     * Set the value of isRegistered
      *
      * @return  self
      */ 
-    public function setIsRegister($isRegister)
+    public function setIsRegistered($isRegistered)
     {
-        $this->isRegister = $isRegister;
+        $this->isRegistered = $isRegistered;
 
         return $this;
     }

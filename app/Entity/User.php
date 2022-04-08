@@ -1,19 +1,16 @@
 <?php
+require 'Entity.php';
 
-class User {
+class User extends Entity {
     protected string $email;
     protected string $familyName;
     protected string $firstName;
-    protected int $id;
+    protected int $id_user;
     protected string $password;
 
-    public function __construct(array $userInfos)
+    public function __construct()
     {
-        $this->setId($userInfos['id_user']);
-        $this->setFamilyName($userInfos['familyName_user']);
-        $this->setFirstName($userInfos['firstName_user']);
-        $this->setPassword($userInfos['password_user']);
-        $this->setEmail($userInfos['email_user']);
+        
     }
 
     /**
@@ -79,9 +76,9 @@ class User {
     /**
      * Get the value of id
      */ 
-    public function getId()
+    public function getIdUser()
     {
-        return $this->id;
+        return $this->id_user;
     }
 
     /**
@@ -89,9 +86,9 @@ class User {
      *
      * @return  self
      */ 
-    public function setId($id)
+    public function setIdUser($id_user)
     {
-        $this->id = $id;
+        $this->id_user = $id_user;
 
         return $this;
     }

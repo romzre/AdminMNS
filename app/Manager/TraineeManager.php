@@ -68,11 +68,38 @@ class TraineeManager extends UserManager {
         ]);
         
         $traineeInfos = $req->fetch(PDO::FETCH_ASSOC);
-        $obj=new Trainee($traineeInfos);
+        $obj=(new Trainee())->hydrate($traineeInfos);
 
         return $obj;
 
+    }
 
+    public function checkCompleteDossier(string $id_user)
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= 'SELECT completeDossier FROM trainee WHERE id_user=:id_user';
+
+        $req = $pdo->prepare($sql);
+        $req->execute([
+            'id_user'=>intval($id_user)
+        ]);
+        
+        $completeDossier = $req->fetch(PDO::FETCH_ASSOC);
+        return $completeDossier;
+    }
+
+    public function isRegistered(string $id_user)
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= 'SELECT isRegistered FROM trainee WHERE id_user=:id_user';
+
+        $req = $pdo->prepare($sql);
+        $req->execute([
+            'id_user'=>intval($id_user)
+        ]);
+        
+        $isRegistered = $req->fetch(PDO::FETCH_ASSOC);
+        return $isRegistered;
     }
 
 }

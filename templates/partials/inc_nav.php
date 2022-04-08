@@ -19,7 +19,7 @@
                 <ul class="navbar-account__content">
                     <li> <a href="/page=planning" class="navbar--account__links">Mon compte</a></li>
                     <li><div class="content-log-out">
-                        <a href="/page=absences" class="navbar--account__links">
+                        <a href="/?page=log-out" class="navbar--account__links">
                             <i class="fa-solid fa-arrow-right-from-bracket"></i>Déconnexion
                         </a>
                     </div></li>

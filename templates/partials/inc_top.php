@@ -10,6 +10,7 @@
   </head>
   <body>
   <header>
-  <?php isset($_SESSION['id_user'])?($_SESSION['is_admin'] == 1 ?require '../templates/partials/inc_nav-admin.php' : require '../templates/partials/inc_nav.php'):null ;?>
+  <?php 
+  isset($_SESSION['id_user'])?(isset($admin)?require '../templates/partials/inc_nav-admin.php' : require '../templates/partials/inc_nav.php'):null ;?>
   </header>
  

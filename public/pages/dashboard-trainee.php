@@ -3,6 +3,7 @@
 require '../app/Manager/TraineeManager.php';
 
 $traineeManager=new TraineeManager();
-$trainee=$traineeManager->getAllInfos('69');
+$trainee=$traineeManager->getAllInfos($_SESSION['id_user']);
+
 
 require '../templates/pages/dashboard-trainee.tpl.php'; ?>

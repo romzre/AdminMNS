@@ -1,6 +1,5 @@
 <?php 
 require '../app/Manager/UserManager.php';
-require '../app/Manager/AdminManager.php';
 
 //on vérifie le champ du mail
 $email = !empty($_POST['email']) ? $_POST['email']:null;
@@ -24,6 +23,7 @@ if(!$password)
 
 $manager = new UserManager();
 $user = $manager->getUserByEmail($email);
+
 if(!$user)
 {
     header('Location: ./?page=login&error_account');
@@ -31,8 +31,7 @@ if(!$user)
 }
 
 //on vérifie le mot de passe
-if($user['password_user']!==$password)
-// if(!password_verify($password, $user['password_user']) // à intégrer lorsqu'on aura hacher les mdp
+if(!password_verify($password, $user['password']))
 {
     header('Location: ./?page=login&error_account');
     exit;
@@ -44,16 +43,27 @@ $id_user = $user['id_user'];
 $_SESSION['id_user'] = $id_user;
 
 //on vérifie si l'utilisateur est un admin
+require_once '../app/Manager/AdminManager.php';
 $adminManager = new AdminManager();
 $admin=$adminManager->get($id_user);
 
-
 if ($admin)
 {
-    $_SESSION['is_admin'] = 1;
     header('Location: /?page=admin');
 }
 else{
-    $_SESSION['is_admin'] = 0;
-    header('Location: ./?page=dashboard-trainee');
+    require '../app/Manager/TraineeManager.php';
+
+    //on vérifie si le user est un stagiaire ou un candidat et en fonction en le redirige sur le bon espace
+    $traineeManager = new TraineeManager();
+    $completeDossier=$traineeManager->checkCompleteDossier($id_user);
+
+    if(!$completeDossier)
+    {
+        header('Location: ./?page=dashboard-candidate');
+    }
+    else {
+        header('Location: ./?page=dashboard-trainee');
+    }
+    
 }

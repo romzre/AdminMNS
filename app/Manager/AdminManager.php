@@ -1,7 +1,11 @@
 <?php
 
-class AdminManager {
+require_once 'UserManager.php';
 
+class AdminManager extends UserManager{
+
+    private int $id_admin;
+    private int $id_user;
     
     /**
      * getAll

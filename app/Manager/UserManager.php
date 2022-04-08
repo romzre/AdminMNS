@@ -23,7 +23,10 @@ class UserManager {
 
         $users = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        return $users;
+        foreach ($users as $user) {
+            $obj[] = (new User($user))->hydrate($user);
+        }
+        return $obj;
     }
 
     /**
@@ -35,25 +38,25 @@ class UserManager {
     public function getUserByEmail(string $email)
     {
         $pdo=PdoManager::getPdo();
-        $sql= 'SELECT * FROM users WHERE email_user=:email_user';
+        $sql= 'SELECT * FROM users WHERE email=:email';
 
         $req = $pdo->prepare($sql);
         $req->execute([
-            'email_user'=>$email
+            'email'=>$email
         ]);
 
         $user = $req->fetch(PDO::FETCH_ASSOC);
-
+        // $obj = (new User())->hydrate($user);
+        // return $obj;
         return $user;
     }
 
     public function insertRegister(array $dataRegister)
     {
 
-        // var_dump($dataRegister); exit;
         $pdo=PdoManager::getPdo();
         // $sql= "INSERT INTO `trainee`(`id_user`, `birthdate`,  `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber`, `completeDossier`,`isRegister`) VALUES (:id_user,':birthdate',':tel',':laneType',':street',':addressComplement',':postalCode',':city',':streetNumber',:completeDossier,:isRegister)";
-        $sql= "INSERT INTO `trainee`(`id_user`, `birthdate`,  `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber`, `completeDossier`, isActive ,`isRegister`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        $sql= "INSERT INTO `trainee`(`id_user`, `birthdate`,  `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber`, `completeDossier`, isActive ,`isRegistered`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         
         $req = $pdo->prepare($sql);
         return $req->execute($dataRegister);
@@ -69,12 +72,13 @@ class UserManager {
     public static function insertUser(array $dataUser)
     {
         $pdo=PdoManager::getPdo();
-        $sql= 'INSERT INTO `users`( `firstName_user`, `familyName_user`, `email_user`, `password_user`) VALUES (:firstName_user,:familyName_user,:email_user,:password_user)';
+        $sql= 'INSERT INTO `users`( `firstName`, `familyName`, `email`, `password`) VALUES (:firstName,:familyName,:email,:password)';
 
         $req = $pdo->prepare($sql);
         $req->execute($dataUser);
 
         $id = $pdo->lastInsertId();
+
         return $id;
 
 
@@ -92,9 +96,13 @@ class UserManager {
         ]);
         
         $user = $req->fetch(PDO::FETCH_ASSOC);
-        $obj = new User($user);
-        return $obj;
+        // $obj = (new User())->hydrate($user);
+        // return $obj;
+        return $user;
     }
+
+  
+    
 
 
 

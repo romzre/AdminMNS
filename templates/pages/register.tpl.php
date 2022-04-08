@@ -15,9 +15,9 @@ require '../templates/partials/inc_top.php';
         <legend>Informations Personnelles</legend>
     <?php 
         $form = new Form();
-        $form->createInputText('firstName_user','text','Prénom', 'space',(isset($firstName_user)) ? $firstName_user : NULL);
+        $form->createInputText('firstName','text','Prénom', 'space',(isset($firstName)) ? $firstName : NULL);
 
-        $form->createInputText('familyName_user','text','Nom', 'space',(isset($familyName_user)) ? $familyName_user : NULL);
+        $form->createInputText('familyName','text','Nom', 'space',(isset($familyName)) ? $familyName : NULL);
 
         $form->createInputText('birthdate','date','Date de naissance', 'space',(isset($birthdate)) ? $birthdate : NULL);
         
@@ -40,11 +40,11 @@ require '../templates/partials/inc_top.php';
         <legend>Communication</legend>
     <?php
         $form->createInputText('tel','text','Numéro de téléphone', 'space',(isset($tel)) ? $tel : NULL);
-        $form->createInputText('email_user','text','Adresse email', 'space',(isset($email_user)) ? $email_user : NULL);
+        $form->createInputText('email','text','Adresse email', 'space',(isset($email)) ? $email : NULL);
        if($email != NULL): ?>
         <p><?= $email ?> </p>
         <?php endif; 
-        $form->createInputText('password_user','password','Mot de passe', 'space',(isset($password_user)) ? $password_user : NULL); 
+        $form->createInputText('password','password','Mot de passe', 'space',(isset($password)) ? $password : NULL); 
         $form->createInputText('confirm_password','password','Retapez votre mot de passe', 'space',(isset($confirm_password)) ? $confirm_password : NULL);
         
         if($samePass == false)

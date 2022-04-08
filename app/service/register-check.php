@@ -12,11 +12,12 @@ foreach ($_POST as $key => $value) {
         $_POST[$key] = htmlspecialchars($value);
     }
 }
+
 // Test si l'email existe dans la bdd
 require '../app/Manager/UserManager.php';
 
 $manager = new UserManager();
-$checkEmail = $manager->getUserByEmail($_POST['email_user']);
+$checkEmail = $manager->getUserByEmail($_POST['email']);
 
 
 if(empty($checkEmail))
@@ -25,12 +26,12 @@ if(empty($checkEmail))
     if(count($array_dataPost) == 0)
     {
    
-    $password = password_hash($_POST['password_user'], PASSWORD_DEFAULT);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $dataUser = [
-       'firstName_user' => $_POST['firstName_user'],
-       'familyName_user' => $_POST['familyName_user'],
-       'email_user' => $_POST['email_user'],
-       'password_user' => $password
+       'firstName' => $_POST['firstName'],
+       'familyName' => $_POST['familyName'],
+       'email' => $_POST['email'],
+       'password' => $password
     ];
    
     
@@ -62,16 +63,16 @@ if(empty($checkEmail))
         0,
         0
     ];
-    // var_dump($dataTrainee);exit;
+
     $reqRegister = $manager->insertRegister($dataTrainee);
 
     if($reqRegister)
     {
-        $message = "Votre demande d'inscription a bien été pris en compte. Un email vous sera envoyé dés que votre espace sera disponible.";
+        $message = "Votre demande d'inscription a bien été prise en compte. Un email vous sera envoyé dés que votre espace sera disponible.";
     }
     else
     {
-        $message = "Une erreur est survenu lors de votre inscription. Veuillez renouvelez l'opération.";
+        $message = "Une erreur est survenue lors de votre inscription. Veuillez renouveler l'opération.";
     }   
     }
 }
