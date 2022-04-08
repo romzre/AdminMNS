@@ -11,7 +11,7 @@ class UserManager {
      *
      * @return void
      */
-    public function getAll()
+    public function getAllUsers()
     {
         $pdo=PdoManager::getPdo();
         
@@ -30,7 +30,7 @@ class UserManager {
      * @param  mixed $email
      * @return void
      */
-    public function getByEmail(string $email)
+    public function getUserByEmail(string $email)
     {
         $pdo=PdoManager::getPdo();
         $sql= 'SELECT * FROM users WHERE email_user=:email_user';
@@ -45,7 +45,7 @@ class UserManager {
         return $user;
     }
 
-    public function getByUserId(string $id_user)
+    public function getUserById(string $id_user)
     {
         $pdo=PdoManager::getPdo();
         $sql= 'SELECT * FROM users WHERE id_user=:id_user';

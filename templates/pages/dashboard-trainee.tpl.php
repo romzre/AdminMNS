@@ -1,15 +1,20 @@
 <?php require '../templates/partials/inc_top.php';?>
 <link rel="stylesheet" href="../style/dashboard-trainee.css">
 <div class="container-titre-dashboard">
-    <h2>Bienvenue sur votre tableau de bord <?=$user->getFirstName();?> ! </h2>
+    <h2>Bienvenue sur votre tableau de bord ! </h2>
 </div>
 <div class="container-dashboard">
-    <div>
-        <p>Votre emploi du temps de la semaine</p>
+    <div class="dashboard-firstPart">
+        <h2>Formation : </h2>
+        <div class='personal-data'>
+            <h3>Vos informations personnelles :</h3>
+            <p>Prénom : <?= $trainee->getFirstName();?></p>
+            <p>Nom : <?=$trainee->getFamilyName() ?></p>
+            <p>Email : <?=$trainee->getEmail() ?></p>
+        </div>
     </div>
-    <div class="recap-retards-absences">
-        <p>Nombre d'absences en attente de justificatifs : <span>test<!-- <?=$absences['unjustified'];?>--></span></p>
-        <p>Nombre de retards en attente de justificatifs : <span><!--<?=$retards['unjustified'];?>--></span></p>
+    <div class="profile-pic">
+        <img src="ressources">
     </div>
 </div>
 

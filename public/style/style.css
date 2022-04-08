@@ -139,11 +139,18 @@ nav img
 
 }
 
+.navbar-account_notification{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /* menu account */
 
 .navbar-account{
     margin-right: 30px;
     margin-left: 30px;
+    transition: all 0.5s;
 }
 
 
@@ -161,6 +168,9 @@ nav img
 
 /* menu BURGER pour la version mobile */
 @media all and (max-width: 767px) {
+    .navbar {
+        justify-content: space-between;
+    }
     .nav__burger {
         display: block;
         position: relative;
@@ -170,7 +180,7 @@ nav img
         border: none;
         cursor: pointer;
         background-color: transparent;
-        justify-self: flex-start;
+        margin-left: 20px;
       }
       .navbar__menu{
         display: flex;
@@ -182,7 +192,7 @@ nav img
         height: 60vh;
         position: absolute;
         top: 80px;
-        right: -100px;
+        left: -100px;
         background-color: var(--dark-blue);
         transition: all 0.5s;
         align-items: center;
@@ -191,7 +201,7 @@ nav img
       .show-nav .navbar__menu {
         width: 100%;
         visibility: visible;
-        right: 0;
+        left: 0;
     }
       .nav__burger__bar {
         display: inherit;

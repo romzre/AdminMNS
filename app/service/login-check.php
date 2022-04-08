@@ -23,7 +23,7 @@ if(!$password)
 //on vérifier l'existence de l'utilisateur
 
 $manager = new UserManager();
-$user = $manager->getByEmail($email);
+$user = $manager->getUserByEmail($email);
 if(!$user)
 {
     header('Location: ./?page=login&error_account');
