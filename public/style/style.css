@@ -22,7 +22,12 @@ body{
     background-color: var(--main-bg-color);
     color : #fff;
     font-family: 'Montserrat';
-    margin :0
+    
+}
+
+ul,li{
+    margin :0;
+    padding:0
 }
 
 /* Titre  */
@@ -84,6 +89,10 @@ header{
     gap:4rem
 }
 
+.container-button{
+    display: flex;
+    gap:40px
+}
 
 /*Navigation */
 
@@ -123,20 +132,124 @@ nav img
 
 /* menu de base  */
 
-.navbar__menu__content{
+.navbar__menu{
     display: flex;
     justify-content: space-around;
     gap : 20px
 
 }
 
+.navbar-account_notification{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /* menu account */
 
 .navbar-account{
-    margin-right: 20px;
+    margin-right: 30px;
+    margin-left: 30px;
+    transition: all 0.5s;
 }
+
+
+.navbar-notification{
+    margin-left:30px;
+}
+
 .navbar-account--toggle{
     display: none;
+}
+
+.fa-bell{
+    font-size: 1.2rem;
+}
+
+/* menu BURGER pour la version mobile */
+@media all and (max-width: 767px) {
+    .navbar {
+        justify-content: space-between;
+    }
+    .nav__burger {
+        display: block;
+        position: relative;
+        padding: 0;
+        width: 45px;
+        height: 45px;
+        border: none;
+        cursor: pointer;
+        background-color: transparent;
+        margin-left: 20px;
+      }
+      .navbar__menu{
+        display: flex;
+        flex-direction: column;
+        width: 0;
+        overflow: hidden;
+        visibility: hidden;
+        color: transparent;
+        height: 60vh;
+        position: absolute;
+        top: 80px;
+        left: -100px;
+        background-color: var(--dark-blue);
+        transition: all 0.5s;
+        align-items: center;
+      }
+
+      .show-nav .navbar__menu {
+        width: 100%;
+        visibility: visible;
+        left: 0;
+    }
+      .nav__burger__bar {
+        display: inherit;
+        width: 30px;
+        height: 3px;
+        background: white;
+        border-radius: 3px;
+        -webkit-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+      }
+      .show-nav .nav__burger__bar {
+        width: 0;
+        color: transparent;
+      }
+      .nav__burger__bar::before, .nav__burger__bar::after {
+        content: "";
+        width: 30px;
+        height: 3px;
+        position: absolute;
+        left: 0;
+        background: white;
+        border-radius: 3px;
+        -webkit-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+      }
+      .nav__burger__bar::before {
+        -webkit-transform: translateY(-12px);
+                transform: translateY(-12px);
+      }
+      .show-nav .nav__burger__bar::before {
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+      }
+      .nav__burger__bar::after {
+        -webkit-transform: translateY(12px);
+                transform: translateY(12px);
+      }
+      .show-nav .nav__burger__bar::after {
+        -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+      }
+}
+
+
+@media all and (min-width: 768px) {
+    .nav__burger {
+      display: none;
+    }
 }
 
 /* on modifie son comporterment lorsqu'on clique dessus */
@@ -155,7 +268,22 @@ nav img
     justify-content: center;
     align-items: center;
     padding-inline-start: 0;
-    width: 110px;
+    min-width: 120px;
+    margin: 5px 5px;
+    
+}
+
+.navbar-account__content li{
+    padding : 2.5px 0;
+    font-size: 0.9rem;
+}
+
+.content-log-out .fa-solid {
+    margin-right:5px
+}
+
+.content-log-out:hover i{
+    color:var(--main-title-color)
 }
 
 /* Login form */

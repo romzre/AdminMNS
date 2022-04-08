@@ -1,5 +1,8 @@
-<?php
-require 'PdoManager.php';
+
+<?php 
+require_once 'PdoManager.php';
+require '../app/Entity/User.php';
+
 
 class UserManager {
 
@@ -10,7 +13,7 @@ class UserManager {
      *
      * @return void
      */
-    public function getAll()
+    public function getAllUsers()
     {
         $pdo=PdoManager::getPdo();
 
@@ -29,7 +32,7 @@ class UserManager {
      * @param  mixed $email
      * @return void
      */
-    public function get(string $email)
+    public function getUserByEmail(string $email)
     {
         $pdo=PdoManager::getPdo();
         $sql= 'SELECT * FROM users WHERE email_user=:email_user';
@@ -42,19 +45,6 @@ class UserManager {
         $user = $req->fetch(PDO::FETCH_ASSOC);
 
         return $user;
-    }
-
-    public function compareEmail($email)
-    {
-        $pdo=PdoManager::getPdo();
-      
-        $sql= 'SELECT email_user FROM users WHERE email_user = :email_user';
-        $req = $pdo->prepare($sql);
-        $req->execute(['email_user' => $email]);
-
-        $issetEmail = $req->fetch(PDO::FETCH_ASSOC);
-
-        return $issetEmail;
     }
 
     public function insertRegister(array $dataRegister)
@@ -90,5 +80,22 @@ class UserManager {
 
 
     }
+
+    public function getUserById(string $id_user)
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= 'SELECT * FROM users WHERE id_user=:id_user';
+
+        $req = $pdo->prepare($sql);
+        $req->execute([
+            'id_user'=>$id_user
+        ]);
+        
+        $user = $req->fetch(PDO::FETCH_ASSOC);
+        $obj = new User($user);
+        return $obj;
+    }
+
+
 
 }

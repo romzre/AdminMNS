@@ -1,0 +1,37 @@
+
+/* Déclaration des variables de couleur */
+
+:root {
+    --main-bg-color: #151B36;
+    --main-title-color :#EC6834;
+    --dark-blue :#0D1121;
+}
+
+.container-titre-dashboard {
+    margin : 40px 40px
+}
+
+.container-titre-dashboard h2 {
+    color: var(--main-title-color);
+}
+
+
+.container-dashboard {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.dashboard-firstPart {
+    height: 400px;
+    border : 2px solid var(--main-title-color);
+    border-radius: 15px;
+}
+
+.recap-retards-absences span {
+    color : var(--main-title-color)
+}
+
+.fa-solid{
+    color:#fff
+}

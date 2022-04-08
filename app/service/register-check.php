@@ -16,7 +16,7 @@ foreach ($_POST as $key => $value) {
 require '../app/Manager/UserManager.php';
 
 $manager = new UserManager();
-$checkEmail = $manager->compareEmail($_POST['email_user']);
+$checkEmail = $manager->getUserByEmail($_POST['email_user']);
 
 
 if(empty($checkEmail))
