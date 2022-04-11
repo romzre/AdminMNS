@@ -1,6 +1,9 @@
 <?php require '../templates/partials/inc_top.php';?>
 
 <div class="container">
+    <div class='container-button'>
+        <button type="button" class="btn btn-primary btn-back"><a href="index.php">Retour</a></button>
+    </div>
     <div class="login-form-container">
         <div class="login-form-top">
             <h2>Connectez vous a votre espace ADMIN MNS</h2>
