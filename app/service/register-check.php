@@ -20,7 +20,7 @@ $manager = new UserManager();
 $checkEmail = $manager->getUserByEmail($_POST['email']);
 
 
-if(empty($checkEmail))
+if(!$checkEmail)
 {
     $checkEmail = NULL;
     if(count($array_dataPost) == 0)
@@ -36,19 +36,7 @@ if(empty($checkEmail))
    
     
     $id  = $manager->insertUser($dataUser);
-    // $dataTrainee = [
-    //     'id_user' => intval($id),
-    //     'birthdate' => $_POST['birthdate'],
-    //     'tel' => $_POST['tel'],
-    //     'laneType' => $_POST['laneType'],
-    //     'street' => $_POST['street'],
-    //     'addressComplement' => $_POST['addressComplement'],
-    //     'postalCode' => $_POST['postalCode'],
-    //     'city' => $_POST['city'],
-    //     'streetNumber' => $_POST['streetNumber'],
-    //     'completeDossier' => 0,
-    //     'isRegister' => 0,
-    // ];
+    
     $dataTrainee = [
         intval($id),
         $_POST['birthdate'],

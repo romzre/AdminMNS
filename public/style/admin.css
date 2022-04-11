@@ -1,0 +1,78 @@
+.contBtnMenu{
+    margin: 25px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.contBtnMenu > .active{
+  
+    background-color: transparent;
+    border : 2px solid var(--main-title-color);
+    
+}
+
+.contData{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 70px 0px;
+    
+}
+
+.dataTable{
+    background-color: transparent;
+    
+    border-top-right-radius: 30px;
+  
+    display: block;
+}
+
+.dataTable > thead{
+    font-family: 'Shary';
+}
+
+.cel > a {
+    text-decoration: none;
+    color: #fff;
+}
+tr{
+    position: relative;
+}
+.anim-hover:hover {
+    text-decoration: none;
+    color: var(--main-title-color);
+    position: absolute;
+    top: 30%;
+    transform: scale(1.2);
+    transition: all .3s linear;
+}
+
+.headTable, .cel{
+    border : 1px solid var(--main-title-color);
+    border-top: .5px solid var(--main-title-color);
+    padding: 15px 35px;
+}
+.left{
+    border-right : .5px solid var(--main-title-color);
+    border-top-left-radius: 30px;
+    border-top: 2px solid var(--main-title-color);
+    border-bottom: 1px solid var(--main-title-color);
+    display: block;
+}
+.right{
+    border-left : .5px solid var(--main-title-color);
+    border-top-right-radius: 30px;
+    border-top: 2px solid var(--main-title-color);
+    border-bottom: 1px solid var(--main-title-color);
+    display: block;
+}
+
+@media screen and (max-width:800px) {
+    table, thead,tbody, tr, td
+    {
+        display: block;
+    }
+}

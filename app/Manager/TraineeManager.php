@@ -18,6 +18,25 @@ class TraineeManager extends UserManager {
         
         return $trainee;
     }
+
+    
+    /**
+     * getAllTrainees permet de récupérer les Trainnees qui ne sont ni candidat et ni stagiaire.
+     *
+     * @return void
+     */
+    public function getAllRegistered()
+    {
+        $pdo=PdoManager::getPdo();
+        
+        $sql= "SELECT users.id_user ,  firstName , familyName , email , tel FROM trainee INNER JOIN users ON users.id_user = trainee.id_user  WHERE isRegistered = 0";
+        $req = $pdo->prepare($sql);
+        $req->execute();
+        
+        $registered = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $registered;
+    }
     
     /**
      * get

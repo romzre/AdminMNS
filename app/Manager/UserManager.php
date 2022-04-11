@@ -44,8 +44,9 @@ class UserManager {
         $req->execute([
             'email'=>$email
         ]);
-
+        
         $user = $req->fetch(PDO::FETCH_ASSOC);
+
         // $obj = (new User())->hydrate($user);
         // return $obj;
         return $user;

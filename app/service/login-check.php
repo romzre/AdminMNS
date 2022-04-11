@@ -58,7 +58,7 @@ else{
 
     //on vérifie si le user est un stagiaire ou un candidat et en fonction en le redirige sur le bon espace
     $traineeManager = new TraineeManager();
-    $completeDossier=$traineeManager->checkCompleteDossier($id_user);
+    $completeDossier = $traineeManager->checkCompleteDossier($id_user);
 
     if(!$completeDossier)
     {
