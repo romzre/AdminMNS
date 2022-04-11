@@ -31,8 +31,8 @@ if(!$user)
 }
 
 //on vérifie le mot de passe
-if($user['password_user']!==$password)
-// if(!password_verify($password, $user['password_user']) // à intégrer lorsqu'on aura hacher les mdp
+// if($user['password_user']!==$password)
+if(!password_verify($password, $user['password_user'])) // à intégrer lorsqu'on aura hacher les mdp
 {
     header('Location: ./?page=login&error_account');
     exit;

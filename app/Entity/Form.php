@@ -124,7 +124,13 @@ class Form
 
         <?php
     }
-
+    
+    /**
+     * CheckForUX Vérifie si une valeur est présente dans l'input
+     *
+     * @param  mixed $input
+     * @return void
+     */
     public function CheckForUX($input)
     {
         if(empty($input)) : ?>
