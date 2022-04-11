@@ -31,7 +31,9 @@ if(!$user)
 }
 
 //on vérifie le mot de passe
+
 if(!password_verify($password, $user['password']))
+
 {
     header('Location: ./?page=login&error_account');
     exit;
