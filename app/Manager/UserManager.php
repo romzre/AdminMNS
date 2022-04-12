@@ -101,9 +101,17 @@ class UserManager {
         return $user;
     }
 
-  
-    
+    public function updatePassword (string $password, string $email)
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= 'UPDATE `users` SET `password`= :password WHERE email = :email';
 
+        $req = $pdo->prepare($sql);
+        $req->execute([
+            'email'=>$email,
+            'password'=>$password,
+        ]);
+    }
 
 
 }
