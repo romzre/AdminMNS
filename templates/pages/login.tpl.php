@@ -1,7 +1,7 @@
 <?php require '../templates/partials/inc_top.php';?>
 
-<div class="container">
-    <div class='container-button'>
+<div class="container container-login">
+    <div class='container-button-back'>
         <button type="button" class="btn btn-primary btn-back"><a href="index.php">Retour</a></button>
     </div>
     <div class="login-form-container">
@@ -24,10 +24,10 @@
                 <?php if(isset($_GET['password_error'])) require '../templates/partials/inc_password-error.php'?>
                 <?php if(isset($_GET['error_account'])) require '../templates/partials/inc_account-error.php'?>
             </div>    
-                <div class="container-btn">
+                <div class="container-button-center">
                     <input type="submit" class="btn btn-primary" value="Se connecter" name="submit" />
                 </div>
-            <div class="password_forgotten"><a href="">mot de passe oublié ?</a></div>
+            <div class="password_forgotten"><a href="/?page=forgot-password">mot de passe oublié ?</a></div>
         </form>    
     </div>
 </div>
