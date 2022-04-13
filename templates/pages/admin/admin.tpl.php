@@ -7,19 +7,19 @@
 <div class="contData">
     <table class="dataTable">
         <thead>
-            <td class="headTable left">Prénom</td>
-            <td class="headTable">Nom</td>
-            <td class="headTable">Email</td>
-            <td class="headTable right">Tel</td>
-            <!-- <td>Formation</td> -->
+            <th class="headTable left">Prénom</th>
+            <th class="headTable">Nom</th>
+            <th class="headTable">Email</th>
+            <th class="headTable right">Tel</th>
+            <!-- <td>Formation</td> --> 
         </thead>
         <tbody>
             <?php  foreach ($registered as $user) :?>
                 <tr >
-                <td class="cel" ><a class="anim-hover" href="index.php?page=profile&id=<?= $user['id_user'] ?>"><?= $user['firstName'] ?></a></td>
-                <td class="cel"><a ><?= $user['familyName'] ?></a></td>
-                <td class="cel"><a mailto="<?= $user['email'] ?>"><?= $user['email'] ?></a></td>
-                <td class="cel"><a><?= $user['tel'] ?></a></td>
+                <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?page=profile&id=<?= $user['id_user'] ?>"><?= $user['firstName'] ?></a></td>
+                <td class="cel" data-info="Nom" ><a ><?= $user['familyName'] ?></a></td>
+                <td class="cel" data-info="Email" ><a mailto="<?= $user['email'] ?>"><?= $user['email'] ?></a></td>
+                <td class="cel" data-info="Tel" ><a><?= $user['tel'] ?></a></td>
                 <!-- <td>< ?= $user['formation'] ?></td> -->
                 </tr>
             
