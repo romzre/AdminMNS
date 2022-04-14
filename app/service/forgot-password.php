@@ -32,7 +32,6 @@ else
         $passwordResetManager = new PasswordResetManager();
         $passwordResetManager->createPasswordResetTemp($email,$key,$expDate);
         $success .= 'An email has been sent to you with instructions on how to reset your password.';
-        echo 'OK';
         
         //partie à mettre en place avec PHPMailer
         $output='<p>Dear user,</p>';
