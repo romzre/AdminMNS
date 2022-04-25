@@ -85,7 +85,14 @@ class TraineeManager extends UserManager {
         ]);
         
         $completeDossier = $req->fetch(PDO::FETCH_ASSOC);
+
+        $statusDossier = $completeDossier['completeDossier'];
+
+        //Si la requete renvoie 0, $statusDossier est false 
+        $statusDossier == 0 ? $completeDossier=false : $completeDossier=true;
+
         return $completeDossier;
+
     }
 
     public function isRegistered(string $id_user)
@@ -99,6 +106,11 @@ class TraineeManager extends UserManager {
         ]);
         
         $isRegistered = $req->fetch(PDO::FETCH_ASSOC);
+        
+        $registerStatus = $isRegistered['isRegistered'];
+
+        //Si la requete renvoie 0, $isRegistered est false 
+        $registerStatus == 0 ? $isRegistered=false : $isRegistered=true;
         return $isRegistered;
     }
 
