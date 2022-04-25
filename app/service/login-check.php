@@ -64,7 +64,10 @@ else{
     {
         header('Location: ./?page=dashboard-candidate');
     }
-    else {
+    //on vérifie qu'il est candidat
+    $isRegistered=$traineeManager->isRegistered($id_user);
+    if(!$isRegistered)
+    {
         header('Location: ./?page=dashboard-trainee');
     }
     
