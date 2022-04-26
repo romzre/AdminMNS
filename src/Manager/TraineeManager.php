@@ -1,7 +1,7 @@
 <?php 
 
 require_once 'UserManager.php';
-require '../app/Entity/Trainee.php';
+require '../src/Entity/Trainee.php';
 
 class TraineeManager extends UserManager {
 

@@ -33,5 +33,3 @@
 
 
 <script src="scripts/login-check.js"></script>
-
-<?php require '../templates/partials/inc_bottom.php';?>

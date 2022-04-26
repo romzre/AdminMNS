@@ -12,7 +12,7 @@ if (isset($_POST['submit-register']))
     else
     {
         $samePass = false;
-        $msg = "Les mots de passes ne sont pas identiques";
+        $message = "Les mots de passes ne sont pas identiques";
        
     }   
 
