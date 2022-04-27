@@ -5,6 +5,7 @@ $error_password2='';
 $error_passwords='';
 $success = '';
 $error ='';
+$form = false;
 
 
 // on récupère la clé et l'email de l'user qui ont été passé en paramètre dans le lien envoyé pour réinitialiser le mdp
@@ -36,8 +37,10 @@ if (!empty($_GET["key"]) && !empty($_GET["email"]))
         $expDate = $key['expDate'];
         if ($expDate >= $curDate) // on vérifie que la clé est toujours valide
         {
+            
+            $form = true; // on charge le formulaire pour créer le nouveau mdp si la date d'exp n'est pas dépassée
             require '../app/service/reset-password.php';
-            require '../templates/pages/reset-password-form.tpl.php'; // on charge le formulaire pour créer le nouveau mdp si la date d'exp n'est pas dépassée
+            
             
         }
         else

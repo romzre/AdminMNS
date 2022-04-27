@@ -334,6 +334,7 @@ nav img
     margin-bottom: 20px;
     box-sizing: content-box;
     
+    
 
 
 }
@@ -432,7 +433,7 @@ Les autres éléments s'afficheront grâce à php et ne seront pas impactés par
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 30%;
+    height: 50%;
     width: 98%;
 }
 .form-group {
@@ -457,6 +458,15 @@ Les autres éléments s'afficheront grâce à php et ne seront pas impactés par
     text-align: center;
     font-family: 'montserrat';
     font-size: 0.8rem;
+}
+
+.alert-form {
+    padding: 0.2em;;
+    margin: 2rem auto;
+    width: 95%;
+    border-radius: 10px;
+    text-align:center;
+    font-size:0.8rem
 }
 
 
