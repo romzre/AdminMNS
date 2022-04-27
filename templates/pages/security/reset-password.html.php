@@ -1,5 +1,3 @@
-<?php require '../templates/partials/inc_top.php'?>
-
 <div class="container container-reset-password">
 
     <?php if(!empty($success)) : ?>
@@ -7,10 +5,10 @@
     <?php endif ;?>    
     <?php if(!empty($error)) : ?>
         <span class="alert alert-danger" role="alert"><?=$error;?></span>
-    <?php endif ;?>  
-        
+    <?php endif ;?> 
+    <?php ($form) ? require 'reset-password-form.tpl.php': null;?> 
+
 </div>
 
 <script src="scripts/login-check.js"></script>
 
-<?php require '../templates/partials/inc_bottom.php';?>
