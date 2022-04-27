@@ -14,7 +14,7 @@ foreach ($_POST as $key => $value) {
 }
 
 // Test si l'email existe dans la bdd
-require '../app/Manager/UserManager.php';
+require '../src/Manager/UserManager.php';
 
 $manager = new UserManager();
 $checkEmail = $manager->getUserByEmail($_POST['email']);

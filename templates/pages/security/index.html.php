@@ -1,14 +1,12 @@
-<?php require '../templates/partials/inc_top.php';?>
-
 <div class="container container-login">
     <div class='container-button-back'>
-        <button type="button" class="btn btn-primary btn-back"><a href="index.php">Retour</a></button>
+        <a href="/"><button type="button" class="btn btn-primary btn-back">Retour</button></a>
     </div>
     <div class="login-form-container">
         <div class="login-form-top">
             <h2>Connectez vous a votre espace ADMIN MNS</h2>
         </div>
-        <form method='post' action='./?page=login'>
+        <form method='post' action='/?controller=security&action=check'>
             <div class="form-group">
                 <label for="email">Adresse email</label>
                 <input type="email" name="email" class="form-control" id="email_input" placeholder="name@example.com">
@@ -27,11 +25,9 @@
                 <div class="container-button-center">
                     <input type="submit" class="btn btn-primary" value="Se connecter" name="submit" />
                 </div>
-            <div class="password_forgotten"><a href="/?page=forgot-password">mot de passe oublié ?</a></div>
+            <div class="password_forgotten"><a href="/?controller=security&action=forgotPassword">mot de passe oublié ?</a></div>
         </form>    
     </div>
 </div>
 </div>
 <script src="scripts/login-check.js"></script>
-
-<?php require '../templates/partials/inc_bottom.php';?>
