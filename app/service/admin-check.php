@@ -11,7 +11,7 @@ if(!isset($_SESSION['id_user']))
 else 
 // Vérification que l'utilisateur est bien un administrateur 
 {
-    require_once '../app/Manager/AdminManager.php';
+    require_once '../src/Manager/AdminManager.php';
     $adminManager=new AdminManager();
     $admin=$adminManager->get($_SESSION['id_user']);
 

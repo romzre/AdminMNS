@@ -1,5 +1,3 @@
-<?php require '../templates/partials/inc_top.php'?>
-
 <div class="container container-reset-password">
 
     <?php if(!empty($success)) : ?>
@@ -14,4 +12,3 @@
 
 <script src="scripts/login-check.js"></script>
 
-<?php require '../templates/partials/inc_bottom.php';?>

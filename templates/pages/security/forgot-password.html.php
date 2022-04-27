@@ -1,8 +1,6 @@
-<?php require '../templates/partials/inc_top.php';?>
-
-<div class="container container-reset-password">
+<div class="container container-login">
     <div class='container-button-back'>
-        <button type="button" class="btn btn-primary btn-back"><a href="/">Retour</a></button>
+        <a href="/"><button type="button" class="btn btn-primary btn-back">Retour</button></a>
     </div>
     <?php if(!empty($success)) : ?>
             <span class="alert alert-success" role="alert"><?=$success;?></span>
@@ -11,7 +9,7 @@
         <div class="login-form-top">
             <h2>Réinitialisation du mot de passe</h2>
         </div>
-        <form method='post' action='/?page=forgot-password'>
+        <form class='reset-container-form' method='post' action='/?controller=security&action=forgotPassword'>
             <div class="form-group">
                 <label for="email">Adresse email</label>
                 <input type="email" name="email" class="form-control" id="email_input" placeholder="name@example.com">
@@ -38,5 +36,3 @@
 </div>
 </div>
 <script src="scripts/login-check.js"></script>
-
-<?php require '../templates/partials/inc_bottom.php';?>

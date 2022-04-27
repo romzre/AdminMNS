@@ -8,4 +8,4 @@ if (isset($_POST['submit']))
     require '../app/service/forgot-password.php';
 }
 
-require '../templates/pages/forgot-password.tpl.php';
+require '../templates/pages/security/forgot-password.tpl.php';

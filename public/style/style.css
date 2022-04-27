@@ -319,7 +319,7 @@ nav img
 
 /* Login form */
 .login-form-container, .reset-password-form-container{
-    height: 450px;
+    min-height: 450px;
     width: 410px;
     border: solid 2px var(--main-title-color);
     border-radius: 50px;
@@ -350,7 +350,7 @@ form{
     width: 98%;
 }
 
-.reset-password-form-container form{
+form.reset-password-form-container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -358,6 +358,11 @@ form{
     width: 98%;
 }
 
+form.reset-container-form {
+    justify-content: flex-start;
+    gap:20px;
+    height: auto;
+}
 
 .form-group {
     margin : 10px auto;
@@ -429,7 +434,7 @@ Les autres éléments s'afficheront grâce à php et ne seront pas impactés par
     margin-top: 20px;
 }
 
-.container-reset-password form{
+form.container-reset-password{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
