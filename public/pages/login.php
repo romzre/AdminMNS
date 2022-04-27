@@ -1,4 +1,5 @@
-<?php require '../templates/pages/login.tpl.php';
+<?php 
+require '../templates/pages/login.tpl.php';
 
 if (isset($_POST['submit'])) 
 {

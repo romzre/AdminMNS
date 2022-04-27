@@ -39,6 +39,7 @@ if(!password_verify($password, $user['password']))
     exit;
 
 }
+
 //on ouvre une session et on stock l'id_user
 session_start();
 $id_user = $user['id_user'];
