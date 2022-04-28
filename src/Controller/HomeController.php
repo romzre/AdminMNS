@@ -6,7 +6,8 @@ class HomeController extends Controller {
     {
         $data = [];
         $path= '../templates/pages/home/index.html.php';
-        $this->renderView($path, $data);
+        $layOut = 'base';
+        $this->renderView($path, $data, $layOut);
     }
     
     public function register()
@@ -14,6 +15,7 @@ class HomeController extends Controller {
         $samePass = true;
         $message = NULL;
         $email = NULL;
+
         if (isset($_POST['submit-register'])) 
         { 
             if($_POST['password'] == $_POST['confirm_password'])
@@ -28,14 +30,11 @@ class HomeController extends Controller {
             
             }   
 
-            $array_input = extract($_POST,EXTR_PREFIX_SAME,'mns_');
-            
             $data['$_POST']=$_POST;
             $data['samePass']=$samePass;
             $data['message']=$message;
             $data['email'] = $email;
-            
-            
+
             
         }
         else
@@ -44,7 +43,8 @@ class HomeController extends Controller {
             
         }
         $path = '../templates/pages/home/register.html.php';
-        $this->renderView($path, $data);
+        $layOut='base';
+        $this->renderView($path, $data, $layOut);
     }
 
 }

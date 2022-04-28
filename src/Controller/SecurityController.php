@@ -8,7 +8,8 @@ class SecurityController extends Controller {
     {
         $data = [];
         $path= '../templates/pages/security/index.html.php';
-        $this->renderView($path, $data);
+        $layOut = 'base';
+        $this->renderView($path, $data, $layOut);
 
     }
 
@@ -39,8 +40,11 @@ class SecurityController extends Controller {
         $data['message'] = $message;
         $data['messageErrorEmail'] = $messageErrorEmail ;
         $data['success'] = $success;
+
         $path= '../templates/pages/security/forgot-password.html.php';
-        $this->renderView($path, $data);
+        $layOut = 'base';
+
+        $this->renderView($path, $data, $layOut);
 
     }
 
@@ -108,7 +112,7 @@ class SecurityController extends Controller {
         
         }
         
-        $path = '../templates/pages/security/reset-password.html.php';
+        
         $data = [];
 
         $data['form'] = $form;
@@ -117,8 +121,11 @@ class SecurityController extends Controller {
         $data['error_password1'] = $error_password1;
         $data['error_password2'] = $error_password2;
         $data['error_passwords'] = $error_passwords;
+    
+        $path = '../templates/pages/security/reset-password.html.php';
+        $layOut = 'base';
 
-        $view=new View($path, $data);
+        $view=new View($path, $data, $layOut);
         $view->render();
                
 
