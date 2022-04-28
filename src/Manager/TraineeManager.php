@@ -87,6 +87,7 @@ class TraineeManager extends UserManager {
         ]);
         
         $traineeInfos = $req->fetch(PDO::FETCH_ASSOC);
+
         $obj=(new Trainee())->hydrate($traineeInfos);
 
         return $obj;

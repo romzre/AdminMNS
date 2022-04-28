@@ -69,7 +69,7 @@ class View
         return $this;
     }
 
-    function __construct($path, $data, $layOut='base')
+    function __construct($path, $data, $layOut)
     {
         $this->setPath($path);
         $this->setData($data);
