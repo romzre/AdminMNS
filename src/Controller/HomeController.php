@@ -6,7 +6,7 @@ class HomeController extends Controller {
     {
         $data = [];
 
-        $path= '../templates/pages/home/index.html.php';
+        $path= 'pages/home/index.html.twig';
         $layOut = 'base';
         $this->renderView($path, $data, $layOut);
 
@@ -44,7 +44,7 @@ class HomeController extends Controller {
             $data = compact('samePass','message','email');
             
         }
-        $path = '../templates/pages/home/register.html.php';
+        $path = 'pages/home/register.html.php';
         $layOut='base';
         $this->renderView($path, $data, $layOut);
     }
