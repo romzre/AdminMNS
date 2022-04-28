@@ -1,6 +1,6 @@
 <?php 
 
-require 'Report.php';
+require_once 'Report.php';
 
 class Absence extends Report {
 

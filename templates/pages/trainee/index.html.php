@@ -16,8 +16,8 @@
     <div class="profile-pic&recap-report">
         <img src="ressources" alt='photo-profil'>
         <div class="recap">
-            <p>Nombre d'abscences non justifiées :<span class='dash-unjustified-report'> /5 </span></p>
-            <p>Nombre de retards non justifiées : <span class='dash-unjustified-report'> /10 </span></p>
+            <p>Nombre d'abscences non justifiées :<span class='dash-unjustified-report'> <?= $nbUnjustifiedAbsences;?>/5 </span></p>
+            <p>Nombre de retards non justifiées : <span class='dash-unjustified-report'> <?= $nbUnjustifiedDelays;?>/10 </span></p>
         </div>
     </div>
 </div>
