@@ -1,10 +1,9 @@
 <?php 
-require_once 'PdoManager.php';
-require '../app/Entity/User.php';
 
-class AbsenceManager {
+require '../src/Entity/ReportManager.php';
 
-    use PdoManager; 
+class AbsenceManager extends ReportManager {
+
     
     /**
      * getAll
@@ -30,7 +29,7 @@ class AbsenceManager {
      * @param  mixed $email
      * @return void
      */
-    public function getUserAbsences(int $id_user)
+    public function getUserAbsences(string $id_user)
     {
         $pdo=PdoManager::getPdo();
         $sql= 'SELECT * FROM abscence WHERE id_user=:id_user';
@@ -45,20 +44,22 @@ class AbsenceManager {
         return $absences;
     }
 
-    public function getUserAbsencesUnjustified(int $id_user)
+    public function getUnjustifiedAbsencesByUser(string $id_user)
     {
         $pdo=PdoManager::getPdo();
-        $sql= 'SELECT * FROM abscence WHERE id_user=:id_user INNER JOIN on report WHERE absence.id_report=report.id_report';
+        $sql= 'SELECT * FROM abscence INNER JOIN on report WHERE absence.id_report=report.id_report WHERE id_user=:id_user AND isJustified = 0';
 
         $req = $pdo->prepare($sql);
         $req->execute([
             'id_user'=>intval($id_user)
         ]);
         
-        $absencesUnjustified = $req->fetchAll(PDO::FETCH_ASSOC);
+        $unjustifiedAbsences = $req->fetchAll(PDO::FETCH_ASSOC);
         
-        return $absencesUnjustified;
+        return $unjustifiedAbsences;
     }
 
 
+
+    
 }

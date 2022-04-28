@@ -4,9 +4,9 @@ abstract class Controller {
 
     abstract public function index();
 
-    protected function renderView(string $path, array $data)
+    protected function renderView(string $path, array $data, string $layOut)
     {
-        $view= new View($path, $data);
+        $view= new View($path, $data, $layOut);
         $view->render();
     }
 

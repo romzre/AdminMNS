@@ -6,10 +6,17 @@ class AdminController extends Controller {
     public function index()
     {
         require_once '../app/service/admin-check.php';
-        $data = compact('admin');
-        
+   
+        require '../src/Manager/TraineeManager.php';
+        $manager = new TraineeManager();
+
+        $registered = $manager->getAllRegistered();
+
+
+        $data = compact('admin', 'registered');
         $path= '../templates/pages/admin/index.html.php';
-        $this->renderView($path, $data);
+        $layOut='base-admin';
+        $this->renderView($path, $data, $layOut);
     }
     
 }
