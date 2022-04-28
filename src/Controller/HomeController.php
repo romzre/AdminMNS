@@ -5,7 +5,7 @@ class HomeController extends Controller {
     public function index()
     {
         $data = [];
-        $path= '../templates/pages/home/index.html.php';
+        $path= 'pages/home/index.html.php.twig';
         $this->renderView($path, $data);
     }
     
@@ -24,7 +24,7 @@ class HomeController extends Controller {
             else
             {
                 $samePass = false;
-                $msg = "Les mots de passes ne sont pas identiques";
+                $message = "Les mots de passes ne sont pas identiques";
             
             }   
 
