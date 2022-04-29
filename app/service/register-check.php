@@ -1,6 +1,7 @@
 <?php
 $array_dataPost = [];
 
+// Echappement des input pour éviter l'injection de code 
 foreach ($_POST as $key => $value) {
     
     if(empty($value))
@@ -19,10 +20,12 @@ foreach ($_POST as $key => $value) {
         $_POST[$key] = htmlspecialchars($value);
     }
 }
+
 // Test si l'email existe dans la bdd
 require '../src/Manager/UserManager.php';
 
 $manager = new UserManager();
+
 $checkEmail = $manager->getUserByEmail($_POST['email']);
 
 
@@ -62,11 +65,11 @@ if(!$checkEmail)
 
     if($reqRegister)
     {
-        $message = "Votre demande d'inscription a bien été prise en compte. Un email vous sera envoyé dés que votre espace sera disponible.";
+        $messageEndCheck = "Votre demande d'inscription a bien été prise en compte. Un email vous sera envoyé dés que votre espace sera disponible.";
     }
     else
     {
-        $message = "Une erreur est survenue lors de votre inscription. Veuillez renouveler l'opération.";
+        $messageEndCheck = "Une erreur est survenue lors de votre inscription. Veuillez renouveler l'opération.";
     }   
     }
 }

@@ -33,17 +33,18 @@ fieldset{
     padding: 15px;
     justify-content: flex-end;
 }
-
 .Return{
-    text-align: center;
-    position: relative;
-    right: 300px;   
+   margin: 0px auto;
+   padding: 8px 15px ;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
-
 .Return > a{
     display: inline-block;
     width: 100%;
     height: 100%;
+    text-align: center;
 }
 .suc_err{
     width: 60%;
