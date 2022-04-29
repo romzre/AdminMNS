@@ -1,3 +1,7 @@
+{% extends "partials/base.html.twig" %} 
+
+{% block body%}
+
 <div class="container container-login">
     <div class='container-button-back'>
         <a href="/"><button type="button" class="btn btn-primary btn-back">Retour</button></a>
@@ -14,13 +18,16 @@
                     <img src="images/check.svg" alt="icone de validation" class="icone-verif login-js">
                     <span class="message-alerte login-js">Rentrez un email valide.</span>
                 </div>
-                <?php if(isset($_GET['email_error'])) {require '../templates/partials/inc_email-error.php';}?>
+                {% if email_error is defined %} {% include "partials/inc_email-error.php" %}
+                {% endif %}
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe</label>
                 <input type="password"  name="password" class="form-control" id="password_input" placeholder="tappez votre mot de passe">
-                <?php if(isset($_GET['password_error'])) require '../templates/partials/inc_password-error.php'?>
-                <?php if(isset($_GET['error_account'])) require '../templates/partials/inc_account-error.php'?>
+                {% if password_error is defined %} {% include "partials/inc_password-error.php" %}
+                {% endif %}
+                {% if error_account is defined %} {% include'../templates/partials/inc_account-error.php' %}
+                {% endif %}
             </div>    
                 <div class="container-button-center">
                     <input type="submit" class="btn btn-primary" value="Se connecter" name="submit" />
@@ -31,3 +38,5 @@
 </div>
 </div>
 <script src="scripts/login-check.js"></script>
+
+{% endblock %}

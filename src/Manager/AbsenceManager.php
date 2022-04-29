@@ -1,10 +1,10 @@
 <?php 
 
-require '../src/Entity/ReportManager.php';
+require_once '../src/manager/ReportManager.php';
+require_once '../src/Entity/Absence.php';
 
 class AbsenceManager extends ReportManager {
 
-    
     /**
      * getAll
      *
@@ -14,7 +14,7 @@ class AbsenceManager extends ReportManager {
     {
         $pdo=PdoManager::getPdo();
         
-        $sql= 'SELECT * FROM absences';
+        $sql= 'SELECT * FROM absence';
         $req = $pdo->prepare($sql);
         $req->execute();
         
@@ -47,17 +47,41 @@ class AbsenceManager extends ReportManager {
     public function getUnjustifiedAbsencesByUser(string $id_user)
     {
         $pdo=PdoManager::getPdo();
-        $sql= 'SELECT * FROM abscence INNER JOIN on report WHERE absence.id_report=report.id_report WHERE id_user=:id_user AND isJustified = 0';
+        $sql= 'SELECT * FROM absence INNER JOIN report on absence.id_report=report.id_report WHERE id_user=:id_user AND isJustified=0';
 
         $req = $pdo->prepare($sql);
         $req->execute([
             'id_user'=>intval($id_user)
         ]);
         
-        $unjustifiedAbsences = $req->fetchAll(PDO::FETCH_ASSOC);
+        $unjustifiedAbsences = $req->fetchall(PDO::FETCH_ASSOC);
         
-        return $unjustifiedAbsences;
+        foreach ($unjustifiedAbsences as $absence) 
+        {
+                $obj[]=(new Absence())->hydrate($absence);
+        }
+        
+        return $obj;
     }
+
+    
+    public function getNbOfUnjustifiedAbsencesByUser(string $id_user)
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= 'SELECT * FROM absence INNER JOIN report on absence.id_report=report.id_report WHERE id_user=:id_user AND isJustified=0';
+
+        $req = $pdo->prepare($sql);
+        $req->execute([
+            'id_user'=>intval($id_user)
+        ]);
+        
+        $unjustifiedAbsences = $req->fetchall(PDO::FETCH_ASSOC);
+        
+       return $nbAbsences = count($unjustifiedAbsences);
+        
+
+    }
+
 
 
 

@@ -14,13 +14,7 @@ if (isset($_POST['submit-register']))
     else
     {
         $samePass = false;
-<<<<<<< HEAD
-        $msg = "Les mots de passes ne sont pas identiques";
-        $array_input = extract($_POST,EXTR_PREFIX_SAME,'mns_');
-        require '../templates/pages/register.tpl.php';
-=======
         $message = "Les mots de passes ne sont pas identiques";
->>>>>>> a5ad38d70cf6a9c5f1bdfa57597e1a8ed0c55adf
        
     }   
 
