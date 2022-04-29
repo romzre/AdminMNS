@@ -17,7 +17,8 @@ class HomeController extends Controller {
         $samePass = true;
         $message = NULL;
         $email = NULL;
-
+        $data = [];
+        $messageEndCheck = NULL;
         if (isset($_POST['submit-register'])) 
         { 
             if($_POST['password'] == $_POST['confirm_password'])
@@ -32,9 +33,10 @@ class HomeController extends Controller {
             
             }   
 
-            $data['$_POST']=$_POST;
+            $data['POST']=$_POST;
             $data['samePass']=$samePass;
             $data['message']=$message;
+            
             $data['email'] = $email;
 
             
@@ -44,7 +46,12 @@ class HomeController extends Controller {
             $data = compact('samePass','message','email');
             
         }
-        $path = 'pages/home/register.html.php';
+        require '../src/Entity/Form.php';
+        $form = new Form();
+        $data['form'] = $form;
+        $data['POST'] = $_POST;
+        $data['messageEndCheck']=$messageEndCheck;
+        $path = 'pages/home/register.html.twig';
         $layOut='base';
         $this->renderView($path, $data, $layOut);
     }
