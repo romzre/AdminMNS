@@ -5,9 +5,11 @@ class HomeController extends Controller {
     public function index()
     {
         $data = [];
-        $path= '../templates/pages/home/index.html.php';
+
+        $path= 'pages/home/index.html.twig';
         $layOut = 'base';
         $this->renderView($path, $data, $layOut);
+
     }
     
     public function register()
@@ -26,7 +28,7 @@ class HomeController extends Controller {
             else
             {
                 $samePass = false;
-                $msg = "Les mots de passes ne sont pas identiques";
+                $message = "Les mots de passes ne sont pas identiques";
             
             }   
 
@@ -42,7 +44,7 @@ class HomeController extends Controller {
             $data = compact('samePass','message','email');
             
         }
-        $path = '../templates/pages/home/register.html.php';
+        $path = 'pages/home/register.html.twig';
         $layOut='base';
         $this->renderView($path, $data, $layOut);
     }

@@ -14,8 +14,9 @@ require '../src/Entity/Form.php';
     <fieldset>
         <legend>Informations Personnelles</legend>
     <?php 
+
         $form = new Form();
-        $form->createInputText('firstName','text','Prénom', 'space',(isset($firstName)) ? $firstName : NULL);
+        $form->createInputText('firstName','text','Prénom', 'space',(isset($_POST['firstName'])) ? $_POST['firstName'] : NULL);
 
         $form->createInputText('familyName','text','Nom', 'space',(isset($familyName)) ? $familyName : NULL);
 

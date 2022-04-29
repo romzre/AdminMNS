@@ -7,7 +7,11 @@ class SecurityController extends Controller {
     public function index()
     {
         $data = [];
-        $path= '../templates/pages/security/index.html.php';
+        isset($_GET['error_account'])? $data['error_account'] = $_GET['error_account']:null;
+        isset($_GET['password_error'])? $data['password_error'] = $_GET['password_error']:null;
+        isset($_GET['email_error']) ? $data['email_error'] = $_GET['email_error'] : null;
+ 
+        $path= 'pages/security/index.html.twig';
         $layOut = 'base';
         $this->renderView($path, $data, $layOut);
 
@@ -23,7 +27,7 @@ class SecurityController extends Controller {
         {
             header('Location :/');
         }
-
+        
     }
 
     public function forgotPassword ()
@@ -41,7 +45,7 @@ class SecurityController extends Controller {
         $data['messageErrorEmail'] = $messageErrorEmail ;
         $data['success'] = $success;
 
-        $path= '../templates/pages/security/forgot-password.html.php';
+        $path= 'pages/security/forgot-password.html.twig';
         $layOut = 'base';
 
         $this->renderView($path, $data, $layOut);
@@ -122,7 +126,7 @@ class SecurityController extends Controller {
         $data['error_password2'] = $error_password2;
         $data['error_passwords'] = $error_passwords;
     
-        $path = '../templates/pages/security/reset-password.html.php';
+        $path = 'pages/security/reset-password.html.twig';
         $layOut = 'base';
 
         $view=new View($path, $data, $layOut);

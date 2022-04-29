@@ -5,14 +5,20 @@ foreach ($_POST as $key => $value) {
     
     if(empty($value))
     {
-        $array_dataPost [] = $key;
+        if($key == 'addressComplement'){
+
+        }
+        else
+        {
+            $array_dataPost [] = $key;
+        }
+       
     }
     else
     {
         $_POST[$key] = htmlspecialchars($value);
     }
 }
-
 // Test si l'email existe dans la bdd
 require '../src/Manager/UserManager.php';
 

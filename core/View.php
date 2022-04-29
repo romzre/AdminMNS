@@ -1,4 +1,5 @@
 <?php 
+
 class View 
 {
     private string $path;
@@ -75,17 +76,32 @@ class View
         $this->setLayOut($layOut);
     }
 
-    function render() {
-        ob_start();
+    // function render() {
+    //     ob_start();
 
-        $data = extract($this->data, EXTR_PREFIX_SAME, "wddx");
+    //     $data = extract($this->data, EXTR_PREFIX_SAME, "wddx");
 
         
-        require $this->path;
+    //     require $this->path;
 
-        $content = ob_get_clean();
+    //     $content = ob_get_clean();
 
-        require '../templates/partials/'.$this->layOut.'.html.php';
+    //     require '../templates/partials/'.$this->layOut.'.html.php';
+
+    // }
+
+    function render() {
+
+        $directory = "../templates/";
+
+        $loader = new \Twig\Loader\FilesystemLoader($directory);
+
+        $twig = new \Twig\Environment($loader,[
+            'cache' => false,
+            'debug' => true
+        ]);
+
+        echo $twig->render($this->path,$this->data);
 
     }
 

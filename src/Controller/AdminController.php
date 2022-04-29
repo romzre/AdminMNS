@@ -14,7 +14,7 @@ class AdminController extends Controller {
 
 
         $data = compact('admin', 'registered');
-        $path= '../templates/pages/admin/index.html.php';
+        $path= 'pages/admin/index.html.twig';
         $layOut='base-admin';
         $this->renderView($path, $data, $layOut);
     }

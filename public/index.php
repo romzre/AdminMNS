@@ -1,5 +1,5 @@
 <?php 
-
+require '../vendor/autoload.php';
 
 
 if(!empty($_GET['controller']))

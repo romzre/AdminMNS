@@ -34,7 +34,7 @@ class TraineeController extends Controller {
             $data['nbUnjustifiedAbsences']=$nbUnjustifiedAbsences;
             $data['nbUnjustifiedDelays']=$nbUnjustifiedDelays;
 
-            $path= '../templates/pages/trainee/index.html.php';
+            $path= 'pages/trainee/index.html.twig';
             $layOut='base-trainee';
             $this->renderView($path, $data, $layOut);
         }

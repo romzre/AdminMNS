@@ -71,8 +71,41 @@ tr{
 }
 
 @media screen and (max-width:800px) {
-    table, thead,tbody, tr, td
+    *::before{
+        box-sizing: border-box;
+    }
+    table, thead,tbody, tr, td,th
     {
         display: block;
+        
+    }
+    th,.left, .right{
+        display: none;
+    }
+    td{
+        margin-top: -1px;
+        position: relative;
+    }
+    tr{
+        margin-bottom: 20px;
+    }
+    td::before{
+        content: attr(data-info);
+        position: absolute;
+        top: 0;
+        left: -130px;
+        width: 130px;
+        bottom: 0;
+        background-color: var(--main-title-color);
+   
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Shary';
+    }
+    .dataTable{
+        margin: 50px 0px;
+        margin-left: 130px;
+
     }
 }

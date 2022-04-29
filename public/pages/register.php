@@ -9,7 +9,7 @@ if (isset($_POST['submit-register']))
 
     {
         require '../app/service/register-check.php';
-       
+        require '../templates/pages/register-sucess.tpl.php';
     }
     else
     {
@@ -18,8 +18,7 @@ if (isset($_POST['submit-register']))
        
     }   
 
-    $array_input = extract($_POST,EXTR_PREFIX_SAME,'mns_');
-    require '../templates/pages/register.tpl.php';
+   
 }
 else
 {
