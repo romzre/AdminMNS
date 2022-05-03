@@ -1,0 +1,76 @@
+
+/* Déclaration des variables de couleur */
+
+h2, h3,h4 {
+    font-family: 'Gilroy';
+}
+
+:root {
+    --main-bg-color: #151B36;
+    --main-title-color :#EC6834;
+    --dark-blue :#0D1121;
+}
+
+.container-titre-dashboard {
+    margin : 50px 50px
+}
+
+.container-titre-dashboard h2 {
+    color: var(--main-title-color);
+}
+
+
+.container-dashboard {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 80px;
+
+}
+
+.dashboard-personal-info, .profile-pic {
+    height: 400px;
+    min-width: 450px;
+    border : 2px solid var(--main-title-color);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dashboard-personal-info h2 {
+    text-align: left;
+    margin-bottom: 40px;
+
+}
+
+.personal-info-content {
+    width: 90%;
+    height:80%;
+}
+
+.personal-info-content h3 {
+    font-size: 1.2rem;
+}
+
+.recap-retards-absences span {
+    color : var(--main-title-color)
+}
+
+.fa-solid{
+    color:#fff
+}
+
+@media screen and (max-width: 1000px){
+
+    .container-dashboard{
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        gap: 10px
+    }
+    .dashboard-personal-info, .profile-pic {
+        width:350px;
+        min-width: inherit;
+        height:300px;
+        
+    }
+}

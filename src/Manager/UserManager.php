@@ -1,7 +1,7 @@
 
 <?php 
 require_once 'PdoManager.php';
-require '../src/Entity/User.php';
+require_once '../src/Entity/User.php';
 
 
 class UserManager {

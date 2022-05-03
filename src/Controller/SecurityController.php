@@ -1,4 +1,4 @@
-<?php require '../core/Controller.php';
+<?php require_once '../core/Controller.php';
 
 
 
@@ -111,7 +111,7 @@ class SecurityController extends Controller {
             <p>The link is invalid/expired. Either you did not copy the correct link
             from the email, or you have already used the key in which case it is 
             deactivated.</p>
-            <p><a href="/?page=forgot-password">
+            <p><a href="/?controller=security&action=forgot-password">
             Click here</a> to reset password.</p>';
         
         }

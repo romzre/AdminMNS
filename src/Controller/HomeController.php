@@ -1,4 +1,4 @@
-<?php require '../core/Controller.php';
+<?php require_once '../core/Controller.php';
 
 class HomeController extends Controller {
 

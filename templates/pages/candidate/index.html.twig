@@ -1,0 +1,17 @@
+{% extends 'partials/base-candidate.html.twig' %}
+
+{% block body %}
+
+<div class="container-titre-dashboard">
+    <h2>Bonjour {{candidate.getFirstName}}, bienvenue sur votre espace personnel ! </h2>
+    <p>Vous êtes candidat à la formation {{training.getTitleFormation}}</p>
+    <p>Pour compléter votre dossier et permettre à l’équipe de MNS d’étudier votre candidature, merci de nous transmettre les documents ci-dessous avant le $dateFinCand</p>
+</div>
+<div class="container-dashboard">
+    <div class="dashboard-personal-info">
+        <div class="personal-info-content">
+        </div>
+    </div>
+
+</div>
+{% endblock %}
