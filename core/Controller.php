@@ -1,5 +1,7 @@
 <?php require '../core/View.php';
 
+
+
 abstract class Controller {
 
     abstract public function index();

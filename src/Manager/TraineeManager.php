@@ -38,6 +38,21 @@ class TraineeManager extends UserManager {
         return $registered;
     }
     
+
+    public function getAllCandidates()
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= 'SELECT * FROM trainee WHERE isRegistered = 0';
+
+        $req = $pdo->prepare($sql);
+        $req->execute();
+        
+        $candidates = $req->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $candidates;
+    }
+
+
     /**
      * get
      *
