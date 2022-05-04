@@ -1,0 +1,30 @@
+{% extends "partials/base-admin.html.twig" %} 
+{% block body%}
+<div class='contBtnMenu'>
+        <button type="button" class=" btn btn-primary btn-lg"><a href="/?controller=admin&action=Inscrits">Inscrits</a></button>
+        <button type="button" class="active btn btn-primary btn-lg"><a href="/?page=candidats">Candidats</a></button>
+        <button type="button" class="btn btn-primary btn-lg"><a href="/?page=trainees">Stagiaires</a></button>
+</div>
+<div class="contData">
+    <table class="dataTable">
+        <thead>
+            <td class="headTable left">Prénom</td>
+            <td class="headTable">Nom</td>
+            <td class="headTable">Email</td>
+            <td class="headTable right">Formation</td>
+        </thead>
+        <tbody>
+            {% for user in candidates %}
+                <tr>
+                    <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?page=profile&id={{ user.id_user }} ?>">{{ user.firstName }}</a></td>
+                    <td class="cel" data-info="Nom" ><a >{{ user.familyName }}</a></td>
+                    <td class="cel" data-info="Email" ><a mailto="{{ user.email }}">{{ user.email }}</a></td>
+                    <td class="cel" data-info="Formation" ><a>{{ user.title_formation }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="scripts/adminDash.js"></script>
+
+{% endblock %}

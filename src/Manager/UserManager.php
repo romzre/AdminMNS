@@ -1,8 +1,7 @@
 
 <?php 
 require_once 'PdoManager.php';
-require '../src/Entity/User.php';
-
+require_once '../src/Entity/User.php';
 
 class UserManager {
 
@@ -56,11 +55,32 @@ class UserManager {
     {
 
         $pdo=PdoManager::getPdo();
-        // $sql= "INSERT INTO `trainee`(`id_user`, `birthdate`,  `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber`, `completeDossier`,`isRegister`) VALUES (:id_user,':birthdate',':tel',':laneType',':street',':addressComplement',':postalCode',':city',':streetNumber',:completeDossier,:isRegister)";
+        
         $sql= "INSERT INTO `trainee`(`id_user`, `birthdate`,  `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber`, `completeDossier`, isActive ,`isRegistered`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
         
         $req = $pdo->prepare($sql);
-        return $req->execute($dataRegister);
+        $stmt = $req->execute($dataRegister);
+        
+        return $stmt; 
+
+    }
+
+    public function insertTraineeTraining($id_user , $id_training)
+    {
+
+        $pdo=PdoManager::getPdo();
+        
+        $sql= "INSERT INTO `trainee_training`(`id_user`, `id_training`) VALUES (:id_user,:id_training)";
+        
+        $req = $pdo->prepare($sql);
+        $stmt = $req->execute(
+            [
+                'id_user' => $id_user,
+                'id_training' => $id_training
+            ]
+        );
+        
+        return $stmt ; 
 
     }
 

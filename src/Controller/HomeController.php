@@ -1,5 +1,7 @@
-<?php require '../core/Controller.php';
-
+<?php 
+require '../core/Controller.php';
+require '../src/Manager/TrainingManager.php';
+require '../src/Entity/Form.php';
 class HomeController extends Controller {
 
     public function index()
@@ -46,13 +48,17 @@ class HomeController extends Controller {
             $data = compact('samePass','message','email');
             
         }
-
-        require '../src/Entity/Form.php';
+        $manager = new TrainingManager();
+        $trainings = $manager->getAll();
+        foreach ($trainings as $training) {
+            $selectTraining[$training->getIdTraining()] = $training->getTitleFormation();
+        }
         $form = new Form();
         $data['form'] = $form;
         $data['POST'] = $_POST;
+        $data['trainings'] = $selectTraining;
         $data['messageEndCheck']=$messageEndCheck;
-
+    
         $path = 'pages/home/register.html.twig';
         $layOut='base';
         $this->renderView($path, $data, $layOut);

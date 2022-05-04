@@ -56,7 +56,7 @@
             Formation Souhaitée
         </legend>
         
-        {{ form.createSelect(['Tech','DEV','RH'],'Quelle formation vous intéresse','trainnings') }}
+        {{ form.createSelect(trainings,'Quelle formation vous intéresse','training') }}
         
         {{ form.createSubmit('ContBtn','btn-primary','submit-register') }}
     </fieldset>
