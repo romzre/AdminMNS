@@ -3,6 +3,7 @@
 require_once 'PdoManager.php';
 require_once '../src/Entity/User.php';
 
+
 class UserManager {
 
     use PdoManager;

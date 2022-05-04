@@ -94,7 +94,7 @@ class TraineeManager extends UserManager {
         ]);
 
         $trainee = $req->fetch(PDO::FETCH_ASSOC);
-        return $trainee;
+        return $obj=(new Trainee())->hydrate($trainee);
     }
 
     public function getAllInfos(string $id_user)

@@ -1,7 +1,9 @@
+<<<<<<< HEAD
 <?php 
 require '../core/Controller.php';
 require '../src/Manager/TrainingManager.php';
 require '../src/Entity/Form.php';
+
 class HomeController extends Controller {
 
     public function index()

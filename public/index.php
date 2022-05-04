@@ -1,6 +1,11 @@
 <?php 
 require '../vendor/autoload.php';
 
+spl_autoload_register(function ($class) {
+    include '..' . $class . '.class.php';
+});
+
+
 
 if(!empty($_GET['controller']))
 {

@@ -17,7 +17,7 @@ class TraineeController extends Controller {
             $trainee=$traineeManager->getAllInfos($_SESSION['id_user']);
 
             //on récupère les infos sur la formation qu'il suit
-            $trainingManager = new TraineeTrainingManager();
+            $trainingManager = new TrainingManager();
             $training = $trainingManager->getTraining($_SESSION['id_user']);
 
             //on récupère son nombre d'absence injustifiées

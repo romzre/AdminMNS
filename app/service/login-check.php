@@ -3,7 +3,7 @@ require '../src/Manager/UserManager.php';
 
 //on vérifie le champ du mail
 $email = !empty($_POST['email']) ? $_POST['email']:null;
-
+echo $email;
 
 if(!$email)
 {
@@ -25,6 +25,7 @@ if(!$password)
 
 $manager = new UserManager();
 $user = $manager->getUserByEmail($email);
+
 
 if(!$user)
 {
@@ -63,15 +64,16 @@ else{
     $traineeManager = new TraineeManager();
     $completeDossier = $traineeManager->checkCompleteDossier($id_user);
 
-    if(!$completeDossier)
+    if($completeDossier)
     {
-        header('Location: ./?controller=candidate');
+        header('Location: ./?controller=trainee');
     }
     //on vérifie qu'il est candidat
     $isRegistered=$traineeManager->isRegistered($id_user);
-    if(!$isRegistered)
+    
+    if($isRegistered)
     {
-        header('Location: ./?controller=trainee');
+        header('Location: ./?controller=candidate');
     }
     
 }
