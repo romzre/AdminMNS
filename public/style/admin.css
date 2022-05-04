@@ -106,4 +106,7 @@ tr{
         margin: 50px 0px;
         margin-left: 130px;
     }
+    thead{
+        display: none;
+    }
 }
