@@ -1,6 +1,6 @@
 <?php 
 require '../core/Controller.php';
-require '../src/manager/AdminManager.php';
+require '../src/Manager/AdminManager.php';
 
 class AdminController extends Controller {
 

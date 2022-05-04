@@ -36,8 +36,6 @@ class CandidateController extends Controller {
             $path= 'pages/candidate/index.html.twig';
             $layOut='base-candidate';
 
-            var_dump($data);
-
             $this->renderView($path, $data, $layOut);
         }
         else
