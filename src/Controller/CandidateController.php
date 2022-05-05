@@ -21,7 +21,8 @@ class CandidateController extends Controller {
             //on récupère les infos sur la formation qu'il suit
             $trainingManager = new TrainingManager();
             $training = $trainingManager->getTraining($_SESSION['id_user']);
-            var_dump($training);
+
+            
 
         //     // //on récupère son nombre d'absence injustifiées
         //     // $absenceManager = new AbsenceManager();
@@ -36,9 +37,23 @@ class CandidateController extends Controller {
             $data['candidate']=$candidate;
 
             //on récupère les documents à fournir pour la formation 
-            $trainingInfos=$trainingManager->getDocumentsByTraining($training->getIdTraining());
-            var_dump($trainingInfos);
+            $trainingDocs=$trainingManager->getDocumentsByTraining($training->getIdTraining());
 
+            $documents = [];
+
+            foreach($trainingDocs as $document)
+            {
+                $file= ucfirst($document['wording_typeOfDoc']);
+                if(strpbrk($file, '_'))
+                {
+                    $file=str_replace('_',' ', $file);
+                }
+                $documents[]=$file;
+            };
+
+            $nbIndex=count($documents);
+            $data['nbIndex']=$nbIndex;
+            $data['documents']=$documents;
             $path= 'pages/candidate/index.html.twig';
             $layOut='base-candidate';
 

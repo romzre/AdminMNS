@@ -1,5 +1,5 @@
 <?php require_once '../core/Controller.php';
-require '../src/manager/TraineeTrainingManager.php';
+require '../src/manager/TrainingManager.php';
 require '../src/manager/TraineeManager.php';
 require '../src/manager/AbsenceManager.php';
 require '../src/manager/DelayManager.php';

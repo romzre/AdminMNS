@@ -23,31 +23,22 @@
 }
 
 .path {
-    font-size: 0.5rem;
+    font-size: 0.8rem;
     color:var(--main-title-color)
 }
 
 .col-1 {
-    width: 400px;
+    width: 500px;
 }
 
 .col-2 {
-    width: 200px;
+    width: 250px;
 }
 
 .container-titre-dashboard>p {
     margin: 20px auto
 }
 
-
-/* .anim-hover:hover {
-    text-decoration: none;
-    color: var(--main-title-color);
-    position: absolute;
-    top: 30%;
-    transform: scale(1.2);
-    transition: all .3s linear;
-} */
 form {
     align-items: center;
     gap: 20px
@@ -61,7 +52,6 @@ form {
     border : 1px solid var(--main-title-color);
     border-top-right-radius: 30px;
     display: inline-block;
-    width: 100px;
     /* border-top: 2px solid var(--main-title-color);
     border-bottom: 1px solid var(--main-title-color); */
 }
@@ -70,14 +60,13 @@ form {
     border : 1px solid var(--main-title-color);
     border-bottom-right-radius: 30px;
     display: inline-block;
-    width: 100px;
     /* border-top: 2px solid var(--main-title-color);
     border-bottom: 1px solid var(--main-title-color); */
    
 }
 
 td {
-    padding: 10px 35px;
+    padding: 20px 35px;
     text-align: center;
 }
 
@@ -89,7 +78,6 @@ tr {
 
     border : 1px solid var(--main-title-color);
     border-top-left-radius: 30px;
-    width:300px;
     display: inline-block;
     
 }
@@ -98,45 +86,10 @@ tr {
 
     border-bottom-left-radius: 30px;
     border : 1.5px solid var(--main-title-color);
-    width: 300px;
     display: inline-block;
     
 }
 
-td.col-1 {
-
-    width:300px
-
-}
-
-td.col-2 {
-
-    width:100px
-
-}
-
-/* td::before{
-    content: attr(data-content);
-    position: absolute;
-    top: 0;
-    left: -350px;
-    width: 350px;
-    bottom: 0;
-    color: var(--main-title-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Montserrat';
-    text-align: center;
-    border : 1px solid var(--main-title-color);
-    /* border-top: .5px solid var(--main-title-color); */
-    /* padding: 20px 35px;
-    border-collapse: collapse */
-
-
-*::before{
-        box-sizing: border-box;
-    }
 
 table, thead,tbody, tr, td,th
 {
@@ -146,7 +99,6 @@ table, thead,tbody, tr, td,th
 
 form span {
     align-self: flex-start;
-    font-size:0.8em
 }
 
 i:hover {
@@ -169,12 +121,6 @@ i:hover {
         display: flex;
         justify-content: flex-end;
         width: 350px;
-    }
-
-    td::before{
-        left: -250px;
-        width: 250px;
-        font-size: 1rem
     }
 }
 

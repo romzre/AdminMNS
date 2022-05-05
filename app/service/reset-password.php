@@ -11,12 +11,12 @@ if(isset($_POST["email"]) && isset($_POST["submit"]) && ($_POST["action"]=="upda
 
   if(!$password1)
   {
-    $error_password1="Ce champ est obligatoire";
+    $error_password1="<p>Ce champ est obligatoire</p>";
 
   }
   if(!$password2)
   {
-    $error_password2="Ce champ est obligatoire";
+    $error_password2="<p>Ce champ est obligatoire</p>";
 
   }
   //on vérifie que les mots de passe sont identiques
@@ -37,7 +37,7 @@ if(isset($_POST["email"]) && isset($_POST["submit"]) && ($_POST["action"]=="upda
       //on supprime la clé unique qui a été créée suite à la demande de réinitialisation du user
       $passwordResetManager->deleteKey($email);
       $success = '<p>Congratulations! Your password has been updated successfully.</p>
-      <p><a href="/?page=login">
+      <p><a href="/?controller=security">
       Click here</a> to Login.</p>';
     }
   }
