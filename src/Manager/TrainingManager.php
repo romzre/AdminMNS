@@ -19,4 +19,20 @@ class TrainingManager {
 
         return $obj= (new Training())->hydrate($training);
     }
+
+    public function getDocumentsByTraining(string $id_training)
+    {
+        echo($id_training);
+        $pdo=PdoManager::getPdo();
+
+        $sql= 'SELECT * FROM training INNER JOIN training_typeOfDoc on training.id_training = training_typeOfDoc.id_training INNER JOIN typeOfDoc on typeOfDoc.id_typeOfDoc = training_typeOfDoc.id_typeOfDoc WHERE training.id_training=:id_training';
+        $req = $pdo->prepare($sql);
+        $req->execute([
+            'id_training'=> $id_training,
+        ]);
+        
+        return $trainingInfos = $req->fetch(PDO::FETCH_ASSOC);
+
+
+    }
 }
