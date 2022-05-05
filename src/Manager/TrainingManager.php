@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php 
 require_once 'PdoManager.php';
 
@@ -30,3 +29,4 @@ class TrainingManager {
         return $obj;
     }
 
+}
