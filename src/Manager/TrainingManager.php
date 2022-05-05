@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?php 
 require_once 'PdoManager.php';
 
@@ -62,13 +62,15 @@ class TrainingManager {
         echo($id_training);
         $pdo=PdoManager::getPdo();
 
-        $sql= 'SELECT * FROM training INNER JOIN training_typeOfDoc on training.id_training = training_typeOfDoc.id_training INNER JOIN typeOfDoc on typeOfDoc.id_typeOfDoc = training_typeOfDoc.id_typeOfDoc WHERE training.id_training=:id_training';
+        $sql= 'SELECT typeOfDoc.wording_typeOfDoc FROM training INNER JOIN training_typeOfDoc on training.id_training = training_typeOfDoc.id_training INNER JOIN typeOfDoc on typeOfDoc.id_typeOfDoc = training_typeOfDoc.id_typeOfDoc WHERE training.id_training=:id_training';
         $req = $pdo->prepare($sql);
+        
         $req->execute([
             'id_training'=> $id_training,
         ]);
-        
-        return $trainingInfos = $req->fetch(PDO::FETCH_ASSOC);
+        $trainingInfos = $req->fetchAll(PDO::FETCH_ASSOC);
+ 
+        return $trainingInfos;
 
     }
 

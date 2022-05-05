@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php 
 require '../core/Controller.php';
 require '../src/Manager/TrainingManager.php';
