@@ -29,7 +29,11 @@ class TraineeManager extends UserManager {
     {
         $pdo=PdoManager::getPdo();
         
-        $sql= "SELECT users.id_user ,  firstName , familyName , email , tel FROM trainee INNER JOIN users ON users.id_user = trainee.id_user  WHERE isRegistered = 0";
+        $sql= "SELECT users.id_user ,  firstName , familyName , email , tel , title_formation FROM trainee 
+        INNER JOIN users ON users.id_user = trainee.id_user 
+        INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user
+        INNER JOIN training ON trainee_training.id_training = training.id_training 
+        WHERE isRegistered = 0";
         $req = $pdo->prepare($sql);
         $req->execute();
         
@@ -42,11 +46,16 @@ class TraineeManager extends UserManager {
     public function getAllCandidates()
     {
         $pdo=PdoManager::getPdo();
-        $sql= 'SELECT * FROM trainee WHERE isRegistered = 0';
+
+        $sql= 'SELECT users.id_user ,  firstName , familyName , email , tel , title_formation FROM trainee 
+        INNER JOIN users ON users.id_user = trainee.id_user 
+        INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user
+        INNER JOIN training ON trainee_training.id_training = training.id_training 
+        WHERE isRegistered = 1 AND completeDossier = 0';
 
         $req = $pdo->prepare($sql);
-        $req->execute();
-        
+        $stmt = $req->execute();
+       
         $candidates = $req->fetchAll(PDO::FETCH_ASSOC);
         
         return $candidates;

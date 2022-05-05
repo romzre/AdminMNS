@@ -1,38 +1,19 @@
+<<<<<<< HEAD
 <?php
-
-require_once 'Entity.php';
-
-class Training extends Entity {
+require_once '../src/Entity/Entity.php';
+class Training extends Entity{
 
     private int $id_training;
     private string $title_formation;
-    private string $capacity_training;
-    private string $trainingYear;
+    private int $capacity_training;
+    private int $trainingYear;
 
-    public function __construct()
-    {
 
-    }
+    // public function __construct($id,$title_formation,$capacity_training,$trainingYear)
+    // {
+    //     $this->setId($id)->setTitleFormation($title_formation)->setCapacityTraining($capacity_training)->setTrainingYear($trainingYear);
+    // }
 
-    /**
-     * Get the value of id_training
-     */ 
-    public function getIdTraining()
-    {
-        return $this->id_training;
-    }
-
-    /**
-     * Set the value of id_training
-     *
-     * @return  self
-     */ 
-    public function setIdTraining($id_training)
-    {
-        $this->id_training = $id_training;
-
-        return $this;
-    }
 
     /**
      * Get the value of title_formation
@@ -93,6 +74,25 @@ class Training extends Entity {
 
         return $this;
     }
+
+    /**
+     * Get the value of id_training
+     */ 
+    public function getIdTraining()
+    {
+        return $this->id_training;
+    }
+
+    /**
+     * Set the value of id_training
+     *
+     * @return  self
+     */ 
+    public function setIdTraining($id_training)
+    {
+        $this->id_training = $id_training;
+
+        return $this;
+    }
 }
-    
 

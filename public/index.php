@@ -17,10 +17,10 @@ else
 
 }
 
-if(file_exists('../src/controller/' . $controller . 'Controller.php'))
+if(file_exists('../src/Controller/' . $controller . 'Controller.php'))
 {
     
-    require '../src/controller/' . $controller . 'Controller.php';
+    require '../src/Controller/' . $controller . 'Controller.php';
 
     $controller.='Controller';
     $controllerManager = new $controller() ;

@@ -45,7 +45,7 @@ if(!$checkEmail)
    
     
     $id  = $manager->insertUser($dataUser);
-    
+  
     $dataTrainee = [
         intval($id),
         $_POST['birthdate'],
@@ -60,8 +60,10 @@ if(!$checkEmail)
         0,
         0
     ];
-
+    
     $reqRegister = $manager->insertRegister($dataTrainee);
+
+    $req = $manager->insertTraineeTraining(intval($id),intval($_POST['training']));
 
     if($reqRegister)
     {

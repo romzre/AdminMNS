@@ -49,7 +49,6 @@ tr{
     transform: scale(1.2);
     transition: all .3s linear;
 }
-
 .headTable, .cel{
     border : 1px solid var(--main-title-color);
     border-top: .5px solid var(--main-title-color);
@@ -106,6 +105,8 @@ tr{
     .dataTable{
         margin: 50px 0px;
         margin-left: 130px;
-
+    }
+    thead{
+        display: none;
     }
 }

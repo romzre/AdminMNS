@@ -24,7 +24,6 @@ fieldset{
     flex-direction: column;
     flex-wrap: wrap;
     gap: 10px;
-
 }
 
 .ContBtn{
@@ -54,7 +53,6 @@ fieldset{
     font-size: 1rem;
     background-color: var(--main-title-color);
     border-radius: 25px;
-
 }
 @media screen and (max-width: 980px) { 
     .Return{
@@ -65,12 +63,10 @@ fieldset{
     }
 }
 
-
 @media screen and (max-width: 500px) { 
 
     form > fieldset {
         width: 80%;
- 
     }
     fieldset{
       
@@ -78,9 +74,7 @@ fieldset{
        
     }
     .space > input{
-      
         width: 150px;
-           
         }
     .Return{
         right: 0px;

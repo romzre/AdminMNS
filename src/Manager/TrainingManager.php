@@ -1,10 +1,41 @@
-<?php require_once 'PdoManager.php';
-require_once '../src/Entity/Training.php';
+
+<?php 
+require_once 'PdoManager.php';
+
+require '../src/Entity/Training.php';
 
 class TrainingManager {
 
-    use PdoManager; 
+    use PdoManager;
 
+    /**
+     * getAll
+     *
+     * @return void
+     */
+    public function getAll()
+    {
+        $pdo=PdoManager::getPdo();
+
+        $currentYear = date('Y');
+        $sql= "SELECT * FROM `training` WHERE trainingYear = $currentYear";
+        $req = $pdo->prepare($sql);
+        $req->execute();
+
+        $trainings = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($trainings as $training) {
+            $obj[] = (new Training())->hydrate($training);
+        }
+        return $obj;
+    }
+    
+    /**
+     * getTraining
+     *
+     * @param  mixed $id_user
+     * @return void
+     */
     public function getTraining($id_user)
     {
         $pdo=PdoManager::getPdo();
@@ -19,21 +50,25 @@ class TrainingManager {
 
         return $obj= (new Training())->hydrate($training);
     }
-
+    
+    /**
+     * getDocumentsByTraining
+     *
+     * @param  mixed $id_training
+     * @return void
+     */
     public function getDocumentsByTraining(string $id_training)
     {
         $pdo=PdoManager::getPdo();
 
         $sql= 'SELECT typeOfDoc.wording_typeOfDoc FROM training INNER JOIN training_typeOfDoc on training.id_training = training_typeOfDoc.id_training INNER JOIN typeOfDoc on typeOfDoc.id_typeOfDoc = training_typeOfDoc.id_typeOfDoc WHERE training.id_training=:id_training';
         $req = $pdo->prepare($sql);
-
         $req->execute([
             'id_training'=> $id_training,
         ]);
         
         return $trainingDocs = $req->fetchAll(PDO::FETCH_ASSOC);
 
-
-
     }
+
 }

@@ -12,8 +12,9 @@
         {
             try{
 
-                self::$pdo = new PDO('mysql:host=51.77.211.62:3306:3306;dbname=adminMns','kyoko9273','Spedum1463!');
-                // host=88.166.155.219
+                self::$pdo = new PDO('mysql:host=51.77.211.62:3306;dbname=adminMns','kyoko9273','Spedum1463!');
+                
+
             }
             catch (PDOException $e)
             {
