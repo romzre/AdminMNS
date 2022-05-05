@@ -29,7 +29,13 @@ class TrainingManager {
         }
         return $obj;
     }
-
+    
+    /**
+     * getTraining
+     *
+     * @param  mixed $id_user
+     * @return void
+     */
     public function getTraining($id_user)
     {
         $pdo=PdoManager::getPdo();
@@ -44,7 +50,13 @@ class TrainingManager {
 
         return $obj= (new Training())->hydrate($training);
     }
-
+    
+    /**
+     * getDocumentsByTraining
+     *
+     * @param  mixed $id_training
+     * @return void
+     */
     public function getDocumentsByTraining(string $id_training)
     {
         echo($id_training);
