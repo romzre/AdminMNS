@@ -75,6 +75,7 @@ else
         $mail->Sender = $fromserver; // indicates ReturnPath header
         $mail->Subject = $subject;
         $mail->Body = $body;
+        $mail->IsHTML(true); 
         $mail->AddAddress($email_to);
         $mail->send();
 
