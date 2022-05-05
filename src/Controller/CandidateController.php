@@ -22,17 +22,7 @@ class CandidateController extends Controller {
             $trainingManager = new TrainingManager();
             $training = $trainingManager->getTraining($_SESSION['id_user']);
 
-            
-
-        //     // //on récupère son nombre d'absence injustifiées
-        //     // $absenceManager = new AbsenceManager();
-        //     // $nbUnjustifiedAbsences = $absenceManager->getNbOfUnjustifiedAbsencesByUser($_SESSION['id_user']);
-            
-        //     // //on récupère son nombre de retards injustifiés
-        //     // $delayManager = new DelayManager();
-        //     // $nbUnjustifiedDelays = $delayManager->getNbOfUnjustifiedDelaysByUser($_SESSION['id_user']);
-
-            
+                        
             $data['training'] =$training;
             $data['candidate']=$candidate;
 
