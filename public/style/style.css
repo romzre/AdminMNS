@@ -318,6 +318,10 @@ nav img
 
 
 /* Login form */
+.reset-password-form-container{
+    margin: 5% auto;
+}
+
 .login-form-container, .reset-password-form-container{
     min-height: 450px;
     width: 410px;
