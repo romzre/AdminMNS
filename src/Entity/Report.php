@@ -1,6 +1,8 @@
 <?php
+namespace App\Entity;
 
-require_once 'Entity.php';
+use App\Entity\Entity;
+// require_once 'Entity.php';
 
 class Report extends Entity {
 

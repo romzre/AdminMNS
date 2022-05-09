@@ -1,7 +1,10 @@
 <?php 
+namespace App\Manager;
 
-require_once 'UserManager.php';
-require '../src/Entity/Trainee.php';
+use PDO;
+use App\Entity\Trainee;
+// require_once 'UserManager.php';
+// require '../src/Entity/Trainee.php';
 
 class TraineeManager extends UserManager {
 
@@ -10,7 +13,7 @@ class TraineeManager extends UserManager {
     {
         $pdo=PdoManager::getPdo();
         
-        $sql= 'SELECT * FROM trainee';
+        $sql= "SELECT * FROM trainee INNER JOIN users ON trainee.id_user = users.id_user WHERE completeDossier = 1 AND isRegistered = 1";
         $req = $pdo->prepare($sql);
         $req->execute();
         
@@ -33,7 +36,7 @@ class TraineeManager extends UserManager {
         INNER JOIN users ON users.id_user = trainee.id_user 
         INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user
         INNER JOIN training ON trainee_training.id_training = training.id_training 
-        WHERE isRegistered = 0";
+        WHERE isRegistered = 0 AND completeDossier = 0";
         $req = $pdo->prepare($sql);
         $req->execute();
         
@@ -47,15 +50,11 @@ class TraineeManager extends UserManager {
     {
         $pdo=PdoManager::getPdo();
 
-        $sql= 'SELECT users.id_user ,  firstName , familyName , email , tel , title_formation FROM trainee 
-        INNER JOIN users ON users.id_user = trainee.id_user 
-        INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user
-        INNER JOIN training ON trainee_training.id_training = training.id_training 
-        WHERE isRegistered = 1 AND completeDossier = 0';
+        $sql= "SELECT users.id_user ,  firstName , familyName , email , tel , title_formation , completeDossier FROM trainee INNER JOIN users ON users.id_user = trainee.id_user INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user INNER JOIN training ON trainee_training.id_training = training.id_training WHERE  isRegistered = 1 AND completeDossier = 0 ";
 
         $req = $pdo->prepare($sql);
         $stmt = $req->execute();
-       
+     
         $candidates = $req->fetchAll(PDO::FETCH_ASSOC);
         
         return $candidates;

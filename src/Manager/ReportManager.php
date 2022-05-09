@@ -1,6 +1,9 @@
 <?php 
+namespace App\Manager;
 
-require_once 'PdoManager.php';
+use PDO;
+use PDOException;
+// require_once 'PdoManager.php';
 
 class ReportManager {
 

@@ -1,8 +1,16 @@
-<?php require_once '../core/Controller.php';
-require '../src/Manager/TrainingManager.php';
-require '../src/Manager/TraineeManager.php';
-require '../src/Manager/AbsenceManager.php';
-require '../src/Manager/DelayManager.php';
+<?php 
+namespace App\Controller;
+
+use Core\Controller;
+use App\Manager\DelayManager;
+use App\Manager\AbsenceManager;
+use App\Manager\TraineeManager;
+use App\Manager\TrainingManager;
+// require_once '../core/Controller.php';
+// require '../src/Manager/TrainingManager.php';
+// require '../src/Manager/TraineeManager.php';
+// require '../src/Manager/AbsenceManager.php';
+// require '../src/Manager/DelayManager.php';
 
 class TraineeController extends Controller {
 

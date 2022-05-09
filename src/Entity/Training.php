@@ -1,5 +1,11 @@
 <?php
-require_once '../src/Entity/Entity.php';
+
+namespace App\Entity;
+
+use App\Entity\Entity;
+
+// require_once '../src/Entity/Entity.php';
+
 class Training extends Entity{
 
     private int $id_training;

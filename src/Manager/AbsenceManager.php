@@ -1,7 +1,12 @@
 <?php 
 
-require_once '../src/manager/ReportManager.php';
-require_once '../src/Entity/Absence.php';
+namespace App\Manager;
+
+use PDO;
+use App\Entity\Absence;
+
+// require_once '../src/manager/ReportManager.php';
+// require_once '../src/Entity/Absence.php';
 
 class AbsenceManager extends ReportManager {
 

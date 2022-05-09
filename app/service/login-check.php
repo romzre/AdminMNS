@@ -1,5 +1,9 @@
 <?php 
-require '../src/Manager/UserManager.php';
+
+use App\Manager\UserManager;
+use App\Manager\AdminManager;
+use App\Manager\TraineeManager;
+
 
 //on vérifie le champ du mail
 $email = !empty($_POST['email']) ? $_POST['email']:null;
@@ -49,7 +53,7 @@ $id_user = $user['id_user'];
 $_SESSION['id_user'] = $id_user;
 
 //on vérifie si l'utilisateur est un admin
-require_once '../src/Manager/AdminManager.php';
+
 $adminManager = new AdminManager();
 $admin=$adminManager->get($id_user);
 
@@ -58,7 +62,7 @@ if ($admin)
     header('Location: /?controller=admin');
 }
 else{
-    require '../src/Manager/TraineeManager.php';
+   
 
     //on vérifie si le user est un stagiaire ou un candidat et en fonction en le redirige sur le bon espace
     $traineeManager = new TraineeManager();

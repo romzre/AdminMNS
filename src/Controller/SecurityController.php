@@ -1,4 +1,10 @@
-<?php require_once '../core/Controller.php';
+<?php 
+namespace App\Controller;
+
+use Core\View;
+use Core\Controller;
+use App\Manager\PasswordResetManager;
+
 
 
 

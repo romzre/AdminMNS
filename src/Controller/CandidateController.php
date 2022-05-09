@@ -1,8 +1,10 @@
 <?php 
+namespace App\Controller;
 
-require_once '../core/Controller.php';
-require_once '../src/Manager/TraineeManager.php';
-require_once '../src/Manager/TrainingManager.php';
+use Core\Controller;
+// require_once '../core/Controller.php';
+// require_once '../src/Manager/TraineeManager.php';
+// require_once '../src/Manager/TrainingManager.php';
 
 
 class CandidateController extends Controller {

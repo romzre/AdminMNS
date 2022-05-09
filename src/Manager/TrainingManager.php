@@ -1,8 +1,12 @@
-
 <?php 
-require_once 'PdoManager.php';
 
-require '../src/Entity/Training.php';
+namespace App\Manager;
+
+use PDO;
+use App\Entity\Training;
+// require_once 'PdoManager.php';
+
+// require '../src/Entity/Training.php';
 
 class TrainingManager {
 

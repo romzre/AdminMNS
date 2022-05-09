@@ -1,7 +1,11 @@
 <?php 
+namespace App\Manager;
 
-require_once '../src/manager/ReportManager.php';
-require_once '../src/Entity/Delay.php';
+use PDO;
+use App\Entity\Delay;
+use App\Manager\ReportManager;
+// require_once '../src/manager/ReportManager.php';
+// require_once '../src/Entity/Delay.php';
 
 class DelayManager extends ReportManager {
 
