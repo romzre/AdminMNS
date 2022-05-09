@@ -70,14 +70,14 @@ else{
 
     if($completeDossier)
     {
-        header('Location: ./?area=traineecontroller=trainee');
+        header('Location: ./?area=traineecontroller=home');
     }
     //on vérifie qu'il est candidat
     $isRegistered=$traineeManager->isRegistered($id_user);
     
     if($isRegistered)
     {
-        header('Location: ./?area=candidate&controller=candidate');
+        header('Location: ./?area=candidate&controller=home');
     }
     
 }

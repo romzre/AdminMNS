@@ -16,7 +16,7 @@
         <tbody>
             {% for user in candidates %}
                 <tr>
-                    <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?area=admin&controller=profile&id={{ user.id_user }} ?>">{{ user.firstName }}</a></td>
+                    <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?area=admin&controller=profile&action=candidate&id={{ user.id_user }} ?>">{{ user.firstName }}</a></td>
                     <td class="cel" data-info="Nom" ><a >{{ user.familyName }}</a></td>
                     <td class="cel" data-info="Email" ><a mailto="{{ user.email }}">{{ user.email }}</a></td>
                     <td class="cel" data-info="Formation" ><a>{{ user.title_formation }}</a></td>

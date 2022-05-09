@@ -157,4 +157,22 @@ class TraineeManager extends UserManager {
         return $isRegistered;
     }
 
+    public function getAllTraineeById(string $id_user)
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= ' SELECT users.id_user ,  firstName , familyName , email , tel , title_formation ,streetNumber, laneType, street, addressComplement, postalCode, city FROM trainee 
+        INNER JOIN users ON users.id_user = trainee.id_user 
+        INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user
+        INNER JOIN training ON trainee_training.id_training = training.id_training 
+        WHERE trainee.id_user = :id_user';
+
+        $req = $pdo->prepare($sql);
+        $req->execute([
+            'id_user'=>intval($id_user)
+        ]);
+
+        $trainee = $req->fetch(PDO::FETCH_ASSOC);
+        return $trainee;
+    }
+   
 }
