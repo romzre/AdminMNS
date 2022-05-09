@@ -52,7 +52,7 @@ class SecurityController extends Controller {
 
     }
 
-    public function resetPassword ()
+    public function resetPassword()
     {
         
         $error_password1 = '';
