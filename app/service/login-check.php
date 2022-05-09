@@ -11,7 +11,7 @@ echo $email;
 
 if(!$email)
 {
-    header('Location: ./?controller=security&email_error');
+    header('Location: ./?area=security&controller=security&email_error');
     exit;
 }
 
@@ -20,7 +20,7 @@ $password = !empty($_POST['password'])?$_POST['password']:null;
 
 if(!$password)
     {
-        header('Location: ./?controller=security&password_error');
+        header('Location: ./?area=security&controller=security&password_error');
         exit;
     }
 
@@ -33,7 +33,7 @@ $user = $manager->getUserByEmail($email);
 
 if(!$user)
 {
-    header('Location: ./?controller=security&error_account');
+    header('Location: ./?area=security&controller=security&error_account');
     exit;
 }
 
@@ -42,7 +42,7 @@ if(!$user)
 if(!password_verify($password, $user['password']))
 
 {
-    header('Location: ./?controller=security&error_account');
+    header('Location: ./?area=security&controller=security&error_account');
     exit;
 
 }
@@ -59,7 +59,7 @@ $admin=$adminManager->get($id_user);
 
 if ($admin)
 {
-    header('Location: /?controller=admin');
+    header('Location: /?area=admin&controller=home');
 }
 else{
    
@@ -70,14 +70,14 @@ else{
 
     if($completeDossier)
     {
-        header('Location: ./?controller=trainee');
+        header('Location: ./?area=traineecontroller=trainee');
     }
     //on vérifie qu'il est candidat
     $isRegistered=$traineeManager->isRegistered($id_user);
     
     if($isRegistered)
     {
-        header('Location: ./?controller=candidate');
+        header('Location: ./?area=candidate&controller=candidate');
     }
     
 }

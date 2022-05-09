@@ -3,8 +3,10 @@ require '../src/Manager/UserManager.php';
 
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
-use PHPMailer\PHPMailer\PHPMailer;
+use App\Manager\UserManager;
 use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\PHPMailer;
+use App\Manager\PasswordResetManager;
 
 
 //on vérifie le champ du mail
@@ -37,25 +39,24 @@ else
         require '../src/Manager/PasswordResetManager.php';
         $passwordResetManager = new PasswordResetManager();
         $passwordResetManager->createPasswordResetTemp($email,$key,$expDate);
-        $success .= 'An email has been sent to you with instructions on how to reset your password.';
+        $success .= '<p>An email has been sent to you with instructions on how to reset your password.</p>';
         
         //partie à mettre en place avec PHPMailer
         $output ='<!DOCTYPE html>';
-        $output .='<html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Organe</title></head>';
+        $output .='<html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin MNS</title></head>';
         $output .='<body>';
         $output .='<p>Dear user,</p>';
         $output.='<p>Please click on the following link to reset your password.</p>';
         $output.='<p>-------------------------------------------------------------</p>';
-        $output.='<p><a href="51.77.211.62/?controller=security&action=resetPassword&key='.$key.'&email='.$email.'</a></p>';		
+        $output.='<p><a href="51.77.211.62/?area=security&controller=security&action=resetPassword&key="'.$key.'&email='.$email.'>Cliquez-ici</a></p>';		
         $output.='<p>-------------------------------------------------------------</p>';
         $output.='<p>Please be sure to copy the entire link into your browser.';
         $output.= 'The link will expire after 1 hour for security reason.</p>';
-        $output.='<p>If you did not request this forgotten password email, no action ';
-        $output.='is needed, your password will not be reset. However, you may want to log into ';
-        $output.='your account and change your security password as someone may have guessed it.</p>';   	
+        $output.='<p>If you did not request this forgotten password email, no action is needed, your password will not be reset. However, you may want to log into your account and change your security password as someone may have guessed it.</p> ';  	
         $output.='<p>Thanks,</p>';
         $output.='<p>Admin MNS Team</p>';
         $output .='</body>';
+        $output .= '<style>body{width:100%;height=100%;padding=12px;backgound-color:#151B36;color:#fff;}</style>';
         $output .='</html>';
         $body = $output; 
         $subject = "Password Recovery - Admin MNS";
@@ -64,7 +65,8 @@ else
         $fromserver = "noreply@adminmns.com"; 
         
         $mail = new PHPMailer(true);
-        
+        $mail->CharSet = 'UTF-8';
+        $mail->Encoding = 'base64';
             //Server settings
         $mail->SMTPDebug = 0;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP

@@ -1,9 +1,9 @@
 {% extends "partials/base-admin.html.twig" %} 
 {% block body%}
 <div class='contBtnMenu'>
-        <button type="button" class="active btn btn-primary btn-lg"><a href="/?controller=admin&action=index">Inscrits</a></button>
-        <button type="button" class="btn btn-primary btn-lg"><a href="/?controller=admin&action=candidates">Candidats</a></button>
-        <button type="button" class="btn btn-primary btn-lg"><a href="/?controller=admin&action=trainees">Stagiaires</a></button>
+        <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=index">Inscrits</a></button>
+        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
+        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=trainees">Stagiaires</a></button>
 </div>
 <div class="contData">
     <table class="dataTable">
@@ -18,7 +18,7 @@
         <tbody>
             {% for user in registered %}
                 <tr>
-                    <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?page=profile&id={{ user.id_user }} ?>">{{ user.firstName }}</a></td>
+                    <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?area=admin&controller=profile&id={{ user.id_user }} ?>">{{ user.firstName }}</a></td>
                     <td class="cel" data-info="Nom" ><a >{{ user.familyName }}</a></td>
                     <td class="cel" data-info="Email" ><a mailto="{{ user.email }}">{{ user.email }}</a></td>
                     <td class="cel" data-info="Tel" ><a>{{ user.tel }}</a></td>

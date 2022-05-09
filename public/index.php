@@ -8,7 +8,11 @@ spl_autoload_register(function ($class) {
         [
             '\\',
             'Core',
-            'App/Controller',
+            "App/Controller/Admin",
+            "App/Controller/Candidate",
+            "App/Controller/Home",
+            "App/Controller/Security",
+            "App/Controller/Trainee",
             'App/Manager',
             'App/Entity',
             'App/Service',
@@ -18,8 +22,12 @@ spl_autoload_register(function ($class) {
         [
             '/',
             '../core',
-            '../src/controller',
-            '../src/manager',
+            '../src/Controller/Admin',
+            '../src/Controller/Candidate',
+            '../src/Controller/Home',
+            '../src/Controller/Security',
+            '../src/Controller/Trainee',
+            '../src/Manager',
             '../src/Entity',
             '../src/Service',
             '../src/DTO'
@@ -28,11 +36,20 @@ spl_autoload_register(function ($class) {
         ,$class
         
         );
-      
-    require_once "$class.php";
+      $class .= '.php';  
+   
+    require_once "$class";
 });
 
+if(!empty($_GET['area']))
+{
+    $area = ucfirst($_GET['area']) ;
+}
+else
+{
+    $area = 'Home';
 
+}
 
 if(!empty($_GET['controller']))
 {
@@ -47,7 +64,7 @@ else
 // if(file_exists('../src/Controller/' . $controller . 'Controller.php'))
 // {
     
-    $controller = '\\App\\Controller\\'.$controller.'Controller';
+    $controller = '\\App\\Controller\\'.$area.'\\'.$controller.'Controller';
 
     $controller = new $controller();
     
