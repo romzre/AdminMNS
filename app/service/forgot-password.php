@@ -40,18 +40,23 @@ else
         $success .= 'An email has been sent to you with instructions on how to reset your password.';
         
         //partie à mettre en place avec PHPMailer
-        $output='<p>Dear user,</p>';
+        $output ='<!DOCTYPE html>';
+        $output .='<html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Organe</title></head>';
+        $output .='<body>';
+        $output .='<p>Dear user,</p>';
         $output.='<p>Please click on the following link to reset your password.</p>';
         $output.='<p>-------------------------------------------------------------</p>';
         $output.='<p><a href="http:adminmns.php?controller=security&action=resetPassword&key='.$key.'&email='.$email.'</a></p>';		
         $output.='<p>-------------------------------------------------------------</p>';
-        $output.='<p>Please be sure to copy the entire link into your browser.
-        The link will expire after 1 hour for security reason.</p>';
-        $output.='<p>If you did not request this forgotten password email, no action 
-        is needed, your password will not be reset. However, you may want to log into 
-        your account and change your security password as someone may have guessed it.</p>';   	
+        $output.='<p>Please be sure to copy the entire link into your browser.';
+        $output.= 'The link will expire after 1 hour for security reason.</p>';
+        $output.='<p>If you did not request this forgotten password email, no action ';
+        $output.='is needed, your password will not be reset. However, you may want to log into ';
+        $output.='your account and change your security password as someone may have guessed it.</p>';   	
         $output.='<p>Thanks,</p>';
         $output.='<p>Admin MNS Team</p>';
+        $output .='</body>';
+        $output .='</html>';
         $body = $output; 
         $subject = "Password Recovery - Admin MNS";
         
@@ -75,7 +80,6 @@ else
         $mail->Sender = $fromserver; // indicates ReturnPath header
         $mail->Subject = $subject;
         $mail->Body = $body;
-        $mail->IsHTML(true); 
         $mail->AddAddress($email_to);
         $mail->send();
 
