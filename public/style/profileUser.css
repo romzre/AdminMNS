@@ -1,0 +1,7 @@
+.h_Profile{
+    color: var(--main-title-color);
+}
+
+.Cont_infPerso{
+    border: 2px solid var(--main-title-color);
+}
