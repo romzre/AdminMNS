@@ -1,7 +1,85 @@
 .h_Profile{
     color: var(--main-title-color);
+    margin: 40px 20%;
+    display: flex;
+    align-self: flex-start;
+}
+.Cont_infPerso{
+    width: 80%;
+    border: 2px solid var(--main-title-color);
+    padding: 50px;
+    border-radius: 50px;
 }
 
-.Cont_infPerso{
-    border: 2px solid var(--main-title-color);
+.cont_line{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.cont_line2{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+   
+    
+}
+.cont_inf{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 50%;
+    
+}
+.cont_inf2{
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start ;
+    align-items: center;
+    flex-wrap: wrap;
+    
+}
+.cont_titleFormation{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.cont_inf > p:nth-child(1) , .cont_inf2 > p:nth-child(1), .cont_address >p,.cont_titleFormation>p:nth-child(1)
+{
+    color: var(--main-title-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.cont_inf > p:nth-child(2), .cont_inf > p:nth-child(2){
+    font-size: 1.1rem;
+}
+.Main_Profile{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cont_address{
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: wrap;
+    gap:5px;
+}
+
+.address_part{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 800px) {
+   .cont_line2, .cont_line{
+       flex-direction: column;
+       gap: 5px;
+   }
+   
 }
