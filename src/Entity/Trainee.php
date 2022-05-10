@@ -1,6 +1,8 @@
 <?php
+namespace App\Entity;
 
-require_once 'User.php';
+use App\Entity\User;
+// require_once 'User.php';
 
 class Trainee extends User {
     

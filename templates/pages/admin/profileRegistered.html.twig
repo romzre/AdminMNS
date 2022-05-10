@@ -1,0 +1,44 @@
+{% extends "partials/base-admin.html.twig" %} 
+{% block body%}
+<div class='contBtnMenu'>
+        <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=index">Inscrits</a></button>
+        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
+        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=trainees">Stagiaires</a></button>
+</div>
+<div class="contData">
+    <div class="Cont_infPerso">
+        <div>
+            <h2 class="h_Profile">Formulaire d'inscription</h2>
+        </div
+        <div>
+            <p class="head_infPerso">Vos informations personnelles</p>
+            <div>
+                <p>Prénom : {{ registered.firstName }} </p>
+            </div>
+            <div>
+                <p>Nom : {{ registered.familyName }} </p>
+            </div>
+            <div>
+                <p>Tel : {{ registered.tel }} </p>
+            </div>
+            <div>
+                <p>Email : {{ registered.email }} </p>
+            </div>
+            <div>
+                <p>Adresse : {{ registered.streetNumber }} {{ registered.laneType }} {{ registered.street }} {{ registered.addressComplement }} {{ registered.postalCode }} {{ registered.city }} </p>
+            </div>
+            <div>
+                <p>Formation : {{ registered.title_formation }}</p>
+            </div>
+            
+           
+            
+            
+            
+            
+        </div>
+    </div>
+</div>
+<script src="scripts/adminDash.js"></script>
+
+{% endblock %}

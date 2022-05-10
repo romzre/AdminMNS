@@ -1,8 +1,24 @@
+<<<<<<< HEAD:app/OLD/TraineeController.php
+<?php 
+namespace App\Controller;
+
+use Core\Controller;
+use App\Manager\DelayManager;
+use App\Manager\AbsenceManager;
+use App\Manager\TraineeManager;
+use App\Manager\TrainingManager;
+// require_once '../core/Controller.php';
+// require '../src/Manager/TrainingManager.php';
+// require '../src/Manager/TraineeManager.php';
+// require '../src/Manager/AbsenceManager.php';
+// require '../src/Manager/DelayManager.php';
+=======
 <?php require_once '../core/Controller.php';
 require '../src/manager/TrainingManager.php';
 require '../src/manager/TraineeManager.php';
 require '../src/manager/AbsenceManager.php';
 require '../src/manager/DelayManager.php';
+>>>>>>> 8b48901212d36841514e5135580e93625bc7a31e:src/Controller/TraineeController.php
 
 class TraineeController extends Controller {
 
@@ -33,7 +49,7 @@ class TraineeController extends Controller {
             $data['trainee']=$trainee;
             $data['nbUnjustifiedAbsences']=$nbUnjustifiedAbsences;
             $data['nbUnjustifiedDelays']=$nbUnjustifiedDelays;
-
+// var_dump($training); exit;
             $path= 'pages/trainee/index.html.twig';
             $layOut='base-trainee';
             $this->renderView($path, $data, $layOut);

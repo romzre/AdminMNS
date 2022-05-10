@@ -1,5 +1,5 @@
 <?php 
-
+namespace App\Entity;
 class Entity {
 
     public function hydrate(array $data)

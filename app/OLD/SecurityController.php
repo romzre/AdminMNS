@@ -1,4 +1,10 @@
-<?php require_once '../core/Controller.php';
+<?php 
+namespace App\Controller;
+
+use Core\View;
+use Core\Controller;
+use App\Manager\PasswordResetManager;
+
 
 
 
@@ -52,15 +58,16 @@ class SecurityController extends Controller {
 
     }
 
-    public function resetPassword ()
+    public function resetPassword()
     {
+        
         $error_password1 = '';
         $error_password2='';
         $error_passwords='';
         $success = '';
         $error ='';
         $form = false;
-        
+       
         // on récupère la clé et l'email de l'user qui ont été passé en paramètre dans le lien envoyé pour réinitialiser le mdp
         if (!empty($_GET["key"]) && !empty($_GET["email"])) 
         {
@@ -69,9 +76,9 @@ class SecurityController extends Controller {
             $email = $_GET["email"];
             
             $curDate = date("Y-m-d H:i:s"); // on récupère la date et l'heure actuelle
-        
+       
             // on vérifie que la clé existe bien pour cet email 
-            require '../app/Manager/PasswordResetManager.php';
+            require '../src/Manager/PasswordResetManager.php';
             $passwordResetManager = new PasswordResetManager();
             $key=$passwordResetManager->keyCheck($email, $key);
             
@@ -126,7 +133,7 @@ class SecurityController extends Controller {
         $data['error_password2'] = $error_password2;
         $data['error_passwords'] = $error_passwords;
     
-        $path = 'pages/security/reset-password.html.twig';
+        $path = 'pages/security/reset-password-form.html.twig';
         $layOut = 'base';
 
         $view=new View($path, $data, $layOut);

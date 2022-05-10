@@ -1,6 +1,9 @@
 <?php
+namespace App\Manager;
 
-require_once 'UserManager.php';
+use PDO;
+use App\Manager\UserManager;
+// require_once 'UserManager.php';
 
 class AdminManager extends UserManager{
 

@@ -1,5 +1,11 @@
 <?php
-require_once 'Entity.php';
+
+namespace App\Entity;
+
+use App\Entity\Entity;
+
+
+// require_once 'Entity.php';
 
 class User extends Entity {
     protected string $email;

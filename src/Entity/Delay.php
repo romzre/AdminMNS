@@ -1,6 +1,8 @@
 <?php 
+namespace App\Entity;
 
-require_once 'Report.php';
+use App\Entity\Report;
+// require_once 'Report.php';
 
 class Delay extends Report {
 

@@ -1,4 +1,7 @@
 <?php
+namespace App\Entity;
+
+use App\Entity\User;
 
 class Admin extends User {
     protected int $id_user;

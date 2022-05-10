@@ -1,6 +1,9 @@
 <?php 
-require '../core/Controller.php';
-require '../src/Manager/AdminManager.php';
+namespace App\Controller;
+
+use Core\Controller;
+use App\Manager\TraineeManager;
+
 
 class AdminController extends Controller {
 
@@ -57,5 +60,24 @@ class AdminController extends Controller {
         $this->renderView($path, $data, $layOut);
 
     }
+
+    public function trainees()
+    {
+        require_once '../app/service/admin-check.php';
+   
+        require '../src/Manager/TraineeManager.php';
+
+        $manager = new TraineeManager();
+
+        $trainees = $manager->getAllTrainees();
+
+        $data = compact('admin', 'trainees');
+
+        $path= 'pages/admin/trainees.html.twig';
+        $layOut='base-admin';
+        $this->renderView($path, $data, $layOut);
+
+    }
     
+
 }

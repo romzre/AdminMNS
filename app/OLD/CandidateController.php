@@ -1,8 +1,12 @@
 <?php 
+namespace App\Controller;
 
-require_once '../core/Controller.php';
-require_once '../src/Manager/TraineeManager.php';
-require_once '../src/Manager/TrainingManager.php';
+use Core\Controller;
+use App\Manager\DelayManager;
+use App\Manager\AbsenceManager;
+use App\Manager\TraineeManager;
+use App\Manager\TrainingManager;
+
 
 
 class CandidateController extends Controller {

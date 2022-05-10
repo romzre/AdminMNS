@@ -1,7 +1,13 @@
-
 <?php 
-require_once 'PdoManager.php';
-require_once '../src/Entity/User.php';
+
+namespace App\Manager;
+
+use PDO;
+use App\Entity\User;
+use App\Manager\PdoManager;
+
+// require_once 'PdoManager.php';
+// require_once '../src/Entity/User.php';
 
 
 class UserManager {

@@ -2,10 +2,46 @@
 require '../vendor/autoload.php';
 
 spl_autoload_register(function ($class) {
-    include '..' . $class . '.class.php';
+ 
+   
+    $class = str_replace(
+        [
+            '\\',
+            'Core',
+            "App/Controller",
+            'App/Manager',
+            'App/Entity',
+            'App/Service',
+            'App/DTO'
+            
+        ],
+        [
+            '/',
+            '../core',
+            '../src/Controller',
+            '../src/Manager',
+            '../src/Entity',
+            '../src/Service',
+            '../src/DTO'
+        
+        ]
+        ,$class
+        
+        );
+      $class .= '.php';  
+   
+    require_once "$class";
 });
 
+if(!empty($_GET['area']))
+{
+    $area = ucfirst($_GET['area']) ;
+}
+else
+{
+    $area = 'Home';
 
+}
 
 if(!empty($_GET['controller']))
 {
@@ -17,51 +53,28 @@ else
 
 }
 
-if(file_exists('../src/Controller/' . $controller . 'Controller.php'))
-{
+// if(file_exists('../src/Controller/' . $controller . 'Controller.php'))
+// {
     
-    require '../src/Controller/' . $controller . 'Controller.php';
+    $controller = '\\App\\Controller\\'.$area.'\\'.$controller.'Controller';
 
-    $controller.='Controller';
-    $controllerManager = new $controller() ;
-
-
+    $controller = new $controller();
+    
     if(!empty($_GET['action']))
     {
         $action = $_GET['action'];
-       
     }
     else
     {
         $action = 'index';
     }
 
-    if(method_exists($controller,$action))
+    if(method_exists($controller , $action))
     {
-        $controllerManager->$action(); // index() soit autre
+        $controller->$action(); // index() soit autre
     }
     else
     {
         header("HTTP/1.1 404 Not Found");
-        echo "Erreur 404 Not Found A";
+        echo "Erreur 404 Not Found test1";
     }
-
-}
-else
-{
-    header("HTTP/1.1 404 Not Found");
-    echo "Erreur 404 Not Found B";
-}
-
-
-// if(empty($_GET['page'])) {
-//     include_once '../templates/pages/index.tpl.php';
-// } 
-// else 
-// {
-//     if ($_GET['page']) 
-//     { 
-//         include_once 'pages/'.$_GET['page'].'.php';
-//     };
-// };
-

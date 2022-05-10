@@ -1,6 +1,8 @@
 <?php 
-require_once 'PdoManager.php';
+namespace App\Manager;
 
+use PDO;
+// require_once 'PdoManager.php';
 class PasswordResetManager {
 
     use PdoManager; 

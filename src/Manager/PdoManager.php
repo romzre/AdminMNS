@@ -1,4 +1,9 @@
 <?php
+namespace App\Manager;
+
+use PDO;
+use PDOException;
+
     trait PdoManager{
         protected static $pdo;
     
