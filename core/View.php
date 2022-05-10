@@ -97,8 +97,8 @@ class View
         $loader = new \Twig\Loader\FilesystemLoader($directory);
 
         $twig = new \Twig\Environment($loader,[
+            'debug' => true,
             'cache' => false,
-            'debug' => true
         ]);
 
         echo $twig->render($this->path,$this->data);

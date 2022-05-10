@@ -14,44 +14,44 @@
             <col class='col-1' span="1" >
             <col class='col-2' span='1'>
         </colgroup>
-            <tr>
-                <td scope='col' class='up-left col-1'>CV</td>
-                <td class='up-right col-2'>
-                    <label for='CV'>
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                    </label>
-                    <input id='CV' type='file' name="CV" accept=".pdf"/>
-                </td>
-            </tr>
-            <tr>
-                <td scope='col' class='cell col-1'>Lettre de motivation</td>
-                <td class='cell col-2'>
-                    <label for='motivation_letter'>
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                    </label>
-                    <input id='motivation_letter' type='file' name="motivation_letter" accept=".pdf"/>
-                </td>
-            </tr>
-            <tr>
-               <td scope='col' class='cell col-1'>Dernier diplôme</td>
-               <td  class='cell col-2'>
-                    <label for='diploma'>
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                    </label>
-                    <input id='diploma' type='file' name="diploma" accept=".pdf"/>
-                </td>
-            </tr>
-            <tr>
-                <td scope='col' id='td_id-card' class='down-left'>Carte d'identité</td>
-                <td class='down-right col-2'>
-                    <label for='ID_card'>
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                    </label>
-                    <input id='ID_card' type='file' name="ID_card" accept=".pdf"/>
-                </td>
-            </tr>
-            
+        {% for key,document in documents  %}
+        {# {{ dump(document) }} #}
         
+        {% if key ==0 %}
+        
+        <tr>
+            <td scope='col' class='up-left col-1'>{{document}}</td>
+            <td class='up-right col-2'>
+                <label for='{{document}}'>
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                </label>
+                <input id='{{document}}' type='file' name="{{document}}" accept=".pdf"/>
+            </td>
+        </tr>       
+        {% endif %}
+        {% if key > 0 and key < nbIndex -1 %}
+        <tr>
+            <td scope='col' class='cell col-1'>{{document}}</td>
+            <td class='cell col-2'>
+                <label for='{{document}}'>
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                </label>
+                <input id='{{document}}' type='file' name="{{document}}" accept=".pdf"/>
+            </td>
+        </tr>
+        {% endif %}
+        {% if key == nbIndex -1 %}
+        <tr>
+            <td scope='col' id='td_id-card' class='col-1 down-left'>{{document}}</td>
+            <td scope='col' class='down-right col-2'>
+                <label for='{{document}}'>
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                </label>
+                <input id='{{document}}' type='file' name="{{document}}" accept=".pdf"/>
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
         </tbody>
     </table>
     <button type="submit" class="btn btn-primary btn-lg">Envoyer</button>

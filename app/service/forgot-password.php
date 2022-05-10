@@ -24,7 +24,7 @@ else
 
     if(!$user)
     {
-        $messageErrorEmail = 'L\'adresse email indiquée n\'est associée à aucun compte !';
+        $messageErrorEmail = '<p>L\'adresse email indiquée n\'est associée à aucun compte !</p>';
     }
     else 
     {
