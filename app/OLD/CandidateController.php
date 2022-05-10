@@ -25,7 +25,7 @@ class CandidateController extends Controller {
             //on récupère les infos sur la formation qu'il suit
             $trainingManager = new TrainingManager();
             $training = $trainingManager->getTraining($_SESSION['id_user']);
-
+            var_dump("ici"); exit;
                         
             $data['training'] =$training;
             $data['candidate']=$candidate;

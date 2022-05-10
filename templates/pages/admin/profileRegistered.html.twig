@@ -5,10 +5,13 @@
         <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
         <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=trainees">Stagiaires</a></button>
 </div>
-            <h2 class="h_Profile">Formulaire d'inscription</h2>
+            <h1 class="h_Profile">Formulaire d'inscription</h1>
 <div class="Main_Profile">
+{% if err %}
+<p>{{ err }}</p>
+{% endif %}
     <div class="title_head">
-        <p class="head_infPerso">Informations personnelles</p>
+        <h2 class="head_infPerso">Informations personnelles</h2>
     </div>
     <div class="Cont_infPerso">
     
@@ -69,7 +72,10 @@
                 <p>Formation : </p>
                 <p>{{ registered.title_formation }}</p>
             </div>
-    
+        <div class=' btn_registered '>
+            <p class=" btn-primary Return btnProfile"><a href="/?area=admin&controller=home&action=candidates" >Retour</a></p>
+            <p class=" btn-primary Return btnProfile"><a href="/?area=admin&controller=registered&action=validate&id={{registered.id_user}}" >Creer le candidat</a></p>
+        </div>
     </div>
 </div>
 <script src="scripts/adminDash.js"></script>

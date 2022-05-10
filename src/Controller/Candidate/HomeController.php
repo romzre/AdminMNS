@@ -22,7 +22,7 @@ class HomeController extends Controller {
             //on récupère les infos sur la formation qu'il suit
             $trainingManager = new TrainingManager();
             $training = $trainingManager->getTraining($_SESSION['id_user']);
-            var_dump($training);
+            // var_dump($training);
 
         //     // //on récupère son nombre d'absence injustifiées
         //     // $absenceManager = new AbsenceManager();
@@ -38,7 +38,7 @@ class HomeController extends Controller {
 
             //on récupère les documents à fournir pour la formation 
             $trainingInfos=$trainingManager->getDocumentsByTraining($training->getIdTraining());
-            var_dump($trainingInfos);
+            // var_dump($trainingInfos);
 
             $path= 'pages/candidate/index.html.twig';
             $layOut='base-candidate';

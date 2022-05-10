@@ -1,8 +1,8 @@
 .h_Profile{
     color: var(--main-title-color);
-    margin: 40px 20%;
-    display: flex;
-    align-self: flex-start;
+    margin: 25px;
+   text-align: center;
+    font-size: 2.5rem;
 }
 .Cont_infPerso{
     width: 80%;
@@ -20,6 +20,7 @@
 .cont_line2{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
     width: 100%;
    
@@ -29,16 +30,16 @@
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 20px;
     width: 50%;
     
 }
 .cont_inf2{
     display: flex;
-    gap: 12px;
     justify-content: flex-start ;
     align-items: center;
     flex-wrap: wrap;
+    gap: 12px;
     
 }
 .cont_titleFormation{
@@ -50,11 +51,11 @@
 .cont_inf > p:nth-child(1) , .cont_inf2 > p:nth-child(1), .cont_address >p,.cont_titleFormation>p:nth-child(1)
 {
     color: var(--main-title-color);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: bold;
 }
 .cont_inf > p:nth-child(2), .cont_inf > p:nth-child(2){
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 .Main_Profile{
     display: flex;
@@ -75,10 +76,22 @@
     display: flex;
     justify-content: space-between;
 }
+.btn_registered{
+    display: flex;
+    justify-content: space-between;
+}
+.btnProfile{
+    padding: 8px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+}
 
 @media screen and (max-width: 800px) {
    .cont_line2, .cont_line{
        flex-direction: column;
+       align-items: flex-start;
        gap: 5px;
    }
    
