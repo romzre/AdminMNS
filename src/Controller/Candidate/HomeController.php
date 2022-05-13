@@ -69,7 +69,7 @@ class HomeController extends Controller {
             $this->renderView($path, $data, $layOut);
             
             // si des documents ont été envoyé, on appelle la méthode sendFile()
-            if(isset($_FILES)&& !empty($_FILES)) $this->sendFile();
+            if(isset($_POST['form-button'])) $this->sendFile();
         }
         else
         {
@@ -100,7 +100,6 @@ class HomeController extends Controller {
         {
             $key_file = $id_typeOfDoc[$i];
             $dataDoc[$i]['id_typeOfDoc']=$key_file;
-            echo("l'id du file est ".$key_file);
 
             if($typeOfDocs['error'][$key_file] == 0)
             {
@@ -112,14 +111,13 @@ class HomeController extends Controller {
                     {
         
                         $dataDoc[$i]['wording_file']=$typeOfDocs['name'][$key_file];
-                        var_dump($dataDoc);
 
                         // Testons si l'extension est autorisée
                         $infosfichier = pathinfo($typeOfDocs['name'][$key_file]);
 
                         $extension_upload = $infosfichier['extension'];
 
-                        $extensions_autorisees = array('jpg', 'jpeg', 'gif', 'png');
+                        $extensions_autorisees = array('pdf', 'jpg', 'jpeg', 'gif', 'png');
 
                         if(in_array($extension_upload, $extensions_autorisees))
                         {
@@ -127,7 +125,7 @@ class HomeController extends Controller {
 
                             move_uploaded_file($typeOfDocs['tmp_name'][$key_file],'uploads/' . basename($typeOfDocs['name'][$key_file]));
                             $dataDoc[$i]['basename'] = basename($typeOfDocs['name'][$key_file]);
-
+                            var_dump($dataDoc);
                             echo "L'envoi a bien été effectué !";
                             } 
 
