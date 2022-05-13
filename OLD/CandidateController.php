@@ -25,14 +25,13 @@ class CandidateController extends Controller {
             //on récupère les infos sur la formation qu'il suit
             $trainingManager = new TrainingManager();
             $training = $trainingManager->getTraining($_SESSION['id_user']);
-
                         
             $data['training'] =$training;
             $data['candidate']=$candidate;
 
             //on récupère les documents à fournir pour la formation 
             $trainingDocs=$trainingManager->getDocumentsByTraining($training->getIdTraining());
-
+            
             $documents = [];
 
             foreach($trainingDocs as $document)
@@ -42,8 +41,10 @@ class CandidateController extends Controller {
                 {
                     $file=str_replace('_',' ', $file);
                 }
-                $documents[]=$file;
+                $document['wording_typeOfDoc']=$file;
+                $documents[]=$document;
             };
+            var_dump($documents);
 
             $nbIndex=count($documents);
             $data['nbIndex']=$nbIndex;
