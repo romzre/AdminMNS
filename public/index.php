@@ -53,8 +53,8 @@ else
 
 }
 
-// if(file_exists('../src/Controller/' . $controller . 'Controller.php'))
-// {
+if(file_exists('../src/Controller/' . $area. '/'. $controller . 'Controller.php'))
+{
     
     $controller = '\\App\\Controller\\'.$area.'\\'.$controller.'Controller';
 
@@ -78,3 +78,4 @@ else
         header("HTTP/1.1 404 Not Found");
         echo "Erreur 404 Not Found test1";
     }
+}
