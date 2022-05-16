@@ -1,5 +1,6 @@
 <?php 
 namespace Core;
+
 class View 
 {
     private string $path;
@@ -101,6 +102,8 @@ class View
             'cache' => false,
         ]);
 
+        $twig->addExtension(new \Twig\Extension\DebugExtension());
+        
         echo $twig->render($this->path,$this->data);
 
     }

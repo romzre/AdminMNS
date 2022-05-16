@@ -8,7 +8,7 @@ use App\Manager\TraineeManager;
 use App\Manager\TrainingManager;
 
 
-class TraineeController extends Controller {
+class HomeController extends Controller {
 
     public function index()
     {

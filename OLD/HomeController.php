@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Form;
 use Core\Controller;
 use App\Manager\TrainingManager;
+
 // require '../core/Controller.php';
 // require '../src/Manager/TrainingManager.php';
 // require '../src/Entity/Form.php';

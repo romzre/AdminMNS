@@ -143,4 +143,12 @@ class SecurityController extends Controller {
     }
 
     
+    public function logout() {
+        unset($_SESSION['user_id']);
+        session_destroy();
+        header('Location: /'); exit;
+    }
+
+
+    
 }

@@ -8,7 +8,7 @@
     <p>Pour compléter votre dossier et permettre à l’équipe de MNS d’étudier votre candidature, merci de nous transmettre les documents ci-dessous avant le $dateFinCand</p>
 </div>
 <div class="container-dashboard">
-<form action="?area=candidate&controller=home&action=sendFile" method='post' enctype='multipart/form-data'>
+<form action="#" method='post' enctype='multipart/form-data'>
     <table class="dataTable">
         <colgroup>
             <col class='col-1' span="1" >
@@ -18,43 +18,76 @@
         {# {{ dump(document) }} #}
         
         {% if key ==0 %}
-        
         <tr>
-            <td scope='col' class='up-left col-1'>{{document}}</td>
+            <td scope='col' class='up-left col-1'>{{document.wording_typeOfDoc}}</td>
             <td class='up-right col-2'>
-                <label for='{{document}}'>
+            {% if userDocuments[document.id_typeOfDoc] is defined %}
+                {% if userDocuments[document.id_typeOfDoc] == true %}
+                <i class="fa-solid fa-check"></i>
+                {% elseif userDocuments[document.id_typeOfDoc] == false %}
+                <label for='{{document.wording_typeOfDoc}}'>
                     <i class="fa-solid fa-cloud-arrow-up"></i>
                 </label>
-                <input id='{{document}}' type='file' name="{{document}}" accept=".pdf"/>
-            </td>
-        </tr>       
+                <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+                <input type='hidden' value={{document.id_typeOfDoc}}/>
+                {% endif %}
+            {% else %}
+            <label for='{{document.wording_typeOfDoc}}'>
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </label>
+            <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+            {% endif %}
+            </td>     
+        </tr>        
         {% endif %}
         {% if key > 0 and key < nbIndex -1 %}
         <tr>
-            <td scope='col' class='cell col-1'>{{document}}</td>
+            <td scope='col' class='cell col-1'>{{document.wording_typeOfDoc}}</td>
             <td class='cell col-2'>
-                <label for='{{document}}'>
+            {% if userDocuments[document.id_typeOfDoc] is defined %}
+                {% if userDocuments[document.id_typeOfDoc] == true %}
+                <i class="fa-solid fa-check"></i>
+                {% elseif userDocuments[document.id_typeOfDoc] == false %}
+                <label for='{{document.wording_typeOfDoc}}'>
                     <i class="fa-solid fa-cloud-arrow-up"></i>
                 </label>
-                <input id='{{document}}' type='file' name="{{document}}" accept=".pdf"/>
+                <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+                {% endif %}
+            {% else %}
+            <label for='{{document.wording_typeOfDoc}}'>
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </label>
+            <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+            {% endif %}
             </td>
         </tr>
         {% endif %}
         {% if key == nbIndex -1 %}
         <tr>
-            <td scope='col' id='td_id-card' class='col-1 down-left'>{{document}}</td>
+            <td scope='col' id='td_id-card' class='col-1 down-left'>type{{document.wording_typeOfDoc}}</td>
             <td scope='col' class='down-right col-2'>
-                <label for='{{document}}'>
+                {% if userDocuments[document.id_typeOfDoc] is defined %}
+                {% if userDocuments[document.id_typeOfDoc] == true %}
+                <i class="fa-solid fa-check"></i>
+                {% elseif userDocuments[document.id_typeOfDoc] == false %}
+                <label for='{{document.wording_typeOfDoc}}'>
                     <i class="fa-solid fa-cloud-arrow-up"></i>
                 </label>
-                <input id='{{document}}' type='file' name="{{document}}" accept=".pdf"/>
+                <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+                {% endif %}
+            {% else %}
+            <label for='{{document.wording_typeOfDoc}}'>
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </label>
+            <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+            {% endif %}
             </td>
         </tr>
         {% endif %}
         {% endfor %}
         </tbody>
     </table>
-    <button type="submit" class="btn btn-primary btn-lg">Envoyer</button>
+    <button type="submit" name="form-button" class="btn btn-primary btn-lg">Envoyer</button>
     </form>
 </div>
 
