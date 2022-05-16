@@ -1,4 +1,6 @@
 <?php
+
+use App\Manager\UserManager;
 $array_dataPost = [];
 
 // Echappement des input pour éviter l'injection de code 
@@ -22,7 +24,7 @@ foreach ($_POST as $key => $value) {
 }
 
 // Test si l'email existe dans la bdd
-require '../src/Manager/UserManager.php';
+
 
 $manager = new UserManager();
 

@@ -1,0 +1,51 @@
+{% extends "partials/base-admin.html.twig" %} 
+{% block body%}
+
+<div class='contBtnMenu'>
+                <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=index">Foramtions</a></button>
+        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=organisme">Organismes</a></button>
+        
+</div>
+
+<div class="cont_Search">
+    <label for="myInput">Recherchez</label>
+    <input type="text" id="myInput" />
+</div>
+
+<div class="contData">
+
+    <table class="dataTable" >
+        <thead>
+            <td class="left headTable">Nom</td>
+            <td class="headTable">Capacité d'accueil</td>
+            <td class="headTable right">Année</td>
+        </thead>
+        <tbody id="myTable">
+            {% for formation in gestion %}
+                <tr>
+                    <td class="cel" data-info="Nom" ><a class="anim-hover" href="index.php?area=admin&controller=gestion&action=training&id={{ formation.idtraining }}">{{ formation.titleformation }}</a></td>
+                    <td class="cel" data-info="Capacité d'accueil" >{{ formation.capacitytraining }}</td>
+                    <td class="cel" data-info="Année" >{{ formation.trainingYear }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+<div class='contBtnMenu'>
+        <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=home">Retour</a></button>
+        <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=AddTraining">Ajouter</a></button>
+</div>
+<script src="scripts/adminDash.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+{% endblock %}

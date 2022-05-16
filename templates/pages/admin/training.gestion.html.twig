@@ -1,0 +1,43 @@
+{% extends "partials/base-admin.html.twig" %} 
+{% block body%}
+<div class="contAllDataGestion">
+    <form action="/?area=admin&controller=gestion&action=training" method="POST">
+        <div class="contDataGestion  ">
+            <input type="hidden" name="id" value="{{ docs.id_training }}" />
+            <h2>{{ docs.title_formation }}</h2>
+            <div>
+                <label for="title_formation">Titre de la formaiton</label>
+                <input type='text' value='{{ docs.title_formation }}' name="title_formation" id="title_formation" />
+            </div>
+            <div>
+                <label for="capacity_training">Capacité d'accueil</label>
+                <input type='number' value='{{ docs.capacity_training }}' name="capacity_training" id="capacity_training" />
+            </div>
+            <div>
+                <label for="trainingYear">Année de validité</label>
+                <input type='number' value='{{ docs.trainingYear }}' name="trainingYear" id="trainingYear" />
+            </div>
+            <div class='contBtnMenu'>
+                <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion">Retour</a></button>
+                <button type="submit" class=" btn btn-primary btn-lg" name="submit">Modifier</button>
+            </div>
+        </div>
+    </form>
+    <div class="ContgestionTable">
+        <table class="dataTable gestionTable">
+            <thead>
+                <td class="headTable right left">Documents demandés</td>
+            </thead>
+            <tbody id="myTable">
+                {% for document in documents %}
+                    <tr>
+                        <td class="cel" data-info="Nom" >{{ document }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="scripts/adminDash.js"></script>
+
+{% endblock %}

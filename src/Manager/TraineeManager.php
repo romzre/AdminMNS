@@ -3,6 +3,7 @@ namespace App\Manager;
 
 use PDO;
 use App\Entity\Trainee;
+use App\Manager\PdoManager;
 // require_once 'UserManager.php';
 // require '../src/Entity/Trainee.php';
 
