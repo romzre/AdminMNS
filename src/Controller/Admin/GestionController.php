@@ -45,15 +45,48 @@ class GestionController extends Controller{
             exit;
         }
     
+        if(isset($_POST['submit_add']))
+        {
+            //Verifier le champ
+            //Ajouter dans la bdd TypeOfDoc
+            // Ajouter dans la table d'association Training TypeOfDoc
+            var_dump($_POST);
+            var_dump('add'); exit;
+            $manager = new TrainingManager();
+        }
+
+        if(isset($_POST['submit_edit']))
+        {
+            //Verifier le champ
+            //Modifier le TypeOfDoc "WHERE TypeOfDOc.id = :id"
+            var_dump($_POST);
+            var_dump('edit'); exit;
+            $manager = new TrainingManager();
+        }
+
+        if(isset($_POST['submit_delete']))
+        {
+            //DELETE 
+            var_dump($_POST);
+            var_dump('delete'); exit;
+            $manager = new TrainingManager();
+        }
+
+
         $manager = new TrainingDocsManager();
 
         $docs = $manager->getAllTrainingDocsByTraining(intval($_GET['id']));
         foreach ($docs as $doc ) {
             $documents[$doc['id_typeOfDoc']] = $doc['wording_typeOfDoc'];
+            
         }
-
+        for ($i=0; $i < count($docs) ; $i++) { 
+            array_pop($docs[$i]);
+            array_pop($docs[$i]);
+        }
+        $docs= $docs[0];
         $data = compact('admin', 'docs' , 'documents');
-var_dump($data); exit;
+
         $path= 'pages/admin/training.gestion.html.twig';
         $layOut='base-admin';
         

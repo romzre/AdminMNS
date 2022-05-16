@@ -114,9 +114,39 @@ tr{
     
 }
 .ContgestionTable{
-    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     height: 100%;
+}
+.ContgestionTable > form{
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 15px;
+}
+.celtraining{
+    display: flex;
+    justify-content: space-between;
+}
+.celtraining > div{
+    display: flex;
+    gap: 15px;
+    
+}
+#editDoc{
+    width: 250px;
+}
+.DocName, label[for='btn_submit'], label[for='btn_cancel'], label[for='btn_delete']{
+    cursor: pointer;
+}
+
+.hiddenbtn{
+    display: none;
 }
 @media screen and (max-width:800px) {
     *::before{
