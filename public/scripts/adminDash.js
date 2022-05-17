@@ -4,15 +4,22 @@ let DocName = document.querySelectorAll('.DocName')
 
 let btn_edit= document.querySelector('#Lab_submit')
 let btn_add= document.querySelector('#Lab_submit_add')
+let btn_add_submit= document.querySelector('#btn_submit_add')
 let btn_cancel= document.querySelector('#Lab_cancel')
+
+btn_add_submit.disabled = true
 
 btn_cancel.addEventListener('click', function(){
     btnGestionTrainingDoc.value = ''
     IdbtnGestionTrainingDoc.value = ''
     btn_add.removeAttribute('class', 'hiddenbtn')
     btn_edit.setAttribute('class', 'hiddenbtn')
+    btn_add_submit.disabled = true
 })
 
+btnGestionTrainingDoc.addEventListener('input', function(){
+    btn_add_submit.disabled = false
+})
 
 DocName.forEach(element => {
     element.addEventListener('click', function(){

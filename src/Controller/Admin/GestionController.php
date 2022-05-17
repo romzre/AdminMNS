@@ -19,7 +19,7 @@ class GestionController extends Controller{
         
         $manager = new TrainingManager();
 
-        $gestion = $manager->getAll();
+        $gestion = $manager->getAllwithAllYear();
         $data = compact('admin', 'gestion');
      
         $path= 'pages/admin/index.gestion.html.twig';
@@ -48,45 +48,91 @@ class GestionController extends Controller{
         if(isset($_POST['submit_add']))
         {
             //Verifier le champ
+            if(empty($_POST['Iddoc']))
+            {
+                $champ = $_POST['doc'];
+            }
+            //Ajouter dans la bdd TypeOfD)
+            
             //Ajouter dans la bdd TypeOfDoc
             // Ajouter dans la table d'association Training TypeOfDoc
-            var_dump($_POST);
-            var_dump('add'); exit;
-            $manager = new TrainingManager();
+            $manager = new TrainingDocsManager();
+            $check = $manager->checkTrainingTypeOfDocExist($champ);
+            if($check)
+            {
+                // Le doc existe dans la table
+                // Vérifier si le doc est associé à la formation
+             
+                $idTypeOfDoc = $check['id_typeOfDoc'];
+                $id = $manager->checkTrainingHasTypeOfDoc(intval($_GET['id']), $idTypeOfDoc);
+             
+                if($id)
+                {
+                    $message = 'Ce document existe déja pour cette formation';
+                }
+                else
+                {
+                    $manager->insertTrainingTypeOfDoc(intval($_GET['id']), $idTypeOfDoc );
+                    $message = 'Votre document a été associé à la formation';
+                }
+            }
+            else
+            {
+                $id = $manager->insertTypeOfDoc($champ);
+                $manager->insertTrainingTypeOfDoc($_GET['id'] , $id );
+                $message = 'Votre document a été créé et associé à la formation';
+            }
         }
 
         if(isset($_POST['submit_edit']))
         {
             //Verifier le champ
-            //Modifier le TypeOfDoc "WHERE TypeOfDOc.id = :id"
-            var_dump($_POST);
-            var_dump('edit'); exit;
-            $manager = new TrainingManager();
+            //Modifier le TypeOfDoc "WHERE TypeOfDOc.id = :id
+            $manager = new TrainingDocsManager();
+            $stmt = $manager->updateWording_TypeOfDoc($_POST['Iddoc'],$_POST['doc']);
+            $message = 'Le nom de votre document a été modifié';
         }
-
-        if(isset($_POST['submit_delete']))
+ 
+        if(isset($_POST['delete']) && $_POST['delete'] == '')
         {
             //DELETE 
-            var_dump($_POST);
-            var_dump('delete'); exit;
-            $manager = new TrainingManager();
+           
+            $manager = new TrainingDocsManager();
+            $stmt = $manager->deleteTrainingDocs($_GET['id'] , $_POST['id_typeOfDoc']);
+            $message = 'Votre document a bien été supprimé';
         }
 
 
         $manager = new TrainingDocsManager();
 
-        $docs = $manager->getAllTrainingDocsByTraining(intval($_GET['id']));
-        foreach ($docs as $doc ) {
-            $documents[$doc['id_typeOfDoc']] = $doc['wording_typeOfDoc'];
-            
+        $docs = $manager->getAllTrainingInfosByTraining(intval($_GET['id']));
+       $Alldocuments =  $manager->getAllTrainingDocs(intval($_GET['id']));
+     
+        foreach ($Alldocuments as $doc ) 
+        {
+            if($doc['id_typeOfDoc'] != null && $doc['wording_typeOfDoc'] != null)
+            {
+                $documents[$doc['id_typeOfDoc']] = $doc['wording_typeOfDoc'];
+            }
+        
         }
-        for ($i=0; $i < count($docs) ; $i++) { 
-            array_pop($docs[$i]);
-            array_pop($docs[$i]);
-        }
-        $docs= $docs[0];
-        $data = compact('admin', 'docs' , 'documents');
 
+        $docs= $docs[0];
+        
+        $data = compact('admin');
+        if(!empty($docs))
+        {
+            $data['docs'] = $docs;
+        }
+        if(!empty($documents))
+        {
+            $data['documents'] = $documents;
+        }
+        if(!empty($message))
+        {
+            $data['message'] = $message;
+        }
+  
         $path= 'pages/admin/training.gestion.html.twig';
         $layOut='base-admin';
         

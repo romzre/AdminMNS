@@ -34,6 +34,22 @@ class TrainingManager {
         return $obj;
     }
 
+    public function getAllwithAllYear()
+    {
+        $pdo=PdoManager::getPdo();
+
+        $currentYear = date('Y');
+        $sql= "SELECT * FROM `training` ";
+        $req = $pdo->prepare($sql);
+        $req->execute();
+
+        $trainings = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($trainings as $training) {
+            $obj[] = (new Training())->hydrate($training);
+        }
+        return $obj;
+    }
 
     public function updateTraining($data)
     {
@@ -47,7 +63,7 @@ class TrainingManager {
         return $stmt;
     }
 
-
+    
  
     
     /**

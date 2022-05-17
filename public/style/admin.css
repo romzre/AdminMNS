@@ -141,7 +141,7 @@ tr{
 #editDoc{
     width: 250px;
 }
-.DocName, label[for='btn_submit'], label[for='btn_cancel'], label[for='btn_delete']{
+.DocName, label[for='btn_submit'], label[for='btn_cancel'], .labdel{
     cursor: pointer;
 }
 
