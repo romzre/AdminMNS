@@ -4,8 +4,8 @@
                     <span class="nav__burger__bar"></span>
                 </button>
         <ul class="navbar__menu">
-            <li class="navbar__item"> <a href="/page=dashboard-trainee" class="navbar__links">Admin</a></li>
-            <li class="navbar__item"><a href="/page=absences" class="navbar__links">Gestion</a></li>
+            <li class="navbar__item"> <a href="/area=admin&controller=admin" class="navbar__links">Admin</a></li>
+            <li class="navbar__item"><a href="/area=admin&controller=gestion" class="navbar__links">Gestion</a></li>
             <!-- <li class="navbar__item"><a href="/page=delay" class="navbar__links">Mes retards</a></li> -->
         </ul>
     </div>

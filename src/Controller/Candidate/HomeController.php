@@ -23,10 +23,11 @@ class HomeController extends Controller {
             //on récupère les infos sur la formation qu'il suit
             $trainingManager = new TrainingManager();
             $training = $trainingManager->getTraining($_SESSION['id_user']);
-        
+
             
             $data['training'] =$training;
             $data['candidate']=$candidate;
+
 
             // //on récupère les documents à fournir pour la formation 
             $trainingDocs=$trainingManager->getDocumentsByTraining($training->getIdTraining());
@@ -61,6 +62,7 @@ class HomeController extends Controller {
             }
 
             $data['userDocuments']= $userDocuments;
+
 
             $path= 'pages/candidate/index.html.twig';
             $layOut='base-candidate';

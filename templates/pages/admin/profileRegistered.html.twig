@@ -5,37 +5,76 @@
         <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
         <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=trainees">Stagiaires</a></button>
 </div>
-<div class="contData">
+            <h1 class="h_Profile">Formulaire d'inscription</h1>
+<div class="Main_Profile">
+{% if err %}
+<p>{{ err }}</p>
+{% endif %}
+    <div class="title_head">
+        <h2 class="head_infPerso">Informations personnelles</h2>
+    </div>
     <div class="Cont_infPerso">
-        <div>
-            <h2 class="h_Profile">Formulaire d'inscription</h2>
-        </div
-        <div>
-            <p class="head_infPerso">Vos informations personnelles</p>
-            <div>
-                <p>Prénom : {{ registered.firstName }} </p>
+    
+            <div class="cont_line">
+                <div class="cont_inf">
+                    <p>Prénom :</p>
+                    <p> {{ registered.firstName }} </p>
+                </div>
+                <div class="cont_inf">
+                    <p>Nom :  </p>
+                    <p>{{ registered.familyName }}</p>
+                </div>
             </div>
-            <div>
-                <p>Nom : {{ registered.familyName }} </p>
+             <div class="cont_line">
+                <div class="cont_inf">
+                    <p>Tel :  </p>
+                    <p>{{ registered.tel }}</p>
+                </div>
+                <div class="cont_inf">
+                    <p>Email :  </p>
+                    <p>{{ registered.email }}</p>
+                </div>
             </div>
-            <div>
-                <p>Tel : {{ registered.tel }} </p>
+            <div class="cont_address">
+                <p>Adresse :</p>
+               <div class="cont_line2 ">
+                    <div class="cont_inf2">
+                        <p>Numéro :  </p> 
+                        <p>{{ registered.streetNumber }}</p> 
+                    </div>
+                    <div class="cont_inf2">
+                        <p>Type de voie : </p>
+                        <p>{{ registered.laneType }} </p>
+                    </div>
+                    <div class="cont_inf2">
+                        <p>Nom de voie :</p>
+                        <p>{{ registered.street }} </p>
+                    </div>
+                </div>
+                <div class="cont_line2">
+                {% if registered.addressComplement  %}
+                    <div class="cont_inf2">
+                        <p>Complément d'adresse : </p>
+                        <p>{{ registered.addressComplement }} </p>
+                    </div>
+                {% endif %}
+                    <div class="cont_inf2">
+                        <p>Code postal : </p>
+                        <p>{{ registered.postalCode }} </p>
+                    </div>
+                    <div class="cont_inf2">
+                        <p>Ville :</p>
+                        <p>{{ registered.city }} </p>
+                    </div>
+                </div>
+            </div>      
+            <div class="cont_titleFormation">
+                <p>Formation : </p>
+                <p>{{ registered.title_formation }}</p>
             </div>
-            <div>
-                <p>Email : {{ registered.email }} </p>
-            </div>
-            <div>
-                <p>Adresse : {{ registered.streetNumber }} {{ registered.laneType }} {{ registered.street }} {{ registered.addressComplement }} {{ registered.postalCode }} {{ registered.city }} </p>
-            </div>
-            <div>
-                <p>Formation : {{ registered.title_formation }}</p>
-            </div>
-            
-           
-            
-            
-            
-            
+        <div class=' btn_registered '>
+            <p class=" btn-primary Return btnProfile"><a href="/?area=admin&controller=home" >Retour</a></p>
+            <p class=" btn-primary Return btnProfile"><a href="/?area=admin&controller=registered&action=validate&id={{registered.id_user}}" >Creer le candidat</a></p>
         </div>
     </div>
 </div>

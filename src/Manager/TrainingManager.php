@@ -33,6 +33,22 @@ class TrainingManager {
         }
         return $obj;
     }
+
+
+    public function updateTraining($data)
+    {
+        $pdo=PdoManager::getPdo();
+
+        $sql= "UPDATE `training` SET `title_formation`= :title_formation,`capacity_training`= :capacity_training,`trainingYear`= :trainingYear WHERE id_training = :id";
+        $req = $pdo->prepare($sql);
+        $stmt = $req->execute($data);
+
+        
+        return $stmt;
+    }
+
+
+ 
     
     /**
      * getTraining
@@ -74,5 +90,7 @@ class TrainingManager {
         return $trainingDocs = $req->fetchAll(PDO::FETCH_ASSOC);
 
     }
+
+
 
 }

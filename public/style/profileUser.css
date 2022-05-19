@@ -1,7 +1,98 @@
 .h_Profile{
     color: var(--main-title-color);
+    margin: 25px;
+   text-align: center;
+    font-size: 2.5rem;
+}
+.Cont_infPerso{
+    width: 80%;
+    border: 2px solid var(--main-title-color);
+    padding: 50px;
+    border-radius: 50px;
 }
 
-.Cont_infPerso{
-    border: 2px solid var(--main-title-color);
+.cont_line{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.cont_line2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+   
+    
+}
+.cont_inf{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 50%;
+    
+}
+.cont_inf2{
+    display: flex;
+    justify-content: flex-start ;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    
+}
+.cont_titleFormation{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.cont_inf > p:nth-child(1) , .cont_inf2 > p:nth-child(1), .cont_address >p,.cont_titleFormation>p:nth-child(1)
+{
+    color: var(--main-title-color);
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.cont_inf > p:nth-child(2), .cont_inf > p:nth-child(2){
+    font-size: 1.2rem;
+}
+.Main_Profile{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cont_address{
+    white-space: nowrap;
+    display: flex;
+    flex-wrap: wrap;
+    gap:5px;
+}
+
+.address_part{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.btn_registered{
+    display: flex;
+    justify-content: space-between;
+}
+.btnProfile{
+    padding: 8px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 800px) {
+   .cont_line2, .cont_line{
+       flex-direction: column;
+       align-items: flex-start;
+       gap: 5px;
+   }
+   
 }

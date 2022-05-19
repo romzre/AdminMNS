@@ -46,4 +46,18 @@ class AdminManager extends UserManager{
         
         return $admin;
     }
+
+    public function updateRegisteredToCandidate($id)
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= 'UPDATE trainee SET isRegistered = 1 WHERE id_user=:id_user';
+
+        $req = $pdo->prepare($sql);
+        $stmt = $req->execute([
+            'id_user' => $id
+        ]);
+
+        return $stmt;
+       
+    }
 }

@@ -29,7 +29,6 @@ spl_autoload_register(function ($class) {
         
         );
       $class .= '.php';  
-   
     require_once "$class";
 });
 

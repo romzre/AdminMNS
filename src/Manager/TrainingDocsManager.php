@@ -23,6 +23,26 @@ class TrainingDocsManager {
         
     }
 
+    public function getAllTrainingDocsByTraining(int $id_training)
+    {
+        $pdo=PdoManager::getPdo();
+
+        $sql= "SELECT * FROM `training` 
+        LEFT JOIN training_typeOfDoc ON training.id_training = training_typeOfDoc.id_training
+        LEFT JOIN typeOfDoc ON training_typeOfDoc.id_typeOfDoc = typeOfDoc.id_typeOfDoc WHERE training.id_training = :id_training
+        ";
+        $req = $pdo->prepare($sql);
+        $req->execute([
+            'id_training' => $id_training
+        ]);
+
+        $trainings = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $trainings;
+        
+        
+    }
+
     // public function test(string $id_training, string $id_user)
     // {
     //     $pdo=PdoManager::getPdo();
