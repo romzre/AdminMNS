@@ -38,6 +38,7 @@
     text-decoration: none;
     color: #fff;
     padding: 20px;
+    cursor: pointer;
 }
 tr{
     position: relative;
@@ -200,7 +201,7 @@ tr{
 
 
 /* --------------------- FIN Progess BAR pour Candidats -------------------- */
-@media screen and (max-width:800px) {
+@media screen and (max-width:1444px) {
     *::before{
         box-sizing: border-box;
     }
@@ -240,4 +241,21 @@ tr{
     thead{
         display: none;
     }
+}
+.Cont_filter{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+
+}
+.Cont_action{
+    display: flex;
+    gap: 15px;
+}
+.Cont_action > a >img{
+    width: 35px;
+    cursor: pointer;
 }

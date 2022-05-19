@@ -55,7 +55,7 @@ class TraineeManager extends UserManager {
     {
         $pdo=PdoManager::getPdo();
 
-        $sql= "SELECT users.id_user ,  firstName , familyName , email , tel , title_formation , completeDossier FROM trainee INNER JOIN users ON users.id_user = trainee.id_user INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user INNER JOIN training ON trainee_training.id_training = training.id_training WHERE  completeDossier = 0 ";
+        $sql= "SELECT users.id_user ,  firstName , familyName , email , tel , title_formation , completeDossier , isRegistered FROM trainee INNER JOIN users ON users.id_user = trainee.id_user INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user INNER JOIN training ON trainee_training.id_training = training.id_training WHERE  completeDossier = 0 ";
 
         $req = $pdo->prepare($sql);
         $stmt = $req->execute();

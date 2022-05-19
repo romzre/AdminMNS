@@ -1,30 +1,62 @@
 {% extends "partials/base-admin.html.twig" %} 
 {% block body%}
 <div class='contBtnMenu'>
-                <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=index">Inscrits</a></button>
         <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
         <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=trainees">Stagiaires</a></button>
 </div>
-<div class="cont_Search">
-    <label for="myInput">Recherchez</label>
-    <input type="text" id="myInput" />
+<div class="Cont_filter">
+    
+    <input type="hidden" id="inpFilter" />
+    <div>    
+        <label for="filter1">Filtrer par:</label>
+        <select id="filter1">
+            <option value="">--Choisir une catégorie--</option>
+            <option value="Formation">Formation</option>
+            <option value="Statut">Statut</option>
+        </select>
+    </div>
+    <div>
+        <select class='fil' id="filter2">
+            <option value="">--Toutes les formations--</option>
+            {% for training in List_training %}
+                <option value="{{ training.getTitleFormation  }}">{{ training.getTitleFormation  }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <select class='fil' id="filter2bis">
+            <option value="">--Tout les status--</option>
+            <option value="Enregistrer">Enregistrer</option>
+            <option value="A valider">A valider</option>
+        </select>
+        </div>
+    </div>
+    <div class="cont_Search">
+        <label for="myInput">Rechercher</label>
+        <input type="text" id="myInput" />
+    </div>
 </div>
 <div class="contData">
     <table class="dataTable">
         <thead>
-            <td class="headTable left">Prénom</td>
+            
+            <td class="headTable left ">Prénom</td>
             <td class="headTable">Nom</td>
             <td class="headTable">Email</td>
             <td class="headTable">Formation</td>
-            <td class="headTable right">Dossier Complété</td>
+            <td class="headTable">Statut</td>
+            <td class="headTable ">Dossier Complété</td>
+            <td class="headTable right">Action</td>
         </thead>
         <tbody id="myTable">
             {% for user in candidates %}
                 <tr>
+                   
                     <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?area=admin&controller=profile&action=candidate&id={{ user.id_user }}">{{ user.firstName }}</a></td>
                     <td class="cel" data-info="Nom" ><a >{{ user.familyName }}</a></td>
-                    <td class="cel" data-info="Email" ><a mailto="{{ user.email }}">{{ user.email }}</a></td>
+                    <td class="cel" data-info="Email" ><a href="mailto:{{ user.email }}"><img src="images/email.png" /> {{ user.email }} </a></td>
                     <td class="cel" data-info="Formation" >{{ user.title_formation }}</td>
+                    <td class="cel" data-info="Statut" >{% if user.isRegistered %}Enregistrer{% else %}A valider{% endif %}</td>
                     <td class="cel center" data-info="Dossier Complété" >
                     <a class="center ">
                     <div class="percent">
@@ -46,6 +78,18 @@
                     {% endfor %}
                     </div>
                     </a></td>
+                     <td class="cel" data-info="Action" >
+                     {% if user.isRegistered %}
+                        <div class="Cont_action">
+                            <a href="/?area=admin&controller=profile&action=candidat"><img src="images/eye.png" /></a>
+                        </div>
+                    {% else %}
+                        <div class="Cont_action">
+                            <a href="/?area=admin&controller=profile&action=register"><img src="images/eye.png" /></a>
+                            <a  href="/?area=admin&controller=registered&action=validate&id={{ user.id_user }}"><img src="images/accept.png" /></a>
+                        </div>
+                     {% endif %}
+                     </td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -54,13 +98,25 @@
 <script src="scripts/adminDash.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
+$(document).ready(function()
+{
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#myTable tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
+});
+ $(document).ready(function()
+ {
+    $(".fil").each(function(){
+        $(this).on("change", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+    })
 });
 </script>
 {% endblock %}
