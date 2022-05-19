@@ -58,26 +58,31 @@
                     <td class="cel" data-info="Formation" >{{ user.title_formation }}</td>
                     <td class="cel" data-info="Statut" >{% if user.isRegistered %}Enregistrer{% else %}A valider{% endif %}</td>
                     <td class="cel center" data-info="Dossier Complété" >
-                    <a class="center ">
-                    <div class="percent">
-                        <svg>
-                            <circle cx='24' cy='24' r='24' class="percent_doc1"></circle>
-                            <circle cx='24' cy='24' r='24'  data-percent='{{ user.0.percent }}' class="percent_doc2"></circle>
-                        </svg>
-                    </div>
-                    <div class="nbDoc">
-                    {% for isvalid in DocValid %}
-                        {% if isvalid.id_user == user.id_user %}
-                            {{ isvalid.isValid }} 
-                        {% endif %}
-                    {% endfor %} 
-                    {% for Doc in trainingDoc %}    
-                        {% if user.title_formation == Doc.title_formation %}
-                                / {{ Doc.nbDocs }}
-                        {% endif %}
-                    {% endfor %}
-                    </div>
-                    </a></td>
+                    {% if user.isRegistered %}
+                        <a class="center ">
+                        <div class="percent">
+                            <svg>
+                                <circle cx='24' cy='24' r='24' class="percent_doc1"></circle>
+                                <circle cx='24' cy='24' r='24'  data-percent='{{ user.0.percent }}' class="percent_doc2"></circle>
+                            </svg>
+                        </div>
+                        <div class="nbDoc">
+                            {% for isvalid in DocValid %}
+                                {% if isvalid.id_user == user.id_user %}
+                                    {{ isvalid.isValid }} 
+                                {% endif %}
+                            {% endfor %} 
+                            {% for Doc in trainingDoc %}    
+                                {% if user.title_formation == Doc.title_formation %}
+                                        / {{ Doc.nbDocs }}
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                         -
+                        </div>
+                        </a>
+                    {% endif %}
+                        </td>
                      <td class="cel" data-info="Action" >
                      {% if user.isRegistered %}
                         <div class="Cont_action">

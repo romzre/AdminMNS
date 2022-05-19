@@ -40,6 +40,9 @@
     padding: 20px;
     cursor: pointer;
 }
+.cel {
+    height: 72.78px;
+}
 tr{
     position: relative;
 }
@@ -201,7 +204,7 @@ tr{
 
 
 /* --------------------- FIN Progess BAR pour Candidats -------------------- */
-@media screen and (max-width:1444px) {
+@media screen and (max-width:1636px) {
     *::before{
         box-sizing: border-box;
     }
