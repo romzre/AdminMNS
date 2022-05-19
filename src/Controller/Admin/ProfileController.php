@@ -19,10 +19,10 @@ class ProfileController extends Controller {
         {
             $id_user = intval($_GET['id']);
             $manager = new TraineeManager();
-            $registered = $manager->getAllTraineeById($id_user);
+            $user = $manager->getAllTraineeById($id_user);
     
 
-            $data = compact('registered');
+            $data = compact('user');
             $path= 'pages/admin/profileRegistered.html.twig';
             $layOut='base-admin';
       
@@ -36,10 +36,10 @@ class ProfileController extends Controller {
         {
             $id_user = intval($_GET['id']);
             $manager = new TraineeManager();
-            $candidate = $manager->getAllTraineeById($id_user);
-            var_dump($candidate); exit;
-
-            $data = compact('candidate');
+            $user = $manager->getAllTraineeById($id_user);
+          
+            $data = compact('user');
+            $data['action'] = 'candidates'; 
             $path= 'pages/admin/profileRegistered.html.twig';
             $layOut='base-admin';
       

@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use Core\Controller;
 use App\Manager\TraineeManager;
+use App\Manager\TrainingDocsManager;
 
 
 class HomeController extends Controller {
@@ -68,8 +69,10 @@ class HomeController extends Controller {
         $manager = new TraineeManager();
 
         $candidates = $manager->getAllCandidates();
-
-        $data = compact('admin', 'candidates');
+        $manager = new TrainingDocsManager();
+        $trainingDoc = $manager->getAllDocTraining();
+        $DocValid = $manager->getAllDocValid();
+        $data = compact('admin', 'candidates' , 'trainingDoc' , 'DocValid');
 
         $path= 'pages/admin/candidates.html.twig';
         $layOut='base-admin';

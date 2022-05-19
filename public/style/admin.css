@@ -148,6 +148,13 @@ tr{
 .hiddenbtn{
     display: none;
 }
+
+.center{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 @media screen and (max-width:800px) {
     *::before{
         box-sizing: border-box;

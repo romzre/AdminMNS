@@ -22,7 +22,7 @@ class GestionController extends Controller{
         $gestion = $manager->getAllwithAllYear();
         $data = compact('admin', 'gestion');
      
-        $path= 'pages/admin/index.gestion.html.twig';
+        $path= 'pages/admin/gestion/index.gestion.html.twig';
         $layOut='base-admin';
         
         $this->renderView($path, $data, $layOut);
@@ -103,9 +103,11 @@ class GestionController extends Controller{
         }
 
 
-        $manager = new TrainingDocsManager();
-
+        
+        $manager = new TrainingManager();
         $docs = $manager->getAllTrainingInfosByTraining(intval($_GET['id']));
+
+        $manager = new TrainingDocsManager();
        $Alldocuments =  $manager->getAllTrainingDocs(intval($_GET['id']));
      
         foreach ($Alldocuments as $doc ) 
@@ -133,12 +135,50 @@ class GestionController extends Controller{
             $data['message'] = $message;
         }
   
-        $path= 'pages/admin/training.gestion.html.twig';
+        $path= 'pages/admin/gestion/training.gestion.html.twig';
         $layOut='base-admin';
         
         $this->renderView($path, $data, $layOut);
     }
 
+    public function addTraining()
+    {
+        $data= [];
 
+        if(isset($_POST['submit']))
+        {
+            if(!empty($_POST['title_formation']))
+            {
+                $title = htmlspecialchars($_POST['title_formation']);
+            }
+
+            if(!empty($_POST['capacity_training']))
+            {
+                $capacity_training = htmlspecialchars($_POST['capacity_training']);
+            }
+
+            if(!empty($_POST['trainingYear']))
+            {
+                $trainingYear = htmlspecialchars($_POST['trainingYear']);
+            }
+
+            $data = [
+                "title_formation" => $title,
+                "capacity_training" => $capacity_training,
+                "trainingYear" => $trainingYear,
+            ];
+
+            $manager = new TrainingManager();
+
+            $id = $manager->insertTraining($data);
+
+            header("Location:/?area=admin&controller=gestion&action=training&id=".$id);
+        }
+ 
+        $path= 'pages/admin/gestion/addTraining.gestion.html.twig';
+        $layOut='base-admin';
+        
+        $this->renderView($path, $data, $layOut);
+    }
 
 }

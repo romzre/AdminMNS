@@ -15,7 +15,8 @@
             <td class="headTable left">Prénom</td>
             <td class="headTable">Nom</td>
             <td class="headTable">Email</td>
-            <td class="headTable right">Formation</td>
+            <td class="headTable">Formation</td>
+            <td class="headTable right">Dossier Complété</td>
         </thead>
         <tbody id="myTable">
             {% for user in candidates %}
@@ -23,7 +24,18 @@
                     <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?area=admin&controller=profile&action=candidate&id={{ user.id_user }}">{{ user.firstName }}</a></td>
                     <td class="cel" data-info="Nom" ><a >{{ user.familyName }}</a></td>
                     <td class="cel" data-info="Email" ><a mailto="{{ user.email }}">{{ user.email }}</a></td>
-                    <td class="cel" data-info="Formation" ><a>{{ user.title_formation }}</a></td>
+                    <td class="cel" data-info="Formation" >{{ user.title_formation }}</td>
+                    <td class="cel center" data-info="Dossier Complété" ><a class="center">
+                    {% for isvalid in DocValid %}
+                        {% if isvalid.id_user == user.id_user %}
+                            {{ isvalid.isValid }} 
+                        {% endif %}
+                    {% endfor %} 
+                    {% for Doc in trainingDoc %}    
+                        {% if user.title_formation == Doc.title_formation %}
+                                / {{ Doc.nbDocs }}</a></td>
+                        {% endif %}
+                    {% endfor %}
                 </tr>
             {% endfor %}
         </tbody>

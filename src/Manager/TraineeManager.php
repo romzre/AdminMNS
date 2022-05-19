@@ -14,7 +14,11 @@ class TraineeManager extends UserManager {
     {
         $pdo=PdoManager::getPdo();
         
-        $sql= "SELECT * FROM trainee INNER JOIN users ON trainee.id_user = users.id_user WHERE completeDossier = 1 AND isRegistered = 1";
+        $sql= "SELECT users.id_user ,  firstName , familyName , email , tel , title_formation FROM trainee 
+        INNER JOIN users ON users.id_user = trainee.id_user 
+        INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user
+        INNER JOIN training ON trainee_training.id_training = training.id_training 
+        WHERE completeDossier = 1 AND isRegistered = 1";
         $req = $pdo->prepare($sql);
         $req->execute();
         
@@ -61,6 +65,21 @@ class TraineeManager extends UserManager {
         return $candidates;
     }
 
+    public function getAllDocByTraining()
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= 'SELECT  training.id_training, title_formation   , COUNT(training.id_training) as nbDocs  FROM `training_typeOfDoc`
+        INNER JOIN training ON training_typeOfDoc.id_training = training.id_training
+        INNER JOIN typeOfDoc ON training_typeOfDoc.id_typeOfDoc = typeOfDoc.id_typeOfDoc
+        GROUP BY title_formation';
+
+        $req = $pdo->prepare($sql);
+        $req->execute();
+        
+        $docs = $req->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $docs;
+    }
 
     /**
      * get

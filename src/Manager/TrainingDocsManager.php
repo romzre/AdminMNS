@@ -61,6 +61,40 @@ class TrainingDocsManager {
         return $trainings;
     }
 
+    public function getAllDocTraining()
+    {
+        $pdo=PdoManager::getPdo();
+
+       
+        $sql= 'SELECT  training.id_training, title_formation   , COUNT(training.id_training) as nbDocs  FROM `training_typeOfDoc`
+        INNER JOIN training ON training_typeOfDoc.id_training = training.id_training
+        INNER JOIN typeOfDoc ON training_typeOfDoc.id_typeOfDoc = typeOfDoc.id_typeOfDoc
+        GROUP BY title_formation';
+        $req = $pdo->prepare($sql);
+        $req->execute();
+
+        $trainings = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $trainings;
+    }
+
+    public function getAllDocValid()
+    {
+        $pdo=PdoManager::getPdo();
+
+       
+        $sql= 'SELECT * FROM `trainingDocs` 
+        INNER JOIN document ON trainingDocs.id_document = document.id_document
+        WHERE isvalid = 1';
+
+        $req = $pdo->prepare($sql);
+        $req->execute();
+
+        $docs = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $docs;
+    }
+
     public function checkTrainingTypeOfDocExist(string $champ)
     {
         $pdo=PdoManager::getPdo();

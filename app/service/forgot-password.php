@@ -44,11 +44,12 @@ else
         //partie à mettre en place avec PHPMailer
         $output ='<!DOCTYPE html>';
         $output .='<html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin MNS</title></head>';
+        $output .= '<style>body{width:100%;height=100%;padding=12px;backgound-color:#151B36;color:#fff;}</style>';
         $output .='<body>';
         $output .='<p>Dear user,</p>';
         $output.='<p>Please click on the following link to reset your password.</p>';
         $output.='<p>-------------------------------------------------------------</p>';
-        $output.='<p><a href="51.77.211.62/?area=security&controller=security&action=resetPassword&key="'.$key.'&email='.$email.'>Cliquez-ici</a></p>';		
+        $output.="<p><a href='51.77.211.62/?area=security&controller=security&action=resetPassword&key='".$key."&email=".$email.">Cliquez-ici</a></p>";		
         $output.='<p>-------------------------------------------------------------</p>';
         $output.='<p>Please be sure to copy the entire link into your browser.';
         $output.= 'The link will expire after 1 hour for security reason.</p>';
@@ -56,14 +57,13 @@ else
         $output.='<p>Thanks,</p>';
         $output.='<p>Admin MNS Team</p>';
         $output .='</body>';
-        $output .= '<style>body{width:100%;height=100%;padding=12px;backgound-color:#151B36;color:#fff;}</style>';
         $output .='</html>';
         $body = $output; 
         $subject = "Password Recovery - Admin MNS";
         
         $email_to = $email;
         $fromserver = "noreply@adminmns.com"; 
-        
+     
         $mail = new PHPMailer(true);
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
