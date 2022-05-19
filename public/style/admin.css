@@ -37,6 +37,7 @@
 .cel > a {
     text-decoration: none;
     color: #fff;
+    padding: 20px;
 }
 tr{
     position: relative;
@@ -155,6 +156,50 @@ tr{
     justify-content: center;
     align-items: center;
 }
+/* --------------------- Progess BAR pour Candidats -------------------- */
+
+
+.percent {
+    position: relative;
+    display: flex;
+    justify-content: center;
+   align-items: center;
+}
+.percent svg {
+
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+}
+.percent_doc1{
+    fill: transparent;
+    stroke-width: 5;
+    stroke: #000;
+    stroke-dasharray: 0;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    transform: translate(10px,10px);
+
+}
+.percent_doc2{
+    fill: transparent;
+    stroke-width: 5;
+    stroke: var(--main-title-color);
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+    stroke-linecap: round;
+    transform: translate(10px,10px);
+}
+.nbDoc{
+    position: absolute;
+}
+
+
+
+
+/* --------------------- FIN Progess BAR pour Candidats -------------------- */
 @media screen and (max-width:800px) {
     *::before{
         box-sizing: border-box;
