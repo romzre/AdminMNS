@@ -7,6 +7,9 @@
     <p>Vous êtes candidat à la formation '{{training.getTitleFormation}}'</p>
     <p>Pour compléter votre dossier et permettre à l’équipe de MNS d’étudier votre candidature, merci de nous transmettre les documents ci-dessous avant le $dateFinCand</p>
 </div>
+{% if message is not empty %}
+<div class="alert alert-warning alert-form-docs" role="alert">{{message|raw}}</div>
+{% endif %}
 <div class="container-dashboard">
 <form action="#" method='post' enctype='multipart/form-data'>
     <table class="dataTable">
@@ -91,4 +94,5 @@
     </form>
 </div>
 
+<script src="scripts/candidate.js"></script>
 {% endblock %}
