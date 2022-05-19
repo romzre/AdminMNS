@@ -39,7 +39,7 @@ else
         require '../src/Manager/PasswordResetManager.php';
         $passwordResetManager = new PasswordResetManager();
         $passwordResetManager->createPasswordResetTemp($email,$key,$expDate);
-        $success .= '<p>An email has been sent to you with instructions on how to reset your password.</p>';
+        $success .= '<p>Un email vous a .</p>';
         
         //partie à mettre en place avec PHPMailer
         $output ='<!DOCTYPE html>';
@@ -48,7 +48,7 @@ else
         $output .='<p>Dear user,</p>';
         $output.='<p>Please click on the following link to reset your password.</p>';
         $output.='<p>-------------------------------------------------------------</p>';
-        $output.='<p><a href="51.77.211.62/?area=security&controller=security&action=resetPassword&key="'.$key.'&email='.$email.'>Cliquez-ici</a></p>';		
+        $output.='<p><a href="51.77.211.62/?area=security&controller=security&action=resetPassword&key='.$key.'&email='.$email.'">Cliquez-ici</a></p>';		
         $output.='<p>-------------------------------------------------------------</p>';
         $output.='<p>Please be sure to copy the entire link into your browser.';
         $output.= 'The link will expire after 1 hour for security reason.</p>';
@@ -59,6 +59,8 @@ else
         $output .= '<style>body{width:100%;height=100%;padding=12px;backgound-color:#151B36;color:#fff;}</style>';
         $output .='</html>';
         $body = $output; 
+        echo $body;
+        echo $key;echo $email;
         $subject = "Password Recovery - Admin MNS";
         
         $email_to = $email;
