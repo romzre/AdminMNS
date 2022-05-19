@@ -1,4 +1,6 @@
-
+header {
+    margin-bottom: 20px;
+}
 .container-titre-dashboard {
     margin : 50px 50px
 }
@@ -115,6 +117,143 @@ i:hover {
     display: none
   }
 
+.alert-form-docs
+{
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    margin:auto
+}
+
+.alert-form-docs>p
+{
+    margin-bottom:0
+}
+
+.fa-check{
+    color: var(--main-title-color)
+}
+/* ACCOUNT */
+
+
+div.container-account > div {
+    height: 300px;
+    min-width: 450px;
+    padding: 10px 15px;
+
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+div.container-account >.container-change-password {
+    min-height : 300px;
+    height:inherit;
+}
+
+.container-change-password>.alert{
+
+    width: 75%;
+    margin:auto;
+    padding : 1rem 0.5rem;
+    margin-top : 20px
+
+}
+
+.alert>p{
+    margin-bottom: 0;
+}
+.container-profile-pic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.container-profile-pic form {
+    height: auto;
+}
+
+.container-account h2 {
+    color:var(--main-title-color);
+    margin-bottom: 20px;
+}
+
+.container-account .icone-verif{
+    top:20px
+}
+
+.container-profile-pic input {
+    display:none
+}
+
+.form-floating{
+    min-width: 350px;
+    width: 400px;
+}
+
+.container-account form {
+    color:var(--main-bg-color)
+}
+
+
+.container-account {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: baseline;
+}
+
+.container-personal-info{
+    text-align: center;
+}
+
+.form-change-pic p {
+    margin-bottom: 0;
+}
+
+/* Formulaire changement de mdp :  */
+
+.ligne {
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+}
+.l1, .l2, .l3 {
+    width: 30%;
+    height: 5px;
+    margin: 15px 5px 20px;
+    position: relative;
+    display: none;
+}
+.ligne span {
+    color : #fff;
+    font-size: 0.8rem;
+}
+.l1 {
+    background: rgb(182,182,13);
+}
+.l2 {
+    background: rgb(151,85,85);
+}
+.l3 {
+    background: green;
+}
+.ligne span {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+}
+
+.btn-primary:disabled {
+    color: #fff;
+    background-color: var(--main-bg-color);
+    border-color: var(--main-title-color);
+
+}
 @media screen and (max-width: 480px){
 
     .dataTable{
@@ -122,5 +261,14 @@ i:hover {
         justify-content: flex-end;
         width: 350px;
     }
+}
+
+@media screen and (max-width: 1000px){
+
+    .container-account {
+        display: grid;
+        grid-template-columns: 1fr;
+}
+    
 }
 

@@ -1,0 +1,80 @@
+{% extends "partials/base-candidate.html.twig" %} 
+
+{% block body %}
+<div class="container-account">
+    <div class="container-personal-info">
+        <h2>Vos informations personnelles</h2>
+        <div class='personal-data'>
+            <p>Prénom : {{ candidate.FirstName}}</p>
+            <p>Nom : {{ candidate.FamilyName}}</p>
+            <p>Email : {{ candidate.Email}}</p>
+            <p>Formation : {{ training.TitleFormation }}</p>
+        </div>
+    </div>
+    <div class="container-profile-pic">
+    <h2>Votre photo de profil</h2>
+    <img src="ressources" alt='photo-profil'>
+    <form class="form-change-pic" action='#' method='post' enctype='multipart/form-data'>
+        <label for='edit-profile_pic'>
+            <p name="form-button" class="btn btn-primary btn-lg">Modifier</p>
+        </label>
+        <input id='edit-profile_pic' type='file' name="profile_pic" accept=".pdf"/>
+        <input type="submit" class="btn btn-primary"></input>
+    </form>
+    <form action='#' method='post' enctype='multipart/form-data'>
+        <input type='hidden' name="profile_pic"/>
+        <button onClick="confirm('Etes vous sûr de vouloir supprimer votre photo?')" type="button" name="form-button" class="btn btn-primary btn-lg">Supprimer</button>
+    </form>
+    </div>
+    <div class='container-change-password'>
+    <h2>Changer de mot de passe</h2>
+    <form class='form-change-password' action='?area=candidate&controller=account&action=change_password' method='post'>
+        <div class="form-floating">
+            <input type="password" name="old_password" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Ancien mot de passe</label>
+            {% if error_old_password is defined %}
+                <span class="message-alerte">{{error_old_password|raw}}</span>
+                <img src="images/error.svg" alt="icone de validation" class="icone-verif">
+            {% endif %}  
+        </div>
+        <div class="form-floating">
+            <input type="password" name="new_password" class="form-control" id="floatingNewPassword" placeholder="Password">
+            <label for="floatingPassword">Nouveau mot de passe</label>
+            <img src="images/check.svg" alt="icone de validation" class="icone-verif">
+            <span class="message-alerte">Votre mot de passe doit faire au moins 8 caractères, contenir un caractère spécial et un chiffre.</span>
+            
+            {% if error_new_password is defined %}
+                <span class="message-alerte">{{error_new_password|raw}}</span>
+                <img src="images/error.svg" alt="icone de validation" class="icone-verif">
+            {% endif %}  
+        </div>
+
+        <div class="form-floating">
+            <input type="password" name="confirm_password"class="form-control new-password" id="floatingConfirmPassword" placeholder="Password">
+            <label for="floatingPassword">Confirmer nouveau mot de passe</label>
+            <img src="images/check.svg" alt="icone de validation" class="icone-verif">
+            <span class="message-alerte">Les deux mots de passe ne sont pas identiques.</span>
+
+            {% if error_confirm_password is defined %}
+                <span class="message-alerte">{{error_confirm_password|raw}}</span>
+                <img src="images/error.svg" alt="icone de validation" class="icone-verif">
+            {% endif %}  
+            <div class="ligne">
+                <div class="l1"><span>faible</span></div>
+                <div class="l2"><span>moyen</span></div>
+                <div class="l3"><span>fort</span></div>
+            </div>
+        </div>
+        <button type="submit" name="form-button" class="btn btn-primary btn-change-password">Modifier</button>
+    </form>
+    {% if error_passwords is defined %}
+    <div class="alert alert-danger alert-form">{{error_passwords|raw}}</div>
+    {% endif %}  
+    {% if success_message is defined %}
+    <div class="alert alert-warning alert-form">{{success_message|raw}}</div>
+    {% endif %}  
+    </div>
+</div>
+<script src="scripts/change-password-check.js"></script>
+{% endblock %}
+

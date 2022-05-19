@@ -124,9 +124,9 @@ class UserManager {
         ]);
         
         $user = $req->fetch(PDO::FETCH_ASSOC);
-        // $obj = (new User())->hydrate($user);
-        // return $obj;
-        return $user;
+        $obj = (new User())->hydrate($user);
+        return $obj;
+ 
     }
 
     public function updatePassword (string $password, string $email)
