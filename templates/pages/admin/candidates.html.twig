@@ -86,7 +86,7 @@
                      <td class="cel" data-info="Action" >
                      {% if user.isRegistered %}
                         <div class="Cont_action">
-                            <a href="/?area=admin&controller=profile&action=candidat"><img src="images/eye.png" /></a>
+                            <a href="/?area=admin&controller=profile&action=candidate&id={{ user.id_user }}"><img src="images/eye.png" /></a>
                         </div>
                     {% else %}
                         <div class="Cont_action">
