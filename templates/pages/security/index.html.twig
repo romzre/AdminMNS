@@ -1,14 +1,11 @@
-{% extends "partials/base.html.twig" %} 
+{% extends "partials/base.html.twig" %}
 
 {% block body%}
 
 <div class="container container-login">
-    <div class='container-button-back'>
-        <a href="/"><button type="button" class="btn btn-primary btn-back">Retour</button></a>
-    </div>
     <div class="login-form-container">
         <div class="login-form-top">
-            <h2>Connectez vous a votre espace ADMIN MNS</h2>
+            <h2>Identifiez-vous</h2>
         </div>
         <form method='post' action='/?area=security&controller=security&action=check'>
             <div class="form-group">
@@ -24,17 +21,20 @@
             <div class="form-group">
                 <label for="password">Mot de passe</label>
                 <input type="password"  name="password" class="form-control" id="password_input" placeholder="tapez votre mot de passe">
+                <div class="password_forgotten"><a href="/?area=security&controller=security&action=forgotPassword">mot de passe oublié ?</a></div>
                 {% if password_error is defined %} {% include "partials/inc_password-error.php" %}
                 {% endif %}
                 {% if error_account is defined %} {% include "partials/inc_account-error.php" %}
                 {% endif %}
             </div>    
                 <div class="container-button-center">
-                    <input type="submit" class="btn btn-primary" value="Se connecter" name="submit" />
+                    <input type="submit" class="btn btn-secondary" value="Connexion" name="submit" />
                 </div>
-            <div class="password_forgotten"><a href="/?area=security&controller=security&action=forgotPassword">mot de passe oublié ?</a></div>
-        </form>    
-    </div>
+        </form> 
+        <div class='register-part'>
+            <p>Vous souhaitez devenir candidat ?</p>
+            <a href="/?area=home&controller=home&action=register"><input type="submit" class="btn btn-primary" value="Je candidate" name="submit" /></a>
+        </div>
 </div>
 </div>
 <script src="scripts/login-check.js"></script>

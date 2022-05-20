@@ -15,8 +15,8 @@ class HomeController extends Controller {
         $data = [];
 
         $path= 'pages/home/index.html.twig';
-        $layOut = 'base';
-        $this->renderView($path, $data, $layOut);
+
+        $this->renderView($path, $data);
 
     }
     
@@ -66,8 +66,8 @@ class HomeController extends Controller {
         $data['messageEndCheck']=$messageEndCheck;
     
         $path = 'pages/home/register.html.twig';
-        $layOut='base';
-        $this->renderView($path, $data, $layOut);
+
+        $this->renderView($path, $data);
     }
 
 }

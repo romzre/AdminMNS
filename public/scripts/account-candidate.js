@@ -7,9 +7,11 @@ let btn = document.querySelector("button.btn-change-password")
 
 allImg.forEach(element => {
     element.style.display='none'
-    
 });
 
+allSpan.forEach(element => {
+    element.style.display='none' 
+});
 
 //mot de passe 
 
@@ -118,3 +120,11 @@ function isValid(){
         btn.setAttribute('disabled', 'true')
     }
 }
+
+let formChangePic = document.querySelector('.form-change-pic')
+
+let inputPic = document.querySelector('#edit-profile_pic')
+
+inputPic.addEventListener("input", function(e){
+    formChangePic.submit()
+})

@@ -50,31 +50,11 @@ class View
         return $this;
     }
 
-    /**
-     * Get the value of layOut
-     */ 
-    public function getLayOut()
-    {
-        return $this->layOut;
-    }
 
-    /**
-     * Set the value of layOut
-     *
-     * @return  self
-     */ 
-    public function setLayOut($layOut)
-    {
-        $this->layOut = $layOut;
-
-        return $this;
-    }
-
-    function __construct($path, $data, $layOut)
+    function __construct($path, $data)
     {
         $this->setPath($path);
         $this->setData($data);
-        $this->setLayOut($layOut);
     }
 
     // function render() {

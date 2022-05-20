@@ -43,7 +43,7 @@ header {
 
 form {
     align-items: center;
-    gap: 20px
+    gap: 10px
 }
 .cell{
     border : 1px solid var(--main-title-color);

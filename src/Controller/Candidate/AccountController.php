@@ -34,9 +34,7 @@ class AccountController extends Controller {
             $documents = [];
 
             $path= 'pages/candidate/account.html.twig';
-            $layOut='base-candidate';
-
-            $this->renderView($path,$data,'base-candidate');
+            $this->renderView($path,$data);
 
         }
     }
@@ -109,8 +107,8 @@ class AccountController extends Controller {
                         $data['success_message']=$success_message;
 
                         $path= 'pages/candidate/account.html.twig';
-                        $layOut='base-candidate';
-                        $this->renderView($path,$data,'base-candidate');
+
+                        $this->renderView($path,$data);
                     }
                     else 
                     {
@@ -118,8 +116,7 @@ class AccountController extends Controller {
 
                         $data['error_passwords']=$error_passwords;
                         $path= 'pages/candidate/account.html.twig';
-                        $layOut='base-candidate';
-                        $this->renderView($path,$data,'base-candidate');
+                        $this->renderView($path,$data);
                     }
                 }
                 else 
@@ -128,8 +125,8 @@ class AccountController extends Controller {
                     
                     $data['error_old_password']=$error_old_password;
                     $path= 'pages/candidate/account.html.twig';
-                    $layOut='base-candidate';
-                    $this->renderView($path,$data,'base-candidate');
+                    
+                    $this->renderView($path,$data);
                 }
             }
             else
@@ -138,8 +135,8 @@ class AccountController extends Controller {
                 $data['error_confirm_password']=$error_confirm_password;
                 $data['error_new_password']=$error_new_password;
                 $path= 'pages/candidate/account.html.twig';
-                $layOut='base-candidate';
-                $this->renderView($path,$data,'base-candidate');
+            
+                $this->renderView($path,$data);
             } 
         }
     }

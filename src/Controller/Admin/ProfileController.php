@@ -24,9 +24,8 @@ class ProfileController extends Controller {
 
             $data = compact('registered');
             $path= 'pages/admin/profileRegistered.html.twig';
-            $layOut='base-admin';
       
-            $this->renderView($path, $data, $layOut);
+            $this->renderView($path, $data);
         }
     }
 
@@ -41,9 +40,8 @@ class ProfileController extends Controller {
 
             $data = compact('candidate');
             $path= 'pages/admin/profileRegistered.html.twig';
-            $layOut='base-admin';
       
-            $this->renderView($path, $data, $layOut);
+            $this->renderView($path, $data);
         }
     }
 }
