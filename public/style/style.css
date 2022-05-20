@@ -9,6 +9,13 @@
     color :#000000
 }
 
+@font-face {
+    font-family: "Gilroy";
+    src: url("Gilroy-Regular.woff2") format("woff2");
+    box-sizing: border-box;
+    color :#000000
+}
+
 
 /* Déclaration des variables de couleur */
 
