@@ -22,12 +22,8 @@ class GestionController extends Controller{
         $gestion = $manager->getAllwithAllYear();
         $data = compact('admin', 'gestion');
      
-<<<<<<< HEAD
         $path= 'pages/admin/gestion/index.gestion.html.twig';
         $layOut='base-admin';
-=======
-        $path= 'pages/admin/index.gestion.html.twig';
->>>>>>> 89c94d68b42de4226a61b57d9785e8396c6a1d59
         
         $this->renderView($path, $data);
     }
