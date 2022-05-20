@@ -23,9 +23,8 @@ class GestionController extends Controller{
         $data = compact('admin', 'gestion');
      
         $path= 'pages/admin/index.gestion.html.twig';
-        $layOut='base-admin';
         
-        $this->renderView($path, $data, $layOut);
+        $this->renderView($path, $data);
     }
 
     public function training()
@@ -88,9 +87,8 @@ class GestionController extends Controller{
         $data = compact('admin', 'docs' , 'documents');
 
         $path= 'pages/admin/training.gestion.html.twig';
-        $layOut='base-admin';
         
-        $this->renderView($path, $data, $layOut);
+        $this->renderView($path, $data);
     }
 
 

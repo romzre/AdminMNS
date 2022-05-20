@@ -52,9 +52,8 @@ class SecurityController extends Controller {
         $data['success'] = $success;
 
         $path= 'pages/security/forgot-password.html.twig';
-        $layOut = 'base';
 
-        $this->renderView($path, $data, $layOut);
+        $this->renderView($path, $data);
 
     }
 
@@ -134,11 +133,9 @@ class SecurityController extends Controller {
         $data['error_passwords'] = $error_passwords;
     
         $path = 'pages/security/reset-password-form.html.twig';
-        $layOut = 'base';
 
-        $view=new View($path, $data, $layOut);
+        $view=new View($path, $data);
         $view->render();
-               
 
     }
 

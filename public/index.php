@@ -38,7 +38,7 @@ if(!empty($_GET['area']))
 }
 else
 {
-    $area = 'Home';
+    $area = 'Security';
 
 }
 
@@ -48,7 +48,7 @@ if(!empty($_GET['controller']))
 }
 else
 {
-    $controller = 'Home';
+    $controller = 'Security';
 
 }
 

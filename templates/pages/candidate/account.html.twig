@@ -14,12 +14,11 @@
     <div class="container-profile-pic">
     <h2>Votre photo de profil</h2>
     <img src="ressources" alt='photo-profil'>
-    <form class="form-change-pic" action='#' method='post' enctype='multipart/form-data'>
+    <form class="form-change-pic" action='/?area=candidate&controller=account&action=change_pic' method='post' enctype='multipart/form-data'>
         <label for='edit-profile_pic'>
             <p name="form-button" class="btn btn-primary btn-lg">Modifier</p>
         </label>
-        <input id='edit-profile_pic' type='file' name="profile_pic" accept=".pdf"/>
-        <input type="submit" class="btn btn-primary"></input>
+        <input id='edit-profile_pic' type='file' name="profile_pic" />
     </form>
     <form action='#' method='post' enctype='multipart/form-data'>
         <input type='hidden' name="profile_pic"/>
@@ -75,6 +74,6 @@
     {% endif %}  
     </div>
 </div>
-<script src="scripts/change-password-check.js"></script>
+<script src="scripts/account-candidate.js"></script>
 {% endblock %}
 
