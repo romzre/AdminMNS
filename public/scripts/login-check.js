@@ -7,7 +7,8 @@ let mdpVerif = false
 
 
 // écouter un évenement sur le mail et vérifier avec une expression régulière
-let inpEmail = document.querySelectorAll("input[type='password']")
+let inpEmail = document.querySelector("input[type='email']")
+let expressionReguliere = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
 
 
 inpEmail.addEventListener('input', function(e){

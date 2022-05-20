@@ -5,7 +5,8 @@ use Core\Controller;
 use App\Manager\TraineeManager;
 use App\Manager\TrainingDocsManager;
 use App\Manager\TrainingManager;
-
+use App\Manager\TraineeTrainingManager;
+use App\Manager\DocumentManager;
 
 class HomeController extends Controller {
 
@@ -63,11 +64,7 @@ class HomeController extends Controller {
 
             $data['userDocuments']= $userDocuments;
 
-
             $path= 'pages/candidate/index.html.twig';
-            $layOut='base-candidate';
-
-            
             
             // si des documents ont été envoyé, on appelle la méthode sendFile()
             if(isset($_POST['form-button'])) {
@@ -75,7 +72,7 @@ class HomeController extends Controller {
                 $data['message']=$message;
             }
 
-            $this->renderView($path, $data, $layOut);
+            $this->renderView($path, $data);
         }
         else
         {
@@ -116,24 +113,45 @@ class HomeController extends Controller {
                     if($typeOfDocs['name'][$key_file] !== '')
                     {
         
-                        $dataDoc[$i]['wording_file']=$typeOfDocs['name'][$key_file];
+                        $wording_file = basename($typeOfDocs['name'][$key_file]);
+                        $dataDoc[$i]['wording_file']=$wording_file;
 
                         // Testons si l'extension est autorisée
                         $infosfichier = pathinfo($typeOfDocs['name'][$key_file]);
 
                         $extension_upload = $infosfichier['extension'];
 
-                        $extensions_autorisees = array('pdf', 'jpg', 'jpeg', 'gif', 'png');
+                        $extensions_autorisees = array('pdf', 'jpg', 'jpeg', 'png');
 
                         if(in_array($extension_upload, $extensions_autorisees))
                         {
                             // On peut valider le fichier et le stocker définitivement
-
-                            move_uploaded_file($typeOfDocs['tmp_name'][$key_file],'uploads/' . basename($typeOfDocs['name'][$key_file]));
-                            $dataDoc[$i]['basename'] = basename($typeOfDocs['name'][$key_file]);
+                            $path_file= "uploads/".$_SESSION['id_user'] ."/formation/". $wording_file;
+                            move_uploaded_file($typeOfDocs['tmp_name'][$key_file],$path_file);
                             
+                            // $dataDoc[$i]['basename'] = $wording_file;
+                            $documentManager = new DocumentManager();
+                            $id_document = $documentManager->insertUserFile($path_file, $wording_file, $_SESSION['id_user']);
+
+                            //on relie le document à l'id_typeOfDoc et à la formation du candidat
+
+                            //on récupère l'id de la formation pour laquelle il est candidat
+                            $traineeTrainingManager = new TraineeTrainingManager();
+                            $id_training = $traineeTrainingManager->getTrainingId($_SESSION['id_user']);
+                            $id_training = $id_training['id_training'];
+
+                            $id_typeOfDocToInsert= $dataDoc[$i]['id_typeOfDoc'];
+                            $trainingDocsManager = new TrainingDocsManager();
+
+                            $trainingDocsManager->insertTrainingDoc($id_document,$id_typeOfDocToInsert, $id_training);
+
+
                             $message.= "<p>L'envoi a bien été effectué !</p>";
-                            } 
+                        } 
+                        else
+                        {
+                            $message.= "<p>Seules les extensions pdf, jpeg, jpg et png sont autorisées !</p>";
+                        }
 
                     }
                     else

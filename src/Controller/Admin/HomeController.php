@@ -76,8 +76,7 @@ class HomeController extends Controller {
         $data = compact('admin' ,'candidates' , 'trainingDoc' , 'DocValid', 'List_training');
 // var_dump($data); exit;
         $path= 'pages/admin/candidates.html.twig';
-        $layOut='base-admin';
-        $this->renderView($path, $data, $layOut);
+        $this->renderView($path, $data);
 
     }
     
@@ -99,8 +98,7 @@ class HomeController extends Controller {
         $data = compact('admin', 'trainees');
 
         $path= 'pages/admin/trainees.html.twig';
-        $layOut='base-admin';
-        $this->renderView($path, $data, $layOut);
+        $this->renderView($path, $data);
 
     }
 }

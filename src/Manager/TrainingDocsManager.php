@@ -39,9 +39,24 @@ class TrainingDocsManager {
         $trainings = $req->fetchAll(PDO::FETCH_ASSOC);
 
         return $trainings;
-        
+      
         
     }
+    public function insertTrainingDoc (string $id_document, string $id_typeOfDoc, string $id_training)
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= "INSERT into trainingDocs (id_document, id_typeOfDoc, id_training) VALUES (:id_document, :id_typeOfDoc, :id_training)";
+
+        $req = $pdo->prepare($sql);
+        $stmt=$req->execute([
+            'id_document'=>intval($id_document),
+            'id_typeOfDoc'=>intval($id_typeOfDoc),
+            'id_training'=>intval($id_training)
+        ]);
+
+        return $stmt;
+    }
+
 
     public function getAllTrainingDocs(int $id_training)
     {

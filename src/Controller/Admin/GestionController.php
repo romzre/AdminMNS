@@ -22,10 +22,14 @@ class GestionController extends Controller{
         $gestion = $manager->getAllwithAllYear();
         $data = compact('admin', 'gestion');
      
+<<<<<<< HEAD
         $path= 'pages/admin/gestion/index.gestion.html.twig';
         $layOut='base-admin';
+=======
+        $path= 'pages/admin/index.gestion.html.twig';
+>>>>>>> 89c94d68b42de4226a61b57d9785e8396c6a1d59
         
-        $this->renderView($path, $data, $layOut);
+        $this->renderView($path, $data);
     }
 
     public function training()
@@ -138,7 +142,7 @@ class GestionController extends Controller{
         $path= 'pages/admin/gestion/training.gestion.html.twig';
         $layOut='base-admin';
         
-        $this->renderView($path, $data, $layOut);
+        $this->renderView($path, $data);
     }
 
     public function addTraining()

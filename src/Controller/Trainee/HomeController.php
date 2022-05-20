@@ -39,8 +39,7 @@ class HomeController extends Controller {
             $data['nbUnjustifiedDelays']=$nbUnjustifiedDelays;
 
             $path= 'pages/trainee/index.html.twig';
-            $layOut='base-trainee';
-            $this->renderView($path, $data, $layOut);
+            $this->renderView($path, $data);
         }
         else
         {

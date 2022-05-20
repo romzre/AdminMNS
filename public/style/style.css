@@ -35,7 +35,7 @@ h1 {
     color : var(--main-title-color);
     margin:0;
     font-family: "Shary";
-    font-size: 8em;
+    font-size: 4em;
     text-decoration: underline;
     text-align: center;
 }
@@ -57,16 +57,32 @@ h2 {
     font-family: "Shary";
 }
 
+.btn-secondary {
+    background-color :transparent;
+    border : 2px solid var(--main-title-color);
+    color:#fff;
+    width: 200px;
+    border-radius: 100px;
+    font-family: "Shary";
+}
+
+.btn-primary a, .btn-secondary a {
+    color:#fff;
+    text-decoration: none;
+    font-weight: 500
+}
 .btn-primary:hover{
     background-color: transparent;
     border : 2px solid var(--main-title-color)
 }
 
-.btn-primary a {
-    color:#fff;
-    text-decoration: none;
-    font-weight: 500
+.btn-secondary:hover
+{
+    background-color: var(--main-title-color);
+    border : 2px solid var(--main-title-color)
 }
+
+
 
 /* Header */
 header{
@@ -334,13 +350,8 @@ nav img
 .login-form-top, .reset-password-form-top{
     background-color: var(--main-title-color);
     border:solid 2px var(--main-title-color);
-    padding: 10px 5px;
-    margin-bottom: 20px;
+    padding: 15px 5px;
     box-sizing: content-box;
-    
-    
-
-
 }
 .login.btn {
     margin-top: 20px;
@@ -350,22 +361,34 @@ form{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 75%;
     width: 98%;
 }
 
 form.reset-password-form-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    height: 75%;
-    width: 98%;
+    justify-content: space-between;
+    width: 98%
 }
 
 form.reset-container-form {
     justify-content: flex-start;
     gap:20px;
     height: auto;
+}
+
+.register-part {
+
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    margin-top: 20px;
+}
+
+.register-part > p {
+    font-family: 'Gilroy';
+    letter-spacing: 0.1rem;
+    font-size: 1.2em;
 }
 
 .form-group {
@@ -385,7 +408,7 @@ input::placeholder {
 
 .password_forgotten {
     text-align: right;
-    margin: 20px 10px
+    margin: 0px 10px
 }
 .password_forgotten a {
     color: #fff;
