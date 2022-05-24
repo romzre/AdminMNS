@@ -59,7 +59,7 @@
                     <td class="cel" data-info="Statut" >{% if user.isRegistered %}Enregistrer{% else %}A valider{% endif %}</td>
                     <td class="cel center" data-info="Dossier Complété" >
                     {% if user.isRegistered %}
-                        <a class="center ">
+                        <a href="/?controller=document&action=index&id={{ user.id_user }}" class="center ">
                         <div class="percent">
                             <svg>
                                 <circle cx='24' cy='24' r='24' class="percent_doc1"></circle>
