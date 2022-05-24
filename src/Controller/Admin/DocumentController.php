@@ -12,18 +12,20 @@ class DocumentController extends Controller{
 
     public function index(){
 
-
+   
         require_once '../app/service/admin-check.php';
         $data = [];
-
+        
         if(!empty($_GET['id']))
         {
-          $id_user = $_GET['id'];
+          $id_document = $_GET['id'];
         }
 
         $manager = new DocumentManager();
-
-        $path= 'pages/admin/gestion/classroom/classroom.gestion.html.twig';
+        $data['document'] = $manager->getDoc($id_document);
+  
+       
+        $path= 'pages/admin/gestion/document/document.gestion.html.twig';
         $layOut='base-admin';
         
         $this->renderView($path, $data);

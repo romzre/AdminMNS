@@ -48,6 +48,7 @@ class HomeController extends Controller {
         $manager = new TrainingDocsManager();
         $trainingDoc = $manager->getAllDocTraining();
         $DocValid = $manager->getAllDocValid();
+        $DocsNull = $manager->getAllDocNull();
         
         for ($x=0; $x < count($candidates) ; $x++) 
         { 
@@ -73,7 +74,7 @@ class HomeController extends Controller {
         
         $List_training = $manager->getAllwithAllisValid();
 
-        $data = compact('admin' ,'candidates' , 'trainingDoc' , 'DocValid', 'List_training');
+        $data = compact('admin' ,'candidates' , 'trainingDoc' , 'DocValid', 'List_training', 'DocsNull');
         // var_dump($data); exit;
         $path= 'pages/admin/administration/candidates.html.twig';
         $this->renderView($path, $data);

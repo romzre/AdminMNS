@@ -1,0 +1,34 @@
+{% extends "partials/base-admin.html.twig" %} 
+{% block body%}
+<div class="contAllDataGestion">
+    <div class="ContgestionTable">
+        {% if document %} 
+            <img src="/get_protected_file.php?file={{ document.wording_file }}" />
+        {% else %}
+            <p>Une erreur est surnvenu</p>
+        {% endif %}
+        <form method="POST" action="/?area=admin&controller=gestion&action=training&id={{ training.id_training }}">
+
+        <input   id="editDoc" type="text" name="doc"  />
+        <input id="IdeditDoc" type="hidden" name="Iddoc" />
+        
+        <label id="Lab_submit"  class="hiddenbtn" for="btn_submit"><img src="images/accept.png" /></label>
+        <button id="btn_submit" class="hiddenbtn" type="submit" name="submit_edit"></button>
+
+        <label id="Lab_submit_add"  for="btn_submit_add"><img src="images/add.png" /></label>
+        <button id="btn_submit_add" class="hiddenbtn" type="submit" name="submit_add"></button>
+        
+        <label id="Lab_cancel"   for="btn_cancel"><img src="images/cancel.png" /></label>
+        <button id="btn_cancel" class="hiddenbtn" type="button" name=""></button>
+        </form
+        {% if message is defined %}
+            <p>{{ message }}</p>
+        {% endif %}
+    </div>
+    <div class='contBtnMenu'>
+        <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion">Retour</a></button>
+    </div>
+</div>
+<script src="scripts/adminDash.js"></script>
+
+{% endblock %}

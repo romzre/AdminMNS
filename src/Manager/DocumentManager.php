@@ -31,7 +31,22 @@ class DocumentManager {
 
         return $id_document = $pdo->lastInsertId();
 
-        
+    }
+
+    public function getDoc($id_document)
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= "SELECT * FROM `document` WHERE id_document = :id_document";
+
+        $req = $pdo->prepare($sql);
+
+        $req->execute([
+            'id_document' => $id_document
+        ]);
+
+        return $req->fetch(PDO::FETCH_ASSOC);
+
+
     }
 
 }

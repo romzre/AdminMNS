@@ -93,6 +93,22 @@ class TrainingDocsManager {
         return $trainings;
     }
 
+    public function getAllDocNull()
+    {
+        $pdo=PdoManager::getPdo();
+
+       
+        $sql= 'SELECT * FROM `trainingDocs` 
+        INNER JOIN document ON trainingDocs.id_document = document.id_document
+        WHERE isvalid is Null';
+
+        $req = $pdo->prepare($sql);
+        $stmt = $req->execute();
+        $docs = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $docs;
+    }
+
     public function getAllDocValid()
     {
         $pdo=PdoManager::getPdo();
