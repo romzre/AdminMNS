@@ -7,21 +7,22 @@ use App\Entity\Entity;
 
 // require_once 'Entity.php';
 
-class User extends Entity {
+class User extends Entity
+{
     protected string $email;
     protected string $familyName;
     protected string $firstName;
     protected int $id_user;
     protected string $password;
+    protected string $profile_pic;
 
     public function __construct()
     {
-        
     }
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return $this->email;
@@ -31,7 +32,7 @@ class User extends Entity {
      * Set the value of email
      *
      * @return  self
-     */ 
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -41,7 +42,7 @@ class User extends Entity {
 
     /**
      * Get the value of familyName
-     */ 
+     */
     public function getFamilyName()
     {
         return $this->familyName;
@@ -51,7 +52,7 @@ class User extends Entity {
      * Set the value of familyName
      *
      * @return  self
-     */ 
+     */
     public function setFamilyName($familyName)
     {
         $this->familyName = $familyName;
@@ -61,7 +62,7 @@ class User extends Entity {
 
     /**
      * Get the value of firstName
-     */ 
+     */
     public function getFirstName()
     {
         return $this->firstName;
@@ -71,7 +72,7 @@ class User extends Entity {
      * Set the value of firstName
      *
      * @return  self
-     */ 
+     */
     public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
@@ -81,7 +82,7 @@ class User extends Entity {
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getIdUser()
     {
         return $this->id_user;
@@ -91,7 +92,7 @@ class User extends Entity {
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setIdUser($id_user)
     {
         $this->id_user = $id_user;
@@ -101,7 +102,7 @@ class User extends Entity {
 
     /**
      * Get the value of password
-     */ 
+     */
     public function getPassword()
     {
         return $this->password;
@@ -111,10 +112,30 @@ class User extends Entity {
      * Set the value of password
      *
      * @return  self
-     */ 
+     */
     public function setPassword($password)
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of profile_pic
+     */
+    public function getProfilePic()
+    {
+        return $this->profile_pic;
+    }
+
+    /**
+     * Set the value of profile_pic
+     *
+     * @return  self
+     */
+    public function setProfilePic($profile_pic)
+    {
+        $this->profile_pic = $profile_pic;
 
         return $this;
     }

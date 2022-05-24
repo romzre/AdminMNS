@@ -1,4 +1,4 @@
-let allImg = document.querySelectorAll("form.form-change-password img")
+let allImg = document.querySelectorAll("img.icone-verif-js")
 let allSpan = document.querySelectorAll("form.form-change-password span")
 
 let mdpVerif = false
@@ -122,9 +122,14 @@ function isValid(){
 }
 
 let formChangePic = document.querySelector('.form-change-pic')
+let buttonFormPic = document.querySelector('.btn-hidden')
 
 let inputPic = document.querySelector('#edit-profile_pic')
 
-inputPic.addEventListener("input", function(e){
-    formChangePic.submit()
+inputPic.addEventListener("change", function(e){
+    if(e.target.value !== null)
+    {
+        buttonFormPic.click()      
+    }
+   
 })
