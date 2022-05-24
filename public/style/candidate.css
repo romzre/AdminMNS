@@ -254,6 +254,23 @@ div.container-account >.container-change-password {
     border-color: var(--main-title-color);
 
 }
+
+.message-alerte{
+    display: block;
+}
+
+.icone-verif-js {
+    width: 20px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+
+}
+
+button.btn-hidden{
+    display: none;
+}
+
 @media screen and (max-width: 480px){
 
     .dataTable{
