@@ -1,8 +1,7 @@
 {% extends "partials/base-admin.html.twig" %} 
 {% block body%}
 <div class='contBtnMenu'>
-        <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=index">Inscrits</a></button>
-        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
+        <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
         <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=trainees">Stagiaires</a></button>
 </div>
             <h1 class="h_Profile">Formulaire d'inscription</h1>
@@ -60,7 +59,7 @@
                 {% endif %}
                     <div class="cont_inf2">
                         <p>Code postal : </p>
-                        <p>{{ user.postalCode }} </p>
+                        <p>{{ user.postalCode }}</p>
                     </div>
                     <div class="cont_inf2">
                         <p>Ville :</p>
@@ -74,7 +73,9 @@
             </div>
         <div class=' btn_registered '>
             <p class=" btn-primary Return btnProfile"><a href="/?area=admin&controller=home&action={{action}}" >Retour</a></p>
+            {% if action is not defined %}
             <p class=" btn-primary Return btnProfile"><a href="/?area=admin&controller=registered&action=validate&id={{user.id_user}}" >Creer le candidat</a></p>
+            {% endif %}
         </div>
     </div>
 </div>

@@ -58,9 +58,7 @@ if(!$checkEmail)
         $_POST['postalCode'],
         $_POST['city'],
         $_POST['streetNumber'],
-        0,
-        0,
-        0
+       
     ];
     
     $reqRegister = $manager->insertRegister($dataTrainee);

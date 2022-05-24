@@ -1,0 +1,38 @@
+{% extends "partials/base-admin.html.twig" %} 
+{% block body%}
+<div class="contAllDataGestion">
+    <form action="/?area=admin&controller=classroom&action=addClassroom" method="POST">
+        <div class="contDataGestion  ">
+            <h2>Completer le formulaire pour ajouter la classe</h2>
+            <div>
+                <label for="id_training">Séléctionner la formation pour créer la classe</label>
+                <select name="id_training" id="id_training">
+                {% for training in trainings %}
+                    <option value="{{ training.getIdTraining }}">{{ training.getTitleFormation }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="classroomMYB">Date de début </label>
+                <input type="month" id="classroomMYB" name="classroomMYB" value="{{ current_date }}">
+            </div>
+            <div>
+                <label for="classroomMYE">Date de fin</label>
+                <input type="month" id="classroomMYE" name="classroomMYE" value="{{ current_dateN }}">
+            </div>
+            
+            <div class='contBtnMenu'>
+                <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=classroom">Retour</a></button>
+                <button type="submit" class=" btn btn-primary btn-lg" name="submit">Enregistrer</button>
+            </div>
+            {% if msg is defined %}
+                <div>
+                    <p>{{ msg }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </form>
+</div>
+<script src="scripts/adminDash.js"></script>
+
+{% endblock %}

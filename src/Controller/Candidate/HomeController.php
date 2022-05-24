@@ -65,7 +65,7 @@ class HomeController extends Controller {
             $data['userDocuments']= $userDocuments;
 
             $path= 'pages/candidate/index.html.twig';
-            
+
             // si des documents ont été envoyé, on appelle la méthode sendFile()
             if(isset($_POST['form-button'])) {
                 $message = $this->sendFile();

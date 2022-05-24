@@ -90,7 +90,7 @@
                         </div>
                     {% else %}
                         <div class="Cont_action">
-                            <a href="/?area=admin&controller=profile&action=register"><img src="images/eye.png" /></a>
+                            <a href="/?area=admin&controller=profile&action=register&id={{ user.id_user }}"><img src="images/eye.png" /></a>
                             <a  href="/?area=admin&controller=registered&action=validate&id={{ user.id_user }}"><img src="images/accept.png" /></a>
                         </div>
                      {% endif %}

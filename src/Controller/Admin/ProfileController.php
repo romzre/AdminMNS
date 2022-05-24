@@ -23,7 +23,7 @@ class ProfileController extends Controller {
     
 
             $data = compact('user');
-            $path= 'pages/admin/profileRegistered.html.twig';
+            $path= 'pages/admin/administration/profileRegistered.html.twig';
       
             $this->renderView($path, $data);
         }
@@ -39,7 +39,8 @@ class ProfileController extends Controller {
           
             $data = compact('user');
             $data['action'] = 'candidates'; 
-            $path= 'pages/admin/profileRegistered.html.twig';
+        
+            $path= 'pages/admin/administration/profileRegistered.html.twig';
       
             $this->renderView($path, $data);
         }

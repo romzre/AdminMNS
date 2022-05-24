@@ -1,0 +1,62 @@
+{% extends "partials/base-admin.html.twig" %} 
+{% block body%}
+
+<div class='contBtnMenu'>
+    <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=classroom">Classes</a></button>
+    <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=index">Formations</a></button>
+    <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=organisme">Organismes</a></button>    
+</div>
+
+<div class="cont_Search">
+    <label for="myInput">Recherchez</label>
+    <input type="text" id="myInput" />
+</div>
+
+<div class="contData">
+
+    <table class="dataTable" >
+        <thead>
+            
+            <td class="left headTable ">Code</td>
+            <td class="headTable">Date de début</td>
+            <td class="headTable">Date de fin</td>
+            <td class="headTable">Nombre de place</td>
+            <td class="headTable">Formation</td>
+            <td class="headTable right">Action</td>
+        </thead>
+        <tbody id="myTable">
+            {% for classroom in classrooms %}
+                <tr>
+                    <td class="cel" data-info="Code" >{{ classroom.name }}</td>
+                    <td class="cel" data-info="Date de début" >{{ classroom.classroomMYB }}</td>
+                    <td class="cel" data-info="Date de fin" >{{ classroom.classroomMYE }}</td>
+                    <td class="cel" data-info="Nombre de place">non disponible</td>
+                    <td class="cel" data-info="Formation">{{  classroom.title_formation }}</td>
+                    <td class="cel" data-info="Action" >
+                        <div class="Cont_action">
+                            <a href="/?area=admin&controller=classroom&action=view&id={{ classroom.id_classroom }}"><img src="images/eye.png" /></a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+<div class='contBtnMenu'>
+        <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=home">Retour</a></button>
+        <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=classroom&action=addClassroom">Ajouter</a></button>
+</div>
+<script src="scripts/adminDash.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+{% endblock %}

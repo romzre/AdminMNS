@@ -1,6 +1,7 @@
 {% extends "partials/base.html.twig" %} 
 {% block body%}
 <head><link rel="stylesheet" href="style/register.css"></head>
+
 <body>
 {% if messageEndCheck  %}
     <p class="suc_err">{{ messageEndCheck }}</p>
@@ -39,7 +40,7 @@
         {{ form.createInputText('tel','text','Numéro de téléphone', 'space',POST.tel)}}
         {{ form.createInputText('email','text','Adresse email', 'space',POST.email)}}
        {% if( POST.email != NULL) %}
-       <p>{{POST.email}}</p>
+       <p>Cette adresse existe déja</p>
        {% endif %}
        {{ form.createInputText('password','password','Mot de passe', 'space')}}
        {{ form.createInputText('confirm_password','password','Retapez votre mot de passe', 'space')}}
@@ -55,10 +56,14 @@
         <legend>
             Formation Souhaitée
         </legend>
+        {% if trainings %}
+            {{ form.createSelect(trainings,'Quelle formation vous intéresse','training') }}
+            {{ form.createSubmit('ContBtn','btn-primary','submit-register') }}
+        {% else %}
+            <p>Aucune formation n'est disponible actuellement</p>
+        {% endif %}
         
-        {{ form.createSelect(trainings,'Quelle formation vous intéresse','training') }}
         
-        {{ form.createSubmit('ContBtn','btn-primary','submit-register') }}
     </fieldset>
 </form>
 <p class="btn-primary Return"><a href="/">Retour</a><p>

@@ -21,34 +21,45 @@ class TrainingManager {
     {
         $pdo=PdoManager::getPdo();
 
-        $currentYear = date('Y');
-        $sql= "SELECT * FROM `training` WHERE trainingYear = $currentYear";
+        $sql= "SELECT * FROM `training` WHERE isValid = 1";
         $req = $pdo->prepare($sql);
         $req->execute();
 
         $trainings = $req->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($trainings as $training) {
-            $obj[] = (new Training())->hydrate($training);
+        if(!empty($trainings))
+        {
+            foreach ($trainings as $training) {
+                $obj[] = (new Training())->hydrate($training);
+            }
+            return $obj;
         }
-        return $obj;
+        else
+        {
+            return false;
+        }
     }
 
-    public function getAllwithAllYear()
+    public function getAllwithAllisValid()
     {
         $pdo=PdoManager::getPdo();
 
-        $currentYear = date('Y');
         $sql= "SELECT * FROM `training` ";
         $req = $pdo->prepare($sql);
         $req->execute();
 
         $trainings = $req->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($trainings as $training) {
-            $obj[] = (new Training())->hydrate($training);
+        if(!empty($trainings))
+        {
+            foreach ($trainings as $training) {
+                $obj[] = (new Training())->hydrate($training);
+            }
+            return $obj;
         }
-        return $obj;
+        else
+        {
+            return false;
+        }
     }
 
     public function getAllTrainingInfosByTraining(int $id_training)
@@ -56,17 +67,19 @@ class TrainingManager {
         $pdo=PdoManager::getPdo();
 
        
-        $sql= 'SELECT training.id_training, training.title_formation, training.capacity_training, training.trainingYear FROM `training` 
-        LEFT JOIN training_typeOfDoc ON training.id_training = training_typeOfDoc.id_training
-        LEFT JOIN typeOfDoc ON training_typeOfDoc.id_typeOfDoc = typeOfDoc.id_typeOfDoc WHERE training.id_training = :id_training';
+        $sql= 'SELECT * FROM `training` WHERE training.id_training = :id_training';
+        // LEFT JOIN training_typeOfDoc ON training.id_training = training_typeOfDoc.id_training
+        // LEFT JOIN typeOfDoc ON training_typeOfDoc.id_typeOfDoc = typeOfDoc.id_typeOfDoc WHERE training.id_training = :id_training';
         $req = $pdo->prepare($sql);
         $req->execute([
             'id_training' => $id_training
         ]);
 
-        $trainings = $req->fetchAll(PDO::FETCH_ASSOC);
+        $training = $req->fetch(PDO::FETCH_ASSOC);
 
-        return $trainings;
+        $obj = (new Training())->hydrate($training);
+
+        return $obj;
         
         
     }
@@ -75,7 +88,7 @@ class TrainingManager {
     {
         $pdo=PdoManager::getPdo();
 
-        $sql= "UPDATE `training` SET `title_formation`= :title_formation,`capacity_training`= :capacity_training,`trainingYear`= :trainingYear WHERE id_training = :id";
+        $sql= "UPDATE `training` SET `title_formation`= :title_formation,`capacity_training`= :capacity_training,`codeName`= :codeName,`isValid`= :isValid WHERE id_training = :id";
         $req = $pdo->prepare($sql);
         $stmt = $req->execute($data);
 
@@ -102,7 +115,7 @@ class TrainingManager {
     {
         $pdo=PdoManager::getPdo();
 
-        $sql= "INSERT INTO `training`(`title_formation`, `capacity_training`, `trainingYear`) VALUES ( :title_formation, :capacity_training , :trainingYear)";
+        $sql= "INSERT INTO `training`(`title_formation`, `capacity_training`, `code_training`, `isValid`) VALUES ( :title_formation, :capacity_training , :code_training , :isValid)";
         $req = $pdo->prepare($sql);
         $stmt = $req->execute($data);
 
