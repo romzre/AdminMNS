@@ -48,21 +48,25 @@
                         <td class="cel" data-info="Action" >
                          {% if documents is defined %}
                             {% for document in documents %}
-                                    {% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}
-                                <div class="Cont_action">
-                                    <a target="_blank" href="/?area=admin&controller=document&action=viewTrainingDoc&id={{user.getIdUser}}&file={% for document in documents %}{% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}{{ document.wording_file }}{% endif %}{% endfor %}"><img src="images/eye.png" /></a>
-                                    <a id="acceptbtn" href="/?area=admin&controller=document&action=validateTrainingDoc&id={{user.getIdUser}}&file={% for document in documents %}{% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}{{ document.id_document }}{% endif %}{% endfor %}"><img src="images/accept.png" /></a>
-                                    <label id="returnbtn" class="cursor displayNone" for=""><img class="img-small" src="/images/return.png" /></label>
-                                    <form class="form_CancelDoc" method="POST" action="/?area=admin&controller=document&action=index&id={{user.getIdUser}}">
-                                        <input name="inpJustify_text" id="inpJustify_text" class="displayNone" type="text" />
-                                        <label id="Lab_justify_text" class="cancelDoc cursor" for=""><img src="/images/cancel.png" /></label>
-                                        <label id="Lab_cancelDoc" class="cancelDoc cursor displayNone" for="submit_cancel"><img src="/images/cancel.png" /></label>
-                                        <input name="id_document" type="hidden" value="{% for document in documents %}{% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}{{ document.id_document }}{% endif %}{% endfor %}" />
-                                        <button id="submit_cancel" class="hiddenbtn" type="submit" name="submit_cancel"></button> 
-                                    </form>
-                                </div>
+                                {% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}
+                                        {% if document.isValid != 1 %}
+                                            <div class="Cont_action">
+                                                <a target="_blank" href="/?area=admin&controller=document&action=viewTrainingDoc&id={{user.getIdUser}}&file={% for document in documents %}{% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}{{ document.wording_file }}{% endif %}{% endfor %}"><img src="images/eye.png" /></a>
+                                                <a id="acceptbtn" href="/?area=admin&controller=document&action=validateTrainingDoc&id={{user.getIdUser}}&id_doc={% for document in documents %}{% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}{{ document.id_document }}{% endif %}{% endfor %}"><img src="images/accept.png" /></a>
+                                                <label id="returnbtn" class="cursor displayNone" for=""><img class="img-small" src="/images/return.png" /></label>
+                                                <form class="form_CancelDoc" method="POST" action="/?area=admin&controller=document&action=index&id={{user.getIdUser}}">
+                                                    <input name="inpJustify_text" id="inpJustify_text" class="displayNone" type="text" />
+                                                    <label id="Lab_justify_text" class="cancelDoc cursor" for=""><img src="/images/cancel.png" /></label>
+                                                    <label id="Lab_cancelDoc" class="cancelDoc cursor displayNone" for="submit_cancel"><img src="/images/cancel.png" /></label>
+                                                    <input name="id_document" type="hidden" value="{% for document in documents %}{% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}{{ document.id_document }}{% endif %}{% endfor %}" />
+                                                    <button id="submit_cancel" class="hiddenbtn" type="submit" name="submit_cancel"></button> 
+                                                </form>
+                                            </div>
+                                        {% else %}
+                                            <p>Validé</p>  
+                                        {% endif %}
                                 {% else %}
-                                        <p>Aucun action ne peut activé</p>  
+                                        <p>Aucune action disponible</p>  
                                  {% endif %}
                                 {% endfor %}
                          {% endif %}

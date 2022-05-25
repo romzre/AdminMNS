@@ -72,4 +72,18 @@ class DocumentManager {
         return $stmt;
     }
 
+    public function validateDoc($id_document)
+    {
+        $pdo=PdoManager::getPdo();
+        $sql= "UPDATE `document` SET `isValid`= 1 WHERE id_document = :id_document";
+
+        $req = $pdo->prepare($sql);
+
+        $stmt = $req->execute([
+            'id_document' => $id_document
+        ]);
+
+        return $stmt;
+    }
+
 }

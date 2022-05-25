@@ -93,4 +93,23 @@ class DocumentController extends Controller{
           echo $content;
       }
     }
+
+    public function validateTrainingDoc()
+    {
+        require_once '../app/service/admin-check.php';
+        $data = [];
+
+    
+        if(!empty($_GET['id']))
+        {
+          $id_user = $_GET['id'];
+        }
+        $id_document = htmlspecialchars($_GET['id_doc']);
+       
+        $manager = new DocumentManager();
+        $manager->validateDoc($id_document);
+
+
+        header("Location:/?area=admin&controller=document&action=index&id=".$id_user);
+    }
 }
