@@ -86,13 +86,12 @@ class TrainingManager {
 
     public function updateTraining($data)
     {
+     
         $pdo=PdoManager::getPdo();
 
-        $sql= "UPDATE `training` SET `title_formation`= :title_formation,`capacity_training`= :capacity_training,`codeName`= :codeName,`isValid`= :isValid WHERE id_training = :id";
+        $sql= "UPDATE `training` SET `title_formation`= :title_formation,`capacity_training`= :capacity_training,`code_training`= :code_training,`isValid`= :isValid WHERE id_training = :id";
         $req = $pdo->prepare($sql);
         $stmt = $req->execute($data);
-
-        
         return $stmt;
     }
 

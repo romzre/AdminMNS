@@ -1,4 +1,4 @@
-{% extends "partials/base-admin.html.twig" %} 
+{% extends "partials/base-admin-candidat.html.twig" %} 
 {% block body%}
 <div class='contBtnMenu'>
         <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
@@ -60,7 +60,7 @@
                     <td class="cel center" data-info="Dossier Complété" >
                     {% for DocNull in DocsNull %}
                         {% if DocNull.id_user == user.id_user %}
-                            <a href="/?area=admin&controller=document&action=index&id={{ DocNull.id_document }}"><p class="NewDoc">New Doc!</p></a>
+                            <a href="/?area=admin&controller=document&action=index&id={{ user.id_user }}"><p class="NewDoc">New Doc!</p></a>
                         {% endif %}
                     {% endfor %}
                     {% if user.isRegistered %}

@@ -1,6 +1,11 @@
-<?php require '../src/Entity/Document.php';
+<?php
 
-class Document {
+namespace App\Entity;
+use App\Entity\Entity;
+
+
+
+class Document extends Entity {
 
 
     private int $id_document;

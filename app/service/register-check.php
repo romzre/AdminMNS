@@ -62,7 +62,7 @@ if(!$checkEmail)
     ];
     
     $reqRegister = $manager->insertRegister($dataTrainee);
-
+var_dump($reqRegister); exit;
     $req = $manager->insertTraineeTraining(intval($id),intval($_POST['training']));
 
     if($reqRegister)

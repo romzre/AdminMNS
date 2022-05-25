@@ -204,54 +204,25 @@ tr{
     margin: auto 0;
     margin-right: 20px;
     background-color: var(--main-title-color);
-    padding: 5px;
+    padding: 5px 8px;
     border-radius: 50px;
+    box-shadow: 0px 0px 8px rgb(243, 155, 93);
     cursor: pointer;
+    transition: .3s ease;
 }
+.NewDoc:hover{
+    box-shadow: 0px 0px 4px rgb(243, 155, 93);
+}
+#center{
+    flex-direction: column;
+}
+.cancelDoc > img
+{
+    width: 35px;
 
-
+}
 /* --------------------- FIN Progess BAR pour Candidats -------------------- */
-@media screen and (max-width:1636px) {
-    *::before{
-        box-sizing: border-box;
-    }
-    table, thead,tbody, tr, td,th
-    {
-        display: block;
-        
-    }
-    th,.left, .right{
-        display: none;
-    }
-    td{
-        margin-top: -1px;
-        position: relative;
-    }
-    tr{
-        margin-bottom: 20px;
-    }
-    td::before{
-        content: attr(data-info);
-        position: absolute;
-        top: 0;
-        left: -130px;
-        width: 130px;
-        bottom: 0;
-        background-color: var(--main-title-color);
-   
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Shary';
-    }
-    .dataTable{
-        margin: 50px 0px;
-        margin-left: 130px;
-    }
-    thead{
-        display: none;
-    }
-}
+
 .Cont_filter{
     margin-top: 50px;
     display: flex;
@@ -268,4 +239,21 @@ tr{
 .Cont_action > a >img{
     width: 35px;
     cursor: pointer;
+}
+.form_CancelDoc{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.form_CancelDoc > input{
+    width: 80%;
+}
+.displayNone{
+    display: none;
+}
+.cursor{
+    cursor: pointer;
+}
+.img-small{
+    width: 35px;
 }

@@ -19,7 +19,7 @@ class ClassroomController extends Controller{
         $manager = new ClassroomManager();
 
         $classrooms = $manager->getAllWithTrainings();
-        $trainees = $manager->getClassroomWithTrainee();
+        $trainees = $manager->getClassroomsWithTrainee();
         if(!empty($trainees))
         {
             $data['trainees'] = $trainees;
