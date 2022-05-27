@@ -16,11 +16,6 @@ class HomeController extends Controller
     {
         if (!isset($_SESSION['id_user'])) session_start();
 
-<<<<<<< HEAD
-        session_start();
-        // echo ('test account');
-=======
->>>>>>> f39bf4aba7439cbcbb8fcbb50db183b8225ab98f
 
 
         if (!empty($_SESSION['id_user'])) {
