@@ -24,7 +24,7 @@ class AccountController extends Controller
             }
 
             if (isset($_POST['delete-pic-form-button'])) {
-                $this->deletePic();
+                $this->delete_pic();
             }
 
             // on récupère les infos sur le candidat
@@ -163,11 +163,11 @@ class AccountController extends Controller
                         if (!$updatedPic) {
                             $message .= "<p>Oups, il y a eu une erreur pendant l'envoi</p>";
                         } else {
-                            $this->reSizePic($path_file);
+                            $this->resize_pic($path_file);
                             return $message .= "<p>L'envoi a bien été effectué !</p>";
                         }
                     } else {
-                        $message .= "<p>Seules les extensions pdf, jpeg, jpg et png sont autorisées !</p>";
+                        $message .= "<p>Seules les extensions jpeg et jpg sont autorisées !</p>";
                     }
                 } else {
                     $message .= '<p>Le fichier doit avoir un titre</p>';
@@ -181,7 +181,7 @@ class AccountController extends Controller
         return $message;
     }
 
-    public function reSizePic($path_file)
+    public function resize_pic($path_file)
     {
         $im = imagecreatefromjpeg($path_file);
         $exif = exif_read_data($path_file);
@@ -209,7 +209,7 @@ class AccountController extends Controller
         imagedestroy($im);
     }
 
-    public function deletePic()
+    public function delete_pic()
     {
 
         $userManager = new UserManager();

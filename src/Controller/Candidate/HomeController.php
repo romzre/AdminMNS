@@ -34,7 +34,6 @@ class HomeController extends Controller
             $trainingManager = new TrainingManager();
             $training = $trainingManager->getTraining($_SESSION['id_user']);
 
-
             $data['training'] = $training;
             $data['candidate'] = $candidate;
 

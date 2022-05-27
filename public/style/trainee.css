@@ -417,6 +417,11 @@ button.btn-hidden{
     {
         width: 300px;
     }
+
+    .form-floating{
+        width: auto;
+        min-width: inherit;
+    }
 }
 
 

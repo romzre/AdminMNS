@@ -62,11 +62,11 @@ class UserManager
     public function insertRegister(array $dataRegister)
     {
 
-        $pdo=PdoManager::getPdo();
-        
-        $sql= "INSERT INTO `trainee`(`id_user`, `birthdate`, `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber`, `completeDossier`, `isActive`, `isRegister`, `id_organism`, `id_classroom`) VALUES 
+        $pdo = PdoManager::getPdo();
+
+        $sql = "INSERT INTO `trainee`(`id_user`, `birthdate`, `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber`, `completeDossier`, `isActive`, `isRegister`, `id_organism`, `id_classroom`) VALUES 
                                     (   ?    ,     ?      ,   ?  ,     ?     ,     ?    ,          ?         ,      ?      ,    ?  ,      ?        ,          0      ,      0    ,    0     ,      null    ,        null   )";
-        
+
         $req = $pdo->prepare($sql);
         $stmt = $req->execute($dataRegister);
 
@@ -161,6 +161,24 @@ class UserManager
         $req = $pdo->prepare($sql);
         $stmt = $req->execute([
             'id_user' => $id_user
+        ]);
+
+        return $stmt;
+    }
+
+    public function updateUserInfo(string $firstName, string $lastName, string $email, string $id_user)
+    {
+
+        $pdo = PdoManager::getPdo();
+        $sql = 'UPDATE `users` SET `firstName`= :firstName, `familyName`= :familyName, `email`= :email WHERE id_user = :id_user';
+
+        $req = $pdo->prepare($sql);
+        $stmt = $req->execute([
+            'id_user' => $id_user,
+            'firstName' => $firstName,
+            'familyName' => $lastName,
+            'email' => $email,
+
         ]);
 
         return $stmt;

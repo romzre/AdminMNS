@@ -19,14 +19,21 @@ class AccountController extends Controller
 
         if (!empty($_SESSION['id_user'])) {
 
-
+            // si l'utilisateur a cliqué sur le bouton changé de photo on appelle la methode change_pic
             if (isset($_POST['change-pic-form-button'])) {
                 $message = $this->change_pic();
                 $data['message'] = $message;
             }
 
+            // si l'utilisateur a cliqué sur le bouton supprimé la photo on appelle la methode deletePic
             if (isset($_POST['delete-pic-form-button'])) {
-                $this->deletePic();
+                $this->delete_pic();
+            }
+
+            // si le form pour modifier ses données a été soumis, on appelle la methode update_info
+            if (isset($_POST['submit'])) {
+                $message_update_info = $this->update_info();
+                $data['message_update_info'] = $message_update_info;
             }
 
             // on récupère les infos sur le stagiaire
@@ -51,8 +58,8 @@ class AccountController extends Controller
         if (!isset($_SESSION)) session_start();
 
         // on récupère les infos sur le candidat
-        $candidateManager = new TraineeManager();
-        $candidate = $candidateManager->getTraineeById($_SESSION['id_user']);
+        $userManager = new TraineeManager();
+        $user = $userManager->getTraineeById($_SESSION['id_user']);
 
         //on récupère les infos sur la formation qu'il suit
         $trainingManager = new TrainingManager();
@@ -60,7 +67,7 @@ class AccountController extends Controller
 
 
         $data['training'] = $training;
-        $data['candidate'] = $candidate;
+        $data['user'] = $user;
 
         $success_message = '';
         $error_old_password = '';
@@ -96,6 +103,8 @@ class AccountController extends Controller
 
                     if ($new_password === $confirm_password) {
                         $new_password = password_hash($confirm_password, PASSWORD_DEFAULT);
+
+                        //si c'est le bon mdp, on change 
                         $UserManager->updatePassword($new_password, $user->getEmail());
 
                         $success_message .= 'Votre mot de passe a été modifié avec succès';
@@ -149,7 +158,7 @@ class AccountController extends Controller
 
                     $extension_upload = $infosfichier['extension'];
 
-                    $extensions_autorisees = array('jpg', 'jpeg', 'png');
+                    $extensions_autorisees = array('jpg', 'jpeg');
 
                     if (in_array($extension_upload, $extensions_autorisees)) {
                         // On peut valider le fichier et le stocker définitivement
@@ -163,11 +172,12 @@ class AccountController extends Controller
                         if (!$updatedPic) {
                             $message .= "<p>Oups, il y a eu une erreur pendant l'envoi</p>";
                         } else {
-                            $this->reSizePic($path_file);
+                            // si la photo a bien été envoyée, on la redimensionne en faisant appel à la méthode resize_pic
+                            $this->resize_pic($path_file);
                             $message .= "<p>L'envoi a bien été effectué !</p>";
                         }
                     } else {
-                        $message .= "<p>Seules les extensions pdf, jpeg, jpg et png sont autorisées !</p>";
+                        $message .= "<p>Seules les extensions jpeg et jpg sont autorisées !</p>";
                     }
                 } else {
                     $message .= '<p>Le fichier doit avoir un titre</p>';
@@ -181,7 +191,7 @@ class AccountController extends Controller
         return $message;
     }
 
-    public function reSizePic($path_file)
+    public function resize_pic($path_file)
     {
         $im = imagecreatefromjpeg($path_file);
         $exif = exif_read_data($path_file);
@@ -209,18 +219,84 @@ class AccountController extends Controller
         imagedestroy($im);
     }
 
-    public function deletePic()
+    public function delete_pic()
     {
 
         $userManager = new UserManager();
         $userManager->deletePicture($_SESSION['id_user']);
     }
 
-    public function change_info()
+    public function update_info()
     {
 
-        if (isset($_POST['submit'])) {
-            var_dump($_POST);
+        $message = "";
+        if (!empty($_POST['firstName'])) {
+            $firstName = $_POST['firstName'];
+        } else {
+            $message .= '<p> Merci de remplir les champs suivants : </p>';
+            $message .= '<p>Prénom</p>';
         }
+        if (!empty($_POST['lastName'])) {
+            $lastName = $_POST['lastName'];
+        } else {
+            $message .= '<p>Nom</p>';
+        }
+        if (!empty($_POST['email'])) {
+            $email = $_POST['email'];
+        } else {
+            $message .= '<p>Email</p>';
+        }
+        if (!empty($_POST['tel'])) {
+            $tel = $_POST['tel'];
+        } else {
+            $message .= '<p>Téléphone</p>';
+        }
+        if (!empty($_POST['laneType'])) {
+            $laneType = $_POST['laneType'];
+        } else {
+            $message .= '<p>Type de voie</p>';
+        }
+        if (!empty($_POST['streetNumber'])) {
+            $streetNumber = $_POST['streetNumber'];
+        } else {
+            $message .= '<p> Merci de remplir les champs suivants : </p>';
+            $message .= '<p>Numéro de rue</p>';
+        }
+        if (!empty($_POST['street'])) {
+            $street = $_POST['street'];
+        } else {
+            $message .= '<p> Merci de remplir les champs suivants : </p>';
+            $message .= '<p>Rue</p>';
+        }
+        if (!empty($_POST['postalCode'])) {
+            $postalCode = $_POST['postalCode'];
+        } else {
+            $message .= '<p> Merci de remplir les champs suivants : </p>';
+            $message .= '<p>Code postal</p>';
+        }
+        if (!empty($_POST['city'])) {
+            $city = $_POST['city'];
+        } else {
+            $message .= '<p> Merci de remplir les champs suivants : </p>';
+            $message .= '<p>Ville</p>';
+        }
+        if (isset($firstName) && isset($lastName) && isset($email) && isset($tel) && isset($streetNumber) && isset($laneType) & isset($street) && isset($postalCode) && isset($city)) {
+
+            $traineeManager = new TraineeManager();
+            $returnUser = $traineeManager->updateUserInfo($firstName, $lastName, $email, $_SESSION['id_user']);
+
+            if ($returnUser) {
+                $returnTrainee = $traineeManager->updateTraineeInfo($tel, $streetNumber, $laneType, $street, $postalCode, $city, $_SESSION['id_user']);
+
+                if ($returnTrainee) {
+                    $message .= '<p> Vos modifications ont bien été prises en compte !</p>';
+                } else {
+                    $message .= '<p> Oups, une erreur est survenue !</p>';
+                }
+            } else {
+                $message .= '<p> Oups, une erreur est survenue !</p>';
+            }
+        }
+        return $message;
     }
 }
