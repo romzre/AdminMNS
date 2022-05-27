@@ -25,11 +25,19 @@ class DocumentController extends Controller{
           $id_document = htmlspecialchars($_POST['id_document']);
           $id = $_GET['id'];
 
-          $manager = new DocumentManager();
-          $manager->unvalidateDoc($id_document);
+          // $manager = new DocumentManager();
+          // $manager->unvalidateDoc($id_document);
 
           $manager = new TrainingDocsManager();
           $manager->DeleteDoc($id_document);
+
+          $manager = new DocumentManager();
+          $doc = $manager->getDocById($id_document);
+          // Suppression du fichier 
+          unlink($doc->getPathFile());
+          // Suppression dans la table
+          $manager->Delete($id_document);
+
 
           // Envoi du mail pour informer le candidat que son document n'a pas été validé
           require '../app/service/sendmail-unvalidateDoc.php';
@@ -50,20 +58,54 @@ class DocumentController extends Controller{
 
         $manager = new DocumentManager();
         $documents = $manager->getAllDocsFromUser($id_user);
-        if(!empty($documents))
-        {
-          $data['documents'] = $documents;
+        // if(!empty($documents))
+        // {
+        //   $data['documents'] = $documents;
          
-        }
+        // }
 
         $manager = new TraineeTrainingManager();
         $training = $manager->getAllTrainingByUser($id_user);
-        $data['training'] = $training;
-
+        
         $manager = new DocumentManager();
         $id_training = intval($training['id_training']);
         $manager = new TrainingDocsManager();
-        $data['docstraining'] = $manager->getAllTrainingDocs($id_training);
+        $docstraining = $manager->getAllTrainingDocs($id_training);
+
+
+        $process_Alldoc = [];
+        if(!empty($docstraining))
+        {
+          foreach ($docstraining as $doc) 
+          {
+            $array= [];
+            $array['wording_typeOfDoc'] = $doc['wording_typeOfDoc'] ;
+            $array['id_typeOfDoc'] = $doc['id_typeOfDoc'] ;
+            if(!empty($documents))
+            {
+              foreach ($documents as $document) 
+              {
+                
+                if($doc['id_typeOfDoc'] == $document['id_typeOfDoc'])
+                {
+                    $array['wording_file'] = $document['wording_file'] ;
+                    $array['id_document'] = $document['id_document'] ;
+                    $array['id_typeOfDoc'] = $document['id_typeOfDoc'] ;
+                    $array['isValid'] = $document['isValid'] ;
+                } 
+              }
+            }
+            
+            $process_Alldoc[] = $array;
+    
+          }
+        }
+        
+
+
+        // $data['docstraining'] = $docstraining;
+        $data['training'] = $training['title_formation'];
+        $data['docs'] = $process_Alldoc;
         
         
        

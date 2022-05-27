@@ -14,6 +14,11 @@ use App\Manager\PasswordResetManager;
     $manager = new UserManager();
     $user = $manager->getUserById($id);
     $email = $user->getEmail();
+
+    $Name_docTrainee = $_POST['Name_doc'];
+    $Name_docType = $_POST['Name_docType'];
+
+
     if(!$user)
     {
         $messageErrorEmail = '<p>L\'adresse email indiquée n\'est associée à aucun compte !</p>';
@@ -28,11 +33,11 @@ use App\Manager\PasswordResetManager;
         $output .='<html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin MNS</title></head>';
         $output .='<body>';
         $output .='<p>Dear user,</p>';
-        $output.='<p>Please click on the following link to reset your password.</p>';
+        $output.='<p>Vous avez transmis via l\'application AdminMns le document : '. $Name_docTrainee .'</p>';
         $output.='<p>-------------------------------------------------------------</p>';
-        $output.='<p>'.$message.'</p>';		
+        $output.='<p> Ce document aprés analyse a été rejeté pour la raison suivante : <span style="color: red">'.$message.'</span></p>';		
         $output.='<p>-------------------------------------------------------------</p>'; 
-        $output.='<p>Merci de faire le nécessaire,</p>';
+        $output.='<p>Merci de faire le nécessaire, pour transmettre le document demandé dans les plus brefs délai.</p>';
         $output.='<p>Admin MNS Team</p>';
         $output .='</body>';
         $output .='</html>';

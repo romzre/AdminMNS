@@ -14,7 +14,7 @@
             </div>
             <div class="cont_inf">
                 <p>Formation :</p>
-                <p> {{ training.title_formation }} </p>
+                <p> {{ training }} </p>
             </div>
             
         </div>
@@ -27,64 +27,53 @@
             <td class="headTable ">Documents déposé par le candidat</td>
             <td class="headTable right">Action</td>
         </thead>
-        <tbody id="myTable">
-           
-                    {% for docTraining in docstraining %}
+        <tbody>
+            {% for doc in docs %}
                 <tr>
-                        <td class="cel" data-info="formation" >{{ docTraining.wording_typeOfDoc }}</td>
-                        <td class="cel" data-info="candidat">
-                        {% if documents is defined %}
-                            {% for document in documents %}
-                                {% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}
-                                    <p><a target='_blank' href="/?area=admin&controller=document&action=viewTrainingDoc&id={{user.getIdUser}}&file={{ document.wording_file }}">{{ document.wording_file }}</a></p>
-                                {% else %}
-                                    <p>Aucun document déposé</p>    
-                                {% endif %}
-                            {% endfor %}
+                    <td class="cel" data-info="formation" >
+                        <p>{{ doc.wording_typeOfDoc }}</p>
+                    </td>
+                    <td class="cel" data-info="candidat">
+                        {% if doc.id_document is defined %}
+                            <p>
+                                <a target='_blank' href="/?area=admin&controller=document&action=viewTrainingDoc&id={{user.getIdUser}}&file={{ doc.wording_file }}">{{ doc.wording_file }}</a>
+                            </p>          
                         {% else %}
-                            <p>Aucun document déposé</p>    
-                        {% endif %}   
-                        </td>
-                        <td class="cel" data-info="Action" >
-                         {% if documents is defined %}
-                            {% for document in documents %}
-                                {% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}
-                                        {% if document.isValid != 1 %}
-                                            <div class="Cont_action">
-                                                <a target="_blank" href="/?area=admin&controller=document&action=viewTrainingDoc&id={{user.getIdUser}}&file={% for document in documents %}{% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}{{ document.wording_file }}{% endif %}{% endfor %}"><img src="images/eye.png" /></a>
-                                                <a id="acceptbtn" href="/?area=admin&controller=document&action=validateTrainingDoc&id={{user.getIdUser}}&id_doc={% for document in documents %}{% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}{{ document.id_document }}{% endif %}{% endfor %}"><img src="images/accept.png" /></a>
-                                                <label id="returnbtn" class="cursor displayNone" for=""><img class="img-small" src="/images/return.png" /></label>
-                                                <form class="form_CancelDoc" method="POST" action="/?area=admin&controller=document&action=index&id={{user.getIdUser}}">
-                                                    <input name="inpJustify_text" id="inpJustify_text" class="displayNone" type="text" />
-                                                    <label id="Lab_justify_text" class="cancelDoc cursor" for=""><img src="/images/cancel.png" /></label>
-                                                    <label id="Lab_cancelDoc" class="cancelDoc cursor displayNone" for="submit_cancel"><img src="/images/cancel.png" /></label>
-                                                    <input name="id_document" type="hidden" value="{% for document in documents %}{% if document.id_typeOfDoc == docTraining.id_typeOfDoc %}{{ document.id_document }}{% endif %}{% endfor %}" />
-                                                    <button id="submit_cancel" class="hiddenbtn" type="submit" name="submit_cancel"></button> 
-                                                </form>
-                                            </div>
-                                        {% else %}
-                                            <p>Validé</p>  
-                                        {% endif %}
-                                {% else %}
-                                        <p>Aucune action disponible</p>  
-                                 {% endif %}
-                                {% endfor %}
-                         {% endif %}
-                        </td>
+                            <p>Aucun document transmis</p>
+                            
+                        {% endif %}
+                    </td>
+                    <td class='cel center'>
+                        {% if doc.isValid == 1 %}
+                         <p class="center">Validé </p>
+                        {% elseif doc.isValid is defined and doc.isValid == null %}
+                            <div class="Cont_action">
+                                <a target="_blank" href="/?area=admin&controller=document&action=viewTrainingDoc&id={{user.getIdUser}}&file={{ doc.wording_file }}"><img src="images/eye.png" /></a>
+                                <a id="acceptbtn" href="/?area=admin&controller=document&action=validateTrainingDoc&id={{user.getIdUser}}&id_doc={{ doc.id_document }}"><img src="images/accept.png" /></a>
+                                <label id="returnbtn" class="cursor displayNone" for=""><img class="img-small" src="/images/return.png" /></label>
+                                <form class="form_CancelDoc" method="POST" action="/?area=admin&controller=document&action=index&id={{user.getIdUser}}">
+                                    <input name="inpJustify_text" id="inpJustify_text" class="displayNone" type="text" />
+                                    <label id="Lab_justify_text" class="cancelDoc cursor" for=""><img src="/images/cancel.png" /></label>
+                                    <label id="Lab_cancelDoc" class="cancelDoc cursor displayNone" for="submit_cancel"><img src="/images/cancel.png" /></label>
+                                    <input name="id_document" type="hidden" value="{{ doc.id_document }}" />
+                                    <input name="Name_doc" type="hidden" value="{{ doc.wording_file }}" />
+                                    <input name="Name_docType" type="hidden" value="{{ doc.wording_typeOfDoc }}" />
+                                    <button id="submit_cancel" class="hiddenbtn" type="submit" name="submit_cancel"></button> 
+                                </form>
+                            </div>
+                        {% else %}
+                            <p class="center">Aucune action disponible</p>    
+                        {% endif %} 
+                    </td>
                 </tr>
-                    {% endfor %}
-   
-    
+            {% endfor %}
         </tbody>
     </table>
-
-
- 
 </div>
     <div class='contBtnMenu'>
         <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Retour</a></button>
     </div>
-</div>
+
 <script src="scripts/adminDash.js"></script>
 
 {% endblock %}

@@ -49,7 +49,25 @@ class HomeController extends Controller {
         $trainingDoc = $manager->getAllDocTraining();
         $DocValid = $manager->getAllDocValid();
         $DocsNull = $manager->getAllDocNull();
-        
+
+        foreach ($candidates as $key => $candidat) 
+        {
+            $compt= 0;
+            foreach ($DocsNull as $doc) 
+            {
+                if($doc['id_user'] == $candidat['id_user'])
+                {
+                    $compt++;
+
+                }
+
+            }
+            $candidat['Nbdoc'] = $compt;
+            $candidates[$key] = $candidat;
+        }
+     
+
+        // Compter le pourcentage pour chaque candidat
         for ($x=0; $x < count($candidates) ; $x++) 
         { 
             for ($i=0; $i < count($DocValid) ; $i++) { 
@@ -69,13 +87,16 @@ class HomeController extends Controller {
                 }
             }
         }
+
+
+        
         
         $manager = new TrainingManager();
         
         $List_training = $manager->getAllwithAllisValid();
 
-        $data = compact('admin' ,'candidates' , 'trainingDoc' , 'DocValid', 'List_training', 'DocsNull');
-        // var_dump($data); exit;
+        $data = compact('admin' ,'candidates' , 'trainingDoc' , 'DocValid', 'List_training');
+        // var_dump($candidat); exit;
         $path= 'pages/admin/administration/candidates.html.twig';
         $this->renderView($path, $data);
 

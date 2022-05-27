@@ -86,4 +86,36 @@ class DocumentManager {
         return $stmt;
     }
 
+    public function Delete($id_document)
+    {
+        $pdo=PdoManager::getPdo();
+     
+
+        $sql= "DELETE FROM `document` WHERE id_document = :id_document";
+        $req = $pdo->prepare($sql);
+        $stmt =  $req->execute([
+            'id_document' => $id_document
+        ]);
+
+        return $stmt;
+    }
+
+    public function getDocById($id_document)
+    {
+        $pdo=PdoManager::getPdo();
+     
+
+        $sql= "SELECT * FROM `document`  WHERE id_document = :id_document";
+        $req = $pdo->prepare($sql);
+        $stmt =  $req->execute([
+            'id_document' => $id_document
+        ]);
+
+        $doc = $req->fetch(PDO::FETCH_ASSOC);
+
+        $obj = (new Document())->hydrate($doc);
+
+        return $obj ;
+    }
+
 }

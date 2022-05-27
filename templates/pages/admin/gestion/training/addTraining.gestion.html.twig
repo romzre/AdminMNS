@@ -41,7 +41,7 @@
                                             <form method="POST" action="/?area=admin&controller=gestion&action=addTraining&id={{ docs.id_training }}">
                                                     <input type="hidden" name="id_typeOfDoc" value="{{ id }}"  />
                                                     <input type="hidden" name="delete" />
-                                                <label class='labdel' for='btn_delete{{ id }}'>
+                                                <label class='labdel cursor' for='btn_delete{{ id }}'>
                                                     <img  src="images/delete.png" />
                                                     <input type="submit" class="hiddenbtn" id="btn_delete{{ id }}" name="submit_delete{{ id }}"  />
                                                 </label>
@@ -61,13 +61,13 @@
         <input   id="editDoc" type="text" name="doc"  />
         <input id="IdeditDoc" type="hidden" name="Iddoc" />
         
-        <label id="Lab_submit"  class="hiddenbtn" for="btn_submit"><img src="images/accept.png" /></label>
+        <label id="Lab_submit"  class="hiddenbtn cursor" for="btn_submit"><img src="images/accept.png" /></label>
         <button id="btn_submit" class="hiddenbtn" type="submit" name="submit_edit"></button>
 
-        <label id="Lab_submit_add"  for="btn_submit_add"><img src="images/add.png" /></label>
+        <label id="Lab_submit_add" class="cursor"  for="btn_submit_add"><img src="images/add.png" /></label>
         <button id="btn_submit_add" class="hiddenbtn" type="submit" name="submit_add"></button>
         
-        <label id="Lab_cancel"   for="btn_cancel"><img src="images/cancel.png" /></label>
+        <label id="Lab_cancel " class="cursor"  for="btn_cancel"><img src="images/cancel.png" /></label>
         <button id="btn_cancel" class="hiddenbtn" type="button" name=""></button>
         </form
         {% if message is defined %}

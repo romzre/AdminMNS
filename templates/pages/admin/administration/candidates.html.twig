@@ -58,11 +58,10 @@
                     <td class="cel" data-info="Formation" >{{ user.title_formation }}</td>
                     <td class="cel" data-info="Statut" >{% if user.isRegistered %}Enregistrer{% else %}A valider{% endif %}</td>
                     <td class="cel center" data-info="Dossier Complété" >
-                    {% for DocNull in DocsNull %}
-                        {% if DocNull.id_user == user.id_user %}
-                            <a href="/?area=admin&controller=document&action=index&id={{ user.id_user }}"><p class="NewDoc">New Doc!</p></a>
-                        {% endif %}
-                    {% endfor %}
+                    {% if user.Nbdoc is defined and user.Nbdoc != 0 %}
+                        <a href="/?area=admin&controller=document&action=index&id={{ user.id_user }}"><p class="NewDoc">New Doc!</p></a>
+                    {% endif %}
+                    
                     {% if user.isRegistered %}
                         <a href="/?area=admin&controller=document&action=index&id={{ user.id_user }}" class="center ">
                         <div class="percent">
