@@ -13,8 +13,9 @@ abstract class Controller
         $view->render();
     }
 
-    protected function reLocate(string $path)
+    protected function reLocate(string $path = null)
     {
         header('Location: /' . $path);
+        exit;
     }
 }

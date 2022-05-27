@@ -14,12 +14,18 @@ class HomeController extends Controller
 
     public function index()
     {
+        if (!isset($_SESSION['id_user'])) session_start();
 
-        session_start();
-        echo ('test account');
 
 
         if (!empty($_SESSION['id_user'])) {
+
+
+            if (isset($_POST['form-button'])) {
+                $message = $this->sendFile();
+                $data['message'] = $message;
+            }
+
             // on récupère les infos sur le candidat
             $candidateManager = new TraineeManager();
             $candidate = $candidateManager->getTraineeById($_SESSION['id_user']);
@@ -139,7 +145,7 @@ class HomeController extends Controller
                             $trainingDocsManager->insertTrainingDoc($id_document, $id_typeOfDocToInsert, $id_training);
 
 
-                            $message .= "<p>L'envoi a bien été effectué !</p>";
+                            return $message .= "<p>L'envoi a bien été effectué !</p>";
                         } else {
                             $message .= "<p>Seules les extensions pdf, jpeg, jpg et png sont autorisées !</p>";
                         }
@@ -150,9 +156,10 @@ class HomeController extends Controller
                     $message .= '<p>Le fichier est trop volumineux</p>';
                 }
             } else {
-                "<p>Oups il y a eu un problème lors de l'envoi, merci de renouveller l'opération </p>";
+                $message .= "<p>Oups il y a eu un problème lors de l'envoi, merci de renouveller l'opération </p>";
             }
+
+            return $message;
         }
-        return $message;
     }
 }

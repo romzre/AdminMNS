@@ -1,47 +1,61 @@
-{% extends "partials/base-admin.html.twig" %} 
+{% extends "partials/base-admin.html.twig" %}
 {% block body%}
-<div class='contBtnMenu'>
-        
-        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
-        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=trainees">Stagiaires</a></button>
-</div>
-<div class="cont_Search">
-    <label for="myInput">Recherchez</label>
-    <input type="text" id="myInput" />
-</div>
-<div class="contData">
-    <table class="dataTable">
-        <thead>
-            <td class="headTable left">Prénom</td>
-            <td class="headTable">Nom</td>
-            <td class="headTable">Email</td>
-            <td class="headTable">Tel</td>
-            <td class="headTable right">Formation</td>
-        
-        </thead>
-        <tbody id="myTable">
-            {% for user in registered %}
-                <tr>
-                    <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?area=admin&controller=profile&action=register&id={{ user.id_user }}">{{ user.firstName }}</a></td>
-                    <td class="cel" data-info="Nom" ><a >{{ user.familyName }}</a></td>
-                    <td class="cel" data-info="Email" ><a mailto="{{ user.email }}">{{ user.email }}</a></td>
-                    <td class="cel" data-info="Tel" ><a>{{ user.tel }}</a></td>
-                    <td class="cel" data-info="Formation" ><a>{{ user.title_formation }}</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-<script src="scripts/adminDash.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
+	<div class='contBtnMenu'>
+
+		<button type="button" class="btn btn-primary btn-lg">
+			<a href="/?area=admin&controller=home&action=candidates">Candidats</a>
+		</button>
+		<button type="button" class="btn btn-primary btn-lg">
+			<a href="/?area=admin&controller=home&action=trainees">Stagiaires</a>
+		</button>
+	</div>
+	<div class="cont_Search">
+		<label for="myInput">Rechercher</label>
+		<input type="text" id="myInput"/>
+	</div>
+	<div class="contData">
+		<table class="dataTable">
+			<thead>
+				<td class="headTable left">Prénom</td>
+				<td class="headTable">Nom</td>
+				<td class="headTable">Email</td>
+				<td class="headTable">Tel</td>
+				<td class="headTable right">Formation</td>
+
+			</thead>
+			<tbody id="myTable">
+				{% for user in registered %}
+					<tr>
+						<td class="cel" data-info="Prénom">
+							<a class="anim-hover" href="index.php?area=admin&controller=profile&action=register&id={{ user.id_user }}">{{ user.firstName }}</a>
+						</td>
+						<td class="cel" data-info="Nom">
+							<a>{{ user.familyName }}</a>
+						</td>
+						<td class="cel" data-info="Email">
+							<a mailto="{{ user.email }}">{{ user.email }}</a>
+						</td>
+						<td class="cel" data-info="Tel">
+							<a>{{ user.tel }}</a>
+						</td>
+						<td class="cel" data-info="Formation">
+							<a>{{ user.title_formation }}</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<script src="scripts/adminDash.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+$("#myInput").on("keyup", function () {
+var value = $(this).val().toLowerCase();
+$("#myTable tr").filter(function () {
+$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 });
-</script>
+});
+});
+	</script>
 {% endblock %}

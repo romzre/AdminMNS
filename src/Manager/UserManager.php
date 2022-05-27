@@ -138,13 +138,30 @@ class UserManager
 
     public function updatePicture(string $profile_pic, string $id_user)
     {
+
         $pdo = PdoManager::getPdo();
         $sql = 'UPDATE `users` SET `profile_pic`= :profile_pic WHERE id_user = :id_user';
 
         $req = $pdo->prepare($sql);
-        $req->execute([
+        $stmt = $req->execute([
             'id_user' => $id_user,
             'profile_pic' => $profile_pic,
         ]);
+
+        return $stmt;
+    }
+
+    public function deletePicture(string $id_user)
+
+    {
+        $pdo = PdoManager::getPdo();
+        $sql = 'UPDATE `users` SET `profile_pic`= NULL WHERE id_user = :id_user';
+
+        $req = $pdo->prepare($sql);
+        $stmt = $req->execute([
+            'id_user' => $id_user
+        ]);
+
+        return $stmt;
     }
 }

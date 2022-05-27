@@ -1,0 +1,442 @@
+
+/* Déclaration des variables de couleur */
+
+h2, h3,h4 {
+    font-family: 'Gilroy';
+}
+
+:root {
+    --main-bg-color: #151B36;
+    --main-title-color :#EC6834;
+    --dark-blue :#0D1121;
+}
+.orange {
+    color:var(--main-title-color)
+}
+.personal-info-content p:first-child
+{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.container-titre-dashboard {
+    margin : 30px 30px
+}
+
+.container-titre-dashboard h2 {
+    color: var(--main-title-color);
+}
+
+
+.container-dashboard {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 80px;
+
+}
+
+.dashboard-personal-info, .profile-pic {
+    height: 400px;
+    min-width: 450px;
+    border : 2px solid var(--main-title-color);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dashboard-personal-info h2 {
+    text-align: left;
+    margin-bottom: 40px;
+
+}
+
+.personal-info-content {
+    width: 90%;
+    height:80%;
+}
+
+.personal-info-content h3 {
+    font-size: 1.2rem;
+}
+
+.recap-retards-absences span {
+    color : var(--main-title-color)
+}
+
+.fa-solid.fa-bell{
+    color:#fff
+}
+
+.fa-solid{
+    color:var(--main-title-color);
+}
+
+ul li {
+    list-style-type: none;
+    margin: 10px auto
+}
+
+
+/* ACCOUNT */
+
+
+div.container-account > div {
+    padding: 10px 15px;
+
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.one {
+    grid-area: one;
+  }
+  
+.two {
+grid-area: two;
+}
+
+.three {
+grid-area: three;
+}
+
+.container-account {
+    width: auto;
+    margin-top: 20px;
+    display: grid;
+    grid-area: one ;
+    grid-template-columns:auto auto;
+    grid-template-areas:    
+        "one one"
+        "two three";
+    gap:40px;
+}
+
+.alert>p{
+    margin-bottom: 0;
+}
+
+/* PERSONAL DATA */
+
+.form-sub-part {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.form-first-column, .form-second-column{
+    display: flex;
+    flex-direction: column;
+    gap:10px
+}
+
+.part-column{
+    display: flex;
+    justify-content:flex-start;
+    gap:40px
+}
+
+.container-personal-info input{
+    width: 250px;
+    font-size: 0.8em;
+   }
+
+
+.part-address{
+    display: flex;
+    width: 250px;
+    align-items: center;
+    gap: 20px;
+}
+
+
+
+.part-number input {
+    width: 70px;
+}
+
+.part-typeLane input {
+    width: 110px;
+}
+
+.part-address .part-typeLane {
+    align-self: flex-end;
+}
+
+
+.container-personal-info label{
+    width: 110px;
+    color:#fff;
+    text-align: left;
+}
+
+.part-typeLane label
+{
+    width: 50px;
+}
+
+
+/* CHANGE PASSWORD */
+
+div.container-account >.container-change-password {
+    min-height : 300px;
+    height:inherit;
+}
+
+.container-change-password>.alert{
+
+    width: 75%;
+    margin:auto;
+    padding : 1rem 0.5rem;
+    margin-top : 20px
+
+}
+
+.fa-pen, .fa-trash{
+    color: #fff;
+}
+
+.form-update-delete-pic
+{
+    display: flex;
+    justify-content: center;
+    gap:30px
+}
+
+
+.container-profile-pic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.container-profile-pic form {
+    height: auto;
+}
+
+.container-account h2 {
+    color:var(--main-title-color);
+    margin-bottom: 20px;
+}
+
+.container-account .icone-verif{
+    top:20px
+}
+
+.container-profile-pic input {
+    display:none
+}
+
+.form-floating{
+    min-width: 350px;
+    width: 400px;
+}
+
+form {
+    align-items: center;
+    gap: 30px
+}
+
+
+.container-account form {
+    color:var(--main-bg-color)
+}
+
+
+
+.container-personal-info{
+    text-align: center;
+    width: 100%;
+}
+
+.form-change-pic p {
+    margin-bottom: 0;
+}
+
+/* Formulaire changement de mdp :  */
+
+.ligne {
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+}
+.l1, .l2, .l3 {
+    width: 30%;
+    height: 5px;
+    margin: 15px 5px 20px;
+    position: relative;
+    display: none;
+}
+.ligne span {
+    color : #fff;
+    font-size: 0.8rem;
+}
+.l1 {
+    background: rgb(182,182,13);
+}
+.l2 {
+    background: rgb(151,85,85);
+}
+.l3 {
+    background: green;
+}
+.ligne span {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+}
+
+.btn-primary:disabled {
+    color: #fff;
+    background-color: var(--main-bg-color);
+    border-color: var(--main-title-color);
+
+}
+
+.message-alerte{
+    display: block;
+}
+
+.icone-verif-js {
+    width: 20px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+
+}
+
+button.btn-hidden{
+    display: none;
+}
+
+.form-floating
+{
+    color:var(--main-bg-color)
+}
+
+.form-change-password
+{
+    gap:10px
+}
+
+
+
+@media all and (max-width: 480px){
+
+    .dataTable{
+        display: flex;
+        justify-content: flex-end;
+        width: 350px;
+    }
+    .container-titre-dashboard {
+        padding: 0 10px;
+        margin: inherit;
+        margin-top:40px
+    }
+}
+
+@media all and (max-width: 480px){
+
+    .dataTable{
+        display: flex;
+        justify-content: flex-end;
+        width: 350px;
+    }
+    .container-titre-dashboard {
+        padding: 0 10px;
+        margin: inherit;
+        margin-top:40px
+    }
+
+    .form-first-column, .form-second-column
+    {
+        width: 200px;
+    }
+}
+
+
+
+@media all and (max-width: 800px){
+
+/* .container-account {
+        display: grid;
+        grid-template-columns: 1fr;
+} */
+    .form-sub-part {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .part-column{
+        justify-content: center;
+        gap:20px
+        
+    }
+    .container-personal-info input{
+        width: 250px;
+        font-size: 0.8em;
+    }
+    
+
+    #email_input
+    {
+        width: 250px;
+    }
+
+    #tel_input{
+        width: 250px;
+    }
+
+    #street_input{
+        width: 250px;
+    }
+    .container-personal-info label {
+        width: auto;
+    }
+
+    #streetNumber_input, #laneType_input {
+        width: 70px;
+    }
+    .part-address{
+        justify-content :space-between
+    }
+    /* .container-personal-info input {
+        width: 200px;
+    } */
+
+    form {
+        align-items: stretch;
+        
+    }
+
+    .form-first-column, .form-second-column
+    {
+        width: 300px;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 1000px){
+
+    .container-dashboard{
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        gap: 30px
+    }
+    .dashboard-personal-info, .profile-pic {
+        width:350px;
+        min-width: inherit;
+        height:300px;
+        
+    }
+    
+}
+

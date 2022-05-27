@@ -12,11 +12,9 @@ class FileController extends Controller
         echo ('oui');
     }
 
-    public function getPicture()
+    public function get_picture()
     {
-        echo ('ok');
         session_start();
-        var_dump($_SESSION);
 
         if (isset($_SESSION['id_user'])) {
             $headers = getallheaders();
@@ -24,12 +22,10 @@ class FileController extends Controller
             if (isset($headers['Sec-Fetch-Mode']) && $headers['Sec-Fetch-Mode'] == 'navigate') {
                 die('Vous n\'êtes pas autorisé à accéder à ce fichier.');
             }
-            echo ('coucou');
 
             if (isset($_GET['file'])) {
                 $file_name = $_GET['file'];
                 $file = '../uploads/' . $_SESSION['id_user'] . '/profile_pic/' . $file_name;
-                echo ($file);
                 if (file_exists($file)) {
                     header('Content-Description: File Transfer');
                     header('Content-Type: application/octet-stream');
