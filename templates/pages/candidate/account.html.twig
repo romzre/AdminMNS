@@ -17,18 +17,29 @@
 		</div>
 		<div class="container-profile-pic">
 			<h2>Votre photo de profil</h2>
-			<img src="/get_picture.php?file={{candidate.getProfilePic}}" alt='photo-profil'/>
-			<form class="form-change-pic" action='/?area=candidate&controller=account&action=change_pic' method='post' enctype='multipart/form-data'>
-				<label for='edit-profile_pic'>
-					<p name="form-button" class="btn btn-primary btn-lg">Modifier</p>
-				</label>
-				<input id='edit-profile_pic' type='file' name="profile_pic"/>
-				<button type="submit" name="change-pic-form-button" class="btn-hidden">Supprimer</button>
-			</form>
-			<form action='#' method='post' enctype='multipart/form-data'>
-				<input type='hidden' name="profile_pic"/>
-				<button onclick="confirm('Etes vous sûr de vouloir supprimer votre photo?')" type="button" name="delete-pic-form-button" class="btn btn-primary btn-lg">Supprimer</button>
-			</form>
+			{% if message is defined %}
+				<div class="alert-info alert">{{message|raw}}</div>
+			{% endif %}
+			<div class="container_profile-pic">
+
+				<img class="profile_pic" {% if(candidate.getProfilePic is not null) %} src="/?area=file&controller=file&action=get_picture&file={{candidate.getProfilePic}}" {% else %} src="/images/avatar.jpg" {% endif %} alt='profile-picture'/>
+
+			</div>
+			<div class="form-update-delete-pic">
+				<form class="form-change-pic" action='#' method='post' enctype='multipart/form-data'>
+					<label class="btn btn-icone" for='edit-profile_pic'>
+						<i class="fa-solid fa-pen "></i>
+					</label>
+					<input id='edit-profile_pic' type='file' name="profile_pic"/>
+					<button type="submit" name="change-pic-form-button" class="btn-hidden">Supprimer</button>
+				</form>
+				<form action='#' method='post' enctype='multipart/form-data'>
+					<input type='hidden' name="profile_pic"/>
+					<button onclick="confirm('Etes vous sûr de vouloir supprimer votre photo?')" type="submit" name="delete-pic-form-button" class="btn btn-icone">
+						<i class="fa-solid fa-trash"></i>
+					</button>
+				</form>
+			</div>
 		</div>
 		<div class='container-change-password'>
 			<h2>Changer de mot de passe</h2>

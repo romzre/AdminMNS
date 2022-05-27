@@ -64,6 +64,23 @@ h2 {
     font-family: "Shary";
 }
 
+.btn-icone{
+
+    background-color :var(--main-title-color);
+    border : 2px solid var(--main-title-color);
+    color:#fff;
+    border-radius: 100px;
+}
+
+.btn-icone:hover{
+    background-color: transparent;
+    border : 2px solid var(--main-title-color)
+}
+
+.btn-icone:hover .fa-solid{
+    color: var(--main-title-color)
+}
+
 .btn-secondary {
     background-color :transparent;
     border : 2px solid var(--main-title-color);
@@ -95,6 +112,10 @@ h2 {
 header{
     height: 80px;
     background-color: var(--dark-blue);
+}
+
+header>h1 {
+    margin:auto
 }
 
 .logo-MNS {
@@ -196,94 +217,9 @@ nav img
     font-size: 1.2rem;
 }
 
-/* menu BURGER pour la version mobile */
-@media all and (max-width: 767px) {
-    .navbar {
-        justify-content: space-between;
-    }
-    .nav__burger {
-        display: block;
-        position: relative;
-        padding: 0;
-        width: 45px;
-        height: 45px;
-        border: none;
-        cursor: pointer;
-        background-color: transparent;
-        margin-left: 20px;
-      }
-      .navbar__menu{
-        display: flex;
-        flex-direction: column;
-        width: 0;
-        overflow: hidden;
-        visibility: hidden;
-        color: transparent;
-        height: 60vh;
-        position: absolute;
-        top: 80px;
-        left: -100px;
-        background-color: var(--dark-blue);
-        transition: all 0.5s;
-        align-items: center;
-      }
 
-      .show-nav .navbar__menu {
-        width: 100%;
-        visibility: visible;
-        left: 0;
-    }
-      .nav__burger__bar {
-        display: inherit;
-        width: 30px;
-        height: 3px;
-        background: white;
-        border-radius: 3px;
-        -webkit-transition: all 0.5s ease-in-out;
-        transition: all 0.5s ease-in-out;
-      }
-      .show-nav .nav__burger__bar {
-        width: 0;
-        color: transparent;
-      }
-      .nav__burger__bar::before, .nav__burger__bar::after {
-        content: "";
-        width: 30px;
-        height: 3px;
-        position: absolute;
-        left: 0;
-        background: white;
-        border-radius: 3px;
-        -webkit-transition: all 0.5s ease-in-out;
-        transition: all 0.5s ease-in-out;
-      }
-      .nav__burger__bar::before {
-        -webkit-transform: translateY(-12px);
-                transform: translateY(-12px);
-      }
-      .show-nav .nav__burger__bar::before {
-        -webkit-transform: rotate(45deg);
-                transform: rotate(45deg);
-      }
-      .nav__burger__bar::after {
-        -webkit-transform: translateY(12px);
-                transform: translateY(12px);
-      }
-      .show-nav .nav__burger__bar::after {
-        -webkit-transform: rotate(-45deg);
-                transform: rotate(-45deg);
-      }
-}
 
-@media all and (min-width: 768px) {
-    
-}
 
-@media all and (min-width: 768px) {
-    .nav__burger {
-      display: none;
-    }
-}
 
 /* on modifie son comporterment lorsqu'on clique dessus */
 .navbar-account--toggle.is-active{
@@ -510,3 +446,108 @@ form.container-reset-password{
 
 
 
+/* menu BURGER pour la version mobile */
+@media all and (max-width: 767px) {
+    .navbar {
+        justify-content: space-between;
+    }
+    .nav__burger {
+        display: block;
+        position: relative;
+        padding: 0;
+        width: 45px;
+        height: 45px;
+        border: none;
+        cursor: pointer;
+        background-color: transparent;
+        margin-left: 20px;
+      }
+      .navbar__menu{
+        display: flex;
+        flex-direction: column;
+        width: 0;
+        overflow: hidden;
+        visibility: hidden;
+        color: transparent;
+        height: 60vh;
+        position: absolute;
+        top: 80px;
+        left: -100px;
+        background-color: var(--dark-blue);
+        transition: all 0.5s;
+        align-items: center;
+      }
+
+      .show-nav .navbar__menu {
+        width: 100%;
+        visibility: visible;
+        left: 0;
+    }
+      .nav__burger__bar {
+        display: inherit;
+        width: 30px;
+        height: 3px;
+        background: white;
+        border-radius: 3px;
+        -webkit-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+      }
+      .show-nav .nav__burger__bar {
+        width: 0;
+        color: transparent;
+      }
+      .nav__burger__bar::before, .nav__burger__bar::after {
+        content: "";
+        width: 30px;
+        height: 3px;
+        position: absolute;
+        left: 0;
+        background: white;
+        border-radius: 3px;
+        -webkit-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+      }
+      .nav__burger__bar::before {
+        -webkit-transform: translateY(-12px);
+                transform: translateY(-12px);
+      }
+      .show-nav .nav__burger__bar::before {
+        -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+      }
+      .nav__burger__bar::after {
+        -webkit-transform: translateY(12px);
+                transform: translateY(12px);
+      }
+      .show-nav .nav__burger__bar::after {
+        -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+      }
+}
+
+@media all and (min-width: 768px) {
+    .nav__burger {
+      display: none;
+    }
+}
+
+
+@media all and (max-width: 478px) 
+{
+    h1{
+        font-size: 2em;
+    
+    }
+    .container-login
+    {
+        height: 80vh;
+    }
+    .login-form-container{
+        width: auto;
+    }
+
+    .register-part{
+        padding : 0 5px
+    }
+
+}

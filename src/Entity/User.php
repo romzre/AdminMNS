@@ -14,7 +14,7 @@ class User extends Entity
     protected string $firstName;
     protected int $id_user;
     protected string $password;
-    protected string $profile_pic;
+    protected ?string $profile_pic = null;
 
     public function __construct()
     {

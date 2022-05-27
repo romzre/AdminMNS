@@ -2,105 +2,106 @@
 
 {% block body %}
 
-<div class="container-titre-dashboard">
-    <h2>Bonjour {{candidate.getFirstName}}, bienvenue sur votre espace personnel ! </h2>
-    <p>Vous êtes candidat à la formation '{{training.getTitleFormation}}'</p>
-    <p>Pour compléter votre dossier et permettre à l’équipe de MNS d’étudier votre candidature, merci de nous transmettre les documents ci-dessous avant le $dateFinCand</p>
-</div>
-{% if message is not empty %}
-<div class="alert alert-warning alert-form-docs" role="alert">{{message|raw}}</div>
-{% endif %}
-<div class="container-dashboard">
-<form action="#" method='post' enctype='multipart/form-data'>
-    <table class="dataTable">
-        <colgroup>
-            <col class='col-1' span="1" >
-            <col class='col-2' span='1'>
-        </colgroup>
-        {% for key,document in documents  %}
-        {# {{ dump(document) }} #}
-        
-        {% if key ==0 %}
-        <tr>
-            <td scope='col' class='up-left col-1'>{{document.wording_typeOfDoc}}</td>
-            <td class='up-right col-2'>
-            {% if userDocuments[document.id_typeOfDoc] is defined %}
-                {% if userDocuments[document.id_typeOfDoc] == true %}
-                <i class="fa-solid fa-check"></i>
-                {% elseif userDocuments[document.id_typeOfDoc] is null %}
-                <p>En cours d'analyse</p>
-                {% elseif userDocuments[document.id_typeOfDoc] == false %}
-                <label for='{{document.wording_typeOfDoc}}'>
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                </label>
-                <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
-                <input type='hidden' value={{document.id_typeOfDoc}}/>
-                {% endif %}
-            {% else %}
-            <label for='{{document.wording_typeOfDoc}}'>
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-            </label>
-            <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
-            {% endif %}
-            </td>     
-        </tr>        
-        {% endif %}
-        {% if key > 0 and key < nbIndex -1 %}
-        <tr>
-            <td scope='col' class='cell col-1'>{{document.wording_typeOfDoc}}</td>
-            <td class='cell col-2'>
-            {% if userDocuments[document.id_typeOfDoc] is defined %}
-                {% if userDocuments[document.id_typeOfDoc] == true %}
-                <i class="fa-solid fa-check"></i>
-                {% elseif userDocuments[document.id_typeOfDoc] is null %}
-                <p>En cours d'analyse</p>
-                {% elseif userDocuments[document.id_typeOfDoc] == false %}
-                <label for='{{document.wording_typeOfDoc}}'>
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                </label>
-                <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
-                <input type='hidden' value={{document.id_typeOfDoc}}/>
-                {% endif %}
-            {% else %}
-            <label for='{{document.wording_typeOfDoc}}'>
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-            </label>
-            <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
-            {% endif %}
-            </td>
-        </tr>
-        {% endif %}
-        {% if key == nbIndex -1 and key != 0 %}
-        <tr>
-            <td scope='col' id='td_id-card' class='col-1 down-left'>{{document.wording_typeOfDoc}}</td>
-            <td scope='col' class='down-right col-2'>
-            {% if userDocuments[document.id_typeOfDoc] is defined %}
-                {% if userDocuments[document.id_typeOfDoc] == true %}
-                <i class="fa-solid fa-check"></i>
-                {% elseif userDocuments[document.id_typeOfDoc] is null %}
-                <p>En cours d'analyse</p>
-                {% elseif userDocuments[document.id_typeOfDoc] == false %}
-                <label for='{{document.wording_typeOfDoc}}'>
-                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                </label>
-                <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
-                <input type='hidden' value={{document.id_typeOfDoc}}/>
-                {% endif %}
-            {% else %}
-            <label for='{{document.wording_typeOfDoc}}'>
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-            </label>
-            <input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
-            {% endif %}
-            </td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-        </tbody>
-    </table>
-    <button type="submit" name="form-button" class="btn btn-primary btn-lg">Envoyer</button>
-    </form>
+	<div class="container-titre-dashboard">
+		<h2>Bonjour
+			{{candidate.getFirstName}}, bienvenue sur votre espace personnel !
+		</h2>
+		<p>Vous êtes candidat à la formation '{{training.getTitleFormation}}'</p>
+		<p>Pour compléter votre dossier et permettre à l’équipe de MNS d’étudier votre candidature, merci de nous transmettre les documents ci-dessous avant le $dateFinCand</p>
+	</div>
+	{% if message is not empty %}
+		<div class="alert alert-warning alert-form-docs" role="alert">{{message|raw}}</div>
+	{% endif %}
+	<div class="container-dashboard">
+		<form class="form-docs" action="#" method='post' enctype='multipart/form-data'>
+			<table class="dataTable">
+				<colgroup>
+					<col class='col-1' span="1">
+					<col class='col-2' span='1'>
+				</colgroup>
+				{% for key,document in documents  %}
+					{# {{ dump(document) }} #}
+
+					{% if key ==0 %}
+						<tr>
+							<td scope='col' class='up-left col-1'>{{document.wording_typeOfDoc}}</td>
+							<td class='up-right col-2'>
+								{% if userDocuments[document.id_typeOfDoc] is defined %}
+									{% if userDocuments[document.id_typeOfDoc] == true %}
+										<i class="fa-solid fa-check"></i>
+									{% elseif userDocuments[document.id_typeOfDoc] is null %}
+										<p>En cours d'analyse</p>
+									{% elseif userDocuments[document.id_typeOfDoc] == false %}
+										<label for='{{document.wording_typeOfDoc}}'>
+											<i class="fa-solid fa-cloud-arrow-up"></i>
+										</label>
+										<input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+										<input type='hidden' value={{document.id_typeOfDoc}}/>
+									{% endif %}
+								{% else %}
+									<label for='{{document.wording_typeOfDoc}}'>
+										<i class="fa-solid fa-cloud-arrow-up"></i>
+									</label>
+									<input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+								{% endif %}
+							</td>
+						</tr>
+					{% endif %}
+					{% if key > 0 and key < nbIndex -1 %}
+						<tr>
+							<td scope='col' class='cell col-1'>{{document.wording_typeOfDoc}}</td>
+							<td class='cell col-2'>
+								{% if userDocuments[document.id_typeOfDoc] is defined %}
+									{% if userDocuments[document.id_typeOfDoc] == true %}
+										<i class="fa-solid fa-check"></i>
+									{% elseif userDocuments[document.id_typeOfDoc] is null %}
+										<p>En cours d'analyse</p>
+									{% elseif userDocuments[document.id_typeOfDoc] == false %}
+										<label for='{{document.wording_typeOfDoc}}'>
+											<i class="fa-solid fa-cloud-arrow-up"></i>
+										</label>
+										<input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+										<input type='hidden' value={{document.id_typeOfDoc}}/>
+									{% endif %}
+								{% else %}
+									<label for='{{document.wording_typeOfDoc}}'>
+										<i class="fa-solid fa-cloud-arrow-up"></i>
+									</label>
+									<input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+								{% endif %}
+							</td>
+						</tr>
+					{% endif %}
+					{% if key == nbIndex -1 %}
+						<tr>
+							<td scope='col' id='td_id-card' class='col-1 down-left'>{{document.wording_typeOfDoc}}</td>
+							<td scope='col' class='down-right col-2'>
+								{% if userDocuments[document.id_typeOfDoc] is defined %}
+									{% if userDocuments[document.id_typeOfDoc] == true %}
+										<i class="fa-solid fa-check"></i>
+									{% elseif userDocuments[document.id_typeOfDoc] is null %}
+										<p>En cours d'analyse</p>
+									{% elseif userDocuments[document.id_typeOfDoc] == false %}
+										<label for='{{document.wording_typeOfDoc}}'>
+											<i class="fa-solid fa-cloud-arrow-up"></i>
+										</label>
+										<input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+										<input type='hidden' value={{document.id_typeOfDoc}}/>
+									{% endif %}
+								{% else %}
+									<label for='{{document.wording_typeOfDoc}}'>
+										<i class="fa-solid fa-cloud-arrow-up"></i>
+									</label>
+									<input id='{{document.wording_typeOfDoc}}' type='file' name="typeOfDocs[{{document.id_typeOfDoc}}]" accept=".pdf"/>
+								{% endif %}
+							</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+			</tbody>
+		</table>
+		<button type="submit" name="form-button" class="btn btn-primary btn-lg">Envoyer</button>
+	</form>
 </div>
 
-<script src="scripts/candidate.js"></script>
-{% endblock %}
+<script src="scripts/candidate.js"></script>{% endblock %}

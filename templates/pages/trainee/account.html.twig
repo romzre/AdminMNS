@@ -1,0 +1,149 @@
+{% extends "partials/base-trainee.html.twig" %}
+
+{% block body %}
+	<div class="container-account">
+		<div class="container-personal-info one">
+			<h2>Vos informations personnelles</h2>
+			<form method='post' action='/?area=trainee&controller=account&action=change_info'>
+				<div class="part-column">
+					<div class="form-first-column">
+						<div class="form-sub-part part-firstName">
+							<label for="firstName">Prénom</label>
+							<input type="text" name="firstName" class="form-control" id="firstName_input" value="{{trainee.getFirstName}}"/>
+						</div>
+						<div class="form-sub-part part-email">
+							<label for="email">Email</label>
+							<input type="text" name="email" class="form-control" id="email_input" value="{{trainee.getEmail}}">
+						</div>
+						<div class="part-address">
+							<div class="form-sub-part part-number">
+								<label for="streetNumber">Numéro</label>
+								<input type="text" name="streetNumber" class="form-control" id="streetNumber_input" value="{{trainee.getStreetNumber}}">
+							</div>
+							<div class="form-sub-part part-typeLane">
+								<label for="laneType">Type</label>
+								<input type="text" name="laneType" class="form-control" id="laneType_input" value="{{trainee.getLaneType}}">
+							</div>
+						</div>
+						<div class="form-sub-part part-postalCode">
+							<label for="postalCode">Code postal</label>
+							<input type="text" name="postalCode" class="form-control" id="postalCode_input" value="{{trainee.getpostalCode}}"/>
+						</div>
+					</div>
+					<div class="form-second-column">
+						<div class="form-sub-part lastName">
+							<label for="lastName">Nom</label>
+							<input type="text" name="lastName" class="form-control" id="lastName_input" value="{{trainee.getFamilyName}}">
+						</div>
+						<div class="form-sub-part tel">
+							<label for="tel">Téléphone</label>
+							<input disabled type="text" name="tel" class="form-control" id="tel_input" value="{{trainee.gettel}}">
+						</div>
+						<div class="form-sub-part street">
+							<label for="street">Rue</label>
+							<input type="text" name="street" class="form-control" id="street_input" value="{{trainee.getstreet}}">
+						</div>
+						<div class="form-sub-part part-street">
+
+							<label for="city">Ville</label>
+							<input type="text" name="city" class="form-control" id="city_input" value="{{trainee.getcity}}">
+							{% if password_error is defined %}
+								{% include "partials/inc_password-error.php" %}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				<div class="part-raw">
+					<div class="container-button-center">
+						<button type="submit" id="btn-change-personal-info" class="btn btn-secondary">
+							Modifier</button>
+						<button type="submit" id="btn-validate-personal-info" name="submit" class="btn btn-secondary">
+							Valider</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="container-profile-pic two">
+			<h2>Votre photo de profil</h2>
+			{% if message is defined %}
+				<div class="alert-info alert">{{message|raw}}</div>
+			{% endif %}
+			<div class="container_profile-pic">
+
+				<img class="profile_pic" {% if(trainee.getProfilePic is not null) %} src="/?area=file&controller=file&action=get_picture&file={{trainee.getProfilePic}}" {% else %} src="/images/avatar.jpg" {% endif %} alt='profile-picture'/>
+
+			</div>
+			<div class="form-update-delete-pic">
+				<form class="form-change-pic" action='#' method='post' enctype='multipart/form-data'>
+					<label class="btn btn-icone" for='edit-profile_pic'>
+						<i class="fa-solid fa-pen "></i>
+					</label>
+					<input id='edit-profile_pic' type='file' name="profile_pic"/>
+					<button type="submit" name="change-pic-form-button" class="btn-hidden">Supprimer</button>
+				</form>
+				<form action='#' method='post' enctype='multipart/form-data'>
+					<input type='hidden' name="profile_pic"/>
+					<button onclick="confirm('Etes vous sûr de vouloir supprimer votre photo?')" type="submit" name="delete-pic-form-button" class="btn btn-icone">
+						<i class="fa-solid fa-trash"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+		<div class='container-change-password three'>
+			<h2>Changer de mot de passe</h2>
+			<form class='form-change-password' action='/?area=trainee&controller=account&action=change_password' method='post'>
+				<div class="form-floating">
+					<input type="password" name="old_password" class="form-control" id="floatingInput" placeholder="name@example.com">
+					<label for="floatingInput">Ancien mot de passe</label>
+					{% if error_old_password is defined %}
+						<div class="message-alerte">{{error_old_password|raw}}</div>
+						<img src="images/error.svg" alt="icone de validation" class="icone-verif">
+					{% endif %}
+				</div>
+				<div class="form-floating">
+					<input type="password" name="new_password" class="form-control" id="floatingNewPassword" placeholder="Password">
+					<label for="floatingPassword">Nouveau mot de passe</label>
+					<img src="images/check.svg" alt="icone de validation" class="icone-verif-js">
+					<span class="message-alerte">Votre mot de passe doit faire au moins 8 caractères, contenir un caractère spécial et un chiffre.</span>
+
+					{% if error_new_password is defined %}
+						<div class="message-alerte">{{error_new_password|raw}}</div>
+						<img src="images/error.svg" alt="icone de validation" class="icone-verif">
+					{% endif %}
+				</div>
+
+				<div class="form-floating">
+					<input type="password" name="confirm_password" class="form-control new-password" id="floatingConfirmPassword" placeholder="Password">
+					<label for="floatingPassword">Confirmer nouveau mot de passe</label>
+					<img src="images/check.svg" alt="icone de validation" class="icone-verif-js">
+					<span class="message-alerte">Les deux mots de passe ne sont pas identiques.</span>
+
+					{% if error_confirm_password is defined %}
+						<div class="message-alerte">{{error_confirm_password|raw}}</div>
+						<img src="images/error.svg" alt="icone de validation" class="icone-verif">
+					{% endif %}
+					<div class="ligne">
+						<div class="l1">
+							<span>faible</span>
+						</div>
+						<div class="l2">
+							<span>moyen</span>
+						</div>
+						<div class="l3">
+							<span>fort</span>
+						</div>
+					</div>
+				</div>
+				<button type="submit" name="form-button" class="btn btn-primary btn-change-password">Modifier</button>
+			</form>
+			{% if error_passwords is defined %}
+				<div class="alert alert-danger alert-form">{{error_passwords|raw}}</div>
+			{% endif %}
+			{% if success_message is defined %}
+				<div class="alert alert-success alert-form">{{success_message|raw}}</div>
+			{% endif %}
+		</div>
+
+	</div>
+	<script src="/scripts/account-trainee.js"></script>
+{% endblock %}

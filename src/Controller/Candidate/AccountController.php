@@ -5,7 +5,6 @@ namespace App\Controller\Candidate;
 use Core\Controller;
 use App\Manager\UserManager;
 use App\Manager\TraineeManager;
-use App\Manager\TrainingDocsManager;
 use App\Manager\TrainingManager;
 
 
@@ -17,8 +16,17 @@ class AccountController extends Controller
 
         session_start();
 
-
         if (!empty($_SESSION['id_user'])) {
+
+            if (isset($_POST['change-pic-form-button'])) {
+                $message = $this->change_pic();
+                $data['message'] = $message;
+            }
+
+            if (isset($_POST['delete-pic-form-button'])) {
+                $this->deletePic();
+            }
+
             // on récupère les infos sur le candidat
             $candidateManager = new TraineeManager();
             $candidate = $candidateManager->getTraineeById($_SESSION['id_user']);
@@ -122,54 +130,89 @@ class AccountController extends Controller
     public function change_pic()
     {
         $message = '';
-        if (!isset($_SESSION)) session_start();
 
-        if (isset($_POST['change-pic-form-button'])) {
-
-            $profile_pic = $_FILES['profile_pic'];
-
-            if ($profile_pic['error'] == 0) {
-
-                // Testons si le fichier n'est pas trop gros (max 5Mo)
-                if ($profile_pic['size'] <= 4000000) {
-
-                    if ($profile_pic['name'] !== '') {
-
-                        $wording_file = basename($profile_pic['name']);
-
-                        // Testons si l'extension est autorisée
-                        $infosfichier = pathinfo($profile_pic['name']);
-
-                        $extension_upload = $infosfichier['extension'];
-
-                        $extensions_autorisees = array('jpg', 'jpeg', 'png');
-
-                        if (in_array($extension_upload, $extensions_autorisees)) {
-                            // On peut valider le fichier et le stocker définitivement
-                            $path_file = "../uploads/" . $_SESSION['id_user'] . "/profile_pic/" . $wording_file;
-                            move_uploaded_file($profile_pic['tmp_name'], $path_file);
+        $profile_pic = $_FILES['profile_pic'];
 
 
-                            //on ajoute le champ du fichier dans l'entrée du user 
-                            $userManager = new UserManager();
-                            $updatedPic = $userManager->updatePicture($wording_file, $_SESSION['id_user']);
-                            if ($updatedPic) {
-                                $message .= "<p>Oups, il y a eu une erreur pendant l'envoi</p>";
-                            } else {
-                                $message .= "<p>L'envoi a bien été effectué !</p>";
-                            }
-                            $message .= "<p>L'envoi a bien été effectué !</p>";
+        if ($profile_pic['error'] == 0) {
+
+
+            // Testons si le fichier n'est pas trop gros (max 5Mo)
+            if ($profile_pic['size'] <= 4000000) {
+
+                if ($profile_pic['name'] !== '') {
+
+                    $wording_file = basename($profile_pic['name']);
+
+                    // Testons si l'extension est autorisée
+                    $infosfichier = pathinfo($profile_pic['name']);
+
+                    $extension_upload = $infosfichier['extension'];
+
+                    $extensions_autorisees = array('jpg', 'jpeg');
+
+                    if (in_array($extension_upload, $extensions_autorisees)) {
+
+                        // On peut valider le fichier et le stocker définitivement
+                        $path_file = "../uploads/" . $_SESSION['id_user'] . "/profile_pic/" . $wording_file;
+                        move_uploaded_file($profile_pic['tmp_name'], $path_file);
+
+                        //on ajoute le champ du fichier dans l'entrée du user 
+                        $userManager = new UserManager();
+                        $updatedPic = $userManager->updatePicture($wording_file, $_SESSION['id_user']);
+                        if (!$updatedPic) {
+                            $message .= "<p>Oups, il y a eu une erreur pendant l'envoi</p>";
                         } else {
-                            $message .= "<p>Seules les extensions pdf, jpeg, jpg et png sont autorisées !</p>";
+                            $this->reSizePic($path_file);
+                            return $message .= "<p>L'envoi a bien été effectué !</p>";
                         }
                     } else {
-                        $message .= '<p>Le fichier doit avoir un titre</p>';
+                        $message .= "<p>Seules les extensions pdf, jpeg, jpg et png sont autorisées !</p>";
                     }
+                } else {
+                    $message .= '<p>Le fichier doit avoir un titre</p>';
                 }
             } else {
-                $message .= "<p>Oups il y a eu un problème lors de l'envoi, merci de renouveller l'opération </p>";
+                $message .= '<p>Le fichier est trop volumineux </p>';
             }
-            return $message;
+        } else {
+            $message .= "<p>Oups il y a eu un problème lors de l'envoi, merci de renouveller l'opération </p>";
         }
+        return $message;
+    }
+
+    public function reSizePic($path_file)
+    {
+        $im = imagecreatefromjpeg($path_file);
+        $exif = exif_read_data($path_file);
+        $orientation = $exif['Orientation'];
+        switch ($orientation) {
+            case 3:
+                $im = imagerotate($im, 180, 0);
+                break;
+            case 6:
+                $im = imagerotate($im, -90, 0);
+                break;
+            case 8:
+                $im = imagerotate($im, 90, 0);
+                break;
+        }
+        $size = min(imagesx($im), imagesy($im));
+        $x = (imagesx($im) - $size) / 2;
+        $y = (imagesy($im) - $size) / 2;
+        $im2 = imagecrop($im, ['x' => $x, 'y' => $y, 'width' => $size, 'height' => $size]);
+        $im3 = imagescale($im2, 400, 400);
+        if ($im3 !== FALSE) {
+            imagepng($im3, $path_file);
+            imagedestroy($im3);
+        }
+        imagedestroy($im);
+    }
+
+    public function deletePic()
+    {
+
+        $userManager = new UserManager();
+        $userManager->deletePicture($_SESSION['id_user']);
     }
 }
