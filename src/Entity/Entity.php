@@ -17,9 +17,11 @@ class Entity {
             
             if(method_exists($this, $method) && $value !=NULL)
             {
+                
                 $this->$method($value);
             }
         }
+ 
         return $this;
     }
 

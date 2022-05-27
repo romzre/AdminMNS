@@ -1,0 +1,42 @@
+{% extends "partials/base-admin.html.twig" %} 
+{% block body%}
+
+<div class="contDataGestion  ">
+    <h2>{{ class.Name }}</h2>    
+</div>
+  {% if classroom is defined %}
+<div class="cont_Search">
+    <label for="myInput">Recherchez</label>
+    <input type="text" id="myInput" />
+</div>
+
+<div class="contData">
+    <table class="dataTable" >
+        <thead>
+            <td class="left headTable">Nom</td>
+            <td class="headTable">Capacité d'accueil</td>
+            <td class="headTable ">Code</td>
+            <td class="headTable right">Statut</td>
+        </thead>
+        <tbody id="myTable">
+            {% for formation in gestion %}
+                <tr>
+                    <td class="cel" data-info="Nom" ><a class="anim-hover" href="index.php?area=admin&controller=gestion&action=training&id={{ formation.idtraining }}">{{ formation.titleformation }}</a></td>
+                    <td class="cel" data-info="Capacité d'accueil" >{{ formation.capacitytraining }}</td>
+                    <td class="cel" data-info="Code" >{{ formation.codeTraining }}</td>
+                    <td class="cel" data-info="Statut" ></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>  
+</div>
+{% else %}
+<p class='center'>Aucun stagiaire n'est associé à cette classe</p>    
+{% endif %}
+<div class='contBtnMenu'>
+    <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=home">Retour</a></button>
+    <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=addTraining">Ajouter</a></button>
+</div>
+<script src="scripts/adminDash.js"></script>
+
+{% endblock %}

@@ -17,7 +17,7 @@ use PDOException;
         {
             try{
 
-                self::$pdo = new PDO('mysql:host=51.77.211.62:3306;dbname=adminMns','kyoko9273','Spedum1463!');
+                self::$pdo = new PDO('mysql:host=51.77.211.62:3306;dbname=adminMns2','kyoko9273','Spedum1463!');
                 
 
             }

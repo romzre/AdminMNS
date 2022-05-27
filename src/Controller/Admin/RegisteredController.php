@@ -31,7 +31,7 @@ class RegisteredController extends Controller
     
 
                 $data = compact('registered','err');
-                $path= 'pages/admin/profileRegistered.html.twig';
+                $path= 'pages/admin/administration/profileRegistered.html.twig';
                 
                 $this->renderView($path, $data);
             }

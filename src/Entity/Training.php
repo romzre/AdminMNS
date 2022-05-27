@@ -11,13 +11,9 @@ class Training extends Entity{
     private int $id_training;
     private string $title_formation;
     private int $capacity_training;
-    private int $trainingYear;
+    private  $code_training;
+    private bool $isValid;
 
-
-    // public function __construct($id,$title_formation,$capacity_training,$trainingYear)
-    // {
-    //     $this->setId($id)->setTitleFormation($title_formation)->setCapacityTraining($capacity_training)->setTrainingYear($trainingYear);
-    // }
 
 
     /**
@@ -60,25 +56,7 @@ class Training extends Entity{
         return $this;
     }
 
-    /**
-     * Get the value of trainingYear
-     */ 
-    public function getTrainingYear()
-    {
-        return $this->trainingYear;
-    }
-
-    /**
-     * Set the value of trainingYear
-     *
-     * @return  self
-     */ 
-    public function setTrainingYear($trainingYear)
-    {
-        $this->trainingYear = $trainingYear;
-
-        return $this;
-    }
+   
 
     /**
      * Get the value of id_training
@@ -96,6 +74,47 @@ class Training extends Entity{
     public function setIdTraining($id_training)
     {
         $this->id_training = $id_training;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of isValid
+     */ 
+    public function getIsValid()
+    {
+        return $this->isValid;
+    }
+
+    /**
+     * Set the value of isValid
+     *
+     * @return  self
+     */ 
+    public function setIsValid($isValid)
+    {
+        $this->isValid = $isValid;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of code_training
+     */ 
+    public function getCodeTraining()
+    {
+        return $this->code_training;
+    }
+
+    /**
+     * Set the value of code_training
+     *
+     * @return  self
+     */ 
+    public function setCodeTraining($code_training)
+    {
+        $this->code_training = $code_training;
 
         return $this;
     }

@@ -13,8 +13,11 @@
                 <input type='number' value='' name="capacity_training" id="capacity_training" />
             </div>
             <div>
-                <label for="trainingYear">Année de validité</label>
-                <input type='number' value='' name="trainingYear" id="trainingYear" />
+                <label for="isValid">Statut</label>
+                <select name="isValid" id="isValid">
+                    <option value="1">Valide</option>
+                    <option value="0">Non Valide</option>
+                </select>
             </div>
             <div class='contBtnMenu'>
                 <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion">Retour</a></button>

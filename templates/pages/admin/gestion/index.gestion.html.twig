@@ -2,9 +2,9 @@
 {% block body%}
 
 <div class='contBtnMenu'>
-                <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=index">Formations</a></button>
-        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=organisme">Organismes</a></button>
-        
+    <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=classroom">Classes</a></button>
+    <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=index">Formations</a></button>
+    <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=organisme">Organismes</a></button>    
 </div>
 
 <div class="cont_Search">
@@ -18,14 +18,20 @@
         <thead>
             <td class="left headTable">Nom</td>
             <td class="headTable">Capacité d'accueil</td>
-            <td class="headTable right">Année</td>
+            <td class="headTable ">Code</td>
+            <td class="headTable right">Statut</td>
         </thead>
         <tbody id="myTable">
             {% for formation in gestion %}
                 <tr>
                     <td class="cel" data-info="Nom" ><a class="anim-hover" href="index.php?area=admin&controller=gestion&action=training&id={{ formation.idtraining }}">{{ formation.titleformation }}</a></td>
                     <td class="cel" data-info="Capacité d'accueil" >{{ formation.capacitytraining }}</td>
-                    <td class="cel" data-info="Année" >{{ formation.trainingYear }}</td>
+                    <td class="cel" data-info="Code" >{{ formation.codeTraining }}</td>
+                    <td class="cel" data-info="Statut" >{% if formation.isValid %}
+                    Valide
+                    {% else %}
+                    Non valide
+                    {% endif %}</td>
                 </tr>
             {% endfor %}
         </tbody>

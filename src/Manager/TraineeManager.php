@@ -59,7 +59,7 @@ class TraineeManager extends UserManager {
 
         $req = $pdo->prepare($sql);
         $stmt = $req->execute();
-     
+ 
         $candidates = $req->fetchAll(PDO::FETCH_ASSOC);
         
         return $candidates;

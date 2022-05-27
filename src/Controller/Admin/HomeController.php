@@ -26,7 +26,7 @@ class HomeController extends Controller {
 
         $data = compact('admin', 'trainees');
 
-        $path= 'pages/admin/trainees.html.twig';
+        $path= 'pages/admin/administration/trainees.html.twig';
         $layOut='base-admin';
         $this->renderView($path, $data, $layOut);
 
@@ -44,10 +44,11 @@ class HomeController extends Controller {
         $manager = new TraineeManager();
 
         $candidates = $manager->getAllCandidates();
-        
+     
         $manager = new TrainingDocsManager();
         $trainingDoc = $manager->getAllDocTraining();
         $DocValid = $manager->getAllDocValid();
+        $DocsNull = $manager->getAllDocNull();
         
         for ($x=0; $x < count($candidates) ; $x++) 
         { 
@@ -71,11 +72,11 @@ class HomeController extends Controller {
         
         $manager = new TrainingManager();
         
-        $List_training = $manager->getAllwithAllYear();
+        $List_training = $manager->getAllwithAllisValid();
 
-        $data = compact('admin' ,'candidates' , 'trainingDoc' , 'DocValid', 'List_training');
-// var_dump($data); exit;
-        $path= 'pages/admin/candidates.html.twig';
+        $data = compact('admin' ,'candidates' , 'trainingDoc' , 'DocValid', 'List_training', 'DocsNull');
+        // var_dump($data); exit;
+        $path= 'pages/admin/administration/candidates.html.twig';
         $this->renderView($path, $data);
 
     }
@@ -97,7 +98,7 @@ class HomeController extends Controller {
 
         $data = compact('admin', 'trainees');
 
-        $path= 'pages/admin/trainees.html.twig';
+        $path= 'pages/admin/administration/trainees.html.twig';
         $this->renderView($path, $data);
 
     }

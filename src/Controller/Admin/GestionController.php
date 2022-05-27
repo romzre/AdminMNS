@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Classroom;
 use Core\Controller;
 use App\Entity\Training;
+use App\Manager\ClassroomManager;
 use App\Manager\TrainingManager;
 use App\Manager\TrainingDocsManager;
 
@@ -19,7 +21,7 @@ class GestionController extends Controller{
         
         $manager = new TrainingManager();
 
-        $gestion = $manager->getAllwithAllYear();
+        $gestion = $manager->getAllwithAllisValid();
         $data = compact('admin', 'gestion');
      
         $path= 'pages/admin/gestion/index.gestion.html.twig';
@@ -72,6 +74,7 @@ class GestionController extends Controller{
                 }
                 else
                 {
+                    
                     $manager->insertTrainingTypeOfDoc(intval($_GET['id']), $idTypeOfDoc );
                     $message = 'Votre document a été associé à la formation';
                 }
@@ -79,7 +82,9 @@ class GestionController extends Controller{
             else
             {
                 $id = $manager->insertTypeOfDoc($champ);
+                
                 $manager->insertTrainingTypeOfDoc($_GET['id'] , $id );
+
                 $message = 'Votre document a été créé et associé à la formation';
             }
         }
@@ -105,26 +110,31 @@ class GestionController extends Controller{
 
         
         $manager = new TrainingManager();
-        $docs = $manager->getAllTrainingInfosByTraining(intval($_GET['id']));
+        $training = $manager->getAllTrainingInfosByTraining(intval($_GET['id']));
 
         $manager = new TrainingDocsManager();
-       $Alldocuments =  $manager->getAllTrainingDocs(intval($_GET['id']));
-     
-        foreach ($Alldocuments as $doc ) 
-        {
-            if($doc['id_typeOfDoc'] != null && $doc['wording_typeOfDoc'] != null)
-            {
-                $documents[$doc['id_typeOfDoc']] = $doc['wording_typeOfDoc'];
-            }
-        
-        }
 
-        $docs= $docs[0];
+       $Alldocuments =  $manager->getAllTrainingDocs(intval($_GET['id']));
+        if(!empty($Alldocuments[0]['id_typeOfDoc']))
+        {
+            foreach ($Alldocuments as $doc ) 
+            {
+                if($doc['id_typeOfDoc'] != null && $doc['wording_typeOfDoc'] != null)
+                {
+                    $documents[$doc['id_typeOfDoc']] = $doc['wording_typeOfDoc'];
+                }
+            
+            }
+            // var_dump($documents); exit;
+            // $docs= $docs[0];
+        }
+        
         
         $data = compact('admin');
-        if(!empty($docs))
+       
+        if(!empty($training))
         {
-            $data['docs'] = $docs;
+            $data['training'] = $training;
         }
         if(!empty($documents))
         {
@@ -134,8 +144,8 @@ class GestionController extends Controller{
         {
             $data['message'] = $message;
         }
-  
-        $path= 'pages/admin/gestion/training.gestion.html.twig';
+
+        $path= 'pages/admin/gestion/training/training.gestion.html.twig';
         $layOut='base-admin';
         
         $this->renderView($path, $data);
@@ -150,6 +160,13 @@ class GestionController extends Controller{
             if(!empty($_POST['title_formation']))
             {
                 $title = htmlspecialchars($_POST['title_formation']);
+                $ArrayCodeName = explode(' ',$title);
+                $codeName = "";
+                foreach ($ArrayCodeName as $word) {
+                    $codeName .= substr(ucfirst($word) , 0 , 1);
+                   
+                }
+                
             }
 
             if(!empty($_POST['capacity_training']))
@@ -157,15 +174,18 @@ class GestionController extends Controller{
                 $capacity_training = htmlspecialchars($_POST['capacity_training']);
             }
 
-            if(!empty($_POST['trainingYear']))
+            
+            if(!empty($_POST['isValid']))
             {
-                $trainingYear = htmlspecialchars($_POST['trainingYear']);
+              
+                $isValid = intval($_POST['isValid']);
             }
 
             $data = [
                 "title_formation" => $title,
                 "capacity_training" => $capacity_training,
-                "trainingYear" => $trainingYear,
+                "code_training" => $codeName,
+                "isValid" => $isValid,
             ];
 
             $manager = new TrainingManager();
@@ -175,7 +195,7 @@ class GestionController extends Controller{
             header("Location:/?area=admin&controller=gestion&action=training&id=".$id);
         }
  
-        $path= 'pages/admin/gestion/addTraining.gestion.html.twig';
+        $path= 'pages/admin/gestion/training/addTraining.gestion.html.twig';
         $layOut='base-admin';
         
         $this->renderView($path, $data, $layOut);

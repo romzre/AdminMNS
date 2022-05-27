@@ -58,8 +58,13 @@
                     <td class="cel" data-info="Formation" >{{ user.title_formation }}</td>
                     <td class="cel" data-info="Statut" >{% if user.isRegistered %}Enregistrer{% else %}A valider{% endif %}</td>
                     <td class="cel center" data-info="Dossier Complété" >
+                    {% for DocNull in DocsNull %}
+                        {% if DocNull.id_user == user.id_user %}
+                            <a href="/?area=admin&controller=document&action=index&id={{ DocNull.id_document }}"><p class="NewDoc">New Doc!</p></a>
+                        {% endif %}
+                    {% endfor %}
                     {% if user.isRegistered %}
-                        <a class="center ">
+                        <a href="/?area=admin&controller=document&action=index&id={{ user.id_user }}" class="center ">
                         <div class="percent">
                             <svg>
                                 <circle cx='24' cy='24' r='24' class="percent_doc1"></circle>
@@ -82,6 +87,7 @@
                         </div>
                         </a>
                     {% endif %}
+                    
                         </td>
                      <td class="cel" data-info="Action" >
                      {% if user.isRegistered %}
@@ -90,7 +96,7 @@
                         </div>
                     {% else %}
                         <div class="Cont_action">
-                            <a href="/?area=admin&controller=profile&action=register"><img src="images/eye.png" /></a>
+                            <a href="/?area=admin&controller=profile&action=register&id={{ user.id_user }}"><img src="images/eye.png" /></a>
                             <a  href="/?area=admin&controller=registered&action=validate&id={{ user.id_user }}"><img src="images/accept.png" /></a>
                         </div>
                      {% endif %}

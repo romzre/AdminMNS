@@ -56,13 +56,17 @@ class HomeController extends Controller {
         }
         $manager = new TrainingManager();
         $trainings = $manager->getAll();
-        foreach ($trainings as $training) {
-            $selectTraining[$training->getIdTraining()] = $training->getTitleFormation();
+        if(!empty($trainings))
+        {
+            foreach ($trainings as $training) {
+                $selectTraining[$training->getIdTraining()] = $training->getTitleFormation();
+            }
+            $data['trainings'] = $selectTraining;
         }
+       
         $form = new Form();
         $data['form'] = $form;
         $data['POST'] = $_POST;
-        $data['trainings'] = $selectTraining;
         $data['messageEndCheck']=$messageEndCheck;
     
         $path = 'pages/home/register.html.twig';
