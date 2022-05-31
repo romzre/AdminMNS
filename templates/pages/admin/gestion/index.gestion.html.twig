@@ -2,9 +2,9 @@
 {% block body%}
 
 <div class='contBtnMenu'>
-    <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=classroom">Classes</a></button>
-    <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=index">Formations</a></button>
-    <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=organisme">Organismes</a></button>    
+    <a href="/?area=admin&controller=classroom"><button type="button" class="btn btn-primary btn-lg">Classes</button></a>
+    <a href="/?area=admin&controller=gestion&action=index"><button type="button" class="active btn btn-primary btn-lg">Formations</button></a>
+    {# <a href="/?area=admin&controller=gestion&action=organisme"><button type="button" class="btn btn-primary btn-lg">Organismes</button>  </a>   #}
 </div>
 
 <div class="cont_Search">
@@ -39,8 +39,8 @@
     
 </div>
 <div class='contBtnMenu'>
-        <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=home">Retour</a></button>
-        <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=gestion&action=addTraining">Ajouter</a></button>
+        <a href="/?area=admin&controller=home"><button type="button" class=" btn btn-primary btn-lg">Retour</button></a>
+      <a href="/?area=admin&controller=gestion&action=addTraining"><button type="button" class=" btn btn-primary btn-lg">Ajouter</button></a>
 </div>
 <script src="scripts/adminDash.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -1,0 +1,65 @@
+{% extends "partials/base-admin.html.twig" %} 
+{% block body%}
+<div class='contBtnMenu'>
+        <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
+        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=trainees">Stagiaires</a></button>
+</div>
+            
+<div class="Main_Profile">
+    <div class="title_head">
+        <h2 class="head_infPerso">Informations personnelles</h2>
+    </div>
+    <div class="Cont_infPerso">
+    
+            <div class="cont_line">
+                <div class="cont_inf">
+                    <p>Prénom :</p>
+                    <p> {{ user.firstName }} </p>
+                </div>
+                <div class="cont_inf">
+                    <p>Nom :  </p>
+                    <p>{{ user.familyName }}</p>
+                </div>
+            </div>
+             <div class="cont_line">
+                <div class="cont_inf">
+                    <p>Tel :  </p>
+                    <p>{{ user.tel }}</p>
+                </div>
+                <div class="cont_inf">
+                    <p>Email :  </p>
+                    <p>{{ user.email }}</p>
+                </div>
+            </div>
+          
+            <div class="cont_titleFormation">
+                <p>Formation : </p>
+                <p>{{ trainingInfos.GetTitleFormation }}</p>
+            </div>
+    </div>
+    {% if classrooms is defined %}
+   
+    <form method="POST" action="/?area=admin&controller=trainee&action=addTraineeToClassroom">
+        <input type="hidden" name="id_user" value="{{ user.id_user }}" />
+        <div class="Main_Profile mt-5">
+            <label for="id_class">Séléctionner la classe</label>
+            <select name="classroom" id="id_class">
+                {% for class in classrooms %}
+                    <option value="{{class.getIdClassroom}}">{{ class.getName }}</option>
+                {% endfor %}
+            </select>
+            <div class=" mt-5">
+            <button type="button" class=" btn btn-primary btn-lg m-4"><a href="/?area=admin&controller=classroom">Retour</a></button>
+                <button type="submit" class=" btn btn-primary btn-lg" name="submit">Enregistrer</button>
+            </div>
+        </div>
+    </form>
+    {% else %}
+    <p>Aucune classe n'est créé pour cette formation cette année. Vous devez d'abord en créer une</p>
+    <p class="btn-primary Return p-2"><a href="/?area=admin&controller=classroom&action=addClassroom">Créer une classe</a></p>
+    {% endif %}
+    <div></div>
+</div>
+<script src="scripts/adminDash.js"></script>
+
+{% endblock %}

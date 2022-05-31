@@ -40,4 +40,22 @@ class RegisteredController extends Controller
             }
         }
     }
+
+    public function validateTrainee()
+    {
+        require_once '../app/service/admin-check.php';
+        
+        if(!empty($_GET['id']))
+        {
+            $id_user = $_GET['id'];
+        }
+
+        $manager = new AdminManager();
+        $req = $manager->updateCandidateToTrainee($id_user);
+
+
+        
+        
+        header("Location:/?area=admin&controller=home");
+    }
 }

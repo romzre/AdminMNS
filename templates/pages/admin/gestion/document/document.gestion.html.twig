@@ -54,7 +54,7 @@
                                 <form class="form_CancelDoc" method="POST" action="/?area=admin&controller=document&action=index&id={{user.getIdUser}}">
                                     <input name="inpJustify_text" id="inpJustify_text" class="displayNone" type="text" />
                                     <label id="Lab_justify_text" class="cancelDoc cursor" for=""><img src="/images/cancel.png" /></label>
-                                    <label id="Lab_cancelDoc" class="cancelDoc cursor displayNone" for="submit_cancel"><img src="/images/cancel.png" /></label>
+                                    <label id="Lab_cancelDoc" class="cancelDoc cursor displayNone" for="submit_cancel"><img src="/images/accept.png" /></label>
                                     <input name="id_document" type="hidden" value="{{ doc.id_document }}" />
                                     <input name="Name_doc" type="hidden" value="{{ doc.wording_file }}" />
                                     <input name="Name_docType" type="hidden" value="{{ doc.wording_typeOfDoc }}" />
@@ -72,6 +72,9 @@
 </div>
     <div class='contBtnMenu'>
         <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Retour</a></button>
+        {% if DocValid ==  nbAlldocs %}
+        <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=registered&action=validateTrainee&id={{ user.getIdUser }}">Creer le stagiaire</a></button>
+        {% endif %}
     </div>
 
 <script src="scripts/adminDash.js"></script>
