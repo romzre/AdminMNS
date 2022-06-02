@@ -26,3 +26,5 @@ inpEmail.addEventListener('input', function(e){
     }
 
 })
+
+

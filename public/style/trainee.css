@@ -5,6 +5,11 @@ h2, h3,h4 {
     font-family: 'Gilroy';
 }
 
+a{
+    color:white;
+    text-decoration:none;
+}
+
 :root {
     --main-bg-color: #151B36;
     --main-title-color :#EC6834;
@@ -62,11 +67,11 @@ h2, h3,h4 {
     color : var(--main-title-color)
 }
 
-.fa-solid.fa-bell{
+.fa-bell{
     color:#fff
 }
 
-.fa-solid{
+.fa-calendar-days, .fa-clock{
     color:var(--main-title-color);
 }
 
@@ -322,21 +327,140 @@ button.btn-hidden{
     gap:10px
 }
 
+/* ABSENCE */
 
-
-@media all and (max-width: 480px){
-
-    .dataTable{
-        display: flex;
-        justify-content: flex-end;
-        width: 350px;
-    }
-    .container-titre-dashboard {
-        padding: 0 10px;
-        margin: inherit;
-        margin-top:40px
-    }
+.container-title-absence h2{
+    color: var(--main-title-color);
+    margin : 30px auto 50px auto
 }
+
+.container-absence-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.cell{
+    border : 1px solid var(--main-title-color);
+    width: 100px;
+    
+}
+
+small{
+    font-weight:400
+
+}
+
+.container-btn-absence{
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.container-btn-absence .btn-primary
+{
+   width: auto;
+
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5{
+    width: 18%;
+}
+
+.up-right{
+    border : 1px solid var(--main-title-color);
+    border-top-right-radius: 30px;
+    display: inline-block;
+    /* border-top: 2px solid var(--main-title-color);
+    border-bottom: 1px solid var(--main-title-color); */
+}
+
+.down-right{
+    border : 1px solid var(--main-title-color);
+    border-bottom-right-radius: 30px;
+    display: inline-block;
+    /* border-top: 2px solid var(--main-title-color);
+    border-bottom: 1px solid var(--main-title-color); */
+   
+}
+form {
+    align-items: inherit;
+}
+
+
+tr {
+    display: flex;
+    justify-content: center;
+
+}
+
+.up-left{
+
+    border : 1px solid var(--main-title-color);
+    border-top-left-radius: 30px;
+    display: inline-block;
+    
+}
+
+.down-left {
+
+    border-bottom-left-radius: 30px;
+    border : 1.5px solid var(--main-title-color);
+    display: inline-block;
+    
+}
+
+
+table, thead,tbody, tr, td,th
+{
+    border-collapse: collapse;
+      
+}
+
+.col-4 {
+    min-width: 200px;
+}
+
+td, th, .up-left, .up-right, .down-right, .down-left {
+    padding: 20px 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+th.col-3{
+    flex-direction: column;
+    text-align: center;
+}
+
+td.col-5{
+    display: flex;
+    flex-direction: column;
+}
+
+.path {
+    font-size:0.8rem;
+    color:var(--main-title-color);
+}
+.fa-cloud{
+    color: white
+}
+.fa-cloud:hover {
+    color : var(--main-title-color)
+}
+
+.form-justify-abs{
+    align-items: center;
+}
+
+/* // input file pour justifier absence  */
+.dataTable input[type='file']
+{
+    display:none
+}
+
 
 @media all and (max-width: 480px){
 

@@ -1,77 +1,79 @@
-{% extends "partials/base.html.twig" %} 
+{% extends "partials/base.html.twig" %}
 {% block body%}
-<head><link rel="stylesheet" href="style/register.css"></head>
+	<head><link rel="stylesheet" href="style/register.css"></head>
 
-<body>
-{% if messageEndCheck  %}
-    <p class="suc_err">{{ messageEndCheck }}</p>
-    <p class="btn-primary Return"><a href="index.php">Retour</a><p>
-        {% else %}
- 
-<div class="contForm">
-    <h1>Formulaire d'inscription</h1>
-<form action="/?area=home&controller=home&action=register" method="POST">
-    <fieldset>
-        <legend>Informations Personnelles</legend>
-        
-        {{ form.createInputText('firstName','text','Prénom', 'space', POST.firstName )}}
-     
-        {{ form.createInputText('familyName','text','Nom', 'space' , POST.familyName) }}
+	<body>
+		{% if messageEndCheck  %}
+			<p class="suc_err">{{ messageEndCheck }}</p>
+			<p class="btn-primary Return">
+				<a href="index.php">Retour</a>
+			</p>
+			<p>
+			{% else %}
 
-  
+				<div class="contForm">
+					<h1>Formulaire d'inscription</h1>
+					<form action="/?area=home&controller=home&action=register" method="POST">
+						<fieldset>
+							<legend>Informations Personnelles</legend>
 
-        {{ form.createInputText('birthdate','date','Date de naissance', 'space', POST.birthdate) }}
-    
-    </fieldset>
-    <fieldset>
-        <legend>Adresse</legend>
-    
-       {{ form.createInputText('streetNumber','text','Numéro de voie', 'space' , POST.streetNumber)}} 
-       {{ form.createInputText('laneType','text','Type de voie', 'space' , POST.laneType) }}
-       {{ form.createInputText('street','text','Nom de rue', 'space', POST.street) }} 
-       {{ form.createInputText('addressComplement','text','Complément d adresse', 'space', POST.addressComplement)}}
-       {{ form.createInputText('postalCode','text', 'Code Postal', 'space', POST.postalCode) }}
-       {{ form.createInputText('city','text','Ville', 'space', POST.city)}}
- 
-    </fieldset>
-    <fieldset>
-        <legend>Communication</legend>
-    
-        {{ form.createInputText('tel','text','Numéro de téléphone', 'space',POST.tel)}}
-        {{ form.createInputText('email','text','Adresse email', 'space',POST.email)}}
-       {% if( POST.email != NULL) %}
-       <p>Cette adresse existe déja</p>
-       {% endif %}
-       {{ form.createInputText('password','password','Mot de passe', 'space')}}
-       {{ form.createInputText('confirm_password','password','Retapez votre mot de passe', 'space')}}
-        
-        {% if(samePass == false) %}
-            <p>{{ message }}</p>
-        {% endif %}
-        
-            
+							{{ form.createInputText('firstName','text','Prénom', 'space', POST.firstName )}}
 
-    </fieldset>
-    <fieldset>
-        <legend>
-            Formation Souhaitée
-        </legend>
-        {% if trainings %}
-            {{ form.createSelect(trainings,'Quelle formation vous intéresse','training') }}
-            {{ form.createSubmit('ContBtn','btn-primary','submit-register') }}
-        {% else %}
-            <p>Aucune formation n'est disponible actuellement</p>
-        {% endif %}
-        
-        
-    </fieldset>
-</form>
-<p class="btn-primary Return"><a href="/">Retour</a><p>
-</div>
-<script src="scripts/register-check.js"></script>
-{% endif %}
-{% endblock %}
+							{{ form.createInputText('familyName','text','Nom', 'space' , POST.familyName) }}
 
 
+							{{ form.createInputText('birthdate','date','Date de naissance', 'space', POST.birthdate) }}
+
+						</fieldset>
+						<fieldset>
+							<legend>Adresse</legend>
+
+							{{ form.createInputText('streetNumber','text','Numéro de voie', 'space' , POST.streetNumber)}}
+							{{ form.createInputText('laneType','text','Type de voie', 'space' , POST.laneType) }}
+							{{ form.createInputText('street','text','Nom de rue', 'space', POST.street) }}
+							{{ form.createInputText('addressComplement','text','Complément d adresse', 'space', POST.addressComplement)}}
+							{{ form.createInputText('postalCode','text', 'Code Postal', 'space', POST.postalCode) }}
+							{{ form.createInputText('city','text','Ville', 'space', POST.city)}}
+
+						</fieldset>
+						<fieldset>
+							<legend>Communication</legend>
+
+							{{ form.createInputText('tel','text','Numéro de téléphone', 'space',POST.tel)}}
+							{{ form.createInputText('email','text','Adresse email', 'space',POST.email)}}
+							{% if( POST.email != NULL) %}
+								<p>Cette adresse est déja utilisée</p>
+							{% endif %}
+							<p class="message-alerte registration-check">Cette adresse existe déjà !
+							</p>
+							{{ form.createInputText('password','password','Mot de passe', 'space')}}
+							{{ form.createInputText('confirm_password','password','Retapez votre mot de passe', 'space')}}
+
+							{% if(samePass == false) %}
+								<p>{{ message }}</p>
+							{% endif %}
 
 
+						</fieldset>
+						<fieldset>
+							<legend>
+								Formation Souhaitée
+							</legend>
+							{% if trainings %}
+								{{ form.createSelect(trainings,'Quelle formation vous intéresse','training') }}
+								{{ form.createSubmit('ContBtn','btn-primary','submit-register') }}
+							{% else %}
+								<p>Aucune formation n'est disponible actuellement</p>
+							{% endif %}
+
+
+						</fieldset>
+					</form>
+					<p class="btn-primary Return">
+						<a href="/">Retour</a>
+					</p>
+					<p></p>
+				</div>
+				<script src="scripts/register-check.js"></script>
+		{% endif %}
+	{% endblock %}

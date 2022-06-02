@@ -21,7 +21,7 @@ class HomeController extends Controller
         if (!empty($_SESSION['id_user'])) {
 
 
-            if (isset($_POST['form-button'])) {
+            if (isset($_POST['button-abs'])) {
                 $message = $this->sendFile();
                 $data['message'] = $message;
             }
