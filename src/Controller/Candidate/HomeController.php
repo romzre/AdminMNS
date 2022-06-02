@@ -21,7 +21,7 @@ class HomeController extends Controller
         if (!empty($_SESSION['id_user'])) {
 
 
-            if (isset($_POST['form-button'])) {
+            if (isset($_POST['button-abs'])) {
                 $message = $this->sendFile();
                 $data['message'] = $message;
             }
@@ -33,7 +33,6 @@ class HomeController extends Controller
             //on récupère les infos sur la formation qu'il suit
             $trainingManager = new TrainingManager();
             $training = $trainingManager->getTraining($_SESSION['id_user']);
-
 
             $data['training'] = $training;
             $data['candidate'] = $candidate;

@@ -1,5 +1,11 @@
-let inputs = document.querySelectorAll("input")
+let inputs = document.querySelectorAll("input[type=file]")
+let btnSendFile = document.querySelector("button[name=form-button-abs]")
 
+let allBtnFormMotif= document.querySelectorAll("button.btn-form-motif")
+
+allBtnFormMotif.forEach(btn => btn.style.display="none")
+
+btnSendFile.style.display="none"
 
 // permet de mettre le nom du fichier sélectionner dans la case du type de docs : 
 inputs.forEach(element => {
@@ -13,9 +19,8 @@ inputs.forEach(element => {
         pathFile.textContent=nameFile
 
         let parent = element.parentNode
-        let td = parent.previousElementSibling        
-        td.appendChild(pathFile)
-        
+        parent.appendChild(pathFile)
+        btnSendFile.style.display="inline"
         
     })
     

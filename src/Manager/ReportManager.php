@@ -1,34 +1,25 @@
-<?php 
+<?php
+
 namespace App\Manager;
 
 use PDO;
-use PDOException;
+
 // require_once 'PdoManager.php';
 
-class ReportManager {
-
+class ReportManager
+{
     use PdoManager;
 
-   
-
-    public static function getPdo()
+    public function updateMotif(string $id_motif, string $id_report)
     {
+        $pdo = PdoManager::getPdo();
+        $sql = "UPDATE `report` SET `id_motif`= :id_motif WHERE id_report = :id_report";
+        $req = $pdo->prepare($sql);
+        $stmt =  $req->execute([
+            'id_report' => $id_report,
+            'id_motif' => $id_motif
+        ]);
 
-        // On instance la méthode seulement si pdo n'est pas encore initialisé. C'est ce qu'on appelle un "Singleton"
-
-        if(self::$pdo == null)
-        {
-            try{
-
-                self::$pdo = new PDO('mysql:host=88.166.155.219:3306;dbname=adminMns','kyoko9273','Spedum1463!');
-
-            }
-            catch (PDOException $e)
-            {
-                echo 'Error : ' . $e->getMessage();
-                die;
-            }
-        }
-        return self::$pdo;
+        return $stmt;
     }
 }

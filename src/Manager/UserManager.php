@@ -6,8 +6,6 @@ use PDO;
 use App\Entity\User;
 use App\Manager\PdoManager;
 
-// require_once 'PdoManager.php';
-// require_once '../src/Entity/User.php';
 
 
 class UserManager
@@ -161,6 +159,24 @@ class UserManager
         $req = $pdo->prepare($sql);
         $stmt = $req->execute([
             'id_user' => $id_user
+        ]);
+
+        return $stmt;
+    }
+
+    public function updateUserInfo(string $firstName, string $lastName, string $email, string $id_user)
+    {
+
+        $pdo = PdoManager::getPdo();
+        $sql = 'UPDATE `users` SET `firstName`= :firstName, `familyName`= :familyName, `email`= :email WHERE id_user = :id_user';
+
+        $req = $pdo->prepare($sql);
+        $stmt = $req->execute([
+            'id_user' => $id_user,
+            'firstName' => $firstName,
+            'familyName' => $lastName,
+            'email' => $email,
+
         ]);
 
         return $stmt;

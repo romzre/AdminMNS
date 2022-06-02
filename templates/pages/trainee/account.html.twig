@@ -4,7 +4,10 @@
 	<div class="container-account">
 		<div class="container-personal-info one">
 			<h2>Vos informations personnelles</h2>
-			<form method='post' action='/?area=trainee&controller=account&action=change_info'>
+			<form method='post' action='#'>
+				{% if message_update_info %}
+					<div class="alert-info alert">{{message_update_info|raw}}</div>
+				{% endif %}
 				<div class="part-column">
 					<div class="form-first-column">
 						<div class="form-sub-part part-firstName">
@@ -47,9 +50,7 @@
 
 							<label for="city">Ville</label>
 							<input type="text" name="city" class="form-control" id="city_input" value="{{trainee.getcity}}">
-							{% if password_error is defined %}
-								{% include "partials/inc_password-error.php" %}
-							{% endif %}
+
 						</div>
 					</div>
 				</div>

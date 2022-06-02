@@ -1,0 +1,97 @@
+{% extends "partials/base-trainee.html.twig" %}
+
+{% block body %}
+
+	<div class="container-absence-dashboard">
+		<div class="container-title-absence">
+			{% if absencesToJustify == true %}
+				<h2>Absences à justifier</h2>
+			</div>
+			<div class="container-absence-table">
+				{% if message is defined%}
+					<div class="alert-info alert">{{message|raw}}</div>
+				{% endif %}
+
+				<form class="form-justify-abs" action="#" method='post' enctype='multipart/form-data'>
+					<table class="dataTable">
+						<thead>
+							<tr>
+
+								{% for index, key in keys %}
+									{% if index == 1 %}
+										<th class="up-left col-1">
+										{% elseif index != nb_columns %}
+											<th class="cell col-{{index}}">
+
+											{% elseif index == nb_columns %}
+												<th class="up-right col-5">
+												{% endif %}
+												{{key|capitalize}}
+												{% if index == 3 %}
+													<small>en nombre de jour(s)</small>
+												{% endif %}
+											</th>
+
+
+										{% endfor %}
+									</tr>
+								</thead>
+							</tr>
+						</thead>
+						<tbody>
+							{% for index,absence in absences %}
+								<tr>
+									{% if index == nb_absences -1 %}
+										<td class="col-1 down-left">
+										{% else %}
+											<td class='cell col-1'>
+											{% endif %}
+											{{absence.date_de_fin}}
+										</td>
+										<td class='cell col-2'>{{absence.date_de_début}}</td>
+										<td class='cell col-3'>{{absence.durée}}</td>
+										<td class='cell col-4'>
+											{% if absence.motif is null %}
+												<form class="motif_absence" action="#" method="post">
+													<select name="absence[{{absence.id_report}}][id_motif]" id="pet-select">
+														<option value="">--Choose an option--</option>
+														{% for  motif in motifs %}
+															<option value="{{motif.id_motif}}">{{motif.wording_motif}}</option>
+														{% endfor %}
+													</select>
+													<input type='hidden' name="absence[{{absence.id_report}}][id_report]" value="{{absence.id_report}}"/>
+													<button type='submit' class="btn-form-motif" name="btn-form-motif[{{absence.id_report}}]"/>
+												</form>
+											{% else %}
+												{{absence.wording_motif|capitalize}}
+											{% endif %}
+										</td>
+										{% if index == nb_absences -1 %}
+											<td class='down-right col-5'>
+											{% else %}
+												<td class='cell col-5'>
+												{% endif %}
+												<label for='absence_support_document[{{absence.id_report}}]'>
+													<i class="fa-solid fa-cloud-arrow-up"></i>
+												</label>
+												<input id='absence_support_document[{{absence.id_report}}]' type='file' name="{{absence.id_report}}" accept=".pdf"/>
+											</td>
+										</tr>
+									{% endfor %}
+								</tr>
+							</tbody>
+						</tbody>
+					</table>
+					<div class="container-btn-abs">
+						<button type="submit" name="form-button-abs" class="btn btn-primary btn-lg">Envoyer</button>
+					</div>
+				</form>
+			{% elseif absencesToJustify == false %}
+				<h2>Aucune absence à justifier</h2>
+			</div>
+		{% endif %}
+	</div>
+	{% if absencesToJustify == true %}
+		<script src="/scripts/trainee.js"></script>
+	{% endif %}
+{% endblock %}
