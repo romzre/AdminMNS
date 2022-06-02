@@ -1,8 +1,8 @@
 {% extends "partials/base-admin-candidat.html.twig" %} 
 {% block body%}
 <div class='contBtnMenu'>
-        <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
-        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=trainees">Stagiaires</a></button>
+        <a href="/?area=admin&controller=home&action=candidates"><button type="button" class="active btn btn-primary btn-lg">Candidats</button></a>
+        <a href="/?area=admin&controller=home"><button type="button" class="btn btn-primary btn-lg">Stagiaires</button></a>
 </div>
 <div class="Cont_filter">
     
@@ -67,21 +67,16 @@
                         <div class="percent">
                             <svg>
                                 <circle cx='24' cy='24' r='24' class="percent_doc1"></circle>
-                                <circle cx='24' cy='24' r='24'  data-percent='{{ user.0.percent }}' class="percent_doc2"></circle>
+                                <circle cx='24' cy='24' r='24'  data-percent='{{ user.percent }}' class="percent_doc2"></circle>
                             </svg>
                         </div>
                         <div class="nbDoc">
-                            {% for isvalid in DocValid %}
-                                {% if isvalid.id_user == user.id_user %}
-                                    {{ isvalid.isValid }} 
-                                {% endif %}
-                            {% endfor %} 
                             {% for Doc in trainingDoc %}    
                                 {% if user.title_formation == Doc.title_formation %}
-                                        / {{ Doc.nbDocs }}
+                                     {{ user.NbdocValid }} / {{ Doc.nbDocs }}
                                 {% endif %}
                             {% endfor %}
-                        {% else %}
+                       {% else %} 
                          -
                         </div>
                         </a>

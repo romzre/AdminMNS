@@ -25,8 +25,6 @@ class DocumentController extends Controller{
           $id_document = htmlspecialchars($_POST['id_document']);
           $id = $_GET['id'];
 
-          // $manager = new DocumentManager();
-          // $manager->unvalidateDoc($id_document);
 
           $manager = new TrainingDocsManager();
           $manager->DeleteDoc($id_document);
@@ -58,11 +56,7 @@ class DocumentController extends Controller{
 
         $manager = new DocumentManager();
         $documents = $manager->getAllDocsFromUser($id_user);
-        // if(!empty($documents))
-        // {
-        //   $data['documents'] = $documents;
-         
-        // }
+        
 
         $manager = new TraineeTrainingManager();
         $training = $manager->getAllTrainingByUser($id_user);
@@ -76,8 +70,10 @@ class DocumentController extends Controller{
         $process_Alldoc = [];
         if(!empty($docstraining))
         {
+          $compt =0;
           foreach ($docstraining as $doc) 
           {
+            
             $array= [];
             $array['wording_typeOfDoc'] = $doc['wording_typeOfDoc'] ;
             $array['id_typeOfDoc'] = $doc['id_typeOfDoc'] ;
@@ -88,24 +84,31 @@ class DocumentController extends Controller{
                 
                 if($doc['id_typeOfDoc'] == $document['id_typeOfDoc'])
                 {
+                  if($document['isValid'] == 1)
+                  {
+                    $compt++;
+                  }
                     $array['wording_file'] = $document['wording_file'] ;
                     $array['id_document'] = $document['id_document'] ;
                     $array['id_typeOfDoc'] = $document['id_typeOfDoc'] ;
                     $array['isValid'] = $document['isValid'] ;
+                    
                 } 
+
               }
             }
             
             $process_Alldoc[] = $array;
     
           }
+          
         }
         
-
-
         // $data['docstraining'] = $docstraining;
         $data['training'] = $training['title_formation'];
         $data['docs'] = $process_Alldoc;
+        $data['nbAlldocs'] = count($process_Alldoc);
+        $data['DocValid'] = $compt;
         
         
        

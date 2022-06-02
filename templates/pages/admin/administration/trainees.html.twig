@@ -1,8 +1,8 @@
 {% extends "partials/base-admin.html.twig" %} 
 {% block body%}
 <div class='contBtnMenu'>
-        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
-        <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=trainees">Stagiaires</a></button>
+        <a href="/?area=admin&controller=home&action=candidates"><button type="button" class="btn btn-primary btn-lg">Candidats</button></a>
+        <a href="/?area=admin&controller=home"><button type="button" class="active btn btn-primary btn-lg">Stagiaires</button></a>
 </div>
 <div class="cont_Search">
     <label for="myInput">Rechercher</label>
@@ -14,15 +14,27 @@
             <td class="headTable left">Prénom</td>
             <td class="headTable">Nom</td>
             <td class="headTable">Email</td>
-            <td class="headTable right">Formation</td>
+            <td class="headTable ">Formation</td>
+            <td class="headTable ">Classe</td>
+            <td class="headTable right">Action</td>
         </thead>
         <tbody id="myTable">
             {% for user in trainees %}
                 <tr>
-                    <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?area=admin&controller=profile&id={{ user.id_user }} ?>">{{ user.firstName }}</a></td>
+                    <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?area=admin&controller=profile&action=trainee&id={{ user.id_user }}">{{ user.firstName }}</a></td>
                     <td class="cel" data-info="Nom" ><a >{{ user.familyName }}</a></td>
-                    <td class="cel" data-info="Email" ><a mailto="{{ user.email }}">{{ user.email }}</a></td>
+                    <td class="cel" data-info="Email" ><a href="mailto:{{ user.email }}"><img src="images/email.png" /> {{ user.email }} </a></td>
                     <td class="cel" data-info="Formation" ><a>{{ user.title_formation }}</a></td>
+                    <td class="cel" data-info="Classe" >
+                    
+                    {% if user.classroom is not defined %}
+                        <a href="/?area=admin&controller=trainee&action=addTraineeToClassroom&id={{ user.id_user }}"><img src="images/add.png" /></a>
+                    {% else %}
+                    {{ user.classroom }}
+                    {% endif %}
+
+                    </a></td>
+                    <td  class="cel" data-info="Action">Aucune action disponible</td>
                 </tr>
             {% endfor %}
         </tbody>

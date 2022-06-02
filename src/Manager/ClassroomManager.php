@@ -62,10 +62,10 @@ class ClassroomManager {
     {
         $pdo = PdoManager::getPdo();
 
-        $sql = "SELECT * FROM 'classroom' WHERE id_training = :id_training";
+        $sql = "SELECT * FROM classroom WHERE id_training = :id_training AND isActive = 1";
 
         $req = $pdo->prepare($sql);
-        $req->execute([
+        $stmt = $req->execute([
             'id_training' => $id
         ]);
 
@@ -89,10 +89,10 @@ class ClassroomManager {
     {
         $pdo = PdoManager::getPdo();
 
-        $sql = "INSERT INTO `classroom`( `name`, `classroomMYB`, `classroomMYE`, `num_classroom`, `id_training`) VALUES ( :name, :classroomMYB, :classroomMYE, :num_classroom, :id_training)";
+        $sql = "INSERT INTO `classroom`( `name`, `classroomMYB`, `classroomMYE`, `num_classroom`, `id_training` , `isActive`) VALUES ( :name, :classroomMYB, :classroomMYE, :num_classroom, :id_training , 1 )";
 
         $req = $pdo->prepare($sql);
-        var_dump($sql);
+    
         $stmt = $req->execute($data);
 
         return $stmt;
@@ -103,7 +103,7 @@ class ClassroomManager {
         $pdo=PdoManager::getPdo();
 
         $sql = "SELECT * FROM `classroom` 
-        INNER JOIN training ON classroom.id_training = training.id_training";
+        INNER JOIN training ON classroom.id_training = training.id_training AND isActive =1";
 
         $req = $pdo->prepare($sql);
         $req->execute();
@@ -139,6 +139,19 @@ class ClassroomManager {
         $req->execute(['id_classroom' => $id]);
         
         return $req->fetchAll(PDO::FETCH_ASSOC);
+        
+    }
+
+    public function disabled($id)
+    {
+        $pdo=PdoManager::getPdo();
+
+        $sql = "UPDATE `classroom` SET `isActive`= 0 WHERE id_classroom = :id_classroom ";
+
+        $req = $pdo->prepare($sql);
+        $stmt = $req->execute(['id_classroom' => $id]);
+        
+        return $stmt;
         
     }
 

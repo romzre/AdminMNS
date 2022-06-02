@@ -24,6 +24,7 @@ class Trainee extends User {
     private string $street;
     private int $streetNumber;
     private string $tel;
+    private int $id_classroom;
 
     public function __construct()
     {
@@ -308,6 +309,26 @@ class Trainee extends User {
     public function setId_user($id_user)
     {
         $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id_classroom
+     */ 
+    public function getIdClassroom()
+    {
+        return $this->id_classroom;
+    }
+
+    /**
+     * Set the value of id_classroom
+     *
+     * @return  self
+     */ 
+    public function setIdClassroom($id_classroom)
+    {
+        $this->id_classroom = $id_classroom;
 
         return $this;
     }

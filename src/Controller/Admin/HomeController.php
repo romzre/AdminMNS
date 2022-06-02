@@ -4,8 +4,9 @@ namespace App\Controller\Admin;
 
 use Core\Controller;
 use App\Manager\TraineeManager;
-use App\Manager\TrainingDocsManager;
 use App\Manager\TrainingManager;
+use App\Manager\ClassroomManager;
+use App\Manager\TrainingDocsManager;
 
 class HomeController extends Controller {
     
@@ -21,14 +22,29 @@ class HomeController extends Controller {
         require '../src/Manager/TraineeManager.php';
 
         $manager = new TraineeManager();
-
         $trainees = $manager->getAllTrainees();
 
-        $data = compact('admin', 'trainees');
+        $manager = new ClassroomManager();
+        $classrooms = $manager->getAll();
+        
+        foreach ($trainees as $key => $trainee) 
+        {
+            $array = [];
+            foreach ($classrooms as $classroom) 
+            {
+                if($classroom->getIdClassroom() == $trainee['id_classroom'])
+                {
+                    $trainee['classroom'] = $classroom->getName();
+                }
+            }
+            $trainees[$key] = $trainee;
+        }
+       
+        $data = compact('admin');
+        $data['trainees'] = $trainees; 
 
         $path= 'pages/admin/administration/trainees.html.twig';
-        $layOut='base-admin';
-        $this->renderView($path, $data, $layOut);
+        $this->renderView($path, $data);
 
     }
     
@@ -52,54 +68,52 @@ class HomeController extends Controller {
 
         foreach ($candidates as $key => $candidat) 
         {
-            $compt= 0;
+            $compt1= 0;
+            $compt2= 0;
+            
             foreach ($DocsNull as $doc) 
             {
                 if($doc['id_user'] == $candidat['id_user'])
                 {
-                    $compt++;
+                    $compt1++;
 
                 }
 
             }
-            $candidat['Nbdoc'] = $compt;
-            $candidates[$key] = $candidat;
-        }
-     
-
-        // Compter le pourcentage pour chaque candidat
-        for ($x=0; $x < count($candidates) ; $x++) 
-        { 
-            for ($i=0; $i < count($DocValid) ; $i++) { 
-                if($candidates[$x]['id_user'] == $DocValid[$i]['id_user'])
+            foreach ($DocValid as $doc) 
+            {
+                if($doc['id_user'] == $candidat['id_user'])
                 {
-                    if($DocValid[$i]['isValid'] != 0 || $DocValid[$i]['isValid'] != null)
-                    {
-                        for ($j=0; $j < count($trainingDoc) ; $j++) 
-                        { 
-                            if($trainingDoc[$j]['id_training'] == $DocValid[$i]['id_training'] )
-                            {      
-                                array_push($candidates[$x] , ['percent' => ($DocValid[$i]['isValid']/$trainingDoc[$j]['nbDocs']*100)]);
-                            }
-                        }
-                    }
-                   
+                    $compt2++;
+
                 }
+                
             }
-        }
-
-
-        
+            $candidat['Nbdoc'] = $compt1;
+            $candidat['NbdocValid'] = $compt2;
+            // Compter le pourcentage pour chaque candidat
+            foreach ($trainingDoc as $training) 
+            {
+                if($training['id_training'] == $candidat['id_training'])
+                {
+                 
+                    $percent = $candidat['NbdocValid']/$training['nbDocs']*100;
+                }
+                
+            }
+            $candidat['percent'] = $percent;
+            $candidates[$key] = $candidat;
+        }  
         
         $manager = new TrainingManager();
         
         $List_training = $manager->getAllwithAllisValid();
 
         $data = compact('admin' ,'candidates' , 'trainingDoc' , 'DocValid', 'List_training');
-        // var_dump($candidat); exit;
+   
         $path= 'pages/admin/administration/candidates.html.twig';
         $this->renderView($path, $data);
-
+        
     }
     
     /**
@@ -107,20 +121,36 @@ class HomeController extends Controller {
      *
      * @return void
      */
-    public function trainees()
-    {
-        require_once '../app/service/admin-check.php';
+    // public function trainees()
+    // {
+    //     require_once '../app/service/admin-check.php';
    
-        require '../src/Manager/TraineeManager.php';
+    //     require '../src/Manager/TraineeManager.php';
 
-        $manager = new TraineeManager();
+    //     $manager = new TraineeManager();
+    //     $trainees = $manager->getAllTrainees();
 
-        $trainees = $manager->getAllTrainees();
+    //     $manager = new ClassroomManager();
+    //     $classrooms = $manager->getAll();
+        
+    //     foreach ($trainees as $key => $trainee) 
+    //     {
+    //         $array = [];
+    //         foreach ($classrooms as $classroom) 
+    //         {
+    //             if($classroom->getIdClassroom() == $trainee['id_classroom'])
+    //             {
+    //                 $trainee['classroom'] = $classroom->getName();
+    //             }
+    //         }
+    //         $trainees[$key] = $trainee;
+    //     }
+       
+    //     $data = compact('admin');
+    //     $data['trainees'] = $trainees; 
 
-        $data = compact('admin', 'trainees');
+    //     $path= 'pages/admin/administration/trainees.html.twig';
+    //     $this->renderView($path, $data);
 
-        $path= 'pages/admin/administration/trainees.html.twig';
-        $this->renderView($path, $data);
-
-    }
+    // }
 }

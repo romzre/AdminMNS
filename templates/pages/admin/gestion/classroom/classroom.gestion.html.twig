@@ -2,9 +2,9 @@
 {% block body%}
 
 <div class='contBtnMenu'>
-   <a href="/?area=admin&controller=gestion&action=classroom"> <button type="button" class="active btn btn-primary btn-lg">Classes</button></a>
+   <a href="/?area=admin&controller=classroom"> <button type="button" class="active btn btn-primary btn-lg">Classes</button></a>
     <a href="/?area=admin&controller=gestion&action=index"><button type="button" class=" btn btn-primary btn-lg">Formations</button></a>
-    <a href="/?area=admin&controller=gestion&action=organisme"><button type="button" class="btn btn-primary btn-lg">Organismes</button></a>   
+    {# <a href="/?area=admin&controller=gestion&action=organisme"><button type="button" class="btn btn-primary btn-lg">Organismes</button></a>    #}
 </div>
 
 <div class="cont_Search">
@@ -20,7 +20,7 @@
             <td class="left headTable ">Code</td>
             <td class="headTable">Date de début</td>
             <td class="headTable">Date de fin</td>
-            <td class="headTable">Nombre de place</td>
+            <td class="headTable">Nombre de stagiaires</td>
             <td class="headTable">Formation</td>
             <td class="headTable right">Action</td>
         </thead>
@@ -30,11 +30,16 @@
                     <td class="cel" data-info="Code" >{{ classroom.name }}</td>
                     <td class="cel" data-info="Date de début" >{{ classroom.classroomMYB }}</td>
                     <td class="cel" data-info="Date de fin" >{{ classroom.classroomMYE }}</td>
-                    <td class="cel" data-info="Nombre de place">non disponible</td>
+                    <td class="cel" data-info="Nombre de place">0</td>
                     <td class="cel" data-info="Formation">{{  classroom.title_formation }}</td>
                     <td class="cel" data-info="Action" >
                         <div class="Cont_action">
                             <a href="/?area=admin&controller=classroom&action=view&id={{ classroom.id_classroom }}"><img src="images/eye.png" /></a>
+                            <form method="POST" action="/?area=admin&controller=classroom&action=disabled">
+                            <input type="hidden" name="id_classroom" value="{{ classroom.id_classroom }}" />
+                            <label for="btn_delete" class="cursor "><img src="images/cancel.png" /></label>
+                            <button id="btn_delete" name="btn_delete" class="displayNone"></button>
+                            </form>
                         </div>
                     </td>
                 </tr>

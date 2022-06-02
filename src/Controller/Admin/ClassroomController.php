@@ -108,10 +108,11 @@ class ClassroomController extends Controller{
 
             $manager = new ClassroomManager();
             $classrooms = $manager->getClassroomsByTraining($id_training);
+         
             $nb = !empty($classrooms) ? count($classrooms)+1 : 1;
 
             $name = $code.$nb."-".$yearB."-".$yearE;
-            
+          
             $newClass = [
                 'name' => $name,
                 'classroomMYB' => $classroomMYrB,
@@ -144,6 +145,24 @@ class ClassroomController extends Controller{
         $layOut='base-admin';
         
         $this->renderView($path, $data);
+    }
+
+    public function disabled()
+    {
+
+        if(isset($_POST['btn_delete']))
+        {
+            if(!empty($_POST['id_classroom']))
+            {
+                $id = intval($_POST['id_classroom']);
+                $manager = new ClassroomManager();
+
+                $req = $manager->disabled($id);
+
+            }
+        }
+
+        header("Location:/?area=admin&controller=classroom");
     }
 
 }
