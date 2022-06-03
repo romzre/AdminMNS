@@ -21,7 +21,7 @@ class HomeController extends Controller
         if (!empty($_SESSION['id_user'])) {
 
 
-            if (isset($_POST['button-abs'])) {
+            if (isset($_POST['form-button'])) {
                 $message = $this->sendFile();
                 $data['message'] = $message;
             }
@@ -109,38 +109,50 @@ class HomeController extends Controller
                         $wording_file = basename($typeOfDocs['name'][$key_file]);
                         $dataDoc[$i]['wording_file'] = $wording_file;
 
-                        // Testons si l'extension est autorisée
+                        // Testons si l'extension est autorisée et le type du document 
                         $infosfichier = pathinfo($typeOfDocs['name'][$key_file]);
 
                         $extension_upload = $infosfichier['extension'];
+                        $extensions_autorisees = array('pdf');
 
-                        $extensions_autorisees = array('pdf', 'jpg', 'jpeg', 'png');
+                        $mime_type = mime_content_type($typeOfDocs['tmp_name'][$key_file]);
+                        $allowed_file_types = ['application/pdf'];
 
-                        if (in_array($extension_upload, $extensions_autorisees)) {
+                        if (in_array($extension_upload, $extensions_autorisees) && in_array($mime_type, $allowed_file_types)) {
                             // On peut valider le fichier et le stocker définitivement
+
+                            $directory = "../uploads/" . $_SESSION['id_user'] . "/formation/";
                             $path_file = "../uploads/" . $_SESSION['id_user'] . "/formation/" . $wording_file;
-                            move_uploaded_file($typeOfDocs['tmp_name'][$key_file], $path_file);
 
-                            // $dataDoc[$i]['basename'] = $wording_file;
-                            $documentManager = new DocumentManager();
-                            $id_document = $documentManager->insertUserFile($path_file, $wording_file, $_SESSION['id_user']);
+                            //on vérifie que le dossier existe sinon on le créé
+                            if (is_dir($directory) == false) {
+                                mkdir($directory, 0777);
+                            }
 
-                            //on relie le document à l'id_typeOfDoc et à la formation du candidat
+                            if (is_dir($directory) == true) {
+                                move_uploaded_file($typeOfDocs['tmp_name'][$key_file], $path_file);
 
-                            //on récupère l'id de la formation pour laquelle il est candidat
-                            $traineeTrainingManager = new TraineeTrainingManager();
-                            $id_training = $traineeTrainingManager->getTrainingId($_SESSION['id_user']);
-                            $id_training = $id_training['id_training'];
+                                // $dataDoc[$i]['basename'] = $wording_file;
+                                $documentManager = new DocumentManager();
+                                $id_document = $documentManager->insertUserFile($path_file, $wording_file, $_SESSION['id_user']);
 
-                            $id_typeOfDocToInsert = $dataDoc[$i]['id_typeOfDoc'];
-                            $trainingDocsManager = new TrainingDocsManager();
+                                //on relie le document à l'id_typeOfDoc et à la formation du candidat
 
-                            $trainingDocsManager->insertTrainingDoc($id_document, $id_typeOfDocToInsert, $id_training);
+                                //on récupère l'id de la formation pour laquelle il est candidat
+                                $traineeTrainingManager = new TraineeTrainingManager();
+                                $id_training = $traineeTrainingManager->getTrainingId($_SESSION['id_user']);
+                                $id_training = $id_training['id_training'];
+
+                                $id_typeOfDocToInsert = $dataDoc[$i]['id_typeOfDoc'];
+                                $trainingDocsManager = new TrainingDocsManager();
+
+                                $trainingDocsManager->insertTrainingDoc($id_document, $id_typeOfDocToInsert, $id_training);
 
 
-                            return $message .= "<p>L'envoi a bien été effectué !</p>";
+                                return $message .= "<p>L'envoi a bien été effectué !</p>";
+                            }
                         } else {
-                            $message .= "<p>Seules les extensions pdf, jpeg, jpg et png sont autorisées !</p>";
+                            $message .= "<p>Seuls les documents au format PDF sont autorisés !</p>";
                         }
                     } else {
                         $message .= '<p>Le fichier doit avoir un titre</p>';

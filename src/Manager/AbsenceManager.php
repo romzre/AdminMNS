@@ -39,7 +39,7 @@ class AbsenceManager extends ReportManager
     public function getUserAbsences(string $id_user)
     {
         $pdo = PdoManager::getPdo();
-        $sql = 'SELECT *, DATEDIFF(NOW(), absence.startingDate_absence) as `deadline` FROM absence JOIN report on absence.id_report = report.id_report LEFT JOIN motif on motif.id_motif=report.id_motif WHERE id_user=:id_user';
+        $sql = "SELECT report.id_report,  DATE_FORMAT(startingDate_absence, '%d/%m/%Y') AS `startingDate`, DATE_FORMAT(endDate_absence, '%d/%m/%Y') AS `endDate`, ROUND(DATEDIFF(endDate_absence, startingDate_absence),1) AS `duration`, DATEDIFF(NOW(), absence.startingDate_absence) as `deadline`, report.id_user, motif.wording_motif, report.isJustified, absenceDocs.id_document FROM absence JOIN report on absence.id_report = report.id_report LEFT JOIN motif on motif.id_motif=report.id_motif LEFT JOIN absenceDocs on absenceDocs.id_report = absence.id_report WHERE id_user=:id_user ORDER BY `startingDate` LIMIT 10";
 
         $req = $pdo->prepare($sql);
         $req->execute([
@@ -89,7 +89,7 @@ class AbsenceManager extends ReportManager
     public function getAbsencesToJustify(string $id_user)
     {
         $pdo = PdoManager::getPdo();
-        $sql = "SELECT absence.id_report, DATE_FORMAT(startingDate_absence, '%d/%m/%Y') AS `date_de_début`, DATE_FORMAT(endDate_absence, '%d/%m/%Y') AS `date_de_fin`, DATEDIFF(endDate_absence, startingDate_absence) AS `durée`, report.id_motif as motif, report.isJustified as justificatif from absence inner join report on report.id_report = absence.id_report left join motif on motif.id_motif = report.id_motif left join absenceDocs on absenceDocs.id_report = report.id_report left join document on document.id_document = absenceDocs.id_document where report.isJustified is null and document.id_document is null and report.id_user=:id_user and DATEDIFF(NOW(), absence.startingDate_absence)<=2";
+        $sql = "SELECT absence.id_report, DATE_FORMAT(startingDate_absence, '%d/%m/%Y') AS `date_de_début`, DATE_FORMAT(endDate_absence, '%d/%m/%Y') AS `date_de_fin`, ROUND(DATEDIFF(endDate_absence, startingDate_absence),1) AS `durée`, report.id_motif as motif, report.isJustified as justificatif from absence inner join report on report.id_report = absence.id_report left join motif on motif.id_motif = report.id_motif left join absenceDocs on absenceDocs.id_report = report.id_report left join document on document.id_document = absenceDocs.id_document where report.isJustified is null and document.id_document is null and report.id_user=:id_user and DATEDIFF(NOW(), absence.startingDate_absence)<=2";
 
 
         $req = $pdo->prepare($sql);
