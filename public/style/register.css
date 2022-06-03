@@ -54,6 +54,37 @@ fieldset{
     background-color: var(--main-title-color);
     border-radius: 25px;
 }
+.spaceAutoComplete
+{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    
+}
+.contAutoComplete
+{
+   z-index: 2;
+ 
+    background-color: #fff;
+    color: #000;
+    list-style: none;
+    margin-top: 15px;
+
+    margin-left: 25.25px;
+    margin-top: -15px;
+    
+
+}
+.contAutoComplete > li {
+    cursor: pointer;
+    padding: 10px 10px;
+    width: 100%;
+}
+.contAutoComplete > li:hover {
+    background-color: rgb(216, 216, 216);
+}
 @media screen and (max-width: 980px) { 
     .Return{
         right: 100px;

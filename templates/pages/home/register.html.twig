@@ -15,29 +15,6 @@
 					<h1>Formulaire d'inscription</h1>
 					<form action="/?area=home&controller=home&action=register" method="POST">
 						<fieldset>
-							<legend>Informations Personnelles</legend>
-
-							{{ form.createInputText('firstName','text','Prénom', 'space', POST.firstName )}}
-
-							{{ form.createInputText('familyName','text','Nom', 'space' , POST.familyName) }}
-
-
-							{{ form.createInputText('birthdate','date','Date de naissance', 'space', POST.birthdate) }}
-
-						</fieldset>
-						<fieldset class="ContAllAddress">
-							<legend>Adresse</legend>
-
-							{{ form.createInputText('streetNumber','text','Numéro de voie', 'space' , POST.streetNumber)}}
-							{{ form.createInputText('laneType','text','Type de voie', 'space' , POST.laneType) }}
-							{{ form.createInputText('street','text','Nom de rue', 'space', POST.street) }}
-							<div class="contAutoComplete"></div>
-							{{ form.createInputText('addressComplement','text','Complément d adresse', 'space', POST.addressComplement)}}
-							{{ form.createInputText('postalCode','text', 'Code Postal', 'space', POST.postalCode) }}
-							{{ form.createInputText('city','text','Ville', 'space', POST.city)}}
-
-						</fieldset>
-						<fieldset>
 							<legend>Communication</legend>
 
 							{{ form.createInputText('tel','text','Numéro de téléphone', 'space',POST.tel)}}
@@ -55,6 +32,30 @@
 							{% endif %}
 
 						</fieldset>
+						<fieldset>
+							<legend>Informations Personnelles</legend>
+
+							{{ form.createInputText('firstName','text','Prénom', 'space', POST.firstName )}}
+
+							{{ form.createInputText('familyName','text','Nom', 'space' , POST.familyName) }}
+
+
+							{{ form.createInputText('birthdate','date','Date de naissance', 'space', POST.birthdate) }}
+
+						</fieldset>
+						<fieldset class="ContAllAddress">
+							<legend>Adresse</legend>
+
+							{{ form.createInputText('streetNumber','text','Numéro de voie', 'space' , POST.streetNumber)}}
+							{{ form.createInputText('laneType','text','Type de voie', 'space' , POST.laneType) }}
+							{{ form.createInputText('street','text','Nom de rue', 'space', POST.street) }}
+							<ul class="contAutoComplete spaceAutoComplete"></ul>
+							{{ form.createInputText('addressComplement','text','Complément d adresse', 'space', POST.addressComplement)}}
+							{{ form.createInputText('postalCode','text', 'Code Postal', 'space', POST.postalCode) }}
+							{{ form.createInputText('city','text','Ville', 'space', POST.city)}}
+
+						</fieldset>
+						
 						<fieldset>
 							<legend>
 								Formation Souhaitée

@@ -22,11 +22,11 @@ laneType.addEventListener('blur', function(){
 
 })
 
-street.addEventListener('input', function(){
+street.addEventListener('keyup', function(){
     let arrayAddress = []
     contAuto.innerHTML = ""
     champ3 = this.value
-    console.log(champ1+" "+champ2+" "+champ3)
+  
     if(champ3 != "")
     {
         const Address = fetch("https://api-adresse.data.gouv.fr/search/?q="+champ1+" "+champ2+" "+champ3+"&limit=5")
@@ -39,15 +39,29 @@ street.addEventListener('input', function(){
         }
         
         arrayAddress.forEach(element => {
-            let option = document.createElement('option');
-            option.innerText = element
-            option.setAttribute('class', '')
-            contAuto.appendChild(option);
+            let li = document.createElement('li');
+            li.innerText = element
+            li.setAttribute('class', 'li_item')
+            contAuto.appendChild(li);
         });
-        let parent = postalCode.parentNode
-        // parent.appendChild(contAuto)
-        // postalCode.parentNode.insertBefore(contOptions,postalCode.nextSibling)
-      console.log(arrayAddress)  
+        
+        let lis = document.querySelectorAll('.li_item')
+        lis.forEach(li => {
+           
+            li.addEventListener('click', function(){
+
+                let addressSplit = li.innerHTML.split(' ')
+                let citySelect = addressSplit[addressSplit.length - 1]
+                let postalCodeSelect = addressSplit[addressSplit.length - 2]
+                street.value = addressSplit[addressSplit.length - 3]
+                city.value = citySelect
+                postalCode.value = postalCodeSelect
+                contAuto.innerHTML = ""
+                
+            })
+
+        });
+  
     })
     }
     
