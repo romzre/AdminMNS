@@ -28,7 +28,7 @@
 body{
     background-color: var(--main-bg-color);
     color : #fff;
-    font-family: 'Gilroy','Montserrat';
+    font-family: 'Montserrat';
     
 }
 
@@ -49,9 +49,13 @@ h1 {
 
 h2 {
     color : #fff;
-    font-family: "Shary";
+    font-family: "Gilroy";
     font-size: 1.5em;
     text-align: center;
+}
+
+h3,h4 {
+    font-family: 'Gilroy'
 }
 
 /* Bouton */

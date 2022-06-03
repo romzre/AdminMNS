@@ -28,32 +28,12 @@ class AbsenceController extends Controller
             $absences = $absenceManager->getUserAbsences($_SESSION['id_user']);
 
             //on traite les données de la date de début et de fin pour pouvoir l'afficher dans le template
-            foreach ($absences as $key => $absence) {
-                $startingDate = $absence['startingDate_absence'];
-                $endDate = $absence['endDate_absence'];
-
-                $format = 'Y-m-d H:i:s';
-                $startingDate = DateTime::createFromFormat($format, $startingDate);
-                $newStartingDate = $startingDate->format('d-m-Y');
-
-                $endDate = DateTime::createFromFormat($format, $endDate);
-                $newEndDate = $endDate->format('d-m-Y');
-
-                $interval = $startingDate->diff($endDate);
-                $duration = $interval->format('%a');
-
-                $absence['startingDate_absence'] = $newStartingDate;
-                $absence['endDate_absence'] = $newEndDate;
-                $absence['duration'] = $duration;
-
-                $absences[$key] = $absence;
-            }
-
             $indexTab = count($absences);
             $data['indexTab'] = $indexTab;
             $data['absences'] = $absences;
 
             $path = 'pages/trainee/absences.html.twig';
+
             $this->renderView($path, $data);
         } else $this->reLocate();
     }
@@ -116,7 +96,7 @@ class AbsenceController extends Controller
         //on compte le nombre de document envoyé
         $nbDocs = count($_FILES);
 
-        $doc_report = [];
+        $doc_reports = [];
 
         //on récupère l'id_typeOfWord qui étaient passés dans l'attribut name de l'input de chaque document et on les stocke dans le tableau $id_typeOfDoc
 
@@ -135,16 +115,18 @@ class AbsenceController extends Controller
                     if ($doc_report['name'] !== '') {
 
                         $wording_file = basename($doc_report['name']);
-                        echo $wording_file;
 
                         // Testons si l'extension est autorisée
                         $infosfichier = pathinfo($doc_report['name']);
 
                         $extension_upload = $infosfichier['extension'];
 
-                        $extensions_autorisees = array('pdf', 'jpg', 'jpeg', 'png');
+                        $extensions_autorisees = array('pdf', 'jpg', 'jpeg');
 
-                        if (in_array($extension_upload, $extensions_autorisees)) {
+                        $mime_type = mime_content_type($doc_report['tmp_name']);
+                        $allowed_file_types = ['image/jpeg', 'image/jpg', 'application/pdf'];
+
+                        if (in_array($extension_upload, $extensions_autorisees) && in_array($mime_type, $allowed_file_types)) {
 
                             // On regarde si l'internaute a indiqué un motif pour son absence
 
@@ -153,11 +135,11 @@ class AbsenceController extends Controller
                             if (isset($_POST['absence'][$id_report]) && isset(($_POST['absence'][$id_report]['id_motif']))) {
                                 $id_motif = ($_POST['absence'][$id_report]['id_motif']);
 
-                                //on insere le motif dans la base de données 
+                                //on insère le motif dans la base de données 
                                 $reportManager = new ReportManager();
                                 $motif = $reportManager->updateMotif($id_motif, $id_report);
 
-                                //si le motif a bien été inséré on déplace le fichier
+                                //si le motif a bien été inséré dans la base on déplace le fichier
                                 if ($motif) {
                                     $directory = "../uploads/" . $_SESSION['id_user'] . "/absences/" . $id_report;
 
@@ -166,19 +148,23 @@ class AbsenceController extends Controller
                                         mkdir($directory, 0777);
                                     }
 
-                                    $path_file = "../uploads/" . $_SESSION['id_user'] . "/absences/" . $id_report . "/" . $wording_file;
-                                    move_uploaded_file($doc_report['tmp_name'], $path_file);
+                                    if (is_dir($directory) == true) {
+                                        $path_file = "../uploads/" . $_SESSION['id_user'] . "/absences/" . $id_report . "/" . $wording_file;
+                                        move_uploaded_file($doc_report['tmp_name'], $path_file);
 
-                                    $documentManager = new DocumentManager();
-                                    $id_document = $documentManager->insertUserFile($path_file, $wording_file, $_SESSION['id_user']);
+                                        $documentManager = new DocumentManager();
+                                        $id_document = $documentManager->insertUserFile($path_file, $wording_file, $_SESSION['id_user']);
 
-                                    //on relie l'id_document et l'id_report dans la table absenceDocs
-                                    $absenceDocsManager = new AbsenceDocsManager();
-                                    $absenceDoc = $absenceDocsManager->insert($id_document, $id_report);
+                                        //on relie l'id_document et l'id_report dans la table absenceDocs
+                                        $absenceDocsManager = new AbsenceDocsManager();
+                                        $absenceDoc = $absenceDocsManager->insert($id_document, $id_report);
 
-                                    if ($absenceDoc) {
+                                        if ($absenceDoc) {
 
-                                        return $message .= "<p>Votre justificatif a bien été renvoyé, vous recevrez un email lorsque l'administration aura revu votre document</p>";
+                                            return $message .= "<p>Votre justificatif a bien été envoyé, vous recevrez un email lorsque l'administration aura revu votre document</p>";
+                                        }
+                                    } else {
+                                        $message .= "<p>Oups, il y a eu un problème lors de l'envoi, merci de renouveller l'opération </p>";
                                     }
                                 } else {
                                     $message .= "<p>Merci de préciser le motif</p>";
@@ -187,7 +173,7 @@ class AbsenceController extends Controller
                                 $message .= "<p>Merci de préciser le motif</p>";
                             }
                         } else {
-                            $message .= "<p>Seules les extensions pdf, jpeg, jpg et png sont autorisées !</p>";
+                            $message .= "<p>Seules les extensions pdf, jpeg et jpg sont autorisées !</p>";
                         }
                     } else {
                         $message .= '<p>Le fichier doit avoir un titre</p>';
@@ -196,10 +182,65 @@ class AbsenceController extends Controller
                     $message .= '<p>Le fichier est trop volumineux</p>';
                 }
             } else {
-                $message .= "<p>Oups il y a eu un problème lors de l'envoi, merci de renouveller l'opération </p>";
+                $message .= "<p>Oups, il y a eu un problème lors de l'envoi, merci de renouveller l'opération </p>";
             }
 
             return $message;
         }
+    }
+
+    public function
+
+    declare()
+    {
+
+        if (empty($_SESSION['id_user'])) session_start();
+
+
+        if (!empty($_SESSION['id_user'])) {
+            $message = "";
+
+            if (isset($_POST['btn-declare-abs'])) {
+
+                $message = "";
+
+                if (!empty($_POST['startingDate_absence'])) {
+                    $message .= "<p>Merci de préciser une date de début</p>";
+                } else $startingDate_absence = $_POST['startingDate_absence'];
+                if (!empty($_POST['endDate_absence'])) {
+                    $message .= "<p>Merci de préciser une date de fin</p>";
+                } else $endDate_absence = $_POST['endDate_absence'];
+                if (!empty($_POST['id_motif'])) {
+                    $message .= "<p>Merci de préciser le motif de votre absence</p>";
+                } else $id_motif = $_POST['id_motif'];
+                if (isset($startingDate_absence) && isset($endDate_absence) && isset($id_motif)) {
+
+                    if (isset($_FILES)) {
+                        $documentManager = new DocumentManager();
+                        $documentChecked = $documentManager->checkDocNewReport($_FILES);
+                        var_dump($documentChecked);
+                        $message .= $documentChecked['message'];
+
+                        //si le doc a été vérifié, on crée le report
+                        if ($documentChecked['docChecked']) {
+                            $reportManager = new ReportManager();
+                            $id_report = $reportManager->insert($id_motif, $_SESSION['id_user']);
+                        }
+                    }
+                }
+            }
+
+            $motifManager = new MotifManager();
+            $motifs = $motifManager->getAllMotif();
+
+            $data['message'] = $message;
+            $data['motifs'] = $motifs;
+
+            var_dump($data);
+
+
+            $path = 'pages/trainee/declare_absence.html.twig';
+            $this->renderView($path, $data);
+        } else $this->reLocate();
     }
 }
