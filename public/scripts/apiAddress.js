@@ -5,6 +5,7 @@ let postalCode = document.querySelector('#postalCode');
 let city = document.querySelector('#city');
 let addressComplement = document.querySelector('#addressComplement');
 let contAuto = document.querySelector('.contAutoComplete')
+let nbOption = 8
 let champ1 = ""
 let champ2 = ""
 let champ3 = ""
@@ -22,6 +23,7 @@ laneType.addEventListener('blur', function(){
 
 })
 
+
 street.addEventListener('keyup', function(){
     let arrayAddress = []
     contAuto.innerHTML = ""
@@ -29,12 +31,12 @@ street.addEventListener('keyup', function(){
   
     if(champ3 != "")
     {
-        const Address = fetch("https://api-adresse.data.gouv.fr/search/?q="+champ1+" "+champ2+" "+champ3+"&limit=5")
+        const Address = fetch("https://api-adresse.data.gouv.fr/search/?q="+champ1+" "+champ2+" "+champ3+"&limit="+nbOption)
     .then(response => {
         return response.json()
     }).then((data) => {
         
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < nbOption; i++) {
             arrayAddress.push(data.features[i].properties.label)
         }
         
@@ -53,7 +55,7 @@ street.addEventListener('keyup', function(){
                 let addressSplit = li.innerHTML.split(' ')
                 let citySelect = addressSplit[addressSplit.length - 1]
                 let postalCodeSelect = addressSplit[addressSplit.length - 2]
-                street.value = addressSplit[addressSplit.length - 3]
+                // street.value = addressSplit[addressSplit.length - 3]
                 city.value = citySelect
                 postalCode.value = postalCodeSelect
                 contAuto.innerHTML = ""

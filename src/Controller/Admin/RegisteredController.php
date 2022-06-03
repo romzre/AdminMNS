@@ -21,6 +21,7 @@ class RegisteredController extends Controller
             $req = $manager->updateRegisteredToCandidate($id_user);
             mkdir('../uploads/'.$id_user,0777);
             mkdir('../uploads/'.$id_user.'formation',0777);
+            mkdir('../uploads/'.$id_user.'Abscences',0777);
             mkdir('../uploads/'.$id_user.'profile_pic',0777);
             if($req)
             {
@@ -52,9 +53,6 @@ class RegisteredController extends Controller
 
         $manager = new AdminManager();
         $req = $manager->updateCandidateToTrainee($id_user);
-
-
-        
         
         header("Location:/?area=admin&controller=home");
     }
