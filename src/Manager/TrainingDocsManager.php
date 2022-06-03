@@ -215,18 +215,17 @@ class TrainingDocsManager {
         return $stmt;
     }
 
-    // public function test(string $id_training, string $id_user)
-    // {
-    //     $pdo=PdoManager::getPdo();
+    public function DeleteDoc($id_document)
+    {
+        $pdo=PdoManager::getPdo();
+     
 
-    //     $sql= 'SELECT typeOfDoc.id_typeOfDoc, typeOfDoc.wording_typeOfDoc,document.isValid, document.id_user FROM trainingDocs INNER JOIN training_typeOfDoc on trainingDocs.id_training = training_typeOfDoc.id_training INNER JOIN typeOfDoc on typeOfDoc.id_typeOfDoc = training_typeOfDoc.id_typeOfDoc INNER JOIN trainingDocs ON document.id_document = trainingDocs.id_document WHERE training.id_training=:id_training AND document.id_user=:id_user';
-    //     $req = $pdo->prepare($sql);
-    //     $req->execute([
-    //         'id_training'=> $id_training,
-    //         'id_user'=> $id_user
-    //     ]);
-        
-    //     return $trainingDocs = $req->fetchAll(PDO::FETCH_ASSOC);
+        $sql= "DELETE FROM `trainingDocs` WHERE id_document = :id_document";
+        $req = $pdo->prepare($sql);
+        $stmt =  $req->execute([
+            'id_document' => $id_document
+        ]);
 
-    // }
+        return $stmt;
+    }
 }

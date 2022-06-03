@@ -2,7 +2,9 @@
 
 namespace App\Manager;
 
+
 use PDO;
+use App\Entity\Document;
 
 class DocumentManager
 {
@@ -33,18 +35,83 @@ class DocumentManager
         return $id_document = $pdo->lastInsertId();
     }
 
-    public function getDoc($id_document)
+    public function getAllDocsFromUser($id_user)
     {
         $pdo = PdoManager::getPdo();
-        $sql = "SELECT * FROM `document` WHERE id_document = :id_document";
+        $sql = "SELECT document.id_document , wording_file, document.isValid, id_user , typeOfDoc.id_typeOfDoc , wording_typeOfDoc , training.id_training, title_formation FROM `document` INNER JOIN trainingDocs ON document.id_document = trainingDocs.id_document INNER JOIN typeOfDoc ON trainingDocs.id_typeOfDoc = typeOfDoc.id_typeOfDoc INNER JOIN training ON trainingDocs.id_training = training.id_training WHERE id_user = :id_user";
 
         $req = $pdo->prepare($sql);
 
         $req->execute([
+            'id_user' => $id_user
+        ]);
+
+        $docs = $req->fetchAll(PDO::FETCH_ASSOC);
+        if (!empty($docs)) {
+            return $docs;
+        } else {
+            return false;
+        }
+    }
+
+    public function unvalidateDoc($id_document)
+    {
+        $pdo = PdoManager::getPdo();
+        $sql = "UPDATE `document` SET `isValid`= 0 WHERE id_document = :id_document";
+
+        $req = $pdo->prepare($sql);
+
+        $stmt = $req->execute([
             'id_document' => $id_document
         ]);
 
-        return $req->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
+    }
+
+    public function validateDoc($id_document)
+    {
+        $pdo = PdoManager::getPdo();
+        $sql = "UPDATE `document` SET `isValid`= 1 WHERE id_document = :id_document";
+
+        $req = $pdo->prepare($sql);
+
+        $stmt = $req->execute([
+            'id_document' => $id_document
+        ]);
+
+        return $stmt;
+    }
+
+    public function Delete($id_document)
+    {
+        $pdo = PdoManager::getPdo();
+
+
+        $sql = "DELETE FROM `document` WHERE id_document = :id_document";
+        $req = $pdo->prepare($sql);
+        $stmt =  $req->execute([
+            'id_document' => $id_document
+        ]);
+
+        return $stmt;
+    }
+
+    public function getDocById($id_document)
+    {
+        $pdo = PdoManager::getPdo();
+
+
+        $sql = "SELECT * FROM `document`  WHERE id_document = :id_document";
+        $req = $pdo->prepare($sql);
+        $stmt =  $req->execute([
+            'id_document' => $id_document
+        ]);
+
+        $doc = $req->fetch(PDO::FETCH_ASSOC);
+
+        $obj = (new Document())->hydrate($doc);
+
+        return $obj;
     }
 
     public function checkDocNewReport(array $docToCheck)

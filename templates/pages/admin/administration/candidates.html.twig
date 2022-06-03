@@ -1,8 +1,8 @@
-{% extends "partials/base-admin.html.twig" %} 
+{% extends "partials/base-admin-candidat.html.twig" %} 
 {% block body%}
 <div class='contBtnMenu'>
-        <button type="button" class="active btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Candidats</a></button>
-        <button type="button" class="btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=trainees">Stagiaires</a></button>
+        <a href="/?area=admin&controller=home&action=candidates"><button type="button" class="active btn btn-primary btn-lg">Candidats</button></a>
+        <a href="/?area=admin&controller=home"><button type="button" class="btn btn-primary btn-lg">Stagiaires</button></a>
 </div>
 <div class="Cont_filter">
     
@@ -58,31 +58,25 @@
                     <td class="cel" data-info="Formation" >{{ user.title_formation }}</td>
                     <td class="cel" data-info="Statut" >{% if user.isRegistered %}Enregistrer{% else %}A valider{% endif %}</td>
                     <td class="cel center" data-info="Dossier Complété" >
-                    {% for DocNull in DocsNull %}
-                        {% if DocNull.id_user == user.id_user %}
-                            <a href="/?area=admin&controller=document&action=index&id={{ DocNull.id_document }}"><p class="NewDoc">New Doc!</p></a>
-                        {% endif %}
-                    {% endfor %}
+                    {% if user.Nbdoc is defined and user.Nbdoc != 0 %}
+                        <a href="/?area=admin&controller=document&action=index&id={{ user.id_user }}"><p class="NewDoc">New Doc!</p></a>
+                    {% endif %}
+                    
                     {% if user.isRegistered %}
                         <a href="/?area=admin&controller=document&action=index&id={{ user.id_user }}" class="center ">
                         <div class="percent">
                             <svg>
                                 <circle cx='24' cy='24' r='24' class="percent_doc1"></circle>
-                                <circle cx='24' cy='24' r='24'  data-percent='{{ user.0.percent }}' class="percent_doc2"></circle>
+                                <circle cx='24' cy='24' r='24'  data-percent='{{ user.percent }}' class="percent_doc2"></circle>
                             </svg>
                         </div>
                         <div class="nbDoc">
-                            {% for isvalid in DocValid %}
-                                {% if isvalid.id_user == user.id_user %}
-                                    {{ isvalid.isValid }} 
-                                {% endif %}
-                            {% endfor %} 
                             {% for Doc in trainingDoc %}    
                                 {% if user.title_formation == Doc.title_formation %}
-                                        / {{ Doc.nbDocs }}
+                                     {{ user.NbdocValid }} / {{ Doc.nbDocs }}
                                 {% endif %}
                             {% endfor %}
-                        {% else %}
+                       {% else %} 
                          -
                         </div>
                         </a>

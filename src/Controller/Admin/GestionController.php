@@ -33,15 +33,26 @@ class GestionController extends Controller{
     public function training()
     {
         require_once '../app/service/admin-check.php';
-
+   
         if(isset($_POST['submit']))
         {
+            
             $data = [];
             foreach ($_POST as $key => $value) {
                 $data[$key] = htmlspecialchars($value);
             }
-            $manager = new TrainingManager();
+
+            $title = $_POST['title_formation'];
+            $ArrayCodeName = explode(' ',$title);
+            $codeName = "";
+            foreach ($ArrayCodeName as $word) {
+                $codeName .= substr(ucfirst($word) , 0 , 1);
+               
+            }
             array_pop($data);
+            $data['code_training'] = $codeName;
+           
+            $manager = new TrainingManager();
             $manager->updateTraining($data);
             header("location:/?area=admin&controller=gestion&action=training&id=".$_POST['id']);
             exit;
@@ -49,6 +60,7 @@ class GestionController extends Controller{
     
         if(isset($_POST['submit_add']))
         {
+            
             //Verifier le champ
             if(empty($_POST['Iddoc']))
             {
@@ -60,6 +72,7 @@ class GestionController extends Controller{
             // Ajouter dans la table d'association Training TypeOfDoc
             $manager = new TrainingDocsManager();
             $check = $manager->checkTrainingTypeOfDocExist($champ);
+            
             if($check)
             {
                 // Le doc existe dans la table

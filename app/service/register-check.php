@@ -47,17 +47,21 @@ if(!$checkEmail)
    
     
     $id  = $manager->insertUser($dataUser);
-  
+    $addressComp = !empty($_POST['addressComplement']) ? $_POST['addressComplement'] : Null;
     $dataTrainee = [
-        intval($id),
-        $_POST['birthdate'],
-        $_POST['tel'],
-        $_POST['laneType'],
-        $_POST['street'],
-        $_POST['addressComplement'],
-        $_POST['postalCode'],
-        $_POST['city'],
-        $_POST['streetNumber'],
+        'id_user' => intval($id),
+        'birthdate' => $_POST['birthdate'],
+        'tel' => $_POST['tel'],
+        'laneType' => $_POST['laneType'],
+        'street' => $_POST['street'],
+        'addressComplement' => $addressComp ,
+        'postalCode' => $_POST['postalCode'],
+        'city' => $_POST['city'],
+        'streetNumber' => $_POST['streetNumber'],
+        'completeDossier' => 0,
+       'isActive'  =>  0,
+        'isRegistered' => 0,
+       
        
     ];
     

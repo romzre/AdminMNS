@@ -19,6 +19,9 @@ class RegisteredController extends Controller
             $id_user = $_GET['id'];
             $manager = new AdminManager();
             $req = $manager->updateRegisteredToCandidate($id_user);
+            mkdir('../uploads/'.$id_user,0777);
+            mkdir('../uploads/'.$id_user.'formation',0777);
+            mkdir('../uploads/'.$id_user.'profile_pic',0777);
             if($req)
             {
                 header("Location:/?area=admin&controller=home&action=candidates");
@@ -36,5 +39,23 @@ class RegisteredController extends Controller
                 $this->renderView($path, $data);
             }
         }
+    }
+
+    public function validateTrainee()
+    {
+        require_once '../app/service/admin-check.php';
+        
+        if(!empty($_GET['id']))
+        {
+            $id_user = $_GET['id'];
+        }
+
+        $manager = new AdminManager();
+        $req = $manager->updateCandidateToTrainee($id_user);
+
+
+        
+        
+        header("Location:/?area=admin&controller=home");
     }
 }

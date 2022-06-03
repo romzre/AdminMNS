@@ -6,8 +6,6 @@ use PDO;
 use App\Entity\User;
 use App\Manager\PdoManager;
 
-// require_once 'PdoManager.php';
-// require_once '../src/Entity/User.php';
 
 
 class UserManager
@@ -62,11 +60,11 @@ class UserManager
     public function insertRegister(array $dataRegister)
     {
 
-        $pdo = PdoManager::getPdo();
-
-        $sql = "INSERT INTO `trainee`(`id_user`, `birthdate`, `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber`, `completeDossier`, `isActive`, `isRegister`, `id_organism`, `id_classroom`) VALUES 
-                                    (   ?    ,     ?      ,   ?  ,     ?     ,     ?    ,          ?         ,      ?      ,    ?  ,      ?        ,          0      ,      0    ,    0     ,      null    ,        null   )";
-
+        $pdo=PdoManager::getPdo();
+  
+        $sql= "INSERT INTO `trainee`(`id_user`, `birthdate`, `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber` , `completeDossier` , `isActive`, `isRegistered`) VALUES (:id_user, :birthdate, :tel, :laneType, :street , :addressComplement , :postalCode , :city , :streetNumber , :completeDossier , :isActive , :isRegistered)";
+      
+     
         $req = $pdo->prepare($sql);
         $stmt = $req->execute($dataRegister);
 

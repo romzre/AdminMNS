@@ -45,4 +45,21 @@ class ProfileController extends Controller {
             $this->renderView($path, $data);
         }
     }
+
+    public function trainee()
+    {
+        if(!empty($_GET['id']))
+        {
+            $id_user = intval($_GET['id']);
+            $manager = new TraineeManager();
+            $user = $manager->getAllTraineeById($id_user);
+          
+            $data = compact('user');
+            $data['action'] = 'candidates'; 
+        
+            $path= 'pages/admin/administration/profileRegistered.html.twig';
+      
+            $this->renderView($path, $data);
+        }
+    }
 }
