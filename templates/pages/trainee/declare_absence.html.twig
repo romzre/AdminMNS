@@ -26,7 +26,7 @@
 							<label class="input-group-text" for="absence_motif">Motif</label>
 						</div>
 						<select class="custom-select" name="id_motif" id="absence_motif">
-							<option selected>Choose...</option>
+							<option value="null">Choose...</option>
 							{% for  motif in motifs %}
 								<option value="{{motif.id_motif}}">{{motif.wording_motif}}</option>
 							{% endfor %}
@@ -45,6 +45,15 @@
 
 
 				</form>
+			</div>
+		</div>
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text">Justificatif</span>
+			</div>
+			<div class="custom-file">
+				<input type="file" class="custom-file-input" name="report_justificatif" id="report_justificatif">
+				<label class="custom-file-label" for="report_justificatif">Choisir un document</label>
 			</div>
 		</div>
 		<script src="/scripts/trainee-declare-absence.js"></script>

@@ -203,22 +203,24 @@ class AbsenceController extends Controller
             if (isset($_POST['btn-declare-abs'])) {
 
                 $message = "";
+                var_dump($_POST);
 
-                if (!empty($_POST['startingDate_absence'])) {
+                if (empty($_POST['startingDate_absence'])) {
                     $message .= "<p>Merci de préciser une date de début</p>";
                 } else $startingDate_absence = $_POST['startingDate_absence'];
-                if (!empty($_POST['endDate_absence'])) {
+                if (empty($_POST['endDate_absence'])) {
                     $message .= "<p>Merci de préciser une date de fin</p>";
                 } else $endDate_absence = $_POST['endDate_absence'];
-                if (!empty($_POST['id_motif'])) {
+                if (empty($_POST['id_motif'])) {
                     $message .= "<p>Merci de préciser le motif de votre absence</p>";
                 } else $id_motif = $_POST['id_motif'];
+
                 if (isset($startingDate_absence) && isset($endDate_absence) && isset($id_motif)) {
 
                     if (isset($_FILES)) {
                         $documentManager = new DocumentManager();
                         $documentChecked = $documentManager->checkDocNewReport($_FILES);
-                        var_dump($documentChecked);
+                        // var_dump($documentChecked);
                         $message .= $documentChecked['message'];
 
                         //si le doc a été vérifié, on crée le report
