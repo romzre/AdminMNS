@@ -144,14 +144,16 @@ class AccountController extends Controller
 
                     $wording_file = basename($profile_pic['name']);
 
-                    // Testons si l'extension est autorisée
+                    // Testons si l'extension  et le type de document sont autorisés
                     $infosfichier = pathinfo($profile_pic['name']);
 
                     $extension_upload = $infosfichier['extension'];
-
                     $extensions_autorisees = array('jpg', 'jpeg');
 
-                    if (in_array($extension_upload, $extensions_autorisees)) {
+                    $mime_type = mime_content_type($profile_pic['tmp_name']);
+                    $allowed_file_types = ['image/jpg', 'image/jpeg'];
+
+                    if (in_array($extension_upload, $extensions_autorisees) && in_array($mime_type, $allowed_file_types)) {
 
                         // On peut valider le fichier et le stocker définitivement
                         $path_file = "../uploads/" . $_SESSION['id_user'] . "/profile_pic/" . $wording_file;

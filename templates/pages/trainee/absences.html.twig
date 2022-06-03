@@ -2,70 +2,60 @@
 
 {% block body %}
 
-	<div class="container-absence-dashboard">
+	<div class="container">
 		<div class="container-title-absence">
 			<h2>Vos absences</h2>
 		</div>
-		<div class="container-absence-table">
+		<div class="row container-absence-table">
 			<form class="form-docs" action="#" method='post' enctype='multipart/form-data'>
-				<table class="dataTable">
-					<thead>
-						<tr>
-							<th class="up-left col-1">Date de début</th>
-							<th class='cell col-2'>Date de fin</th>
-							<th class='cell col-3'>Durée
-								<div>
-									<small>en nombre de jour(s)</small>
-								</th>
-							</th>
-							<th class='cell col-4'>Motif</th>
-							<th class='up-right col-5' class="up-right col-2">Statut</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for key,absence in absences %}
+				<div class="container-table col-10 col-sm-12">
+					<table class="dataTable">
+						<thead>
 							<tr>
-								{% if key == indexTab -1 %}
-									<td class="col-1 down-left">
-									{% else %}
-										<td class='cell col-1'>
-										{% endif %}
-										{{absence.startingDate_absence}}
-									</td>
-									<td class='cell col-2'>{{absence.endDate_absence}}</td>
-									<td class='cell col-3'>{{absence.duration}}</td>
-									<td class='cell col-4'>
-										{% if absence.wording_motif is not defined %}
-											<select name="wording_motif" id="pet-select">
-												<option value="">--Please choose an option--</option>
-												{% for motif in motifs %}
-													<option value="{{motif.id_motif}}">{{motif.wording_motif}}</option>
-												{% endfor %}
-											</select>
-											<input type='file' name="id_report[{{absence.id_report}}]" accept=".pdf"/>
-										{% else %}
-											{{absence.wording_motif|capitalize}}
-										{% endif %}
-									</td>
-									{% if key == indexTab -1 %}
-										<td class='down-right col-5'>
-										{% else %}
-											<td class='cell col-5'>
-											{% endif %}
-											{% if absence.isJustified == 1 %}Justifiée
-												{% elseif (absence.isJustified) is null and absence.id_motif is null and absence.deadline <= 2 %}En attente de justificatif
-												{% elseif (absence.isJustified) is null and absence.id_motif is not null %}Justificatif envoyé
-												{% elseif (absence.isJustified) is null and absence.id_motif is null or  absence.id_motif is defined %}Injustifiée
-												{% elseif (absence.isJustified) == 0  %}Injustifiée
-
-											{% endif %}
-										</td>
-									</tr>
-								{% endfor %}
+								<th class="up-left table-col-1">Date de début</th>
+								<th class='cell table-col-2'>Date de fin</th>
+								<th class='cell table-col-3'>Durée
+									<div>
+										<small>en nombre de jour(s)</small>
+									</th>
+								</th>
+								<th class='cell table-col-4'>Motif</th>
+								<th class='up-right table-col-5' class="up-right table-col-2">Statut</th>
 							</tr>
+						</thead>
+						<tbody>
+							{% for key,absence in absences %}
+								<tr>
+									{% if key == indexTab -1 %}
+										<td class="table-col-1 down-left">
+										{% else %}
+											<td class='cell table-col-1'>
+											{% endif %}
+											{{absence.startingDate}}
+										</td>
+										<td class='cell table-col-2'>{{absence.endDate}}</td>
+										<td class='cell table-col-3'>{{absence.duration}}</td>
+										<td class='cell table-col-4'>{{absence.wording_motif|capitalize}}</td>
+										{% if key == indexTab -1 %}
+											<td class='down-right table-col-5'>
+											{% else %}
+												<td class='cell table-col-5'>
+												{% endif %}
+												{% if absence.isJustified == 1 %}Justifiée
+													{% elseif (absence.isJustified) is null and absence.id_motif is null and absence.id_document is null and absence.deadline <= 2 %}En attente de justificatif
+													{% elseif (absence.isJustified) is null and absence.id_motif is defined and absence.id_document is defined %}Justificatif envoyé
+													{% elseif (absence.isJustified) is null and (absence.id_motif is null or absence.id_motif is defined) %}Injustifiée
+													{% elseif (absence.isJustified) == 0  %}Injustifiée
+
+												{% endif %}
+											</td>
+										</tr>
+									{% endfor %}
+								</tr>
+							</tbody>
 						</tbody>
-					</tbody>
-				</table>
+					</table>
+				</div>
 			</form>
 		</div>
 		<div class="container-btn-absence">
