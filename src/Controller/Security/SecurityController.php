@@ -46,7 +46,7 @@ class SecurityController extends Controller
         $data['message'] = $message;
         $data['messageErrorEmail'] = $messageErrorEmail;
         $data['success'] = $success;
-        var_dump($data);
+
         $path = 'pages/security/forgot-password.html.twig';
 
         $this->renderView($path, $data);

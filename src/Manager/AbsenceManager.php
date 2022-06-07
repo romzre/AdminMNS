@@ -13,6 +13,21 @@ use PDO;
 class AbsenceManager extends ReportManager
 {
 
+    public function insertAbsence(string $id_report, string $startingDate_absence, string $endDate_absence)
+    {
+
+        $pdo = PdoManager::getPdo();
+        $sql = "INSERT INTO `absence` (id_report, startingDate_absence, endDate_absence) VALUES (:id_report, :startingDate_absence, :endDate_absence)";
+        $req = $pdo->prepare($sql);
+        $stmt =  $req->execute([
+            'id_report' => $id_report,
+            'startingDate_absence' => $startingDate_absence,
+            'endDate_absence' => $endDate_absence,
+        ]);
+
+        return $stmt;
+    }
+
     /**
      * getAll
      *
@@ -89,7 +104,7 @@ class AbsenceManager extends ReportManager
     public function getAbsencesToJustify(string $id_user)
     {
         $pdo = PdoManager::getPdo();
-        $sql = "SELECT absence.id_report, DATE_FORMAT(startingDate_absence, '%d/%m/%Y') AS `date_de_début`, DATE_FORMAT(endDate_absence, '%d/%m/%Y') AS `date_de_fin`, ROUND(DATEDIFF(endDate_absence, startingDate_absence),1) AS `durée`, report.id_motif as motif, report.isJustified as justificatif from absence inner join report on report.id_report = absence.id_report left join motif on motif.id_motif = report.id_motif left join absenceDocs on absenceDocs.id_report = report.id_report left join document on document.id_document = absenceDocs.id_document where report.isJustified is null and document.id_document is null and report.id_user=:id_user and DATEDIFF(NOW(), absence.startingDate_absence)<=2";
+        $sql = "SELECT absence.id_report, DATE_FORMAT(startingDate_absence, '%d/%m/%Y') AS `date_de_début`, DATE_FORMAT(endDate_absence, '%d/%m/%Y') AS `date_de_fin`, ROUND(DATEDIFF(endDate_absence, startingDate_absence),1) AS `durée`, report.id_motif as id_motif, motif.wording_motif as motif, report.isJustified as justificatif from absence inner join report on report.id_report = absence.id_report left join motif on motif.id_motif = report.id_motif left join absenceDocs on absenceDocs.id_report = report.id_report left join document on document.id_document = absenceDocs.id_document where report.isJustified is null and document.id_document is null and report.id_user=:id_user and DATEDIFF(NOW(), absence.startingDate_absence)<=2";
 
 
         $req = $pdo->prepare($sql);
