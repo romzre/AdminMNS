@@ -3,43 +3,51 @@
 {% block body %}
 
 	<div class="container">
+		<div class="container-btn-back row justify-center-start mt-4">
+			<a href="./?area=trainee&controller=absence">
+				<button class="btn-primary">Retour</button>
+			</a>
+		</div>
 		<div class="row container-title-absence">
 			<h2 class="col-12">Déclarer une absence</h2>
 		</div>
 
 		<div class="row justify-content-center">
-			{% if message is defined%}
-				<div class="col-6 alert-info alert">{{message|raw}}</div>
+			{% if message is not empty %}
+				<div class="col-6 alert-info alert text-center">{{message|raw}}</div>
 			{% endif %}
 			<div class="col-10">
 				<form class="form-declare-abs" action="#" method='post' enctype='multipart/form-data'>
-					<div class="form-floating mb-3">
+					<div class="form-floating">
 						<input name="startingDate_absence" type="date" class="form-control" id="floatingInput">
 						<label for="floatingInput">Date de début de l'absence</label>
 					</div>
 					<div class="form-floating">
 						<input name="endDate_absence" type="date" class="form-control" id="floatingInput" placeholder="Password">
 						<label for="floatingPassword">Date de fin</label>
+						<span class="message-alerte alert-date">La date de fin de votre absence doit être postérieure à celle de début</span>
 					</div>
+
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="absence_motif">Motif</label>
 						</div>
 						<select class="custom-select" name="id_motif" id="absence_motif">
-							<option selected>Choose...</option>
+							<option value="null">Choisir...</option>
 							{% for  motif in motifs %}
 								<option value="{{motif.id_motif}}">{{motif.wording_motif}}</option>
 							{% endfor %}
 						</select>
 					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text">Justificatif</span>
-						</div>
-						<div class="custom-file">
-							<input type="file" class="custom-file-input" name="report_justificatif" id="report_justificatif">
-							<label class="custom-file-label" for="report_justificatif">Choisir un document</label>
-						</div>
+
+					<div class="form-check">
+						<input type="checkbox" name="checkbox_justificatif" class="form-check-input" id="checkbox_justificatif">
+						<label class="form-check-label" for="checkbox_justificatif">Transmettre un justificatif
+						</label>
+					</div>
+					<div class="container-form-input">
+						<label for="formFile" class="form-label"></label>
+						<input class="form-control form-input" type="file" id="formFile">
 					</div>
 					<button type="submit" name="btn-declare-abs" class="btn btn-primary btn-lg">Envoyer</button>
 
@@ -47,5 +55,6 @@
 				</form>
 			</div>
 		</div>
+
 		<script src="/scripts/trainee-declare-absence.js"></script>
 	{% endblock %}

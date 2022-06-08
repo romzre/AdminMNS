@@ -3,18 +3,23 @@
 {% block body %}
 
 	<div class="container">
-		<div class="row container-title-absence">
-			{% if absencesToJustify == true %}
+		<div class="container-btn-back row justify-center-start mt-4">
+			<a href="./?area=trainee&controller=absence">
+				<button class="btn-primary">Retour</button>
+			</a>
+		</div>
+		{% if absencesToJustify == true %}
+			<div class="row container-title-absence">
 				<h2 class="col-10">Absences à justifier</h2>
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-10 col-sm-12 d-flex flex-column align-items-center">
-					{% if message is defined%}
-						<div class="alert-info alert col-4 col-sm-6 d-flex justify-content-center">{{message|raw}}</div>
+					{% if message is not empty %}
+						<div class=" text-center alert-info alert col-4 col-sm-6 d-flex justify-content-center">{{message|raw}}</div>
 					{% endif %}
-					<form class="form-justify-abs" action="#" method='post' enctype='multipart/form-data'>
-						<div class="container-table">
-							<table class="dataTable_justify">
+					<div class="container-table">
+						<table class="dataTable_justify">
+							<form class="form-justify-abs" action="#" method='post' enctype='multipart/form-data'>
 								<thead>
 									<tr>
 										<th class="cell table-col-1">Date de début</th>
@@ -27,47 +32,58 @@
 								<tbody>
 									{% for index,absence in absences %}
 										<tr>
-											<td class='table-col-1'>{{absence.date_de_fin}}</td>
+
+											<td class='cell table-col-1'>{{absence.date_de_fin}}</td>
 											<td class='cell table-col-2'>{{absence.date_de_début}}</td>
 											<td class='cell table-col-3'>{{absence.durée}}</td>
+
 											<td class='cell table-col-4'>
+
 												{% if absence.motif is null %}
-													<form class="motif_absence" action="#" method="post">
-														<select name="absence[{{absence.id_report}}][id_motif]" id="pet-select">
-															<option value="">--Choose an option--</option>
-															{% for  motif in motifs %}
-																<option value="{{motif.id_motif}}">{{motif.wording_motif}}</option>
-															{% endfor %}
-														</select>
-														<input type='hidden' name="absence[{{absence.id_report}}][id_report]" value="{{absence.id_report}}"/>
-														<button type='submit' class="btn-form-motif" name="btn-form-motif[{{absence.id_report}}]"/>
-													</form>
+													<select name="absence[{{absence.id_report}}][id_motif]">
+														<option value="">--Choose an option--</option>
+														{% for  motif in motifs %}
+															<option value="{{motif.id_motif}}">{{motif.wording_motif}}</option>
+														{% endfor %}
+													</select>
+													<input type='hidden' name="absence[{{absence.id_report}}][id_report]" value="{{absence.id_report}}"/>
 												{% else %}
-													{{absence.wording_motif|capitalize}}
+
+													<select name="absence[{{absence.id_report}}][id_motif]">
+														<option value="{{absence.id_motif}}">{{absence.motif}}</option>
+														{% for  motif in motifs %}
+															{% if motif.wording_motif != absence.motif %}
+																<option value="{{motif.id_motif}}">{{motif.wording_motif}}</option>
+															{% endif %}
+														{% endfor %}
+													</select>
+													<input type='hidden' name="absence[{{absence.id_report}}][id_report]" value="{{absence.id_report}}"/>
 												{% endif %}
 											</td>
-											<td class='table-col-5'>
+											<td class='cell table-col-5'>
 												<label for='absence_support_document[{{absence.id_report}}]'>
 													<i class="fa-solid fa-cloud-arrow-up"></i>
 												</label>
-												<input id='absence_support_document[{{absence.id_report}}]' type='file' name="{{absence.id_report}}" accept=".pdf"/>
+												<input class="form-justify-abs_{{absence.id_report}}" id='absence_support_document[{{absence.id_report}}]' type='file' name="{{absence.id_report}}" accept=".pdf"/>
 											</td>
 										</tr>
 									{% endfor %}
 								</tbody>
-							</table>
-						</form>
+							</form>
+						</table>
 					</div>
-					<div class="container-btn-abs">
+					<div class="container-btn-abs mt-4">
 						<button type="submit" name="form-button-abs" class="btn btn-primary btn-lg">Envoyer</button>
 					</div>
 				</div>
 			{% elseif absencesToJustify == false %}
-				<h2>Aucune absence à justifier</h2>
-			</div>
+				<div class="row container-title-absence">
+					<h2>Aucune absence à justifier</h2>
+				</div>
+			{% endif %}
+		</div>
+		{% if absencesToJustify == true %}
+			<script src="/scripts/trainee.js"></script>
 		{% endif %}
-	</div>
-	{% if absencesToJustify == true %}
-		<script src="/scripts/trainee.js"></script>
-	{% endif %}
-{% endblock %}
+
+	{% endblock %}

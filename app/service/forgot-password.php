@@ -1,8 +1,9 @@
-<?php 
+<?php
 require '../src/Manager/UserManager.php';
 
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
+
 use App\Manager\UserManager;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -10,29 +11,28 @@ use App\Manager\PasswordResetManager;
 
 
 //on vérifie le champ du mail
-$email = (!empty($_POST['email']) )? $_POST['email']:null;
+$email = (!empty($_POST['email'])) ? $_POST['email'] : null;
 
-if(!$email)
-{
-    $message = 'Merci de renseigner votre email !' ;
-}
-else
-{
+if (!$email) {
+    $message = 'Merci de renseigner votre email !';
+} else {
     //on vérifier l'existence de l'utilisateur avec son email
     $manager = new UserManager();
     $user = $manager->getUserByEmail($email);
 
-    if(!$user)
-    {
+    if (!$user) {
         $messageErrorEmail = '<p>L\'adresse email indiquée n\'est associée à aucun compte !</p>';
-    }
-    else 
-    {
+    } else {
         date_default_timezone_set('Europe/Paris');
         $expFormat = mktime(
-        date("H")+1, date("i"), date("s"), date("m") ,date("d"), date("Y")
+            date("H") + 1,
+            date("i"),
+            date("s"),
+            date("m"),
+            date("d"),
+            date("Y")
         );
-        $expDate = date("Y-m-d H:i:s",$expFormat); // on récupère la date d'expiration de la clé en faisant la date et l'heure actuelle + 1h
+        $expDate = date("Y-m-d H:i:s", $expFormat); // on récupère la date d'expiration de la clé en faisant la date et l'heure actuelle + 1h
         $key = bin2hex(random_bytes(32)); //genere un tolken de 32 caractères
        
         // on insère le tolken unique,  la date d'expiration et l'email de user dans la table password-reset-temp 
@@ -60,12 +60,12 @@ else
         $subject = "Password Recovery - Admin MNS";
         
         $email_to = $email;
-        $fromserver = "noreply@adminmns.com"; 
-     
+        $fromserver = "noreply@adminmns.com";
+
         $mail = new PHPMailer(true);
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
-            //Server settings
+        //Server settings
         $mail->SMTPDebug = 0;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'ssl0.ovh.net.';                     //Set the SMTP server to send through
@@ -83,10 +83,12 @@ else
         $mail->AddAddress($email_to);
         $mail->send();
 
-        if(!$mail->Send())
-        {
+        if (!$mail->Send()) {
             echo "Mailer Error: " . $mail->ErrorInfo;
+        } else {
+            $success = '<p>Un email vous a été envoyé avec les instructions pour réinitialiser votre mot de passe.</p>';
         }
+<<<<<<< HEAD
         else
         {
             $success = '<p>An email has been sent to you with instructions on how to reset your password.</p>';
@@ -94,12 +96,7 @@ else
             
     }   
 
+=======
+    }
+>>>>>>> dev
 }
-
-
-
-
-
-
-
-
