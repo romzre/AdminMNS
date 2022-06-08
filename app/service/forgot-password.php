@@ -83,20 +83,15 @@ if (!$email) {
         $mail->AddAddress($email_to);
         $mail->send();
 
-        if (!$mail->Send()) {
-            echo "Mailer Error: " . $mail->ErrorInfo;
-        } else {
-            $success = '<p>Un email vous a été envoyé avec les instructions pour réinitialiser votre mot de passe.</p>';
-        }
-<<<<<<< HEAD
-        else
+        if (!$mail->Send()) 
         {
-            $success = '<p>An email has been sent to you with instructions on how to reset your password.</p>';
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        } 
+        else 
+        {
+            $success = '<p>Un email vous a été envoyé avec les instructions pour réinitialiser votre mot de passe.</p>';
         }
             
     }   
 
-=======
-    }
->>>>>>> dev
 }
