@@ -22,15 +22,15 @@ class AbsenceDocsManager
 
     public function insert(string $id_document, string $id_report)
     {
+
         $pdo = PdoManager::getPdo();
 
-        $sql = 'INSERT INTO absenceDocs (id_document, id_report) VALUES (:id_document, :id_report) ';
+        $sql = 'INSERT INTO absenceDocs (id_document, id_report) VALUES (:id_document, :id_report)';
         $req = $pdo->prepare($sql);
         $stmt = $req->execute([
-            'id_report' => $id_report,
             'id_document' => $id_document,
+            'id_report' => $id_report,
         ]);
-
 
         return $stmt;
     }

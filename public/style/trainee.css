@@ -108,6 +108,7 @@ grid-area: three;
 
 .alert>p{
     margin-bottom: 0;
+    font-size:0.9rem
 }
 
 /* PERSONAL DATA */
@@ -422,7 +423,7 @@ td, th {
 }
 
 /*declare absence */
-.input-group-text{
+.input-group-text, .form-input{
     padding: 0.75rem 1rem;
 }
 
@@ -431,7 +432,8 @@ select#absence_motif {
 }
 
 .input-group{
-    width:400px;
+    min-width: 350px;
+    width: 400px;
     flex-wrap: inherit;
 }
 
@@ -440,11 +442,7 @@ select#absence_motif {
 
 @media all and (max-width: 480px){
 
-    .dataTable{
-        display: flex;
-        justify-content: flex-end;
-        width: 350px;
-    }
+
     .container-titre-dashboard {
         padding: 0 10px;
         margin: inherit;
@@ -461,10 +459,7 @@ select#absence_motif {
 
 @media all and (max-width: 800px){
 
-/* .container-account {
-        display: grid;
-        grid-template-columns: 1fr;
-} */
+
     .form-sub-part {
         display: flex;
         flex-direction: column;
@@ -504,9 +499,6 @@ select#absence_motif {
     .part-address{
         justify-content :space-between
     }
-    /* .container-personal-info input {
-        width: 200px;
-    } */
 
     form {
         align-items: stretch;
@@ -518,10 +510,22 @@ select#absence_motif {
         width: 300px;
     }
 
-    .form-floating{
+    .form-floating, .input-group{
         width: auto;
         min-width: inherit;
     }
+    button[name="btn-declare-abs"]
+    {
+        align-self: center;
+    }
+
+    .container-btn-absence  button {
+        font-size: 0.7rem;
+    }
+    .container-btn-absence{
+        justify-content: space-between;
+    }
+
 }
 
 

@@ -121,7 +121,6 @@ class DocumentManager
         $docChecked = false;
 
         //on compte le nombre de document envoyé
-        var_dump($docToCheck);
 
         $doc_report = $docToCheck['report_justificatif'];
 
@@ -147,8 +146,6 @@ class DocumentManager
 
                         // On regarde si l'internaute a indiqué un motif pour son absence
                         $docChecked = true;
-                        $id_report = $doc_report['id_report'];
-                        $dataToReturn['id_report'] = $id_report;
                     } else {
                         $message .= "<p>Seules les extensions pdf, jpeg et jpg sont autorisées !</p>";
                     }
@@ -162,7 +159,35 @@ class DocumentManager
             $message .= "<p>Oups il y a eu un problème lors de l'envoi, merci de renouveller l'opération </p>";
         }
         $dataToReturn['message'] = $message;
-        $dataToReturn['docChecked'] = $docChecked;
+        $dataToReturn['wording_file'] = $wording_file;
+        $dataToReturn['tmp_name'] = $doc_report['tmp_name'];
+        $dataToReturn['isChecked'] = $docChecked;
         return $dataToReturn;
+    }
+
+    function move_absence_file(string $id_user, string $id_report, string $wording_file, string $tmp_name)
+    {
+        //si le motif a bien été inséré dans la base on déplace le fichier
+        $first_directory = "../uploads/" . $id_user . "/absences";
+
+        //on vérifie que le dossier existe sinon on le créé
+        if (is_dir($first_directory) == false) {
+            mkdir($first_directory, 0777);
+        }
+        $second_directory = "../uploads/" . $id_user . "/absences/" . $id_report;
+
+        if (is_dir($second_directory) == false) {
+            mkdir($second_directory, 0777);
+        }
+
+        if (is_dir($second_directory) == true) {
+            $path_file = "../uploads/" . $id_user . "/absences/" . $id_report . "/" . $wording_file;
+            move_uploaded_file($tmp_name, $path_file);
+
+            $documentManager = new DocumentManager();
+            $id_document = $documentManager->insertUserFile($path_file, $wording_file, $_SESSION['id_user']);
+
+            return $id_document;
+        }
     }
 }

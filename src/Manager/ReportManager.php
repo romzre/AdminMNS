@@ -25,8 +25,9 @@ class ReportManager
 
     public function insert(string $id_motif, string $id_user)
     {
+
         $pdo = PdoManager::getPdo();
-        $sql = "INSERT INTO `report` (id_motif, id_user)`id_motif`= :id_motif WHERE id_user = :id_user";
+        $sql = "INSERT INTO `report` (id_motif, id_user) VALUES (:id_motif, :id_user)";
         $req = $pdo->prepare($sql);
         $stmt =  $req->execute([
             'id_user' => $id_user,
