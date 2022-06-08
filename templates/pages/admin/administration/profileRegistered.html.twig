@@ -69,9 +69,13 @@
                 <p>{{ user.title_formation }}</p>
             </div>
         <div class=' btn_registered '>
-            <p class=" btn-primary Return btnProfile"><a href="/?area=admin&controller=home&action={{action}}" >Retour</a></p>
             {% if action is not defined %}
-            <p class=" btn-primary Return btnProfile"><a href="/?area=admin&controller=registered&action=validate&id={{user.id_user}}" >Creer le candidat</a></p>
+                <a class="text-decoration-none" href="/?area=admin&controller=home&action=index" ><p class=" btn-primary Return btnProfile">Retour</p></a>
+            {% else %}
+                <a class="text-decoration-none" href="/?area=admin&controller=home&action={{ action }}" ><p class=" btn-primary Return btnProfile">Retour</p></a>
+            {% endif %}
+            {% if action is not defined %}
+            <a class="text-decoration-none" href="/?area=admin&controller=registered&action=validate&id={{user.id_user}}" ><p class=" btn-primary Return btnProfile">Creer le candidat</p></a>
             {% endif %}
         </div>
     </div>

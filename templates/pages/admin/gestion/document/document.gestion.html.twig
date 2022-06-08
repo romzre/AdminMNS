@@ -71,9 +71,9 @@
     </table>
 </div>
     <div class='contBtnMenu'>
-        <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=home&action=candidates">Retour</a></button>
+        <a class="text-decoration-none" href="/?area=admin&controller=home&action=candidates"><button type="button" class=" btn btn-primary btn-lg">Retour</button></a>
         {% if DocValid ==  nbAlldocs %}
-        <button type="button" class=" btn btn-primary btn-lg"><a href="/?area=admin&controller=registered&action=validateTrainee&id={{ user.getIdUser }}">Creer le stagiaire</a></button>
+       <a class="text-decoration-none" href="/?area=admin&controller=registered&action=validateTrainee&id={{ user.getIdUser }}"> <button type="button" class=" btn btn-primary btn-lg">Creer le stagiaire</button></a>
         {% endif %}
     </div>
 

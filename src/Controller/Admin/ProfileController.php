@@ -55,7 +55,7 @@ class ProfileController extends Controller {
             $user = $manager->getAllTraineeById($id_user);
           
             $data = compact('user');
-            $data['action'] = 'candidates'; 
+            // $data['action'] = 'index'; 
         
             $path= 'pages/admin/administration/profileRegistered.html.twig';
       

@@ -22,9 +22,9 @@
             {% for user in trainees %}
                 <tr>
                     <td class="cel" data-info="Prénom" ><a class="anim-hover" href="index.php?area=admin&controller=profile&action=trainee&id={{ user.id_user }}">{{ user.firstName }}</a></td>
-                    <td class="cel" data-info="Nom" ><a >{{ user.familyName }}</a></td>
+                    <td class="cel" data-info="Nom" >{{ user.familyName }}</td>
                     <td class="cel" data-info="Email" ><a href="mailto:{{ user.email }}"><img src="images/email.png" /> {{ user.email }} </a></td>
-                    <td class="cel" data-info="Formation" ><a>{{ user.title_formation }}</a></td>
+                    <td class="cel" data-info="Formation" >{{ user.title_formation }}</td>
                     <td class="cel" data-info="Classe" >
                     
                     {% if user.classroom is not defined %}

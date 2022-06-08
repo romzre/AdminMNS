@@ -32,7 +32,7 @@ use App\Manager\PasswordResetManager;
         $output ='<!DOCTYPE html>';
         $output .='<html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin MNS</title></head>';
         $output .='<body>';
-        $output .='<p>Dear user,</p>';
+        $output .='<p>Chère utilisateur,</p>';
         $output.='<p>Vous avez transmis via l\'application AdminMns le document : '. $Name_docTrainee .'</p>';
         $output.='<p>-------------------------------------------------------------</p>';
         $output.='<p> Ce document aprés analyse a été rejeté pour la raison suivante : <span style="color: red">'.$message.'</span></p>';		

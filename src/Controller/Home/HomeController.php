@@ -74,4 +74,8 @@ class HomeController extends Controller {
         $this->renderView($path, $data);
     }
 
+    public function testEmail()
+    {
+       require '../app/service/testEmail.php';
+    }
 }
