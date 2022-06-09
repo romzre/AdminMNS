@@ -49,13 +49,13 @@ if (!$email) {
         $output .= '<p>Cher.e utilisateur.rice,</p>';
         $output .= '<p>Merci de cliquer sur le lien suivant pour réinitialiser votre mot de passePlease click on the following link to reset your password.</p>';
         $output .= '<p>-------------------------------------------------------------</p>';
-        $output .= '<p><a href="51.77.211.62/?area=security&controller=security&action=resetPassword&key=' . $key . '&email=' . $email . '">Cliquez-ici</a></p>';
+        $output .= '<p><a href="http://51.77.211.62/?area=security&controller=security&action=resetPassword&key=' . $key . '&email=' . $email . '">Cliquez-ici</a></p>';
         $output .= '<p>-------------------------------------------------------------</p>';
         $output .= "<p>ou de copier coller l'intégalité du lien dans votre barre de recherche";
         $output .= 'Pour des raisons de sécurité, le lien expirera dans une heure</p>';
         $output .= "<p>Si vous n'êtes pas à l'origine de cette demande de réinitialisation, aucune action n'est nécessaire, votre mot de passe ne sera pas réinitialisé. Cependant, nous vous conseillons de vous connecter à votre compte et de modifier votre mot de passe car celui-ci est peut être compromis</p> ";
         $output .= '<p>Merci,</p>';
-        $output .= "<p>L'équipe Admin MNS</p>";
+        $output .= "<p>L'équipe d'Admin MNS</p>";
         $output .= '</body>';
         $output .= '</html>';
         $body = $output;

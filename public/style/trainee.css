@@ -97,13 +97,13 @@ grid-area: three;
 .container-account {
     width: auto;
     margin-top: 20px;
-    display: grid;
+    /* display: grid;
     grid-area: one ;
-    grid-template-columns:auto auto;
+    grid-template-columns:auto;
     grid-template-areas:    
         "one one"
         "two three";
-    gap:40px;
+    gap:40px; */
 }
 
 .alert>p{
@@ -113,45 +113,24 @@ grid-area: three;
 
 /* PERSONAL DATA */
 
-.form-sub-part {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.form-first-column, .form-second-column{
-    display: flex;
-    flex-direction: column;
-    gap:10px
-}
-
-.part-column{
-    display: flex;
-    justify-content:flex-start;
-    gap:40px
-}
 
 .container-personal-info input{
     width: 250px;
-    font-size: 0.8em;
+    font-size: 1rem;
    }
 
 
 .part-address{
     display: flex;
-    width: 250px;
     align-items: center;
     gap: 20px;
 }
 
-
-
-.part-number input {
-    width: 70px;
+.form-control {
+    padding: 0.5rem 1rem;
 }
 
-.part-typeLane input {
-    width: 110px;
-}
+
 
 .part-address .part-typeLane {
     align-self: flex-end;
@@ -184,6 +163,10 @@ div.container-account >.container-change-password {
     padding : 1rem 0.5rem;
     margin-top : 20px
 
+}
+
+.form-floating > .form-control {
+    padding : 0.5rem 1 rem
 }
 
 .fa-pen, .fa-trash{
@@ -229,14 +212,10 @@ div.container-account >.container-change-password {
 }
 
 form {
-    align-items: center;
-    gap: 30px
+    display: inherit;
+    flex-direction: inherit;
 }
 
-
-.container-account form {
-    color:var(--main-bg-color)
-}
 
 
 
@@ -449,18 +428,18 @@ select#absence_motif {
         margin-top:40px
     }
 
-    .form-first-column, .form-second-column
-    {
-        width: 200px;
-    }
+    
 }
 
 
 
 @media all and (max-width: 800px){
 
+   .container-account{
+        grid-template-areas: "one" "two" "three";
+   } 
 
-    .form-sub-part {
+    /* .form-sub-part {
         display: flex;
         flex-direction: column;
     }
@@ -470,14 +449,14 @@ select#absence_motif {
         justify-content: center;
         gap:20px
         
-    }
+    } */
     .container-personal-info input{
         width: 250px;
         font-size: 0.8em;
     }
     
 
-    #email_input
+    /* #email_input
     {
         width: 250px;
     }
@@ -488,14 +467,14 @@ select#absence_motif {
 
     #street_input{
         width: 250px;
-    }
+    } */
     .container-personal-info label {
         width: auto;
     }
 
-    #streetNumber_input, #laneType_input {
+    /* #streetNumber_input, #laneType_input {
         width: 70px;
-    }
+    } */
     .part-address{
         justify-content :space-between
     }
@@ -523,12 +502,11 @@ select#absence_motif {
         font-size: 0.7rem;
     }
     .container-btn-absence{
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 20px;
     }
 
 }
-
-
 
 
 
@@ -540,10 +518,17 @@ select#absence_motif {
         margin-top: 20px;
         gap: 30px
     }
+
+    
+    ul li{
+        font-size: 0.9rem;
+        margin: 20px auto;
+    }
     .dashboard-personal-info, .profile-pic {
-        width:350px;
+        /* width:350px;
         min-width: inherit;
-        height:300px;
+        height:300px; */
+        display: none;
         
     }
     
