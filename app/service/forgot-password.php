@@ -55,7 +55,7 @@ if (!$email) {
         $output .= 'Pour des raisons de sécurité, le lien expirera dans une heure</p>';
         $output .= "<p>Si vous n'êtes pas à l'origine de cette demande de réinitialisation, aucune action n'est nécessaire, votre mot de passe ne sera pas réinitialisé. Cependant, nous vous conseillons de vous connecter à votre compte et de modifier votre mot de passe car celui-ci est peut être compromis</p> ";
         $output .= '<p>Merci,</p>';
-        $output .= "<p>L'équipe Admin MNS</p>";
+        $output .= "<p>L'équipe d'Admin MNS</p>";
         $output .= '</body>';
         $output .= '</html>';
         $body = $output;

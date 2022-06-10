@@ -137,19 +137,57 @@ inputPic.addEventListener("change", function(e){
 
 // 
 
-let allInputsChangeInfos = document.querySelectorAll('.container-personal-info input');
+let allInputsChangeInfos = document.querySelectorAll('#form_full-screen input');
+let allInputsChangeInfosMobile = document.querySelectorAll('#form_mobile input');
+
 allInputsChangeInfos.forEach(input => { input.setAttribute('disabled', true)})
+allInputsChangeInfosMobile.forEach(input => { input.setAttribute('disabled', true)})
 
 let btnChangeInfo = document.querySelector('#btn-change-personal-info')
+let btnChangeInfoMobile = document.querySelector('#btn-change-personal-info_mobile')
 
 let btnValidateInfo = document.querySelector('#btn-validate-personal-info')
-btnValidateInfo.style.display="none"
+let btnValidateInfoMobile = document.querySelector('#btn-validate-personal-info_mobile')
 
-btnChangeInfo.addEventListener('click', function(e){
-    e.preventDefault()
-    
-    allInputsChangeInfos.forEach(input => { input.removeAttribute('disabled')
-                                            this.style.display='none'
-                                            btnValidateInfo.style.display="inline"})
+btnValidateInfo.style.display="none"
+btnValidateInfoMobile.style.display="none"
+
+function personalInfoFormAvailable (buttonChange, buttonValidate, inputs)
+{
+
+    buttonChange.addEventListener('click', function(e){
+        e.preventDefault()
         
-    });
+        inputs.forEach(input => { 
+            console.log()
+            input.removeAttribute('disabled')
+            this.style.display='none'
+            buttonValidate.style.display="inline"
+            })
+            
+        });
+}
+
+personalInfoFormAvailable(btnChangeInfo, btnValidateInfo, allInputsChangeInfos);
+personalInfoFormAvailable(btnChangeInfoMobile, btnValidateInfoMobile, allInputsChangeInfosMobile);
+
+// btnChangeInfo.addEventListener('click', function(e){
+//     e.preventDefault()
+    
+//     allInputsChangeInfos.forEach(input => { input.removeAttribute('disabled')
+//                                             this.style.display='none'
+//                                             btnValidateInfo.style.display="inline"})
+        
+//     });
+
+
+
+// btnChangeInfoMobile.addEventListener('click', function(e){
+//     e.preventDefault()
+    
+//     allInputsChangeInfosMobile.forEach(input => { input.removeAttribute('disabled')
+//                                             this.style.display='none'
+//                                             btnValidateInfoMobile.style.display="inline"})
+        
+//     });
+    

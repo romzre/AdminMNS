@@ -1,12 +1,15 @@
 
 /* Déclaration des variables de couleur */
 
-
+/* 
 a{
     color:white;
     text-decoration:none;
-}
+} */
 
+h2 {
+    color:var(--main-title-color)
+}
 
 .personal-info-content p:first-child
 {
@@ -97,13 +100,13 @@ grid-area: three;
 .container-account {
     width: auto;
     margin-top: 20px;
-    display: grid;
+    /* display: grid;
     grid-area: one ;
-    grid-template-columns:auto auto;
+    grid-template-columns:auto;
     grid-template-areas:    
         "one one"
         "two three";
-    gap:40px;
+    gap:40px; */
 }
 
 .alert>p{
@@ -113,49 +116,29 @@ grid-area: three;
 
 /* PERSONAL DATA */
 
-.form-sub-part {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.form-first-column, .form-second-column{
-    display: flex;
-    flex-direction: column;
-    gap:10px
-}
-
-.part-column{
-    display: flex;
-    justify-content:flex-start;
-    gap:40px
-}
 
 .container-personal-info input{
-    width: 250px;
-    font-size: 0.8em;
+    font-size: 1rem;
+    max-width: 400px;
    }
 
+.form-sub-part.part-number {
+    max-width: 100px;
+  }
 
 .part-address{
     display: flex;
-    width: 250px;
     align-items: center;
     gap: 20px;
+    max-width: 400px;
+    justify-content: space-between;
+}
+
+.form-control {
+    padding: 0.5rem 1rem;
 }
 
 
-
-.part-number input {
-    width: 70px;
-}
-
-.part-typeLane input {
-    width: 110px;
-}
-
-.part-address .part-typeLane {
-    align-self: flex-end;
-}
 
 
 .container-personal-info label{
@@ -184,6 +167,10 @@ div.container-account >.container-change-password {
     padding : 1rem 0.5rem;
     margin-top : 20px
 
+}
+
+.form-floating > .form-control {
+    padding : 0.5rem 1rem
 }
 
 .fa-pen, .fa-trash{
@@ -228,16 +215,11 @@ div.container-account >.container-change-password {
     width: 400px;
 }
 
-form {
-    align-items: center;
-    gap: 30px
-}
-
-
-.container-account form {
-    color:var(--main-bg-color)
-}
-
+/* form {
+    display: inherit;
+    flex-direction: inherit;
+    width : inherit
+} */
 
 
 .container-personal-info{
@@ -437,7 +419,9 @@ select#absence_motif {
     flex-wrap: inherit;
 }
 
-
+#form_mobile{
+    display: none;
+}
 
 
 @media all and (max-width: 480px){
@@ -449,66 +433,50 @@ select#absence_motif {
         margin-top:40px
     }
 
-    .form-first-column, .form-second-column
+    
+    
+
+    .form-floating > label
     {
-        width: 200px;
+        font-size: 0.8rem;
     }
+
+    
 }
 
 
 
 @media all and (max-width: 800px){
 
+   .container-account{
+        grid-template-areas: "one" "two" "three";
+   } 
 
-    .form-sub-part {
-        display: flex;
-        flex-direction: column;
+    #form_mobile{
+        display: inline;
+    }
+
+    #form_full-screen{
+        display: none;
     }
 
 
-    .part-column{
-        justify-content: center;
-        gap:20px
-        
-    }
     .container-personal-info input{
-        width: 250px;
+        width: 100%;
         font-size: 0.8em;
-    }
-    
-
-    #email_input
-    {
-        width: 250px;
+        max-width: inherit;
     }
 
-    #tel_input{
-        width: 250px;
-    }
-
-    #street_input{
-        width: 250px;
-    }
     .container-personal-info label {
         width: auto;
     }
 
-    #streetNumber_input, #laneType_input {
-        width: 70px;
-    }
+
     .part-address{
-        justify-content :space-between
+
+        max-width: inherit;
     }
 
-    form {
-        align-items: stretch;
-        
-    }
-
-    .form-first-column, .form-second-column
-    {
-        width: 300px;
-    }
 
     .form-floating, .input-group{
         width: auto;
@@ -523,12 +491,15 @@ select#absence_motif {
         font-size: 0.7rem;
     }
     .container-btn-absence{
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-declare-abs label, .form-declare-abs input, .form-declare-abs select{
+        font-size: 0.8rem;
     }
 
 }
-
-
 
 
 
@@ -540,11 +511,19 @@ select#absence_motif {
         margin-top: 20px;
         gap: 30px
     }
+
+    
+    ul li{
+        font-size: 0.9rem;
+    }
     .dashboard-personal-info, .profile-pic {
-        width:350px;
-        min-width: inherit;
-        height:300px;
+
+        display: none;
         
+    }
+
+    .container {
+        max-width: none;
     }
     
 }

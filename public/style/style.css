@@ -38,6 +38,12 @@ ul,li{
 }
 
 /* Titre  */
+
+form p 
+{
+    margin-bottom: 0;
+}
+
 h1 {
     color : var(--main-title-color);
     margin:0;
@@ -305,13 +311,13 @@ nav img
 .login.btn {
     margin-top: 20px;
 }
-
+/* 
 form{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     width: 98%;
-}
+} */
 
 form.reset-password-form-container {
     display: flex;
@@ -338,6 +344,7 @@ form.reset-container-form {
     font-family: 'Gilroy';
     letter-spacing: 0.1rem;
     font-size: 1.2em;
+    text-align: center;
 }
 
 .form-group {
@@ -378,7 +385,7 @@ Les autres éléments s'afficheront grâce à php et ne seront pas impactés par
     width: 20px;
     position: absolute;
     right: 20px;
-    top: 35px;
+    top: 25px;
 
 }
 .message-alerte {
@@ -416,12 +423,6 @@ form.container-reset-password{
     justify-content: space-between;
     height: 50%;
     width: 98%;
-}
-.form-group {
-    margin : 10px auto;
-    width: 90%;
-    font-family: 'Gilroy';
-    position:relative
 }
 
 .password-forgotten-text {
@@ -553,7 +554,33 @@ form.container-reset-password{
     }
 
     .register-part{
+        margin-top:10px;
         padding : 0 5px
+    }
+
+    .password_forgotten{
+        font-size: 0.7rem;
+    }
+    
+    .register-part > p 
+    {
+        font-size: 0.9rem;
+    }
+
+    .form-group{
+        margin:5px auto
+    }
+    .login-form-top
+    {
+        padding: 10px 5px;
+    }
+
+    .login-form-container{
+        margin-top: 5px;
+        min-height: 380px;
+    }
+    .container-button-center{
+        margin-top: 10px;
     }
 
 }
