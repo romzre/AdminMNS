@@ -1,8 +1,8 @@
 {% extends "partials/base-candidate.html.twig" %}
 
 {% block body %}
-	<div class="container-account">
-		<div class="container-personal-info">
+	<div class="container-account row">
+		<div class="container-personal-info mt-5 col-12 col-md-6">
 			<h2>Vos informations personnelles</h2>
 			<div class='personal-data'>
 				<p>Prénom :
@@ -15,40 +15,42 @@
 					{{ training.TitleFormation }}</p>
 			</div>
 		</div>
-		<div class="container-profile-pic">
-			<h2>Votre photo de profil</h2>
-			{% if message is defined %}
-				<div class="alert-info alert">{{message|raw}}</div>
-			{% endif %}
-			<div class="container_profile-pic">
+		<div class="container-profile-pic col-12 col-md-6 my-5">
+			<div class="row justify-content-center">
+				<h2>Votre photo de profil</h2>
+				{% if message is defined %}
+					<div class="col-6 col-md-4 text-center alert-info alert">{{message|raw}}</div>
+				{% endif %}
+				<div class="container_profile-pic">
 
-				<img class="profile_pic" {% if(candidate.getProfilePic is not null) %} src="/?area=file&controller=file&action=get_picture&file={{candidate.getProfilePic}}" {% else %} src="/images/avatar.jpg" {% endif %} alt='profile-picture'/>
+					<img class="profile_pic" {% if(candidate.getProfilePic is not null) %} src="/?area=file&controller=file&action=get_picture&file={{candidate.getProfilePic}}" {% else %} src="/images/avatar.jpg" {% endif %} alt='profile-picture'/>
 
-			</div>
-			<div class="form-update-delete-pic">
-				<form class="form-change-pic" action='#' method='post' enctype='multipart/form-data'>
-					<label class="btn btn-icone" for='edit-profile_pic'>
-						<i class="fa-solid fa-pen "></i>
-					</label>
-					<input id='edit-profile_pic' type='file' name="profile_pic"/>
-					<button type="submit" name="change-pic-form-button" class="btn-hidden">Supprimer</button>
-				</form>
-				<form action='#' method='post' enctype='multipart/form-data'>
-					<input type='hidden' name="profile_pic"/>
-					<button onclick="confirm('Etes vous sûr de vouloir supprimer votre photo?')" type="submit" name="delete-pic-form-button" class="btn btn-icone">
-						<i class="fa-solid fa-trash"></i>
-					</button>
-				</form>
+				</div>
+				<div class="row justify-content-center form-update-delete-pic">
+					<form class="col-3 text-center form-change-pic" action='#' method='post' enctype='multipart/form-data'>
+						<label class="btn btn-icone" for='edit-profile_pic'>
+							<i class="fa-solid fa-pen "></i>
+						</label>
+						<input id='edit-profile_pic' type='file' name="profile_pic"/>
+						<button type="submit" name="change-pic-form-button" class="btn-hidden">Supprimer</button>
+					</form>
+					<form class="col-3 text-center" action='#' method='post' enctype='multipart/form-data'>
+						<input type='hidden' name="profile_pic"/>
+						<button onclick="confirm('Etes vous sûr de vouloir supprimer votre photo?')" type="submit" name="delete-pic-form-button" class="btn btn-icone">
+							<i class="fa-solid fa-trash"></i>
+						</button>
+					</form>
+				</div>
 			</div>
 		</div>
-		<div class='container-change-password'>
+		<div class='container-change-password col-12 col-md-6 my-5'>
 			<h2>Changer de mot de passe</h2>
-			<form class='form-change-password' action='/?area=candidate&controller=account&action=change_password' method='post'>
+			<form class='row justify-content-center form-change-password' action='/?area=candidate&controller=account&action=change_password' method='post'>
 				<div class="form-floating">
 					<input type="password" name="old_password" class="form-control" id="floatingInput" placeholder="name@example.com">
 					<label for="floatingInput">Ancien mot de passe</label>
 					{% if error_old_password is defined %}
-						<div class="message-alerte">{{error_old_password|raw}}</div>
+						<div class="col-6 col-md-4 text-center message-alerte">{{error_old_password|raw}}</div>
 						<img src="images/error.svg" alt="icone de validation" class="icone-verif">
 					{% endif %}
 				</div>
@@ -86,7 +88,9 @@
 						</div>
 					</div>
 				</div>
-				<button type="submit" name="form-button" class="btn btn-primary btn-change-password">Modifier</button>
+				<div class="row justify-content-center">
+					<button type="submit" name="form-button" class="btn btn-primary btn-change-password">Modifier</button>
+				</div>
 			</form>
 			{% if error_passwords is defined %}
 				<div class="alert alert-danger alert-form">{{error_passwords|raw}}</div>

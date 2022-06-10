@@ -14,9 +14,9 @@ class TraineeManager extends UserManager
 
     public function getAllTrainees()
     {
-        $pdo=PdoManager::getPdo();
-        
-        $sql= "SELECT users.id_user ,  firstName , familyName , email , tel , training.id_training ,   title_formation , id_classroom FROM trainee 
+        $pdo = PdoManager::getPdo();
+
+        $sql = "SELECT users.id_user ,  firstName , familyName , email , tel , training.id_training ,   title_formation , id_classroom FROM trainee 
         INNER JOIN users ON users.id_user = trainee.id_user 
         INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user
         INNER JOIN training ON trainee_training.id_training = training.id_training 
@@ -57,7 +57,7 @@ class TraineeManager extends UserManager
     {
         $pdo = PdoManager::getPdo();
 
-        $sql= "SELECT users.id_user ,  firstName , familyName , email , tel , trainee_training.id_training , title_formation , completeDossier , isRegistered FROM trainee INNER JOIN users ON users.id_user = trainee.id_user INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user INNER JOIN training ON trainee_training.id_training = training.id_training WHERE  completeDossier = 0";
+        $sql = "SELECT users.id_user ,  firstName , familyName , email , tel , trainee_training.id_training , title_formation , completeDossier , isRegistered FROM trainee INNER JOIN users ON users.id_user = trainee.id_user INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user INNER JOIN training ON trainee_training.id_training = training.id_training WHERE  completeDossier = 0";
 
         $req = $pdo->prepare($sql);
         $stmt = $req->execute();
@@ -180,7 +180,7 @@ class TraineeManager extends UserManager
     public function getAllTraineeById(string $id_user)
     {
         $pdo = PdoManager::getPdo();
-        $sql = ' SELECT users.id_user ,  firstName , familyName , email , tel , title_formation ,streetNumber, laneType, street, addressComplement, postalCode, city FROM trainee 
+        $sql = ' SELECT users.id_user, firstName , familyName , email , tel , title_formation ,streetNumber, street, addressComplement, postalCode, city FROM trainee 
         INNER JOIN users ON users.id_user = trainee.id_user 
         INNER JOIN trainee_training ON trainee_training.id_user = trainee.id_user
         INNER JOIN training ON trainee_training.id_training = training.id_training 
@@ -195,34 +195,35 @@ class TraineeManager extends UserManager
         return $trainee;
     }
 
-    public function updateTraineeInfo(string $tel, string $streetNumber, string $laneType, string $street, string $postalCode, string $city, string $id_user)
+    public function updateTraineeInfo(string $tel, string $streetNumber, string $street, string $postalCode, string $city, string $id_user)
     {
 
         $pdo = PdoManager::getPdo();
-        $sql = 'UPDATE `trainee` SET `tel`= :tel, `streetNumber`= :streetNumber, `laneType`= :laneType, `street`= :street, `postalCode`= :postalCode, `city`= :city  WHERE id_user = :id_user';
+        $sql = 'UPDATE `trainee` SET `tel`= :tel, `streetNumber`= :streetNumber, `street`= :street, `postalCode`= :postalCode, `city`= :city  WHERE id_user = :id_user';
 
         $req = $pdo->prepare($sql);
         $stmt = $req->execute([
             'id_user' => $id_user,
             'tel' => $tel,
             'streetNumber' => $streetNumber,
-            'laneType' => $laneType,
             'street' => $street,
             'postalCode' => $postalCode,
             'city' => $city
         ]);
+
+        return $stmt;
     }
 
     public function updateClassroom(int $id_classroom, int $id_user)
     {
-        $pdo=PdoManager::getPdo();
+        $pdo = PdoManager::getPdo();
 
-        $sql="UPDATE `trainee` SET`id_classroom`= :id_classroom WHERE id_user = :id_user ";
+        $sql = "UPDATE `trainee` SET`id_classroom`= :id_classroom WHERE id_user = :id_user ";
 
         $req = $pdo->prepare($sql);
         $stmt = $req->execute([
-            'id_user'=> $id_user,
-            'id_classroom'=> $id_classroom
+            'id_user' => $id_user,
+            'id_classroom' => $id_classroom
         ]);
 
         return $stmt;

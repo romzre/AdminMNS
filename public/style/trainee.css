@@ -122,17 +122,15 @@ grid-area: three;
     max-width: 400px;
    }
 
-.form-sub-part.part-number {
-    max-width: 100px;
-  }
-
 .part-address{
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     max-width: 400px;
     justify-content: space-between;
 }
+
+
 
 .form-control {
     padding: 0.5rem 1rem;
@@ -469,13 +467,9 @@ select#absence_motif {
 
     .container-personal-info label {
         width: auto;
+        font-size:0.8rem
     }
 
-
-    .part-address{
-
-        max-width: inherit;
-    }
 
 
     .form-floating, .input-group{

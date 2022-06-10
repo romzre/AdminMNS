@@ -230,12 +230,10 @@ class AccountController extends Controller
 
     public function update_info()
     {
-
-        $message = "";
+        $message = '';
         if (!empty($_POST['firstName'])) {
             $firstName = $_POST['firstName'];
         } else {
-            $message .= '<p> Merci de remplir les champs suivants : </p>';
             $message .= '<p>Prénom</p>';
         }
         if (!empty($_POST['lastName'])) {
@@ -253,42 +251,37 @@ class AccountController extends Controller
         } else {
             $message .= '<p>Téléphone</p>';
         }
-        if (!empty($_POST['laneType'])) {
-            $laneType = $_POST['laneType'];
-        } else {
-            $message .= '<p>Type de voie</p>';
-        }
         if (!empty($_POST['streetNumber'])) {
             $streetNumber = $_POST['streetNumber'];
         } else {
-            $message .= '<p> Merci de remplir les champs suivants : </p>';
+
             $message .= '<p>Numéro de rue</p>';
         }
         if (!empty($_POST['street'])) {
             $street = $_POST['street'];
         } else {
-            $message .= '<p> Merci de remplir les champs suivants : </p>';
+
             $message .= '<p>Rue</p>';
         }
         if (!empty($_POST['postalCode'])) {
             $postalCode = $_POST['postalCode'];
         } else {
-            $message .= '<p> Merci de remplir les champs suivants : </p>';
+
             $message .= '<p>Code postal</p>';
         }
         if (!empty($_POST['city'])) {
             $city = $_POST['city'];
         } else {
-            $message .= '<p> Merci de remplir les champs suivants : </p>';
+
             $message .= '<p>Ville</p>';
         }
-        if (isset($firstName) && isset($lastName) && isset($email) && isset($tel) && isset($streetNumber) && isset($laneType) & isset($street) && isset($postalCode) && isset($city)) {
-
+        if (isset($firstName) && isset($lastName) && isset($email) && isset($tel) && isset($streetNumber) & isset($street) && isset($postalCode) && isset($city)) {
+            $message = '';
             $traineeManager = new TraineeManager();
             $returnUser = $traineeManager->updateUserInfo($firstName, $lastName, $email, $_SESSION['id_user']);
 
             if ($returnUser) {
-                $returnTrainee = $traineeManager->updateTraineeInfo($tel, $streetNumber, $laneType, $street, $postalCode, $city, $_SESSION['id_user']);
+                $returnTrainee = $traineeManager->updateTraineeInfo($tel, $streetNumber, $street, $postalCode, $city, $_SESSION['id_user']);
 
                 if ($returnTrainee) {
                     $message .= '<p> Vos modifications ont bien été prises en compte !</p>';
