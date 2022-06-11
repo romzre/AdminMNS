@@ -1,6 +1,11 @@
 header {
     margin-bottom: 20px;
 }
+
+.nav__burger {
+    display: none
+  }
+
 .container-titre-dashboard {
     margin : 50px 50px
 }
@@ -10,23 +15,19 @@ header {
     margin-bottom: 50px;
 }
 
-
+.training{
+    color: var(--main-title-color)
+}
 
 .path {
     font-size: 0.8rem;
     color:var(--main-title-color)
 }
 
-.col-1 {
-    width: 500px;
-}
-
-.col-2 {
-    width: 250px;
-}
 
 .container-titre-dashboard>p {
-    margin: 20px auto
+    margin: 20px auto;
+    text-align: justify;
 }
 /* 
 .form-docs {
@@ -38,49 +39,15 @@ header {
     
 }
 
-.up-right{
-    border : 1px solid var(--main-title-color);
-    border-top-right-radius: 30px;
-    display: inline-block;
-    /* border-top: 2px solid var(--main-title-color);
-    border-bottom: 1px solid var(--main-title-color); */
-}
-
-.down-right{
-    border : 1px solid var(--main-title-color);
-    border-bottom-right-radius: 30px;
-    display: inline-block;
-    /* border-top: 2px solid var(--main-title-color);
-    border-bottom: 1px solid var(--main-title-color); */
-   
-}
-
 td {
     padding: 20px 35px;
     text-align: center;
 }
 
-tr {
-    display: flex;
+table{
+    width: 100%;
+
 }
-
-.up-left{
-
-    border : 1px solid var(--main-title-color);
-    border-top-left-radius: 30px;
-    display: inline-block;
-    
-}
-
-.down-left {
-
-    border-bottom-left-radius: 30px;
-    border : 1.5px solid var(--main-title-color);
-    display: inline-block;
-    
-}
-
-
 table, thead,tbody, tr, td,th
 {
     border-collapse: collapse;
@@ -101,23 +68,36 @@ i:hover {
     display: none;
 }
 
-.nav__burger {
-    display: none
-  }
 
-.alert-form-docs
-{
-    width: 400px;
-    display: flex;
-    justify-content: center;
-    margin:auto
+table tr:first-child td {
+    border-top: inherit;
 }
 
-.alert-form-docs>p
-{
-    margin-bottom:0
+table tr:first-child td:last-child{
+    border-right: inherit;
 }
 
+table tr:first-child td:first-child{
+    border-left: inherit;
+}
+
+table tr:last-child td:last-child{
+    border-right: inherit;
+}
+
+
+table tr:last-child td{
+    border-bottom: inherit;
+}
+
+
+
+.container-table
+{
+    border : 1px solid var(--main-title-color);
+    border-radius: 30px;
+    overflow-x:auto;
+}
 .fa-check{
     color: var(--main-title-color)
 }

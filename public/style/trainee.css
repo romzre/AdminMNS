@@ -160,11 +160,13 @@ div.container-account >.container-change-password {
 
 .container-change-password>.alert{
 
-    width: 75%;
-    margin:auto;
-    padding : 1rem 0.5rem;
-    margin-top : 20px
 
+    padding : 1rem 0.5rem;
+
+}
+
+.container-change-password .alert-form{
+    width: inherit;
 }
 
 .form-floating > .form-control {

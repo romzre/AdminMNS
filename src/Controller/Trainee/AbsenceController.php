@@ -81,11 +81,13 @@ class AbsenceController extends Controller
                 $hasAbsencesToJustify = false;
             }
             $data['absencesToJustify'] = $hasAbsencesToJustify;
-
             $path = 'pages/trainee/justify_absence.html.twig';
+
+
             $this->renderView($path, $data);
-        }
+        } else $this->reLocate();
     }
+
 
     public function send_justificatif()
     {
@@ -165,8 +167,8 @@ class AbsenceController extends Controller
                                         $absenceDocsManager = new AbsenceDocsManager();
                                         $absenceDoc = $absenceDocsManager->insert($id_document, $id_report);
 
-                                        if ($absenceDoc) {
 
+                                        if ($absenceDoc) {
                                             return $message .= "<p>Votre justificatif a bien été envoyé, vous recevrez un email lorsque l'administration aura revu votre document</p>";
                                         }
                                     } else {

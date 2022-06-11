@@ -145,6 +145,9 @@
 	</div>
 	<div class='row my-5 container-change-password three'>
 		<h2 class="col-12 my-3">Changer de mot de passe</h2>
+		{% if success_message is defined %}
+			<div class="alert alert-success alert-form col-6 col-md-4 my-4">{{success_message|raw}}</div>
+		{% endif %}
 		<form class='col-12 align-items-center d-flex flex-column form-change-password' action='/?area=trainee&controller=account&action=change_password' method='post'>
 			<div class="form-floating">
 				<input type="password" name="old_password" class="form-control" id="floatingInput" placeholder="name@example.com">
@@ -193,9 +196,7 @@
 		{% if error_passwords is defined %}
 			<div class="alert alert-danger alert-form">{{error_passwords|raw}}</div>
 		{% endif %}
-		{% if success_message is defined %}
-			<div class="alert alert-success alert-form">{{success_message|raw}}</div>
-		{% endif %}
+
 	</div>
 </div>
 <script src="/scripts/account-trainee.js"></script>{% endblock %}

@@ -1,103 +1,105 @@
 {% extends "partials/base-candidate.html.twig" %}
 
 {% block body %}
-	<div class="container-account row">
-		<div class="container-personal-info mt-5 col-12 col-md-6">
-			<h2>Vos informations personnelles</h2>
-			<div class='personal-data'>
-				<p>Prénom :
-					{{ candidate.FirstName}}</p>
-				<p>Nom :
-					{{ candidate.FamilyName}}</p>
-				<p>Email :
-					{{ candidate.Email}}</p>
-				<p>Formation :
-					{{ training.TitleFormation }}</p>
-			</div>
-		</div>
-		<div class="container-profile-pic col-12 col-md-6 my-5">
-			<div class="row justify-content-center">
-				<h2>Votre photo de profil</h2>
-				{% if message is defined %}
-					<div class="col-6 col-md-4 text-center alert-info alert">{{message|raw}}</div>
-				{% endif %}
-				<div class="container_profile-pic">
-
-					<img class="profile_pic" {% if(candidate.getProfilePic is not null) %} src="/?area=file&controller=file&action=get_picture&file={{candidate.getProfilePic}}" {% else %} src="/images/avatar.jpg" {% endif %} alt='profile-picture'/>
-
-				</div>
-				<div class="row justify-content-center form-update-delete-pic">
-					<form class="col-3 text-center form-change-pic" action='#' method='post' enctype='multipart/form-data'>
-						<label class="btn btn-icone" for='edit-profile_pic'>
-							<i class="fa-solid fa-pen "></i>
-						</label>
-						<input id='edit-profile_pic' type='file' name="profile_pic"/>
-						<button type="submit" name="change-pic-form-button" class="btn-hidden">Supprimer</button>
-					</form>
-					<form class="col-3 text-center" action='#' method='post' enctype='multipart/form-data'>
-						<input type='hidden' name="profile_pic"/>
-						<button onclick="confirm('Etes vous sûr de vouloir supprimer votre photo?')" type="submit" name="delete-pic-form-button" class="btn btn-icone">
-							<i class="fa-solid fa-trash"></i>
-						</button>
-					</form>
+	<div class="container">
+		<div class="container-account row">
+			<div class="container-personal-info mt-5 col-12 col-md-6">
+				<h2>Vos informations personnelles</h2>
+				<div class='personal-data'>
+					<p>Prénom :
+						{{ candidate.FirstName}}</p>
+					<p>Nom :
+						{{ candidate.FamilyName}}</p>
+					<p>Email :
+						{{ candidate.Email}}</p>
+					<p>Formation :
+						{{ training.TitleFormation }}</p>
 				</div>
 			</div>
-		</div>
-		<div class='container-change-password col-12 col-md-6 my-5'>
-			<h2>Changer de mot de passe</h2>
-			<form class='row justify-content-center form-change-password' action='/?area=candidate&controller=account&action=change_password' method='post'>
-				<div class="form-floating">
-					<input type="password" name="old_password" class="form-control" id="floatingInput" placeholder="name@example.com">
-					<label for="floatingInput">Ancien mot de passe</label>
-					{% if error_old_password is defined %}
-						<div class="col-6 col-md-4 text-center message-alerte">{{error_old_password|raw}}</div>
-						<img src="images/error.svg" alt="icone de validation" class="icone-verif">
+			<div class="container-profile-pic col-12 col-md-6 my-5">
+				<div class="row justify-content-center">
+					<h2>Votre photo de profil</h2>
+					{% if message is defined %}
+						<div class="col-6 col-md-4 text-center alert-info alert">{{message|raw}}</div>
 					{% endif %}
-				</div>
-				<div class="form-floating">
-					<input type="password" name="new_password" class="form-control" id="floatingNewPassword" placeholder="Password">
-					<label for="floatingPassword">Nouveau mot de passe</label>
-					<img src="images/check.svg" alt="icone de validation" class="icone-verif-js">
-					<span class="message-alerte">Votre mot de passe doit faire au moins 8 caractères, contenir un caractère spécial et un chiffre.</span>
+					<div class="container_profile-pic">
 
-					{% if error_new_password is defined %}
-						<div class="message-alerte">{{error_new_password|raw}}</div>
-						<img src="images/error.svg" alt="icone de validation" class="icone-verif">
-					{% endif %}
-				</div>
+						<img class="profile_pic" {% if(candidate.getProfilePic is not null) %} src="/?area=file&controller=file&action=get_picture&file={{candidate.getProfilePic}}" {% else %} src="/images/avatar.jpg" {% endif %} alt='profile-picture'/>
 
-				<div class="form-floating">
-					<input type="password" name="confirm_password" class="form-control new-password" id="floatingConfirmPassword" placeholder="Password">
-					<label for="floatingPassword">Confirmer nouveau mot de passe</label>
-					<img src="images/check.svg" alt="icone de validation" class="icone-verif-js">
-					<span class="message-alerte">Les deux mots de passe ne sont pas identiques.</span>
-
-					{% if error_confirm_password is defined %}
-						<div class="message-alerte">{{error_confirm_password|raw}}</div>
-						<img src="images/error.svg" alt="icone de validation" class="icone-verif">
-					{% endif %}
-					<div class="ligne">
-						<div class="l1">
-							<span>faible</span>
-						</div>
-						<div class="l2">
-							<span>moyen</span>
-						</div>
-						<div class="l3">
-							<span>fort</span>
-						</div>
+					</div>
+					<div class="row justify-content-center form-update-delete-pic">
+						<form class="col-3 text-center form-change-pic" action='#' method='post' enctype='multipart/form-data'>
+							<label class="btn btn-icone" for='edit-profile_pic'>
+								<i class="fa-solid fa-pen "></i>
+							</label>
+							<input id='edit-profile_pic' type='file' name="profile_pic"/>
+							<button type="submit" name="change-pic-form-button" class="btn-hidden">Supprimer</button>
+						</form>
+						<form class="col-3 text-center" action='#' method='post' enctype='multipart/form-data'>
+							<input type='hidden' name="profile_pic"/>
+							<button onclick="confirm('Etes vous sûr de vouloir supprimer votre photo?')" type="submit" name="delete-pic-form-button" class="btn btn-icone">
+								<i class="fa-solid fa-trash"></i>
+							</button>
+						</form>
 					</div>
 				</div>
-				<div class="row justify-content-center">
-					<button type="submit" name="form-button" class="btn btn-primary btn-change-password">Modifier</button>
-				</div>
-			</form>
-			{% if error_passwords is defined %}
-				<div class="alert alert-danger alert-form">{{error_passwords|raw}}</div>
-			{% endif %}
-			{% if success_message is defined %}
-				<div class="alert alert-success alert-form">{{success_message|raw}}</div>
-			{% endif %}
+			</div>
+			<div class='container-change-password col-12 col-md-6 my-5'>
+				<h2>Changer de mot de passe</h2>
+				<form class='row justify-content-center form-change-password' action='/?area=candidate&controller=account&action=change_password' method='post'>
+					<div class="form-floating">
+						<input type="password" name="old_password" class="form-control" id="floatingInput" placeholder="name@example.com">
+						<label for="floatingInput">Ancien mot de passe</label>
+						{% if error_old_password is defined %}
+							<div class="col-6 col-md-4 text-center message-alerte">{{error_old_password|raw}}</div>
+							<img src="images/error.svg" alt="icone de validation" class="icone-verif">
+						{% endif %}
+					</div>
+					<div class="form-floating">
+						<input type="password" name="new_password" class="form-control" id="floatingNewPassword" placeholder="Password">
+						<label for="floatingPassword">Nouveau mot de passe</label>
+						<img src="images/check.svg" alt="icone de validation" class="icone-verif-js">
+						<span class="message-alerte">Votre mot de passe doit faire au moins 8 caractères, contenir un caractère spécial et un chiffre.</span>
+
+						{% if error_new_password is defined %}
+							<div class="message-alerte">{{error_new_password|raw}}</div>
+							<img src="images/error.svg" alt="icone de validation" class="icone-verif">
+						{% endif %}
+					</div>
+
+					<div class="form-floating">
+						<input type="password" name="confirm_password" class="form-control new-password" id="floatingConfirmPassword" placeholder="Password">
+						<label for="floatingPassword">Confirmer nouveau mot de passe</label>
+						<img src="images/check.svg" alt="icone de validation" class="icone-verif-js">
+						<span class="message-alerte">Les deux mots de passe ne sont pas identiques.</span>
+
+						{% if error_confirm_password is defined %}
+							<div class="message-alerte">{{error_confirm_password|raw}}</div>
+							<img src="images/error.svg" alt="icone de validation" class="icone-verif">
+						{% endif %}
+						<div class="ligne">
+							<div class="l1">
+								<span>faible</span>
+							</div>
+							<div class="l2">
+								<span>moyen</span>
+							</div>
+							<div class="l3">
+								<span>fort</span>
+							</div>
+						</div>
+					</div>
+					<div class="row justify-content-center">
+						<button type="submit" name="form-button" class="btn btn-primary btn-change-password">Modifier</button>
+					</div>
+				</form>
+				{% if error_passwords is defined %}
+					<div class="alert alert-danger alert-form">{{error_passwords|raw}}</div>
+				{% endif %}
+				{% if success_message is defined %}
+					<div class="alert alert-success alert-form">{{success_message|raw}}</div>
+				{% endif %}
+			</div>
 		</div>
 	</div>
 	<script src="scripts/account-candidate.js"></script>
