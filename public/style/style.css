@@ -26,8 +26,9 @@
 }
 
 body{
-    background-color: var(--main-bg-color);
+    color: #fff;
     font-family: 'Montserrat';
+    background-color: var(--main-bg-color);
     
 }
 

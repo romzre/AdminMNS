@@ -16,8 +16,8 @@
 			{% if message is not empty %}
 				<div class="col-4 col-md-6 alert-info alert text-center">{{message|raw}}</div>
 			{% endif %}
-			<div class="col-10 d-flex justify-content-center text-center">
-				<form class="form-declare-abs" action="#" method='post' enctype='multipart/form-data'>
+			<div class="row justify-content-center text-center">
+				<form class="w-auto form-declare-abs" action="#" method='post' enctype='multipart/form-data'>
 					<div class="form-floating my-3">
 						<input name="startingDate_absence" type="date" class="form-control" id="floatingInput">
 						<label for="floatingInput">Date de début de l'absence</label>
@@ -48,7 +48,7 @@
 						<label for="formFile" class="form-label"></label>
 						<input class="form-control form-input" type="file" id="formFile">
 					</div>
-					<button type="submit" name="btn-declare-abs" class="btn btn-primary btn-lg">Envoyer</button>
+					<button type="submit" name="btn-declare-abs" class="align-self-center btn btn-primary btn-lg">Envoyer</button>
 
 
 				</form>
