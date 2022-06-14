@@ -27,7 +27,6 @@
 
 body{
     background-color: var(--main-bg-color);
-    color : #fff;
     font-family: 'Montserrat';
     
 }
@@ -177,10 +176,12 @@ nav ul {
 nav a {
     color: #fff;
     text-decoration: none;
+    font-weight: 700;
 }
 
 nav a:hover {
-    color : var(--main-title-color)
+    color : var(--main-title-color);
+
 }
 nav img
 {
@@ -295,6 +296,10 @@ nav img
 /* Login form */
 .reset-password-form-container{
     margin: 5% auto;
+}
+
+.container-login label {
+    color :#fff
 }
 
 .login-form-container, .reset-password-form-container{

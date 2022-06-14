@@ -138,10 +138,10 @@ grid-area: three;
 
 
 
-
 .container-personal-info label{
-    width: 110px;
-    color:#fff;
+    width: 100%;
+    /* color:#fff; */
+    color : var(--main-bg-color);
     text-align: left;
 }
 
