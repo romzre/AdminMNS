@@ -372,6 +372,7 @@ table, thead,tbody, tr, td,th
 td, th {
     padding: 10px 15px;
     width: auto;
+    color : #fff
 }
 
 .table-col-1{
