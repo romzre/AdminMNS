@@ -1,8 +1,7 @@
 let navAccount = document.querySelector(".navbar-account")
 let navImgAccount = document.querySelector(".nav-img-account")
 let navAccountContent = document.querySelector(".navbar-account--toggle")
-let navBurger = document.querySelector('.nav__burger')
-let navBar = document.querySelector('.navbar')
+
 
 let accountActive = false
 
@@ -36,6 +35,10 @@ navAccount.addEventListener('mouseleave', function(e){
 
 
 var intervalImgAccount = setInterval(accountImg, 500);
+
+let navBurger = document.querySelector('.nav__burger')
+let navBar = document.querySelector('.navbar')
+
 
 navBurger.addEventListener('click',function(){
     navBar.classList.toggle('show-nav')

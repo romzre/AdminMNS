@@ -7,7 +7,7 @@
 			<h2>Vos absences</h2>
 		</div>
 		<div class="row container-absence-table">
-			<form class="form-docs" action="#" method='post' enctype='multipart/form-data'>
+			<div>
 				<div class="container-table col-10 col-sm-12">
 					<table class="dataTable">
 						<thead>
@@ -41,12 +41,16 @@
 											{% else %}
 												<td class='cell table-col-5'>
 												{% endif %}
-												{% if absence.isJustified == 1 %}Justifiée
-													{% elseif (absence.isJustified) is null and absence.id_motif is null and absence.id_document is null and absence.deadline <= 2 %}En attente de justificatif
-													{% elseif (absence.isJustified) is null and absence.id_motif is defined and absence.id_document is defined %}Justificatif envoyé
-													{% elseif (absence.isJustified) is null and (absence.id_motif is null or absence.id_motif is defined) %}Injustifiée
-													{% elseif (absence.isJustified) == 0  %}Injustifiée
 
+												{% if absence.isJustified == 1 %}Justifiée
+
+													{% elseif(absence.isJustified) is null and absence.id_document is null and absence.deadline <= 2  %}En attente de justificatif
+
+													{% elseif absence.isJustified is null and absence.id_document is not null and document.isValid is null  and absence.deadline <= 30 %}Justificatif envoyé
+													{% else %}Injustifiée
+													{# {% elseif (absence.isJustified) is null and document.isValid == 0 %}Injustifiée
+																																																																																																																																																																																																																																										{% elseif (absence.isJustified) is null and absence.id_document is not null and document.isValid is null and deadline > 30  %}Injustifié
+																																																																																																																																																																																																																																										{% elseif (absence.isJustified) == 0  %}Injustifiée #}
 												{% endif %}
 											</td>
 										</tr>
@@ -56,7 +60,7 @@
 						</tbody>
 					</table>
 				</div>
-			</form>
+			</div>
 		</div>
 		<div class="container-btn-absence">
 			<a href="/?area=trainee&controller=absence&action=declare">
@@ -65,6 +69,5 @@
 			<a href="/?area=trainee&controller=absence&action=justify">
 				<button type="submit" name="form-button" class="btn btn-primary">Justifier une absence</button>
 			</a>
-
 		</div>
 	{% endblock %}

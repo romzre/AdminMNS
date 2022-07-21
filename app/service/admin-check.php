@@ -4,14 +4,14 @@ use App\Manager\AdminManager;
 
 session_start();
 
-// Vérification qu'un utilisateur est bien connecté
+// Check if the user is connecter
 if(!isset($_SESSION['id_user']))
 {
     header('Location: /');
     exit;
 } 
 else 
-// Vérification que l'utilisateur est bien un administrateur 
+// Check if the user is an admib
 {
     
     $adminManager=new AdminManager();

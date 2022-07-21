@@ -30,10 +30,12 @@ class AbsenceManager extends ReportManager
 
     /**
      * getAll
+     * 
+     * get
      *
-     * @return void
+     * @return array
      */
-    public function getAllAbsences()
+    public function getAllAbsences(): array
     {
         $pdo = PdoManager::getPdo();
 
@@ -46,15 +48,15 @@ class AbsenceManager extends ReportManager
     }
 
     /**
-     * get
+     * get absences by id criteria
      *
-     * @param  mixed $email
-     * @return void
+     * @param  string $id
+     * @return array
      */
-    public function getUserAbsences(string $id_user)
+    public function getUserAbsences(string $id_user): array
     {
         $pdo = PdoManager::getPdo();
-        $sql = "SELECT report.id_report,  DATE_FORMAT(startingDate_absence, '%d/%m/%Y') AS `startingDate`, DATE_FORMAT(endDate_absence, '%d/%m/%Y') AS `endDate`, ROUND(DATEDIFF(endDate_absence, startingDate_absence),1) AS `duration`, DATEDIFF(NOW(), absence.startingDate_absence) as `deadline`, report.id_user, motif.wording_motif, report.isJustified, absenceDocs.id_document FROM absence JOIN report on absence.id_report = report.id_report LEFT JOIN motif on motif.id_motif=report.id_motif LEFT JOIN absenceDocs on absenceDocs.id_report = absence.id_report WHERE id_user=:id_user ORDER BY `startingDate` LIMIT 10";
+        $sql = "SELECT report.id_report, DATE_FORMAT(startingDate_absence, '%d/%m/%Y') AS `startingDate`, DATE_FORMAT(endDate_absence, '%d/%m/%Y') AS `endDate`, ROUND(DATEDIFF(endDate_absence, startingDate_absence),1) AS `duration`, DATEDIFF(NOW(), absence.startingDate_absence) as `deadline`, report.id_user, motif.wording_motif, report.isJustified, absenceDocs.id_document, document.isValid FROM absence INNER JOIN report on absence.id_report = report.id_report LEFT JOIN motif on motif.id_motif=report.id_motif LEFT JOIN absenceDocs on absenceDocs.id_report = absence.id_report LEFT JOIN document on document.id_user = report.id_user WHERE report.id_user=:id_user GROUP BY report.id_report ORDER BY startingDate_absence DESC LIMIT 7";
 
         $req = $pdo->prepare($sql);
         $req->execute([

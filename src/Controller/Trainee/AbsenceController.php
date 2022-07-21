@@ -20,14 +20,13 @@ class AbsenceController extends Controller
 
         session_start();
 
-
         if (!empty($_SESSION['id_user'])) {
 
-            // on récupère les absences du stagiaires
+            // we retrieve the trainee's absences
             $absenceManager = new AbsenceManager();
             $absences = $absenceManager->getUserAbsences($_SESSION['id_user']);
 
-            //on traite les données de la date de début et de fin pour pouvoir l'afficher dans le template
+            //we count the number of absences
             $indexTab = count($absences);
             $data['indexTab'] = $indexTab;
             $data['absences'] = $absences;

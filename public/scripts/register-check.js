@@ -8,14 +8,16 @@ alertEmail.style.display="none"
 inpEmail.addEventListener('blur', function(e){
     let email=this.value
     console.log(email)
-    const emailCheck = fetch(`check-email-addresses.php/?email=${email}`)
+    const emailCheck = fetch(`/?area=home&controller=home&action=checkEmailAddress&email=${email}`)
         .then(response => {
-                return response.json()
-        }).then((data) => {
+        return response.json()
+        })
+        .then((data) => {
+            console.log(data);
             let emailStatus = data.isExistant ;
             if(emailStatus==true) {
                     alertEmail.style.display="inline"
                 }
             })
-}
+        }
 )

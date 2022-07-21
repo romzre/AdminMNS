@@ -57,14 +57,45 @@ class UserManager
         return $user;
     }
 
+    /**
+     * checkEmailAddress
+     *
+     * check if an email address already exists in the DB
+     * 
+     * @param  string $email
+     * @return object
+     */
+    public function checkEmailAddress($email)
+    {
+
+
+        $pdo = PdoManager::getPdo();
+
+        $sql = "SELECT email from users where email=:email";
+
+        $req = $pdo->prepare($sql);
+        $req->execute([
+            'email' => $email
+        ]);
+
+        $user = $req->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            $res = ["isExistant" => true];
+        } else {
+            $res = ["isExistant" => false];
+        }
+        return $res;
+    }
+
     public function insertRegister(array $dataRegister)
     {
 
-        $pdo=PdoManager::getPdo();
-  
-        $sql= "INSERT INTO `trainee`(`id_user`, `birthdate`, `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber` , `completeDossier` , `isActive`, `isRegistered`) VALUES (:id_user, :birthdate, :tel, :laneType, :street , :addressComplement , :postalCode , :city , :streetNumber , :completeDossier , :isActive , :isRegistered)";
-      
-     
+        $pdo = PdoManager::getPdo();
+
+        $sql = "INSERT INTO `trainee`(`id_user`, `birthdate`, `tel`, `laneType`, `street`, `addressComplement`, `postalCode`, `city`, `streetNumber` , `completeDossier` , `isActive`, `isRegistered`) VALUES (:id_user, :birthdate, :tel, :laneType, :street , :addressComplement , :postalCode , :city , :streetNumber , :completeDossier , :isActive , :isRegistered)";
+
+
         $req = $pdo->prepare($sql);
         $stmt = $req->execute($dataRegister);
 

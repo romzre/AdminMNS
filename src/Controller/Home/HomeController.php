@@ -1,25 +1,41 @@
-<?php 
+<?php
+
 namespace App\Controller\Home;
 
 use App\Entity\Form;
 use Core\Controller;
 use App\Manager\TrainingManager;
+use App\Manager\UserManager;
+
 // require '../core/Controller.php';
 // require '../src/Manager/TrainingManager.php';
 // require '../src/Entity/Form.php';
 
-class HomeController extends Controller {
+class HomeController extends Controller
+{
 
     public function index()
     {
         $data = [];
 
-        $path= 'pages/home/index.html.twig';
+        $path = 'pages/home/index.html.twig';
 
         $this->renderView($path, $data);
-
     }
-    
+
+    public function checkEmailAddress()
+    {
+        $email = $_GET['email'];
+
+        $userManager = new UserManager();
+        $res = $userManager->checkEmailAddress($email);
+
+
+        echo json_encode($res);
+    }
+
+
+
     public function register()
     {
         $samePass = true;
@@ -27,48 +43,36 @@ class HomeController extends Controller {
         $email = NULL;
         $data = [];
         $messageEndCheck = NULL;
-        if (isset($_POST['submit-register'])) 
-        { 
-            if($_POST['password'] == $_POST['confirm_password'])
-            {
+        if (isset($_POST['submit-register'])) {
+            if ($_POST['password'] == $_POST['confirm_password']) {
                 require '../app/service/register-check.php';
-            
-            }
-            else
-            {
+            } else {
                 $samePass = false;
                 $message = "Les mots de passes ne sont pas identiques";
-            
-            }   
+            }
 
-            $data['POST']=$_POST;
-            $data['samePass']=$samePass;
-            $data['message']=$message;
-            
+            $data['POST'] = $_POST;
+            $data['samePass'] = $samePass;
+            $data['message'] = $message;
+
             $data['email'] = $email;
-
-            
-        }
-        else
-        {
-            $data = compact('samePass','message','email');
-            
+        } else {
+            $data = compact('samePass', 'message', 'email');
         }
         $manager = new TrainingManager();
         $trainings = $manager->getAll();
-        if(!empty($trainings))
-        {
+        if (!empty($trainings)) {
             foreach ($trainings as $training) {
                 $selectTraining[$training->getIdTraining()] = $training->getTitleFormation();
             }
             $data['trainings'] = $selectTraining;
         }
-       
+
         $form = new Form();
         $data['form'] = $form;
         $data['POST'] = $_POST;
-        $data['messageEndCheck']=$messageEndCheck;
-    
+        $data['messageEndCheck'] = $messageEndCheck;
+
         $path = 'pages/home/register.html.twig';
 
         $this->renderView($path, $data);
@@ -76,6 +80,6 @@ class HomeController extends Controller {
 
     public function testEmail()
     {
-       require '../app/service/testEmail.php';
+        require '../app/service/testEmail.php';
     }
 }

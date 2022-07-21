@@ -52,6 +52,9 @@ class SecurityController extends Controller
         $this->renderView($path, $data);
     }
 
+
+
+
     public function resetPassword()
     {
 
